@@ -1,16 +1,21 @@
 #ifndef OBJECTBASE_H_
 #define OBJECTBASE_H_
 #include"../Engine/Graphics.h"
+
+#include "Definition.h"
+
 class ObjectBase {
 public:
 	ObjectBase();
-	virtual ~ObjectBase();
+	~ObjectBase();
+
+	virtual void Init() = 0;
 	virtual void Update() = 0;
-	void Draw();
+	virtual void Draw() = 0;
 
 protected:
-	float m_posx, m_posy;
-	bool m_is_delete;
+	Position m_pos;
+	bool m_is_deth;
 
 };
 

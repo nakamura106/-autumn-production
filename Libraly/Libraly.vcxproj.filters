@@ -28,6 +28,9 @@
     <Filter Include="Object">
       <UniqueIdentifier>{37c18712-8525-4ab7-a50b-84c22b4a4506}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{ea652ce7-c5c7-4048-9092-dae475916e46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="Object\ObjectBace.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\ObjectManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +117,12 @@
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Object\ObjectBase.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\ObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Definition.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,12 +2,13 @@
 
 ObjectBase::ObjectBase()
 {
-	m_posx = 0.0f;
-	m_posy = 0.0f;
-	m_is_delete = false;
+	m_pos.x = 0.0f;
+	m_pos.y = 0.0f;
+	m_is_deth = false;
+
 }
 
-void ObjectBase::Draw()
+ObjectBase::~ObjectBase()
 {
-
 }
+ 
