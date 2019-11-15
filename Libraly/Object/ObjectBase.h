@@ -15,6 +15,7 @@ public:
 
 protected:
 	Position m_pos;
+	float m_speed;
 	bool m_is_deth;
 
 };
