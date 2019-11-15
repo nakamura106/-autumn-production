@@ -15,7 +15,7 @@ public:
 
 protected:
 	Position m_pos;
-	bool m_is_deth;
+	bool m_is_delete;
 
 };
 
