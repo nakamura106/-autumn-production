@@ -19,6 +19,7 @@ protected:
 	int m_hp;				//体力
 	int m_direction;		//向き
 	int m_state;			//プレイヤーの状態
+	int m_flamecount;		//フレームカウント(UVスクロール用)
 	float m_centerX;		//画像のX中心
 	float m_centery;		//画像のY中心
 	float m_sprite_width;	//画像の横幅
