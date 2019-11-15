@@ -27,4 +27,15 @@ struct Position
 	float y;
 };
 
+enum EnemyStateType
+{
+	MinStateType,	//リスト最小数
+	Idle,			//待機
+	Break,			//疲労状態の待機
+	Warn,			//警戒
+	Attack,			//攻撃
+	Refuge,			//逃走
+	MaxStateType	//リスト最大数
+};
+
 #endif
