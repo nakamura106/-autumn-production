@@ -12,6 +12,15 @@ enum class Player
 	PlayerTypeMax,
 };
 
+enum class PlayerState
+{
+	Wait,
+	Move,
+	Jump,
+	ThinkA,
+	ThinkB
+};
+
 enum class Enemy
 {
 	BossType01,

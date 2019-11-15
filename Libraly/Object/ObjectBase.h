@@ -10,11 +10,13 @@ public:
 	~ObjectBase();
 
 	virtual void Init() = 0;
+	virtual void Create() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 protected:
 	Position m_pos;
+	float m_speed;
 	bool m_is_delete;
 
 };
