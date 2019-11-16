@@ -31,8 +31,19 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{ea652ce7-c5c7-4048-9092-dae475916e46}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Enemy">
       <UniqueIdentifier>{a8cba85b-2c9f-48a0-9673-8f0e510a5ffb}</UniqueIdentifier>
+=======
+    <Filter Include="PlayerBase">
+      <UniqueIdentifier>{754735e6-27b6-43d6-8ddf-c45f59ebe5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{f5d7317f-950c-4b78-b7bb-c3f711bb4988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\TrpPlayer">
+      <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
+>>>>>>> 7b1f4665c5179acd08b0a0945fe35cdf811f05f7
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,8 +89,16 @@
     <ClCompile Include="Manager\ObjectManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="EnemyBase.cpp">
       <Filter>Enemy</Filter>
+=======
+    <ClCompile Include="Player\TrpPlayer.cpp">
+      <Filter>Player\TrpPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBase\PlayerBase.cpp">
+      <Filter>PlayerBase</Filter>
+>>>>>>> 7b1f4665c5179acd08b0a0945fe35cdf811f05f7
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,8 +150,16 @@
     <ClInclude Include="Object\Definition.h">
       <Filter>Object</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="EnemyBase.h">
       <Filter>Enemy</Filter>
+=======
+    <ClInclude Include="Player\TrpPlayer.h">
+      <Filter>Player\TrpPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBase\PlayerBase.h">
+      <Filter>PlayerBase</Filter>
+>>>>>>> 7b1f4665c5179acd08b0a0945fe35cdf811f05f7
     </ClInclude>
   </ItemGroup>
 </Project>
