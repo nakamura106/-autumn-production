@@ -15,7 +15,8 @@ public:
 
 
 private:
-	ObjectBase* objects[50];
+	ObjectBase* chara_objects[50];
+	ObjectBase* bullets_objects[100];
 
 };
 
