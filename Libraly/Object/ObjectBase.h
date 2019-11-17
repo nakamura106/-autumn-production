@@ -16,8 +16,8 @@ public:
 
 protected:
 	Position m_pos;			  //座標
-	float m_speed;			  //動く速さ
 	bool m_is_delete;		  //削除判定用
+	bool m_is_invincible;	  //無敵状態
 	int m_direction;		  //向き
 	int m_state;			  //状態
 	int m_flame_count;		  //フレームカウント
@@ -26,7 +26,8 @@ protected:
 	float m_sprite_width;	  //画像の横幅
 	float m_sprite_height;	  //画像の高さ
 	float m_range;			  //射程距離
-	bool m_is_invincible;	  //無敵状態
+	float m_speed;			  //動く速さ
+	
 
 };
 
