@@ -40,6 +40,9 @@
     <Filter Include="Player\TrpPlayer">
       <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EnemyBase">
+      <UniqueIdentifier>{7c0b1ba8-2e99-4295-a423-c0fa4f105b3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="PlayerBase\PlayerBase.cpp">
       <Filter>PlayerBase</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase\EnemyBase.cpp">
+      <Filter>EnemyBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBase\PlayerBase.h">
       <Filter>PlayerBase</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase\EnemyBase.h">
+      <Filter>EnemyBase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,9 +15,18 @@ public:
 	virtual void Draw() = 0;
 
 protected:
-	Position m_pos;
-	float m_speed;
-	bool m_is_delete;
+	Position m_pos;			  //座標
+	float m_speed;			  //動く速さ
+	bool m_is_delete;		  //削除判定用
+	int m_direction;		  //向き
+	int m_state;			  //状態
+	int m_flame_count;		  //フレームカウント
+	float m_centerX;		  //X中心
+	float m_centerY;		  //Y中心
+	float m_sprite_width;	  //画像の横幅
+	float m_sprite_height;	  //画像の高さ
+	float m_range;			  //射程距離
+	bool m_is_invincible;	  //無敵状態
 
 };
 

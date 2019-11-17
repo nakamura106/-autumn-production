@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyBase\EnemyBase.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Graphics.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyBase\EnemyBase.h" />
     <ClInclude Include="Engine\Anime.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Graphics.h" />
