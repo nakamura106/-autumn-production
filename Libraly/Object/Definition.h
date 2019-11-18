@@ -18,7 +18,7 @@ enum class PlayerState
 	Move,
 	Jump,
 	ThinkA,
-	ThinkB
+	Think
 };
 
 enum class Enemy
@@ -28,6 +28,16 @@ enum class Enemy
 	BossType03,
 
 	BossTypeMax,
+};
+
+enum class EnemyStateType 
+{
+	Idle,
+	Warn,
+	Attack,
+	Refuge,
+	Break,
+	EnemyStateTypeMax,
 };
 
 struct Position
