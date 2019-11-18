@@ -8,10 +8,10 @@ public:
 	EnemyBase();
 	~EnemyBase();
 
-	virtual void Init();
-	virtual void Create();
-	virtual void Update();
-	virtual void Draw();
+	virtual void Init()=0;
+	virtual void Create()=0;
+	virtual void Update()=0;
+	virtual void Draw()=0;
 
 protected:
 	float m_sleep_gauge;	//ñ∞ÇËÉQÅ[ÉW
