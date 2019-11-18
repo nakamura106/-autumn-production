@@ -1,3 +1,6 @@
+#pragma once
+
+
 
 #pragma once
 
@@ -16,7 +19,7 @@ public:
 
 protected:
 	int		m_hp;				//‘Ì—Í
-	
-	
-	
+
+
+
 };
