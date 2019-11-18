@@ -132,6 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet\BulletBase.cpp" />
+    <ClCompile Include="Bullet\EnemyBullet.cpp" />
+    <ClCompile Include="Bullet\PlayerBullet.cpp" />
     <ClCompile Include="EnemyBase\EnemyBase.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
@@ -151,6 +154,9 @@
     <ClCompile Include="Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet\BulletBase.h" />
+    <ClInclude Include="Bullet\EnemyBullet.h" />
+    <ClInclude Include="Bullet\PlayerBullet.h" />
     <ClInclude Include="EnemyBase\EnemyBase.h" />
     <ClInclude Include="Engine\Anime.h" />
     <ClInclude Include="Engine\Engine.h" />
