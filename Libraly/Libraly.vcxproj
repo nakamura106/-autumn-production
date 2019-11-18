@@ -145,7 +145,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
-    <ClCompile Include="PlayerBase\PlayerBase.cpp" />
+    <ClCompile Include="Player\PlayerBase.cpp" />
     <ClCompile Include="Player\TrpPlayer.cpp" />
     <ClCompile Include="Scene\GameEndScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
@@ -168,7 +168,7 @@
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Object\ObjectBase.h" />
-    <ClInclude Include="PlayerBase\PlayerBase.h" />
+    <ClInclude Include="Player\PlayerBase.h" />
     <ClInclude Include="Player\TrpPlayer.h" />
     <ClInclude Include="Scene\GameEndScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
