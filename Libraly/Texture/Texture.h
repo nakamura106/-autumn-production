@@ -49,15 +49,12 @@ enum GameCategoryTextureList
 	GamePlayer_Damage_Tp_RightTex,			//!<ダメージ右
 	GamePlayer_JumpDamage_Tp_LeftTex,		//!<ジャンプダメージ左
 	GamePlayer_JumpDamage_Tp_RightTex,		//!<ジャンプダメージ右
-	GameBoss_TaikiTex,					//!<敵待機
-	GameBoss_WalkTex,					//!<敵歩行
-	GameBoss_Needle_AttackTex,			//!<ハリネズミ攻撃
-	GameBoss_SleepTex,					//!<敵睡眠
-	GameBoss_Fatigue,					//!<敵疲労
-
+	GameBoss_TaikiTex,						//!<敵待機
+	GameBoss_WalkTex,						//!<敵歩行
+	GameBoss_Needle_AttackTex,				//!<ハリネズミ攻撃
+	GameBoss_SleepTex,						//!<敵睡眠
+	GameBoss_Fatigue,						//!<敵疲労
 	GamePointerTex,			//!< ポインタ
-	
-	
 	GameTextureMax,			//!< リスト最大数
 };
 
@@ -76,8 +73,6 @@ enum GameEndCategoryTextureList
 #define TEXTURE_CATEGORY_TITLE (SceneId::TitleScene)			//!< タイトルカテゴリー
 #define TEXTURE_CATEGORY_GAMEEND (SceneId::GameEndScene)				//!< ヘルプカテゴリー
 #define TEXTURE_CATEGORY_GAME (SceneId::GameScene)				//!< ゲーム本編カテゴリー
-#define TEXTURE_CATEGORY_ADV (SceneId::AdvScene)				//!< アドベンチャーパートカテゴリー
-#define TEXTURE_CATEGORY_RESEARCH (SceneId::ResearchScene)		//!< アイテム調査パートカテゴリー
 #define MAX_TEXTURE_CATEGORY (SceneId::SceneIdMax)				//!< カテゴリー最大
 
 /**

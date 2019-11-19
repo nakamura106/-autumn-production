@@ -11,9 +11,7 @@ enum SceneId
 	TitleScene,			//!< タイトルシーン
 	GameEndScene,			//!< ヘルプ(遊戯説明画面)シーン
 	GameScene,			//!< ゲーム本編シーン	
-	AdvScene,			//!< アドベンチャーシーン
-	ResearchScene,		//!< アイテム調査シーン
-	SceneIdMax			//!< シーンID最大
+	SceneIdMax,			//!< シーンID最大
 
 };
 

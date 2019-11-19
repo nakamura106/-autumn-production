@@ -3,10 +3,10 @@
 #include "../Engine/Graphics.h"
 #include "../Texture/Texture.h"
 #include "../Scene/GameScene.h"
+#include "../Map/Map.h"
 
 
-
-
+Map map;
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -43,7 +43,7 @@ void DrawGameScene()
 
 
 
-
+	map.Draw();
 
 
 
@@ -60,7 +60,7 @@ void DrawGameScene()
 void InitGameScene()
 {
 
-
+	map.Init();
 
 
 
