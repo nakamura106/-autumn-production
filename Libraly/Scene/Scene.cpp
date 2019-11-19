@@ -6,7 +6,7 @@
 #include "../Scene/GameEndScene.h"
 
 
-static SceneId g_CurrentSceneId = SceneId::AdvScene;		// 動作中シーンID
+static SceneId g_CurrentSceneId = SceneId::GameScene;		// 動作中シーンID
 static SceneStep g_CurrentSceneStep = SceneStep::InitStep;	// 動作中シーンのステ
 
 SceneId GetCurrentSceneId()

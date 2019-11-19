@@ -24,117 +24,45 @@ enum TitleCategoryTextureList
 /** @brief ゲーム本編用テクスチャのリスト */
 enum GameCategoryTextureList
 {
-	GameBgTex,				//!< 背景
-	GameObject,				//!< フリー
-	GameObject2,				//!< フリー
-	GameObject3,				//!< フリー
-	GameObject4,				//!< フリー
-	GameObject5,				//!< フリー
-	GameObject6,				//!< フリー
-	GameObject7,				//!< フリー
-	GameObject8,				//!< フリー
-	GameObject9,				//!< フリー
-	GameObject10,				//!< フリー
-	GameObject11,				//!< フリー
-	GameObject12,				//!< フリー
-	GameObject13,				//!< フリー
-	GameObject14,				//!< フリー
-	GameObject15,				//!< フリー
-	GameObject16,				//!< フリー
-	GameObject17,				//!< フリー
-	GameObject18,				//!< フリー
-	GameObject19,				//!< フリー
-	GameObject20,				//!< フリー
-	GamePlayerTex,			//!< プレイヤー
-	GameEnemyTex,
+	GameBgTex,								//!<背景
+	GamefloorTex,							//!<床
+	Gamefloor2Tex,							//!<床2
+	GameFgTex,								//!<近景
+	GameObject,								//!< フリー
+	GameObject2,							//!< フリー
+	GameObject3,							//!< フリー
+	GameObject4,							//!< フリー
+	GameObject5,							//!< フリー
+	GamePlayer_Taiki_Tp_LeftTex,			//!<プレイヤー待機左
+	GamePlayer_Taiki_Tp_RightTex,			//!<プレイヤー待機右
+	GamePlayer_Jump_Tp_LeftTex,				//!<ジャンプ左
+	GamePlayer_Jump_Tp_RightTex,			//!<ジャンプ右
+	GamePlayer_Walk_Tp_Left,				//!<歩行左
+	GamePlayer_Walk_Tp_RightTex,			//!<歩行右
+	GamePlayer_Attack_Tp_LeftTex,			//!<攻撃左
+	GamePlayer_Attack_Tp_RightTex,			//!<攻撃右
+	GamePlayer_WalkAttack_Tp_LeftTex,		//!<歩行攻撃左
+	GamePlayer_WalkAttack_Tp_RightTex,		//!<歩行攻撃右
+	GamePlayer_JumpAttack_Tp_LeftTex,		//!<ジャンプ攻撃左
+	GamePlayer_JumpAttack_Tp_RightTex,		//!<ジャンプ攻撃右
+	GamePlayer_Damage_Tp_LeftTex,			//!<ダメージ左
+	GamePlayer_Damage_Tp_RightTex,			//!<ダメージ右
+	GamePlayer_JumpDamage_Tp_LeftTex,		//!<ジャンプダメージ左
+	GamePlayer_JumpDamage_Tp_RightTex,		//!<ジャンプダメージ右
+	GameBoss_TaikiTex,					//!<敵待機
+	GameBoss_WalkTex,					//!<敵歩行
+	GameBoss_Needle_AttackTex,			//!<ハリネズミ攻撃
+	GameBoss_SleepTex,					//!<敵睡眠
+	GameBoss_Fatigue,					//!<敵疲労
+
 	GamePointerTex,			//!< ポインタ
-	GameDarkTex,			//!< 透過0暗闇
-	GameDarkTex2,
-	GameFlashLightTex,		//!< 懐中電灯光源
-	GameWallTex,			//!< 壁
-	GameMapBlackTex,
-	GameMapWall1Tex,
-	GameMapWall2Tex,
-	GameMapWall3Tex,
-	GameMapWall4Tex,
-	GameMapFloor1Tex,
-	GameMapFloor2Tex,
-	GameMapFloor3Tex,
-	GameMapFloor4Tex,
-	GameMapVellTex,
-	GameMapButton1Tex,
-	GameFloorVell1Tex,
-	GameFloorVell2Tex,
-	GameBookshelfTex,
-	GameBloodTex,
-	GameBlood2Tex,
-	GameExMarkTex,
-	GameExitMarkTex,
-	GameMarkTex,
-	GameClosetTex,
-	GameDishTex,
-	GameSyoujoTex,
-	GameSyujinkoTex,
-	GameMapStarTex,
+	
+	
 	GameTextureMax,			//!< リスト最大数
 };
 
-/** @brief アドベンチャーパート用テクスチャのリスト */
-enum AdvCategoryTextureList
-{
-	AdvBg1Tex, //!< 背景
-	AdvBg2Tex,
-	AdvBg3Tex,
-	AdvBg4Tex,
-	AdvBgBlackTex,
-	AdvGirlDirtyTex,
-	AdvGirlNormalTex,
-	AdvGirlHappyTex,
-	AdvGirlAngryTex,
-	AdvGirlSadTex,
-	AdvGirlSurpriseTex,
-	AdvGirlThinkTex,
-	AdvGirlSad2Tex,
-	AdvPlayerNormalTex,
-	AdvPlayerHappyTex,
-	AdvPlayerAngryTex,
-	AdvPlayerSadTex,
-	AdvPlayerSurpriseTex,
-	AdvPlayerThinkTex,
-	AdvGirlShadowTex,
-	AdvGirlDirtyShadowTex,
-	AdvPlayerShadowTex,
-	AdvWinTex,
-	AdvWin2Tex,
-	AdvTextureMax,		//!< リスト最大数
-};
 
-/** @brief アイテム調査パート用テクスチャのリスト */
-enum ResearchCategoryTextureList
-{
-	ResearchBgTex,			//!< 背景
-	ResearchRightTex,		//!< 右のボタン
-	ResearchLeftTex,		//!< 左のボタン
-	ResearchClosetTex,		//!< 洋ダンス
-	ResearchTapLightTex,		//!< バッテン型ボタン
-	ResearchBackMouseTex,		//!< バッテン型ボタン
-	ResearchVellTex,		//!< バッテン型ボタン
-	ResearchSampleTex,		//!< バッテン型ボタン
-	ResearchIllustTex,		//!< バッテン型ボタン
-	ResearchIllust2Tex,		//!< バッテン型ボタン
-	ResearchOnBreakerTex,		//!< バッテン型ボタン
-	ResearchOffBreakerTex,		//!< バッテン型ボタン
-	ResearchKeyTex,		//!< バッテン型ボタン
-	ResearchFlameTex,		//!< バッテン型ボタン
-	ResearchFlameTapeTex,		//!< バッテン型ボタン
-	ResearchKeyTapeTex,		//!< バッテン型ボタン
-	ResearchFreeItem1Tex,
-	ResearchFreeItem2Tex,
-	ResearchFreeItem3Tex,
-	ResearchFreeItem4Tex,
-	ResearchFreeItem5Tex,
-	ResearchTextureMax,		//!< リスト最大数
-};
+
 
 /** @brief ヘルプ用テクスチャリスト */
 enum GameEndCategoryTextureList

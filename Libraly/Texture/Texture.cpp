@@ -11,9 +11,7 @@ int TextureCaterogySize[] = {
 	TitleCategoryTextureList::TitleTextureMax,
 	GameEndCategoryTextureList::GameEndTextureMax,
 	GameCategoryTextureList::GameTextureMax,
-	AdvCategoryTextureList::AdvTextureMax,
-	ResearchCategoryTextureList::ResearchTextureMax,
-};
+	};
 
 // IDチェック
 bool IsCategoryRangeCheck(int category_id, int texture_id);

@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -144,6 +144,7 @@
     <ClCompile Include="Engine\Windows.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
+    <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
     <ClCompile Include="Player\PlayerBase.cpp" />
     <ClCompile Include="Player\TrpPlayer.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Engine\Vec.h" />
     <ClInclude Include="Engine\Windows.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
+    <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Object\ObjectBase.h" />
     <ClInclude Include="Player\PlayerBase.h" />

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include"../PlayerBase/PlayerBase.h"
+#include"PlayerBase.h"
 
 class TrpPlayer :public PlayerBase
 {
