@@ -71,8 +71,8 @@ enum GameEndCategoryTextureList
 };
 
 #define TEXTURE_CATEGORY_TITLE (SceneId::TitleScene)			//!< タイトルカテゴリー
-#define TEXTURE_CATEGORY_GAMEEND (SceneId::GameEndScene)				//!< ヘルプカテゴリー
 #define TEXTURE_CATEGORY_GAME (SceneId::GameScene)				//!< ゲーム本編カテゴリー
+#define TEXTURE_CATEGORY_GAMEEND (SceneId::GameEndScene)				//!< エンドカテゴリー
 #define MAX_TEXTURE_CATEGORY (SceneId::SceneIdMax)				//!< カテゴリー最大
 
 /**

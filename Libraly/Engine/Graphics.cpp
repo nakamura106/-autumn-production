@@ -129,34 +129,6 @@ void DrawTexture(float x, float y, Texture* texture_data)
 
 
 
-void DrawAdvTexture(float x, float y, Texture * texture_data, float texNumX, float texNumY, int divisionX, int divisionY)
-{
-
-	float tmpX1 = 1.0f / divisionX * texNumX;
-	float tmpY1 = 1.0f / divisionY * texNumY;
-
-	texNumX -= 1;
-	texNumY -= 1;
-
-	float tmpX2 = 1.0f / divisionX * texNumX;
-	float tmpY2 = 1.0f / divisionY * texNumY;
-
-
-	CustomVertex v[4] =
-	{
-		{ x, y, 0.0f, 1.0f, tmpX2, tmpY2 },
-		{ x + (texture_data->Width / divisionX), y, 0.0f, 1.0f, tmpX1, tmpY2 },
-		{ x + (texture_data->Width / divisionX), y + (texture_data->Height / divisionY), 0.0f, 1.0f, tmpX1, tmpY1 },
-		{ x, y + (texture_data->Height / divisionY), 0.0f, 1.0f, tmpX2, tmpY1},
-	};
-
-	// 頂点構造の指定
-	g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
-
-	g_D3DDevice->SetTexture(0, texture_data->TexutreData);
-
-	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
-}
 
 //統合画像切り抜き用
 void DrawIntegratedTexture(float x, float y, Texture * texture_data, float tu, float tv, float spriteX, float spriteY, int spriteNumX, int spriteNumY)
