@@ -45,10 +45,10 @@ enum class EnemyStateType
 	EnemyStateTypeMax,
 };
 
-struct Direction 
+enum Direction 
 {
-	int Left;
-	int Right;
+	 LEFT,
+	RIGHT,
 };
 
 struct Position

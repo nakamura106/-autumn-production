@@ -27,7 +27,7 @@ void TrpPlayer::Init()
 	trpplayer.m_is_delete = true;
 	trpplayer.m_is_invincible = true;
 	trpplayer.m_hp = 0;
-	trpplayer.m_direction = direction.Right;
+	trpplayer.m_direction = RIGHT;
 	trpplayer.m_state = (int)P_State::Wait;
 	trpplayer.m_pos.x = 0;
 	trpplayer.m_pos.y = 0;
@@ -37,6 +37,10 @@ void TrpPlayer::Init()
 	trpplayer.m_sprite_height = 0;
 	trpplayer.m_range = 0;
 	trpplayer.m_speed = 0;
+	trpplayer.m_tu = 0;
+	trpplayer.m_tv = 0;
+	Load();
+	Create();
 }
 
 void TrpPlayer::Load()
@@ -50,7 +54,7 @@ void TrpPlayer::Create()
 	trpplayer.m_is_delete = false;
 	trpplayer.m_is_invincible = false;
 	trpplayer.m_hp = 5;
-	trpplayer.m_direction = direction.Right;
+	trpplayer.m_direction = RIGHT;
 	trpplayer.m_state = (int)P_State::Wait;
 	trpplayer.m_pos.x = P_posX;
 	trpplayer.m_pos.y = P_posY;
@@ -69,7 +73,7 @@ void TrpPlayer::Update()
 
 void TrpPlayer::Draw()
 {
-	DrawUVScrollTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),);
+	DrawUVTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,trpplayer.m_sprite_width,trpplayer.m_sprite_height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),trpplayer.m_tu,trpplayer.m_tv,trpplayer.m_direction);
 }
 
 Position TrpPlayer::GetPos()

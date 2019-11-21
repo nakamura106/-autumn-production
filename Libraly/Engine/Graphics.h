@@ -32,7 +32,7 @@ enum FontSize
 /** @brief テクスチャデータやサイズを保持する構造体 */
 struct Texture
 {
-	LPDIRECT3DTEXTURE9 TexutreData;	//!< テクスチャデータ
+	LPDIRECT3DTEXTURE9 TextureData;	//!< テクスチャデータ
 	int Width;						//!< 横幅
 	int Height;						//!< 縦幅
 };
@@ -88,6 +88,9 @@ void DrawTexture(float x, float y, Texture* texture_data);
 * @param[in] tu テクスチャU座標
 * @param[in] tv テクスチャV座標
 */
+
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int direction);
+
 void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, float tv);
 
 /**

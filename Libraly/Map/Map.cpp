@@ -1,6 +1,7 @@
 #include"Map.h"
 #include"../Texture/Texture.h"
 #include"../Engine/Graphics.h"
+#include"../Player/TrpPlayer.h"
 
 
 
@@ -9,6 +10,7 @@ Map floor;	//床
 Map floor2; //床2
 Map fg;		//近景
 Map obj;	//オブジェクト
+TrpPlayer player;
 
 void Map::Init()
 {
@@ -65,5 +67,6 @@ void Map::Draw()
 	DrawTexture(bg.m_pos.x, bg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
 	DrawTexture(floor.m_pos.x, floor.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
+	player.Draw();
 	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
 }
