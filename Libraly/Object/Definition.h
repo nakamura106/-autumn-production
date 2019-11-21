@@ -3,6 +3,11 @@
 
 // \‘¢‘ÌAenum‚Ü‚Æ‚ß—p
 
+#define P_posX 100
+#define P_posY 400
+#define P_trp_range 1000
+#define P_speed 5.0f
+
 enum class Player
 {
 	PlayerTypeTrumpet,
@@ -12,7 +17,7 @@ enum class Player
 	PlayerTypeMax,
 };
 
-enum class PlayerState
+enum class P_State
 {
 	Wait,
 	Move,

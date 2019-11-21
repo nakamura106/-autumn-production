@@ -8,6 +8,8 @@ TrpPlayer trpplayer;
 
 Direction direction;
 
+
+
 Vec2 vec2;
 
 TrpPlayer::TrpPlayer()
@@ -56,7 +58,7 @@ void TrpPlayer::Create()
 	trpplayer.m_centerY = trpplayer.m_pos.y+128.0f;
 	trpplayer.m_sprite_width = 256.0f;
 	trpplayer.m_sprite_height = 256.0f;
-	trpplayer.m_range = P_trprange;
+	trpplayer.m_range = P_trp_range;
 	trpplayer.m_speed = P_speed;
 }
 
