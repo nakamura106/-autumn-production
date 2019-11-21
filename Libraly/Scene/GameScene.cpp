@@ -8,7 +8,7 @@
 
 
 Map map;
-TrpPlayer Trpplayer;
+TrpPlayer player;
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -47,7 +47,7 @@ void DrawGameScene()
 
 	map.Draw();
 
-	Trpplayer.Draw();
+	player.Draw();
 
 
 
@@ -62,9 +62,10 @@ void DrawGameScene()
 void InitGameScene()
 {
 
+
 	map.Init();
 
-
+	
 
 	ChangeSceneStep(SceneStep::MainStep);
 }

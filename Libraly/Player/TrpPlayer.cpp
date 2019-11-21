@@ -14,7 +14,7 @@ Vec2 vec2;
 
 TrpPlayer::TrpPlayer()
 {
-	Init();
+	Load();
 }
 
 TrpPlayer::~TrpPlayer()
@@ -39,14 +39,14 @@ void TrpPlayer::Init()
 	trpplayer.m_speed = 0;
 	trpplayer.m_tu = 0;
 	trpplayer.m_tv = 0;
-	Load();
 	Create();
 }
 
 void TrpPlayer::Load()
 {
-	LoadTexture("Res/Tex/Player_Taiki_Tp_Right.png", TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex);
-	LoadTexture("Res/Tex/Player_Taiki_Tp_Left.png", TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Taiki_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_Taiki_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_Tp_LeftTex);
+
 }
 
 void TrpPlayer::Create()
@@ -73,7 +73,9 @@ void TrpPlayer::Update()
 
 void TrpPlayer::Draw()
 {
-	DrawUVTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,trpplayer.m_sprite_width,trpplayer.m_sprite_height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),trpplayer.m_tu,trpplayer.m_tv,trpplayer.m_direction);
+	DrawTexture(0, 0, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex));
+
+	//DrawUVTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,trpplayer.m_sprite_width,trpplayer.m_sprite_height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),trpplayer.m_tu,trpplayer.m_tv,trpplayer.m_direction);
 }
 
 Position TrpPlayer::GetPos()

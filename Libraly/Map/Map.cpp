@@ -10,7 +10,7 @@ Map floor;	//è∞
 Map floor2; //è∞2
 Map fg;		//ãﬂåi
 Map obj;	//ÉIÉuÉWÉFÉNÉg
-TrpPlayer player;
+
 
 void Map::Init()
 {
@@ -32,6 +32,10 @@ void Map::Init()
 
 void Map::Load()
 {
+	//LoadTexture("Res/Tex/Player_Taiki_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_Tp_RightTex);
+
+
+
 	LoadTexture("Res/Tex/äC îwåi.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);
 	LoadTexture("Res/Tex/äC éËÇ∑ÇË.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);
 	LoadTexture("Res/Tex/äC ïlï”.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);
@@ -64,9 +68,10 @@ void Map::Update()
 
 void Map::Draw()
 {
+	
 	DrawTexture(bg.m_pos.x, bg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
 	DrawTexture(floor.m_pos.x, floor.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
-	player.Draw();
 	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
+	
 }
