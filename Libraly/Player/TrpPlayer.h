@@ -11,9 +11,11 @@ public:
 	~TrpPlayer();
 
 	void Init();
+	void Load();
 	void Create();
 	void Update();
 	void Draw();
+	Position GetPos();
 
 private:
 	
