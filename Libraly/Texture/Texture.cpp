@@ -9,8 +9,9 @@ static Texture** g_TextureList[MAX_TEXTURE_CATEGORY] = { nullptr };
 // シーン追加時に記入を忘れないように
 int TextureCaterogySize[] = {
 	TitleCategoryTextureList::TitleTextureMax,
-	GameEndCategoryTextureList::GameEndTextureMax,
 	GameCategoryTextureList::GameTextureMax,
+	GameEndCategoryTextureList::GameEndTextureMax,
+	
 	};
 
 // IDチェック

@@ -3,6 +3,11 @@
 
 // ç\ë¢ëÃÅAenumÇ‹Ç∆Çﬂóp
 
+#define P_posX 100
+#define P_posY 400
+#define P_trp_range 1000
+#define P_speed 5.0f
+
 enum class Player
 {
 	PlayerTypeTrumpet,
@@ -12,7 +17,7 @@ enum class Player
 	PlayerTypeMax,
 };
 
-enum class PlayerState
+enum class P_State
 {
 	Wait,
 	Move,
@@ -40,10 +45,10 @@ enum class EnemyStateType
 	EnemyStateTypeMax,
 };
 
-struct Direction 
+enum Direction 
 {
-	int Left;
-	int Right;
+	 LEFT,
+	RIGHT,
 };
 
 struct Position

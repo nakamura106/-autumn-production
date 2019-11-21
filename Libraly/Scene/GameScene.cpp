@@ -4,9 +4,11 @@
 #include "../Texture/Texture.h"
 #include "../Scene/GameScene.h"
 #include "../Map/Map.h"
+#include"../Player/TrpPlayer.h"
 
 
 Map map;
+TrpPlayer player;
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -45,7 +47,7 @@ void DrawGameScene()
 
 	map.Draw();
 
-
+	player.Draw();
 
 
 
@@ -60,9 +62,10 @@ void DrawGameScene()
 void InitGameScene()
 {
 
+
 	map.Init();
 
-
+	
 
 	ChangeSceneStep(SceneStep::MainStep);
 }

@@ -1,5 +1,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
+#include"../Object/Definition.h"
 #include "../Engine/Graphics.h"
 #include "../Engine/Windows.h"
 #include "../Utility/Size.h"
@@ -127,6 +128,57 @@ void DrawTexture(float x, float y, Texture* texture_data)
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int direction)
+{
+	float ttu = sprite_width / texture_data->Width;
+	float ttv = sprite_height / texture_data->Height;
+
+	if (direction == RIGHT)
+	{
+		CustomVertex v[4] =
+		{
+			// 左上
+			{ x, y, 0.0f, 1.0f, tu, tv },
+			// 右上
+			{ x + sprite_width, y, 0.0f, 1.0f, tu + ttu, tv },
+			// 右下
+			{ x + sprite_width, y + sprite_height, 0.0f, 1.0f, tu + ttu, tv + ttv },
+			// 左下 
+			{ x, y + sprite_height, 0.0f, 1.0f, tu, tv + ttv },
+		};
+
+		// 頂点構造の指定
+		g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+
+		g_D3DDevice->SetTexture(0, texture_data->TextureData);
+
+		g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
+
+	}
+
+	if (direction == LEFT)
+	{
+		// 左右反転
+		CustomVertex v[4] =
+		{
+			// 左上
+			{ x, y, 0.0f, 1.0f, tu + ttu, tv },
+			// 右上
+			{ x + sprite_width, y, 0.0f, 1.0f, tu, tv },
+			// 右下
+			{ x + sprite_width, y + sprite_height, 0.0f, 1.0f, tu, tv + ttv },
+			// 左下
+			{ x, y + sprite_height, 0.0f, 1.0f, tu + ttu, tv + ttv },
+		};
+
+		// 頂点構造の指定
+		g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+
+		g_D3DDevice->SetTexture(0, texture_data->TextureData);
+
+		g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
+	}
+}
 
 
 
