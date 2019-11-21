@@ -32,7 +32,7 @@ enum FontSize
 /** @brief テクスチャデータやサイズを保持する構造体 */
 struct Texture
 {
-	LPDIRECT3DTEXTURE9 TexutreData;	//!< テクスチャデータ
+	LPDIRECT3DTEXTURE9 TextureData;	//!< テクスチャデータ
 	int Width;						//!< 横幅
 	int Height;						//!< 縦幅
 };
