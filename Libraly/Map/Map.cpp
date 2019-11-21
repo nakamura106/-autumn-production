@@ -11,6 +11,15 @@ Map floor2; //床2
 Map fg;		//近景
 Map obj;	//オブジェクト
 
+Map::Map()
+{
+	
+}
+
+Map::~Map()
+{
+
+}
 
 void Map::Init()
 {

@@ -14,7 +14,7 @@ Vec2 vec2;
 
 TrpPlayer::TrpPlayer()
 {
-	Load();
+	
 }
 
 TrpPlayer::~TrpPlayer()
@@ -39,6 +39,7 @@ void TrpPlayer::Init()
 	trpplayer.m_speed = 0;
 	trpplayer.m_tu = 0;
 	trpplayer.m_tv = 0;
+	Load();
 	Create();
 }
 
@@ -73,9 +74,9 @@ void TrpPlayer::Update()
 
 void TrpPlayer::Draw()
 {
-	DrawTexture(0, 0, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex));
+	//DrawTexture(0, 0, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex));
 
-	//DrawUVTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,trpplayer.m_sprite_width,trpplayer.m_sprite_height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),trpplayer.m_tu,trpplayer.m_tv,trpplayer.m_direction);
+	DrawUVTexture(trpplayer.m_pos.x, trpplayer.m_pos.y,trpplayer.m_sprite_width,trpplayer.m_sprite_height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex),trpplayer.m_tu,trpplayer.m_tv,trpplayer.m_direction);
 }
 
 Position TrpPlayer::GetPos()

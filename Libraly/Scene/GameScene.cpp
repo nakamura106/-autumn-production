@@ -63,9 +63,13 @@ void InitGameScene()
 {
 
 
-	map.Init();
 
+	player.Init();
+
+	map.Init();
 	
+
+
 
 	ChangeSceneStep(SceneStep::MainStep);
 }
