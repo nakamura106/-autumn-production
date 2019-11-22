@@ -3,6 +3,7 @@
 #include"../Texture/Texture.h"
 #include"../Object/Definition.h"
 #include"../Engine/Vec.h"
+#include"../Engine/Input.h"
 
 TrpPlayer trpplayer;
 
@@ -36,7 +37,6 @@ void TrpPlayer::Init()
 	trpplayer.m_sprite_width = 0;
 	trpplayer.m_sprite_height = 0;
 	trpplayer.m_range = 0;
-	trpplayer.m_speed = 0;
 	trpplayer.m_tu = 0;
 	trpplayer.m_tv = 0;
 	Load();
@@ -64,12 +64,12 @@ void TrpPlayer::Create()
 	trpplayer.m_sprite_width = 256.0f;
 	trpplayer.m_sprite_height = 256.0f;
 	trpplayer.m_range = P_trp_range;
-	trpplayer.m_speed = P_speed;
+	
 }
 
 void TrpPlayer::Update()
 {
-
+	P_Controll();
 }
 
 void TrpPlayer::Draw()
@@ -82,4 +82,22 @@ void TrpPlayer::Draw()
 Position TrpPlayer::GetPos()
 {
 	return m_pos;
+}
+
+void TrpPlayer::P_Controll()
+{
+	if (GetKey(LEFT_KEY) == true)
+	{
+		trpplayer.m_direction = LEFT;
+		trpplayer.m_pos.x -= P_speed;
+	}
+	if (GetKey(RIGHT_KEY) == true)
+	{
+		trpplayer.m_direction = RIGHT;
+		trpplayer.m_pos.x += P_speed;
+	}
+	if (GetKey(SPACE_KEY) == true)
+	{
+
+	}
 }

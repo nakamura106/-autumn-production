@@ -88,6 +88,7 @@ void EndInput()
 void UpdateInput()
 {
 	UpdateMouse();
+	KeyUpDate();
 
 	g_PrevMouseState = g_CurrentMouseState;
 	// マウスの状態を取得します
@@ -313,6 +314,10 @@ void KeyUpDate()
 		if (KeyState[DIK_D] & 0x80)
 		{
 			g_InputState.now |= D_KEY;
+		}
+		if (KeyState[DIK_SPACE] & 0x80)
+		{
+			g_InputState.now |= SPACE_KEY;
 		}
 
 		g_InputState.trg = (g_InputState.now & (~old));	// トリガー情報取得

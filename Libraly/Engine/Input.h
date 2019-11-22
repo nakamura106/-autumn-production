@@ -16,10 +16,11 @@
 #define LEFT_KEY	0x0004		// 左キー
 #define RIGHT_KEY	0x0008		// 右キー
 #define RETURN_KEY	0x0010		// リターンキー
-#define W_KEY		0x0020		// リターンキー
-#define A_KEY		0x0040		// リターンキー
-#define S_KEY		0x0080		// リターンキー
-#define D_KEY		0x0100		// リターンキー
+#define W_KEY		0x0020		// Wキー
+#define A_KEY		0x0040		// Aキー
+#define S_KEY		0x0080		// Sキー
+#define D_KEY		0x0100		// Dキー
+#define SPACE_KEY   0x0120      // SPACEキー
 
 
 /** @brief マウスボタンの種類 */

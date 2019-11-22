@@ -15,6 +15,7 @@ public:
 	virtual void Create() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	virtual void P_Controll() = 0;
 	virtual Position GetPos() = 0;
 
 protected:

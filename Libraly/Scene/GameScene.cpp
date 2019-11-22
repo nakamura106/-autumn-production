@@ -62,7 +62,7 @@ void DrawGameScene()
 void InitGameScene()
 {
 
-
+	
 
 	player.Init();
 
@@ -81,9 +81,9 @@ void InitGameScene()
 
 void MainGameScene()
 {
+	UpdateInput();
 
-
-
+	player.Update();
 
 
 

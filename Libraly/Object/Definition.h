@@ -3,10 +3,12 @@
 
 // \‘¢‘ÌAenum‚Ü‚Æ‚ß—p
 
-#define P_posX 100
-#define P_posY 400
-#define P_trp_range 1000
-#define P_speed 5.0f
+#define P_posX			100.0f
+#define P_posY			600.0f
+#define P_trp_range		1000.0f
+#define P_speed			5.0f
+#define P_jump_power	15.0f
+#define Gravity			0.5f
 
 enum class Player
 {

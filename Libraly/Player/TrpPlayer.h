@@ -15,6 +15,7 @@ public:
 	void Create();
 	void Update();
 	void Draw();
+	void P_Controll();
 	Position GetPos();
 
 private:
