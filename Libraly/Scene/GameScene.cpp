@@ -76,9 +76,6 @@ void InitGameScene()
 
 
 
-
-
-
 void MainGameScene()
 {
 	UpdateInput();
