@@ -34,8 +34,7 @@ void TrpPlayer::Init()
 	m_sprite_height = 256.0f;
 	m_range = P_trp_range;
 	Load();
-	//InitAnimation();
-	InitMoveAnimation();
+	InitAnimation();
 }
 
 void TrpPlayer::Load()
@@ -75,8 +74,7 @@ void TrpPlayer::Draw()
 		switch (m_state)
 		{
 		case (int)P_State::Wait:
-			//WaitAnimation();
-			MoveAnimation();
+			WaitAnimation();
 			break;
 		case(int)P_State::Move:
 			MoveAnimation();
@@ -196,40 +194,40 @@ void TrpPlayer::InitMoveAnimation()
 	static float R_X = 0, R_Y = 0;
 	for (int i = 0; i <= 11; i++)
 	{
-		
+
 		move_animation_Right[i].m_RectX = R_X;
 		move_animation_Right[i].m_RectY = R_Y;
 		move_animation_Right[i].m_Rect_Height = Rect_Height;
 		move_animation_Right[i].m_Rect_Width = Rect_Width;
 		move_animation_Right[i].m_Display_Flame = Dispflame;
-		
 
-		
+
+
 		move_animation_Left[i].m_RectX = R_X;
 		move_animation_Left[i].m_RectY = R_Y;
 		move_animation_Left[i].m_Rect_Height = Rect_Height;
 		move_animation_Left[i].m_Rect_Width = Rect_Width;
 		move_animation_Left[i].m_Display_Flame = Dispflame;
-		
-	}
-	
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
-		}
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
 
-		R_X = 0;
+			R_X = 0;
+		}
 	}
-	
 
 }
 
@@ -253,25 +251,25 @@ void TrpPlayer::InitAttackAnimation()
 		attack_animation_Left[i].m_Rect_Width = Rect_Width;
 		attack_animation_Left[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
-		}
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
 
-		R_X = 0;
+			R_X = 0;
+		}
 	}
-
 
 }
 
@@ -295,26 +293,26 @@ void TrpPlayer::InitJumpAttackAnimation()
 		jump_attack_animation_Left[i].m_Rect_Width = Rect_Width;
 		jump_attack_animation_Left[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
+
+			R_X = 0;
 		}
 
-		R_X = 0;
 	}
-
-
 }
 
 void TrpPlayer::InitJumpAnimation()
@@ -323,41 +321,41 @@ void TrpPlayer::InitJumpAnimation()
 
 	for (int i = 0; i <= 11; i++)
 	{
-		
+
 		jump_animation_Right[i].m_RectX = R_X;
 		jump_animation_Right[i].m_RectY = R_Y;
 		jump_animation_Right[i].m_Rect_Height = Rect_Height;
 		jump_animation_Right[i].m_Rect_Width = Rect_Width;
 		jump_animation_Right[i].m_Display_Flame = Dispflame;
-		
 
-		
+
+
 		jump_animation_Left[i].m_RectX = R_X;
 		jump_animation_Left[i].m_RectY = R_Y;
 		jump_animation_Left[i].m_Rect_Height = Rect_Height;
 		jump_animation_Left[i].m_Rect_Width = Rect_Width;
 		jump_animation_Left[i].m_Display_Flame = Dispflame;
-		
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
+
+			R_X = 0;
 		}
 
-		R_X = 0;
 	}
-
-	
 }
 
 
@@ -373,35 +371,35 @@ void TrpPlayer::InitThinkAnimation()
 		think_animation_Right[i].m_Rect_Height = Rect_Height;
 		think_animation_Right[i].m_Rect_Width = Rect_Width;
 		think_animation_Right[i].m_Display_Flame = Dispflame;
-		
 
 
-		
+
+
 		think_animation_Left[i].m_RectX = R_X;
 		think_animation_Left[i].m_RectY = R_Y;
 		think_animation_Left[i].m_Rect_Height = Rect_Height;
 		think_animation_Left[i].m_Rect_Width = Rect_Width;
 		think_animation_Left[i].m_Display_Flame = Dispflame;
-		
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
-		}
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
 
-		R_X = 0;
+			R_X = 0;
+		}
 	}
-	
 }
 
 void TrpPlayer::InitDamageAnimation()
@@ -425,25 +423,26 @@ void TrpPlayer::InitDamageAnimation()
 		damage_animation_Left[i].m_Rect_Width = Rect_Width;
 		damage_animation_Left[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
+
+			R_X = 0;
 		}
 
-		R_X = 0;
 	}
-
 }
 
 void TrpPlayer::InitJumpDamageAnimation()
@@ -472,25 +471,26 @@ void TrpPlayer::InitDeathAnimation()
 		death_animation_Left[i].m_Rect_Width = Rect_Width;
 		death_animation_Left[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
+
+			R_X = 0;
 		}
 
-		R_X = 0;
 	}
-
 }
 
 void TrpPlayer::InitClearAnimation()
@@ -514,23 +514,25 @@ void TrpPlayer::InitClearAnimation()
 		clear_animation_Left[i].m_Rect_Width = Rect_Width;
 		clear_animation_Left[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
+
+			R_X = 0;
 		}
 
-		R_X = 0;
 	}
 
 }
@@ -547,25 +549,25 @@ void TrpPlayer::InitOpeningAnimation()
 		opening_animation[i].m_Rect_Width = Rect_Width;
 		opening_animation[i].m_Display_Flame = Dispflame;
 
-	}
-
-	R_X += RectX;
 
 
-	if (R_X >= 1.0f)
-	{
-		if (R_Y <= 0.75f)
+		R_X += RectX;
+
+
+		if (R_X >= 1.0f)
 		{
-			R_Y += RectY;
-		}
-		else
-		{
-			R_Y = 0;
-		}
+			if (R_Y <= 0.75f)
+			{
+				R_Y += RectY;
+			}
+			else
+			{
+				R_Y = 0;
+			}
 
-		R_X = 0;
+			R_X = 0;
+		}
 	}
-
 
 }
 
