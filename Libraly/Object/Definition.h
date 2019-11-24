@@ -29,10 +29,15 @@ enum class P_State
 	Wait,
 	Move,
 	Jump,
+	Jump_Attack,
+	Jump_Damage,
+	Damage,
 	Attack,
 	ThinkA,
 	ThinkB,
 	Death,
+	Clear,
+
 };
 
 enum class Enemy

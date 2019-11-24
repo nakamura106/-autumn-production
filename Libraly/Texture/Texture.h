@@ -37,7 +37,7 @@ enum GameCategoryTextureList
 	GamePlayer_Taiki_Tp_RightTex,			//!<プレイヤー待機右
 	GamePlayer_Jump_Tp_LeftTex,				//!<ジャンプ左
 	GamePlayer_Jump_Tp_RightTex,			//!<ジャンプ右
-	GamePlayer_Walk_Tp_Left,				//!<歩行左
+	GamePlayer_Walk_Tp_LeftTex,				//!<歩行左
 	GamePlayer_Walk_Tp_RightTex,			//!<歩行右
 	GamePlayer_Attack_Tp_LeftTex,			//!<攻撃左
 	GamePlayer_Attack_Tp_RightTex,			//!<攻撃右
@@ -49,6 +49,9 @@ enum GameCategoryTextureList
 	GamePlayer_Damage_Tp_RightTex,			//!<ダメージ右
 	GamePlayer_JumpDamage_Tp_LeftTex,		//!<ジャンプダメージ左
 	GamePlayer_JumpDamage_Tp_RightTex,		//!<ジャンプダメージ右
+	GamePlayer_Clear_Tp_LeftTex,			//!<クリア左
+	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
+	GamePlayer_OpeningTex,					//!<オープニング
 	GameBoss_TaikiTex,						//!<敵待機
 	GameBoss_WalkTex,						//!<敵歩行
 	GameBoss_Needle_AttackTex,				//!<ハリネズミ攻撃

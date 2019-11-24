@@ -34,13 +34,26 @@ void TrpPlayer::Init()
 	m_sprite_height = 256.0f;
 	m_range = P_trp_range;
 	Load();
-	InitAnimation();
+	//InitAnimation();
+	InitMoveAnimation();
 }
 
 void TrpPlayer::Load()
 {
 	LoadTexture("Res/Tex/Player_Taiki_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_Tp_RightTex);
 	LoadTexture("Res/Tex/Player_Taiki_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Attack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Attack_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_Damage_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Damage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_Jump_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Jump_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_JumpAttack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_JumpAttack_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_JumpDamage_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_JumpDamage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_RightTex);
+	LoadTexture("Res/Tex/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
+	LoadTexture("Res/Tex/Player_Walk_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_RightTex);
 
 }
 
@@ -59,7 +72,33 @@ void TrpPlayer::Draw()
 {
 	if (m_is_delete==false)
 	{
-		WaitAnimation();
+		switch (m_state)
+		{
+		case (int)P_State::Wait:
+			//WaitAnimation();
+			MoveAnimation();
+			break;
+		case(int)P_State::Move:
+			MoveAnimation();
+			break;
+		case(int)P_State::Jump:
+			JumpAnimation();
+			break;
+		case(int)P_State::Jump_Attack:
+			JumpAttackAnimation();
+			break;
+		case(int)P_State::Jump_Damage:
+			JumpDamageAnimation();
+			break;
+		case(int)P_State::Damage:
+			DamageAnimation();
+			break;
+		case(int)P_State::Attack:
+			AttackAnimation();
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -76,6 +115,10 @@ void TrpPlayer::P_Controll()
 		m_direction = LEFT;
 		m_pos.x -= P_speed;
 	}
+	else
+	{
+		m_state = (int)P_State::Wait;
+	}
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
@@ -86,11 +129,23 @@ void TrpPlayer::P_Controll()
 	{
 		m_state = (int)P_State::Jump;
 	}
+	
+
 }
 
 void TrpPlayer::InitAnimation()
 {
 	InitWaitAnimation();
+	InitMoveAnimation();
+	InitAttackAnimation();
+	InitJumpAttackAnimation();
+	InitJumpAnimation();
+	InitThinkAnimation();
+	InitDeathAnimation();
+	InitClearAnimation();
+	InitDamageAnimation();
+	InitJumpDamageAnimation();
+	InitOpeningAnimation();
 }
 
 void TrpPlayer::InitWaitAnimation()
@@ -135,43 +190,6 @@ void TrpPlayer::InitWaitAnimation()
 	}
 
 }
-void TrpPlayer::WaitAnimation()
-{
-	static int i = 0;
-	static int j = 0;
-	if (m_direction == Right)
-	{
-		DrawUVTexture(m_pos.x, m_pos.y, wait_animation_Right[i].m_Rect_Width, wait_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex), wait_animation_Right[i].m_RectX, wait_animation_Right[i].m_RectY);
-		wait_animation_Right[i].m_Display_Flame--;
-		if (wait_animation_Right[i].m_Display_Flame <= 0)
-		{
-			wait_animation_Right[i].m_Display_Flame = Dispflame;
-			i++;
-			if (i >= 11)
-			{
-				i = 0;
-			}
-		}
-	}
-	if (m_direction == Left)
-	{
-		DrawUVTexture(m_pos.x-128, m_pos.y, wait_animation_Left[j].m_Rect_Width, wait_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_LeftTex), wait_animation_Left[j].m_RectX, wait_animation_Left[j].m_RectY);
-		wait_animation_Left[j].m_Display_Flame--;
-		if (wait_animation_Left[j].m_Display_Flame <= 0)
-		{
-			wait_animation_Left[j].m_Display_Flame = Dispflame;
-			
-			j++;
-			if (j >= 11)
-			{
-				j = 0;
-			}
-			
-		}
-	}
-
-	
-}
 
 void TrpPlayer::InitMoveAnimation()
 {
@@ -183,7 +201,7 @@ void TrpPlayer::InitMoveAnimation()
 		move_animation_Right[i].m_RectY = R_Y;
 		move_animation_Right[i].m_Rect_Height = Rect_Height;
 		move_animation_Right[i].m_Rect_Width = Rect_Width;
-		move_animation_Right[i].m_Display_Flame = 6;
+		move_animation_Right[i].m_Display_Flame = Dispflame;
 		
 
 		
@@ -191,7 +209,7 @@ void TrpPlayer::InitMoveAnimation()
 		move_animation_Left[i].m_RectY = R_Y;
 		move_animation_Left[i].m_Rect_Height = Rect_Height;
 		move_animation_Left[i].m_Rect_Width = Rect_Width;
-		move_animation_Left[i].m_Display_Flame = 6;
+		move_animation_Left[i].m_Display_Flame = Dispflame;
 		
 	}
 	
@@ -214,577 +232,730 @@ void TrpPlayer::InitMoveAnimation()
 	
 
 }
+
+void TrpPlayer::InitAttackAnimation()
+{
+	static float R_X = 0, R_Y = 0;
+	for (int i = 0; i <= 11; i++)
+	{
+
+		attack_animation_Right[i].m_RectX = R_X;
+		attack_animation_Right[i].m_RectY = R_Y;
+		attack_animation_Right[i].m_Rect_Height = Rect_Height;
+		attack_animation_Right[i].m_Rect_Width = Rect_Width;
+		attack_animation_Right[i].m_Display_Flame = Dispflame;
+
+
+
+		attack_animation_Left[i].m_RectX = R_X;
+		attack_animation_Left[i].m_RectY = R_Y;
+		attack_animation_Left[i].m_Rect_Height = Rect_Height;
+		attack_animation_Left[i].m_Rect_Width = Rect_Width;
+		attack_animation_Left[i].m_Display_Flame = Dispflame;
+
+	}
+
+	R_X += RectX;
+
+
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
+
+		R_X = 0;
+	}
+
+
+}
+
+void TrpPlayer::InitJumpAttackAnimation()
+{
+	static float R_X = 0, R_Y = 0;
+	for (int i = 0; i <= 11; i++)
+	{
+
+		jump_attack_animation_Right[i].m_RectX = R_X;
+		jump_attack_animation_Right[i].m_RectY = R_Y;
+		jump_attack_animation_Right[i].m_Rect_Height = Rect_Height;
+		jump_attack_animation_Right[i].m_Rect_Width = Rect_Width;
+		jump_attack_animation_Right[i].m_Display_Flame = Dispflame;
+
+
+
+		jump_attack_animation_Left[i].m_RectX = R_X;
+		jump_attack_animation_Left[i].m_RectY = R_Y;
+		jump_attack_animation_Left[i].m_Rect_Height = Rect_Height;
+		jump_attack_animation_Left[i].m_Rect_Width = Rect_Width;
+		jump_attack_animation_Left[i].m_Display_Flame = Dispflame;
+
+	}
+
+	R_X += RectX;
+
+
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
+
+		R_X = 0;
+	}
+
+
+}
+
 void TrpPlayer::InitJumpAnimation()
 {
-	move_animation_Right[0].m_Rect_Num = 0;
-	move_animation_Right[0].m_RectX = 0.25f;
-	move_animation_Right[0].m_RectY = 0.0f;
-	move_animation_Right[0].m_Rect_Height = 256.0f;
-	move_animation_Right[0].m_Rect_Width = 256.0f;
-	move_animation_Right[0].m_Display_Flame = 6;
-	move_animation_Right[0].Next_Rect_Num = 1;
+	static float R_X = 0, R_Y = 0;
 
-	move_animation_Right[1].m_Rect_Num = 1;
-	move_animation_Right[1].m_RectX = 0.5f;
-	move_animation_Right[1].m_RectY = 0.0f;
-	move_animation_Right[1].m_Rect_Height = 256.0f;
-	move_animation_Right[1].m_Rect_Width = 256.0f;
-	move_animation_Right[1].m_Display_Flame = 6;
-	move_animation_Right[1].Next_Rect_Num = 2;
+	for (int i = 0; i <= 11; i++)
+	{
+		
+		jump_animation_Right[i].m_RectX = R_X;
+		jump_animation_Right[i].m_RectY = R_Y;
+		jump_animation_Right[i].m_Rect_Height = Rect_Height;
+		jump_animation_Right[i].m_Rect_Width = Rect_Width;
+		jump_animation_Right[i].m_Display_Flame = Dispflame;
+		
 
-	move_animation_Right[2].m_Rect_Num = 2;
-	move_animation_Right[2].m_RectX = 0.75f;
-	move_animation_Right[2].m_RectY = 0.0f;
-	move_animation_Right[2].m_Rect_Height = 256.0f;
-	move_animation_Right[2].m_Rect_Width = 256.0f;
-	move_animation_Right[2].m_Display_Flame = 6;
-	move_animation_Right[2].Next_Rect_Num = 3;
+		
+		jump_animation_Left[i].m_RectX = R_X;
+		jump_animation_Left[i].m_RectY = R_Y;
+		jump_animation_Left[i].m_Rect_Height = Rect_Height;
+		jump_animation_Left[i].m_Rect_Width = Rect_Width;
+		jump_animation_Left[i].m_Display_Flame = Dispflame;
+		
+	}
 
-	move_animation_Right[3].m_Rect_Num = 3;
-	move_animation_Right[3].m_RectX = 1.0f;
-	move_animation_Right[3].m_RectY = 0.0f;
-	move_animation_Right[3].m_Rect_Height = 256.0f;
-	move_animation_Right[3].m_Rect_Width = 256.0f;
-	move_animation_Right[3].m_Display_Flame = 6;
-	move_animation_Right[3].Next_Rect_Num = 4;
-
-	wait_animation_Right[4].m_Rect_Num = 4;
-	wait_animation_Right[4].m_RectX = 0.25f;
-	wait_animation_Right[4].m_RectY = 0.25f;
-	wait_animation_Right[4].m_Rect_Height = 256.0f;
-	wait_animation_Right[4].m_Rect_Width = 256.0f;
-	wait_animation_Right[4].m_Display_Flame = 6;
-	wait_animation_Right[4].Next_Rect_Num = 5;
-
-	move_animation_Right[5].m_Rect_Num = 5;
-	move_animation_Right[5].m_RectX = 0.5f;
-	move_animation_Right[5].m_RectY = 0.25f;
-	move_animation_Right[5].m_Rect_Height = 256.0f;
-	move_animation_Right[5].m_Rect_Width = 256.0f;
-	move_animation_Right[5].m_Display_Flame = 6;
-	move_animation_Right[5].Next_Rect_Num = 6;
-
-	move_animation_Right[6].m_Rect_Num = 6;
-	move_animation_Right[6].m_RectX = 0.75f;
-	move_animation_Right[6].m_RectY = 0.25f;
-	move_animation_Right[6].m_Rect_Height = 256.0f;
-	move_animation_Right[6].m_Rect_Width = 256.0f;
-	move_animation_Right[6].m_Display_Flame = 6;
-	move_animation_Right[6].Next_Rect_Num = 7;
-
-	move_animation_Right[7].m_Rect_Num = 7;
-	move_animation_Right[7].m_RectX = 1.0f;
-	move_animation_Right[7].m_RectY = 0.25f;
-	move_animation_Right[7].m_Rect_Height = 256.0f;
-	move_animation_Right[7].m_Rect_Width = 256.0f;
-	move_animation_Right[7].m_Display_Flame = 6;
-	move_animation_Right[7].Next_Rect_Num = 8;
-
-	move_animation_Right[8].m_Rect_Num = 8;
-	move_animation_Right[8].m_RectX = 0.25f;
-	move_animation_Right[8].m_RectY = 0.5f;
-	move_animation_Right[8].m_Rect_Height = 256.0f;
-	move_animation_Right[8].m_Rect_Width = 256.0f;
-	move_animation_Right[8].m_Display_Flame = 6;
-	move_animation_Right[8].Next_Rect_Num = 9;
-
-	move_animation_Right[9].m_Rect_Num = 9;
-	move_animation_Right[9].m_RectX = 0.5f;
-	move_animation_Right[9].m_RectY = 0.5f;
-	move_animation_Right[9].m_Rect_Height = 256.0f;
-	move_animation_Right[9].m_Rect_Width = 256.0f;
-	move_animation_Right[9].m_Display_Flame = 6;
-	move_animation_Right[9].Next_Rect_Num = 10;
-
-	move_animation_Right[10].m_Rect_Num = 10;
-	move_animation_Right[10].m_RectX = 0.75f;
-	move_animation_Right[10].m_RectY = 0.5f;
-	move_animation_Right[10].m_Rect_Height = 256.0f;
-	move_animation_Right[10].m_Rect_Width = 256.0f;
-	move_animation_Right[10].m_Display_Flame = 6;
-	move_animation_Right[10].Next_Rect_Num = 0;
+	R_X += RectX;
 
 
-	move_animation_Left[0].m_Rect_Num = 0;
-	move_animation_Left[0].m_RectX = 0.25f;
-	move_animation_Left[0].m_RectY = 0.0f;
-	move_animation_Left[0].m_Rect_Height = 256.0f;
-	move_animation_Left[0].m_Rect_Width = 256.0f;
-	move_animation_Left[0].m_Display_Flame = 6;
-	move_animation_Left[0].Next_Rect_Num = 1;
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
 
-	move_animation_Left[1].m_Rect_Num = 1;
-	move_animation_Left[1].m_RectX = 0.5f;
-	move_animation_Left[1].m_RectY = 0.0f;
-	move_animation_Left[1].m_Rect_Height = 256.0f;
-	move_animation_Left[1].m_Rect_Width = 256.0f;
-	move_animation_Left[1].m_Display_Flame = 6;
-	move_animation_Left[1].Next_Rect_Num = 2;
+		R_X = 0;
+	}
 
-	move_animation_Left[2].m_Rect_Num = 2;
-	move_animation_Left[2].m_RectX = 0.75f;
-	move_animation_Left[2].m_RectY = 0.0f;
-	move_animation_Left[2].m_Rect_Height = 256.0f;
-	move_animation_Left[2].m_Rect_Width = 256.0f;
-	move_animation_Left[2].m_Display_Flame = 6;
-	move_animation_Left[2].Next_Rect_Num = 3;
-
-	move_animation_Left[3].m_Rect_Num = 3;
-	move_animation_Left[3].m_RectX = 1.0f;
-	move_animation_Left[3].m_RectY = 0.0f;
-	move_animation_Left[3].m_Rect_Height = 256.0f;
-	move_animation_Left[3].m_Rect_Width = 256.0f;
-	move_animation_Left[3].m_Display_Flame = 6;
-	move_animation_Left[3].Next_Rect_Num = 4;
-
-	move_animation_Left[4].m_Rect_Num = 4;
-	move_animation_Left[4].m_RectX = 0.25f;
-	move_animation_Left[4].m_RectY = 0.25f;
-	move_animation_Left[4].m_Rect_Height = 256.0f;
-	move_animation_Left[4].m_Rect_Width = 256.0f;
-	move_animation_Left[4].m_Display_Flame = 6;
-	move_animation_Left[4].Next_Rect_Num = 5;
-
-	move_animation_Left[5].m_Rect_Num = 5;
-	move_animation_Left[5].m_RectX = 0.5f;
-	move_animation_Left[5].m_RectY = 0.25f;
-	move_animation_Left[5].m_Rect_Height = 256.0f;
-	move_animation_Left[5].m_Rect_Width = 256.0f;
-	move_animation_Left[5].m_Display_Flame = 6;
-	move_animation_Left[5].Next_Rect_Num = 6;
-
-	move_animation_Left[6].m_Rect_Num = 6;
-	move_animation_Left[6].m_RectX = 0.75f;
-	move_animation_Left[6].m_RectY = 0.25f;
-	move_animation_Left[6].m_Rect_Height = 256.0f;
-	move_animation_Left[6].m_Rect_Width = 256.0f;
-	move_animation_Left[6].m_Display_Flame = 6;
-	move_animation_Left[6].Next_Rect_Num = 7;
-
-	move_animation_Left[7].m_Rect_Num = 7;
-	move_animation_Left[7].m_RectX = 1.0f;
-	move_animation_Left[7].m_RectY = 0.25f;
-	move_animation_Left[7].m_Rect_Height = 256.0f;
-	move_animation_Left[7].m_Rect_Width = 256.0f;
-	move_animation_Left[7].m_Display_Flame = 6;
-	move_animation_Left[7].Next_Rect_Num = 8;
-
-	move_animation_Left[8].m_Rect_Num = 8;
-	move_animation_Left[8].m_RectX = 0.25f;
-	move_animation_Left[8].m_RectY = 0.5f;
-	move_animation_Left[8].m_Rect_Height = 256.0f;
-	move_animation_Left[8].m_Rect_Width = 256.0f;
-	move_animation_Left[8].m_Display_Flame = 6;
-	move_animation_Left[8].Next_Rect_Num = 9;
-
-	move_animation_Left[9].m_Rect_Num = 9;
-	move_animation_Left[9].m_RectX = 0.5f;
-	move_animation_Left[9].m_RectY = 0.5f;
-	move_animation_Left[9].m_Rect_Height = 256.0f;
-	move_animation_Left[9].m_Rect_Width = 256.0f;
-	move_animation_Left[9].m_Display_Flame = 6;
-	move_animation_Left[9].Next_Rect_Num = 10;
-
-	move_animation_Left[10].m_Rect_Num = 10;
-	move_animation_Left[10].m_RectX = 0.75f;
-	move_animation_Left[10].m_RectY = 0.5f;
-	move_animation_Left[10].m_Rect_Height = 256.0f;
-	move_animation_Left[10].m_Rect_Width = 256.0f;
-	move_animation_Left[10].m_Display_Flame = 6;
-	move_animation_Left[10].Next_Rect_Num = 0;
+	
 }
+
+
+
 void TrpPlayer::InitThinkAnimation()
 {
-	move_animation_Right[0].m_Rect_Num = 0;
-	move_animation_Right[0].m_RectX = 0.25f;
-	move_animation_Right[0].m_RectY = 0.0f;
-	move_animation_Right[0].m_Rect_Height = 256.0f;
-	move_animation_Right[0].m_Rect_Width = 256.0f;
-	move_animation_Right[0].m_Display_Flame = 6;
-	move_animation_Right[0].Next_Rect_Num = 1;
+	static float R_X = 0, R_Y = 0;
 
-	move_animation_Right[1].m_Rect_Num = 1;
-	move_animation_Right[1].m_RectX = 0.5f;
-	move_animation_Right[1].m_RectY = 0.0f;
-	move_animation_Right[1].m_Rect_Height = 256.0f;
-	move_animation_Right[1].m_Rect_Width = 256.0f;
-	move_animation_Right[1].m_Display_Flame = 6;
-	move_animation_Right[1].Next_Rect_Num = 2;
-
-	move_animation_Right[2].m_Rect_Num = 2;
-	move_animation_Right[2].m_RectX = 0.75f;
-	move_animation_Right[2].m_RectY = 0.0f;
-	move_animation_Right[2].m_Rect_Height = 256.0f;
-	move_animation_Right[2].m_Rect_Width = 256.0f;
-	move_animation_Right[2].m_Display_Flame = 6;
-	move_animation_Right[2].Next_Rect_Num = 3;
-
-	move_animation_Right[3].m_Rect_Num = 3;
-	move_animation_Right[3].m_RectX = 1.0f;
-	move_animation_Right[3].m_RectY = 0.0f;
-	move_animation_Right[3].m_Rect_Height = 256.0f;
-	move_animation_Right[3].m_Rect_Width = 256.0f;
-	move_animation_Right[3].m_Display_Flame = 6;
-	move_animation_Right[3].Next_Rect_Num = 4;
-
-	wait_animation_Right[4].m_Rect_Num = 4;
-	wait_animation_Right[4].m_RectX = 0.25f;
-	wait_animation_Right[4].m_RectY = 0.25f;
-	wait_animation_Right[4].m_Rect_Height = 256.0f;
-	wait_animation_Right[4].m_Rect_Width = 256.0f;
-	wait_animation_Right[4].m_Display_Flame = 6;
-	wait_animation_Right[4].Next_Rect_Num = 5;
-
-	move_animation_Right[5].m_Rect_Num = 5;
-	move_animation_Right[5].m_RectX = 0.5f;
-	move_animation_Right[5].m_RectY = 0.25f;
-	move_animation_Right[5].m_Rect_Height = 256.0f;
-	move_animation_Right[5].m_Rect_Width = 256.0f;
-	move_animation_Right[5].m_Display_Flame = 6;
-	move_animation_Right[5].Next_Rect_Num = 6;
-
-	move_animation_Right[6].m_Rect_Num = 6;
-	move_animation_Right[6].m_RectX = 0.75f;
-	move_animation_Right[6].m_RectY = 0.25f;
-	move_animation_Right[6].m_Rect_Height = 256.0f;
-	move_animation_Right[6].m_Rect_Width = 256.0f;
-	move_animation_Right[6].m_Display_Flame = 6;
-	move_animation_Right[6].Next_Rect_Num = 7;
-
-	move_animation_Right[7].m_Rect_Num = 7;
-	move_animation_Right[7].m_RectX = 1.0f;
-	move_animation_Right[7].m_RectY = 0.25f;
-	move_animation_Right[7].m_Rect_Height = 256.0f;
-	move_animation_Right[7].m_Rect_Width = 256.0f;
-	move_animation_Right[7].m_Display_Flame = 6;
-	move_animation_Right[7].Next_Rect_Num = 8;
-
-	move_animation_Right[8].m_Rect_Num = 8;
-	move_animation_Right[8].m_RectX = 0.25f;
-	move_animation_Right[8].m_RectY = 0.5f;
-	move_animation_Right[8].m_Rect_Height = 256.0f;
-	move_animation_Right[8].m_Rect_Width = 256.0f;
-	move_animation_Right[8].m_Display_Flame = 6;
-	move_animation_Right[8].Next_Rect_Num = 9;
-
-	move_animation_Right[9].m_Rect_Num = 9;
-	move_animation_Right[9].m_RectX = 0.5f;
-	move_animation_Right[9].m_RectY = 0.5f;
-	move_animation_Right[9].m_Rect_Height = 256.0f;
-	move_animation_Right[9].m_Rect_Width = 256.0f;
-	move_animation_Right[9].m_Display_Flame = 6;
-	move_animation_Right[9].Next_Rect_Num = 10;
-
-	move_animation_Right[10].m_Rect_Num = 10;
-	move_animation_Right[10].m_RectX = 0.75f;
-	move_animation_Right[10].m_RectY = 0.5f;
-	move_animation_Right[10].m_Rect_Height = 256.0f;
-	move_animation_Right[10].m_Rect_Width = 256.0f;
-	move_animation_Right[10].m_Display_Flame = 6;
-	move_animation_Right[10].Next_Rect_Num = 0;
+	for (int i = 0; i <= 11; i++)
+	{
+		think_animation_Right[i].m_RectX = R_X;
+		think_animation_Right[i].m_RectY = R_Y;
+		think_animation_Right[i].m_Rect_Height = Rect_Height;
+		think_animation_Right[i].m_Rect_Width = Rect_Width;
+		think_animation_Right[i].m_Display_Flame = Dispflame;
+		
 
 
-	move_animation_Left[0].m_Rect_Num = 0;
-	move_animation_Left[0].m_RectX = 0.25f;
-	move_animation_Left[0].m_RectY = 0.0f;
-	move_animation_Left[0].m_Rect_Height = 256.0f;
-	move_animation_Left[0].m_Rect_Width = 256.0f;
-	move_animation_Left[0].m_Display_Flame = 6;
-	move_animation_Left[0].Next_Rect_Num = 1;
+		
+		think_animation_Left[i].m_RectX = R_X;
+		think_animation_Left[i].m_RectY = R_Y;
+		think_animation_Left[i].m_Rect_Height = Rect_Height;
+		think_animation_Left[i].m_Rect_Width = Rect_Width;
+		think_animation_Left[i].m_Display_Flame = Dispflame;
+		
+	}
 
-	move_animation_Left[1].m_Rect_Num = 1;
-	move_animation_Left[1].m_RectX = 0.5f;
-	move_animation_Left[1].m_RectY = 0.0f;
-	move_animation_Left[1].m_Rect_Height = 256.0f;
-	move_animation_Left[1].m_Rect_Width = 256.0f;
-	move_animation_Left[1].m_Display_Flame = 6;
-	move_animation_Left[1].Next_Rect_Num = 2;
+	R_X += RectX;
 
-	move_animation_Left[2].m_Rect_Num = 2;
-	move_animation_Left[2].m_RectX = 0.75f;
-	move_animation_Left[2].m_RectY = 0.0f;
-	move_animation_Left[2].m_Rect_Height = 256.0f;
-	move_animation_Left[2].m_Rect_Width = 256.0f;
-	move_animation_Left[2].m_Display_Flame = 6;
-	move_animation_Left[2].Next_Rect_Num = 3;
 
-	move_animation_Left[3].m_Rect_Num = 3;
-	move_animation_Left[3].m_RectX = 1.0f;
-	move_animation_Left[3].m_RectY = 0.0f;
-	move_animation_Left[3].m_Rect_Height = 256.0f;
-	move_animation_Left[3].m_Rect_Width = 256.0f;
-	move_animation_Left[3].m_Display_Flame = 6;
-	move_animation_Left[3].Next_Rect_Num = 4;
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
 
-	move_animation_Left[4].m_Rect_Num = 4;
-	move_animation_Left[4].m_RectX = 0.25f;
-	move_animation_Left[4].m_RectY = 0.25f;
-	move_animation_Left[4].m_Rect_Height = 256.0f;
-	move_animation_Left[4].m_Rect_Width = 256.0f;
-	move_animation_Left[4].m_Display_Flame = 6;
-	move_animation_Left[4].Next_Rect_Num = 5;
-
-	move_animation_Left[5].m_Rect_Num = 5;
-	move_animation_Left[5].m_RectX = 0.5f;
-	move_animation_Left[5].m_RectY = 0.25f;
-	move_animation_Left[5].m_Rect_Height = 256.0f;
-	move_animation_Left[5].m_Rect_Width = 256.0f;
-	move_animation_Left[5].m_Display_Flame = 6;
-	move_animation_Left[5].Next_Rect_Num = 6;
-
-	move_animation_Left[6].m_Rect_Num = 6;
-	move_animation_Left[6].m_RectX = 0.75f;
-	move_animation_Left[6].m_RectY = 0.25f;
-	move_animation_Left[6].m_Rect_Height = 256.0f;
-	move_animation_Left[6].m_Rect_Width = 256.0f;
-	move_animation_Left[6].m_Display_Flame = 6;
-	move_animation_Left[6].Next_Rect_Num = 7;
-
-	move_animation_Left[7].m_Rect_Num = 7;
-	move_animation_Left[7].m_RectX = 1.0f;
-	move_animation_Left[7].m_RectY = 0.25f;
-	move_animation_Left[7].m_Rect_Height = 256.0f;
-	move_animation_Left[7].m_Rect_Width = 256.0f;
-	move_animation_Left[7].m_Display_Flame = 6;
-	move_animation_Left[7].Next_Rect_Num = 8;
-
-	move_animation_Left[8].m_Rect_Num = 8;
-	move_animation_Left[8].m_RectX = 0.25f;
-	move_animation_Left[8].m_RectY = 0.5f;
-	move_animation_Left[8].m_Rect_Height = 256.0f;
-	move_animation_Left[8].m_Rect_Width = 256.0f;
-	move_animation_Left[8].m_Display_Flame = 6;
-	move_animation_Left[8].Next_Rect_Num = 9;
-
-	move_animation_Left[9].m_Rect_Num = 9;
-	move_animation_Left[9].m_RectX = 0.5f;
-	move_animation_Left[9].m_RectY = 0.5f;
-	move_animation_Left[9].m_Rect_Height = 256.0f;
-	move_animation_Left[9].m_Rect_Width = 256.0f;
-	move_animation_Left[9].m_Display_Flame = 6;
-	move_animation_Left[9].Next_Rect_Num = 10;
-
-	move_animation_Left[10].m_Rect_Num = 10;
-	move_animation_Left[10].m_RectX = 0.75f;
-	move_animation_Left[10].m_RectY = 0.5f;
-	move_animation_Left[10].m_Rect_Height = 256.0f;
-	move_animation_Left[10].m_Rect_Width = 256.0f;
-	move_animation_Left[10].m_Display_Flame = 6;
-	move_animation_Left[10].Next_Rect_Num = 0;
+		R_X = 0;
+	}
+	
 }
+
+void TrpPlayer::InitDamageAnimation()
+{
+	static float R_X = 0, R_Y = 0;
+
+	for (int i = 0; i <= 11; i++)
+	{
+		damage_animation_Right[i].m_RectX = R_X;
+		damage_animation_Right[i].m_RectY = R_Y;
+		damage_animation_Right[i].m_Rect_Height = Rect_Height;
+		damage_animation_Right[i].m_Rect_Width = Rect_Width;
+		damage_animation_Right[i].m_Display_Flame = Dispflame;
+
+
+
+
+		damage_animation_Left[i].m_RectX = R_X;
+		damage_animation_Left[i].m_RectY = R_Y;
+		damage_animation_Left[i].m_Rect_Height = Rect_Height;
+		damage_animation_Left[i].m_Rect_Width = Rect_Width;
+		damage_animation_Left[i].m_Display_Flame = Dispflame;
+
+	}
+
+	R_X += RectX;
+
+
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
+
+		R_X = 0;
+	}
+
+}
+
+void TrpPlayer::InitJumpDamageAnimation()
+{
+
+}
+
 void TrpPlayer::InitDeathAnimation()
 {
-	move_animation_Right[0].m_Rect_Num = 0;
-	move_animation_Right[0].m_RectX = 0.25f;
-	move_animation_Right[0].m_RectY = 0.0f;
-	move_animation_Right[0].m_Rect_Height = 256.0f;
-	move_animation_Right[0].m_Rect_Width = 256.0f;
-	move_animation_Right[0].m_Display_Flame = 6;
-	move_animation_Right[0].Next_Rect_Num = 1;
+	static float R_X = 0, R_Y = 0;
 
-	move_animation_Right[1].m_Rect_Num = 1;
-	move_animation_Right[1].m_RectX = 0.5f;
-	move_animation_Right[1].m_RectY = 0.0f;
-	move_animation_Right[1].m_Rect_Height = 256.0f;
-	move_animation_Right[1].m_Rect_Width = 256.0f;
-	move_animation_Right[1].m_Display_Flame = 6;
-	move_animation_Right[1].Next_Rect_Num = 2;
-
-	move_animation_Right[2].m_Rect_Num = 2;
-	move_animation_Right[2].m_RectX = 0.75f;
-	move_animation_Right[2].m_RectY = 0.0f;
-	move_animation_Right[2].m_Rect_Height = 256.0f;
-	move_animation_Right[2].m_Rect_Width = 256.0f;
-	move_animation_Right[2].m_Display_Flame = 6;
-	move_animation_Right[2].Next_Rect_Num = 3;
-
-	move_animation_Right[3].m_Rect_Num = 3;
-	move_animation_Right[3].m_RectX = 1.0f;
-	move_animation_Right[3].m_RectY = 0.0f;
-	move_animation_Right[3].m_Rect_Height = 256.0f;
-	move_animation_Right[3].m_Rect_Width = 256.0f;
-	move_animation_Right[3].m_Display_Flame = 6;
-	move_animation_Right[3].Next_Rect_Num = 4;
-
-	wait_animation_Right[4].m_Rect_Num = 4;
-	wait_animation_Right[4].m_RectX = 0.25f;
-	wait_animation_Right[4].m_RectY = 0.25f;
-	wait_animation_Right[4].m_Rect_Height = 256.0f;
-	wait_animation_Right[4].m_Rect_Width = 256.0f;
-	wait_animation_Right[4].m_Display_Flame = 6;
-	wait_animation_Right[4].Next_Rect_Num = 5;
-
-	move_animation_Right[5].m_Rect_Num = 5;
-	move_animation_Right[5].m_RectX = 0.5f;
-	move_animation_Right[5].m_RectY = 0.25f;
-	move_animation_Right[5].m_Rect_Height = 256.0f;
-	move_animation_Right[5].m_Rect_Width = 256.0f;
-	move_animation_Right[5].m_Display_Flame = 6;
-	move_animation_Right[5].Next_Rect_Num = 6;
-
-	move_animation_Right[6].m_Rect_Num = 6;
-	move_animation_Right[6].m_RectX = 0.75f;
-	move_animation_Right[6].m_RectY = 0.25f;
-	move_animation_Right[6].m_Rect_Height = 256.0f;
-	move_animation_Right[6].m_Rect_Width = 256.0f;
-	move_animation_Right[6].m_Display_Flame = 6;
-	move_animation_Right[6].Next_Rect_Num = 7;
-
-	move_animation_Right[7].m_Rect_Num = 7;
-	move_animation_Right[7].m_RectX = 1.0f;
-	move_animation_Right[7].m_RectY = 0.25f;
-	move_animation_Right[7].m_Rect_Height = 256.0f;
-	move_animation_Right[7].m_Rect_Width = 256.0f;
-	move_animation_Right[7].m_Display_Flame = 6;
-	move_animation_Right[7].Next_Rect_Num = 8;
-
-	move_animation_Right[8].m_Rect_Num = 8;
-	move_animation_Right[8].m_RectX = 0.25f;
-	move_animation_Right[8].m_RectY = 0.5f;
-	move_animation_Right[8].m_Rect_Height = 256.0f;
-	move_animation_Right[8].m_Rect_Width = 256.0f;
-	move_animation_Right[8].m_Display_Flame = 6;
-	move_animation_Right[8].Next_Rect_Num = 9;
-
-	move_animation_Right[9].m_Rect_Num = 9;
-	move_animation_Right[9].m_RectX = 0.5f;
-	move_animation_Right[9].m_RectY = 0.5f;
-	move_animation_Right[9].m_Rect_Height = 256.0f;
-	move_animation_Right[9].m_Rect_Width = 256.0f;
-	move_animation_Right[9].m_Display_Flame = 6;
-	move_animation_Right[9].Next_Rect_Num = 10;
-
-	move_animation_Right[10].m_Rect_Num = 10;
-	move_animation_Right[10].m_RectX = 0.75f;
-	move_animation_Right[10].m_RectY = 0.5f;
-	move_animation_Right[10].m_Rect_Height = 256.0f;
-	move_animation_Right[10].m_Rect_Width = 256.0f;
-	move_animation_Right[10].m_Display_Flame = 6;
-	move_animation_Right[10].Next_Rect_Num = 0;
+	for (int i = 0; i <= 11; i++)
+	{
+		death_animation_Right[i].m_RectX = R_X;
+		death_animation_Right[i].m_RectY = R_Y;
+		death_animation_Right[i].m_Rect_Height = Rect_Height;
+		death_animation_Right[i].m_Rect_Width = Rect_Width;
+		death_animation_Right[i].m_Display_Flame = Dispflame;
 
 
-	move_animation_Left[0].m_Rect_Num = 0;
-	move_animation_Left[0].m_RectX = 0.25f;
-	move_animation_Left[0].m_RectY = 0.0f;
-	move_animation_Left[0].m_Rect_Height = 256.0f;
-	move_animation_Left[0].m_Rect_Width = 256.0f;
-	move_animation_Left[0].m_Display_Flame = 6;
-	move_animation_Left[0].Next_Rect_Num = 1;
 
-	move_animation_Left[1].m_Rect_Num = 1;
-	move_animation_Left[1].m_RectX = 0.5f;
-	move_animation_Left[1].m_RectY = 0.0f;
-	move_animation_Left[1].m_Rect_Height = 256.0f;
-	move_animation_Left[1].m_Rect_Width = 256.0f;
-	move_animation_Left[1].m_Display_Flame = 6;
-	move_animation_Left[1].Next_Rect_Num = 2;
 
-	move_animation_Left[2].m_Rect_Num = 2;
-	move_animation_Left[2].m_RectX = 0.75f;
-	move_animation_Left[2].m_RectY = 0.0f;
-	move_animation_Left[2].m_Rect_Height = 256.0f;
-	move_animation_Left[2].m_Rect_Width = 256.0f;
-	move_animation_Left[2].m_Display_Flame = 6;
-	move_animation_Left[2].Next_Rect_Num = 3;
+		death_animation_Left[i].m_RectX = R_X;
+		death_animation_Left[i].m_RectY = R_Y;
+		death_animation_Left[i].m_Rect_Height = Rect_Height;
+		death_animation_Left[i].m_Rect_Width = Rect_Width;
+		death_animation_Left[i].m_Display_Flame = Dispflame;
 
-	move_animation_Left[3].m_Rect_Num = 3;
-	move_animation_Left[3].m_RectX = 1.0f;
-	move_animation_Left[3].m_RectY = 0.0f;
-	move_animation_Left[3].m_Rect_Height = 256.0f;
-	move_animation_Left[3].m_Rect_Width = 256.0f;
-	move_animation_Left[3].m_Display_Flame = 6;
-	move_animation_Left[3].Next_Rect_Num = 4;
+	}
 
-	move_animation_Left[4].m_Rect_Num = 4;
-	move_animation_Left[4].m_RectX = 0.25f;
-	move_animation_Left[4].m_RectY = 0.25f;
-	move_animation_Left[4].m_Rect_Height = 256.0f;
-	move_animation_Left[4].m_Rect_Width = 256.0f;
-	move_animation_Left[4].m_Display_Flame = 6;
-	move_animation_Left[4].Next_Rect_Num = 5;
+	R_X += RectX;
 
-	move_animation_Left[5].m_Rect_Num = 5;
-	move_animation_Left[5].m_RectX = 0.5f;
-	move_animation_Left[5].m_RectY = 0.25f;
-	move_animation_Left[5].m_Rect_Height = 256.0f;
-	move_animation_Left[5].m_Rect_Width = 256.0f;
-	move_animation_Left[5].m_Display_Flame = 6;
-	move_animation_Left[5].Next_Rect_Num = 6;
 
-	move_animation_Left[6].m_Rect_Num = 6;
-	move_animation_Left[6].m_RectX = 0.75f;
-	move_animation_Left[6].m_RectY = 0.25f;
-	move_animation_Left[6].m_Rect_Height = 256.0f;
-	move_animation_Left[6].m_Rect_Width = 256.0f;
-	move_animation_Left[6].m_Display_Flame = 6;
-	move_animation_Left[6].Next_Rect_Num = 7;
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
 
-	move_animation_Left[7].m_Rect_Num = 7;
-	move_animation_Left[7].m_RectX = 1.0f;
-	move_animation_Left[7].m_RectY = 0.25f;
-	move_animation_Left[7].m_Rect_Height = 256.0f;
-	move_animation_Left[7].m_Rect_Width = 256.0f;
-	move_animation_Left[7].m_Display_Flame = 6;
-	move_animation_Left[7].Next_Rect_Num = 8;
-
-	move_animation_Left[8].m_Rect_Num = 8;
-	move_animation_Left[8].m_RectX = 0.25f;
-	move_animation_Left[8].m_RectY = 0.5f;
-	move_animation_Left[8].m_Rect_Height = 256.0f;
-	move_animation_Left[8].m_Rect_Width = 256.0f;
-	move_animation_Left[8].m_Display_Flame = 6;
-	move_animation_Left[8].Next_Rect_Num = 9;
-
-	move_animation_Left[9].m_Rect_Num = 9;
-	move_animation_Left[9].m_RectX = 0.5f;
-	move_animation_Left[9].m_RectY = 0.5f;
-	move_animation_Left[9].m_Rect_Height = 256.0f;
-	move_animation_Left[9].m_Rect_Width = 256.0f;
-	move_animation_Left[9].m_Display_Flame = 6;
-	move_animation_Left[9].Next_Rect_Num = 10;
-
-	move_animation_Left[10].m_Rect_Num = 10;
-	move_animation_Left[10].m_RectX = 0.75f;
-	move_animation_Left[10].m_RectY = 0.5f;
-	move_animation_Left[10].m_Rect_Height = 256.0f;
-	move_animation_Left[10].m_Rect_Width = 256.0f;
-	move_animation_Left[10].m_Display_Flame = 6;
-	move_animation_Left[10].Next_Rect_Num = 0;
-}
-
-void TrpPlayer::MoveAnimation()
-{
-
-}
-void TrpPlayer::JumpAnimation()
-{
-
-}
-void TrpPlayer::ThinkAnimation()
-{
-
-}
-void TrpPlayer::DeathAnimation()
-{
+		R_X = 0;
+	}
 
 }
 
 void TrpPlayer::InitClearAnimation()
 {
+	static float R_X = 0, R_Y = 0;
+
+	for (int i = 0; i <= 11; i++)
+	{
+		clear_animation_Right[i].m_RectX = R_X;
+		clear_animation_Right[i].m_RectY = R_Y;
+		clear_animation_Right[i].m_Rect_Height = Rect_Height;
+		clear_animation_Right[i].m_Rect_Width = Rect_Width;
+		clear_animation_Right[i].m_Display_Flame = Dispflame;
+
+
+
+
+		clear_animation_Left[i].m_RectX = R_X;
+		clear_animation_Left[i].m_RectY = R_Y;
+		clear_animation_Left[i].m_Rect_Height = Rect_Height;
+		clear_animation_Left[i].m_Rect_Width = Rect_Width;
+		clear_animation_Left[i].m_Display_Flame = Dispflame;
+
+	}
+
+	R_X += RectX;
+
+
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
+
+		R_X = 0;
+	}
+
+}
+
+void TrpPlayer::InitOpeningAnimation()
+{
+	static float R_X = 0, R_Y = 0;
+	for (int i = 0; i <= 11; i++)
+	{
+
+		opening_animation[i].m_RectX = R_X;
+		opening_animation[i].m_RectY = R_Y;
+		opening_animation[i].m_Rect_Height = Rect_Height;
+		opening_animation[i].m_Rect_Width = Rect_Width;
+		opening_animation[i].m_Display_Flame = Dispflame;
+
+	}
+
+	R_X += RectX;
+
+
+	if (R_X >= 1.0f)
+	{
+		if (R_Y <= 0.75f)
+		{
+			R_Y += RectY;
+		}
+		else
+		{
+			R_Y = 0;
+		}
+
+		R_X = 0;
+	}
+
+
+}
+
+void TrpPlayer::WaitAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, wait_animation_Right[i].m_Rect_Width, wait_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex), wait_animation_Right[i].m_RectX, wait_animation_Right[i].m_RectY);
+		wait_animation_Right[i].m_Display_Flame--;
+		if (wait_animation_Right[i].m_Display_Flame <= 0)
+		{
+			wait_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, wait_animation_Left[j].m_Rect_Width, wait_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_LeftTex), wait_animation_Left[j].m_RectX, wait_animation_Left[j].m_RectY);
+		wait_animation_Left[j].m_Display_Flame--;
+		if (wait_animation_Left[j].m_Display_Flame <= 0)
+		{
+			wait_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+
+}
+
+void TrpPlayer::MoveAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, move_animation_Right[i].m_Rect_Width, move_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Walk_Tp_RightTex), move_animation_Right[i].m_RectX, move_animation_Right[i].m_RectY);
+		move_animation_Right[i].m_Display_Flame--;
+		if (move_animation_Right[i].m_Display_Flame <= 0)
+		{
+			move_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, move_animation_Left[j].m_Rect_Width, move_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Walk_Tp_LeftTex), move_animation_Left[j].m_RectX, move_animation_Left[j].m_RectY);
+		move_animation_Left[j].m_Display_Flame--;
+		if (move_animation_Left[j].m_Display_Flame <= 0)
+		{
+			move_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+}
+
+void TrpPlayer::AttackAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, attack_animation_Right[i].m_Rect_Width, attack_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Attack_Tp_RightTex), attack_animation_Right[i].m_RectX, attack_animation_Right[i].m_RectY);
+		attack_animation_Right[i].m_Display_Flame--;
+		if (attack_animation_Right[i].m_Display_Flame <= 0)
+		{
+			attack_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+				m_state = (int)P_State::Wait;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, attack_animation_Left[j].m_Rect_Width, attack_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Attack_Tp_LeftTex), attack_animation_Left[j].m_RectX, attack_animation_Left[j].m_RectY);
+		attack_animation_Left[j].m_Display_Flame--;
+		if (attack_animation_Left[j].m_Display_Flame <= 0)
+		{
+			attack_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+				m_state = (int)P_State::Wait;
+			}
+
+		}
+	}
+}
+
+void TrpPlayer::JumpAttackAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, jump_attack_animation_Right[i].m_Rect_Width, jump_attack_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_JumpAttack_Tp_RightTex), jump_attack_animation_Right[i].m_RectX, jump_attack_animation_Right[i].m_RectY);
+		jump_attack_animation_Right[i].m_Display_Flame--;
+		if (jump_attack_animation_Right[i].m_Display_Flame <= 0)
+		{
+			jump_attack_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, move_animation_Left[j].m_Rect_Width, move_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_JumpAttack_Tp_LeftTex), jump_attack_animation_Left[j].m_RectX, jump_attack_animation_Left[j].m_RectY);
+		jump_attack_animation_Left[j].m_Display_Flame--;
+		if (jump_attack_animation_Left[j].m_Display_Flame <= 0)
+		{
+			jump_attack_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+}
+
+void TrpPlayer::JumpAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, jump_animation_Right[i].m_Rect_Width, jump_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Jump_Tp_RightTex), jump_animation_Right[i].m_RectX, jump_animation_Right[i].m_RectY);
+		jump_animation_Right[i].m_Display_Flame--;
+		if (jump_animation_Right[i].m_Display_Flame <= 0)
+		{
+			jump_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, jump_animation_Left[j].m_Rect_Width, jump_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Jump_Tp_LeftTex), jump_animation_Left[j].m_RectX, jump_animation_Left[j].m_RectY);
+		jump_animation_Left[j].m_Display_Flame--;
+		if (jump_animation_Left[j].m_Display_Flame <= 0)
+		{
+			jump_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+}
+
+void TrpPlayer::ThinkAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, think_animation_Right[i].m_Rect_Width, think_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex), think_animation_Right[i].m_RectX, think_animation_Right[i].m_RectY);
+		think_animation_Right[i].m_Display_Flame--;
+		if (think_animation_Right[i].m_Display_Flame <= 0)
+		{
+			think_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, think_animation_Left[j].m_Rect_Width, think_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_LeftTex), think_animation_Left[j].m_RectX, think_animation_Left[j].m_RectY);
+		think_animation_Left[j].m_Display_Flame--;
+		if (think_animation_Left[j].m_Display_Flame <= 0)
+		{
+			think_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+}
+
+void TrpPlayer::DeathAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, death_animation_Right[i].m_Rect_Width, death_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_RightTex), death_animation_Right[i].m_RectX, death_animation_Right[i].m_RectY);
+		death_animation_Right[i].m_Display_Flame--;
+		if (death_animation_Right[i].m_Display_Flame <= 0)
+		{
+			death_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, death_animation_Left[j].m_Rect_Width, death_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Taiki_Tp_LeftTex), death_animation_Left[j].m_RectX, death_animation_Left[j].m_RectY);
+		death_animation_Left[j].m_Display_Flame--;
+		if (death_animation_Left[j].m_Display_Flame <= 0)
+		{
+			death_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
 
 }
 
 void TrpPlayer::ClearAnimation()
 {
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, clear_animation_Right[i].m_Rect_Width, clear_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Clear_Tp_RightTex), clear_animation_Right[i].m_RectX, clear_animation_Right[i].m_RectY);
+		clear_animation_Right[i].m_Display_Flame--;
+		if (clear_animation_Right[i].m_Display_Flame <= 0)
+		{
+			clear_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, clear_animation_Left[j].m_Rect_Width, clear_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Clear_Tp_LeftTex), clear_animation_Left[j].m_RectX, clear_animation_Left[j].m_RectY);
+		clear_animation_Left[j].m_Display_Flame--;
+		if (clear_animation_Left[j].m_Display_Flame <= 0)
+		{
+			clear_animation_Left[j].m_Display_Flame = Dispflame;
 
-}
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
 
-void TrpPlayer::InitDamageAnimation()
-{
+		}
+	}
 
 }
 
 void TrpPlayer::DamageAnimation()
 {
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, damage_animation_Right[i].m_Rect_Width, damage_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Damage_Tp_RightTex), damage_animation_Right[i].m_RectX, damage_animation_Right[i].m_RectY);
+		damage_animation_Right[i].m_Display_Flame--;
+		if (damage_animation_Right[i].m_Display_Flame <= 0)
+		{
+			damage_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, damage_animation_Left[j].m_Rect_Width, damage_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_Damage_Tp_LeftTex), damage_animation_Left[j].m_RectX, damage_animation_Left[j].m_RectY);
+		damage_animation_Left[j].m_Display_Flame--;
+		if (damage_animation_Left[j].m_Display_Flame <= 0)
+		{
+			damage_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+}
+
+void TrpPlayer::JumpDamageAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	if (m_direction == Right)
+	{
+		DrawUVTexture(m_pos.x, m_pos.y, jump_damage_animation_Right[i].m_Rect_Width, jump_damage_animation_Right[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_JumpDamage_Tp_RightTex), jump_damage_animation_Right[i].m_RectX, jump_damage_animation_Right[i].m_RectY);
+		jump_damage_animation_Right[i].m_Display_Flame--;
+		if (jump_damage_animation_Right[i].m_Display_Flame <= 0)
+		{
+			jump_damage_animation_Right[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	}
+	if (m_direction == Left)
+	{
+		DrawUVTexture(m_pos.x - 128, m_pos.y, jump_damage_animation_Left[j].m_Rect_Width, jump_damage_animation_Left[j].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_JumpDamage_Tp_LeftTex), jump_damage_animation_Left[j].m_RectX, jump_damage_animation_Left[j].m_RectY);
+		jump_damage_animation_Left[j].m_Display_Flame--;
+		if (damage_animation_Left[j].m_Display_Flame <= 0)
+		{
+			jump_damage_animation_Left[j].m_Display_Flame = Dispflame;
+
+			j++;
+			if (j >= 11)
+			{
+				j = 0;
+			}
+
+		}
+	}
+
+}
+
+void TrpPlayer::OpeningAnimation()
+{
+	static int i = 0;
+	static int j = 0;
+	
+		DrawUVTexture(m_pos.x, m_pos.y, opening_animation[i].m_Rect_Width, opening_animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, GamePlayer_OpeningTex), opening_animation[i].m_RectX, opening_animation[i].m_RectY);
+		opening_animation[i].m_Display_Flame--;
+		if (opening_animation[i].m_Display_Flame <= 0)
+		{
+			opening_animation[i].m_Display_Flame = Dispflame;
+			i++;
+			if (i >= 11)
+			{
+				i = 0;
+			}
+		}
+	
 
 }
