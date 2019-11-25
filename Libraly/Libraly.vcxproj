@@ -152,6 +152,8 @@
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Sound\AudioPlayer.cpp" />
+    <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +178,8 @@
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Sound\AudioPlayer.h" />
+    <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="Utility\Size.h" />
   </ItemGroup>

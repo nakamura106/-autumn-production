@@ -46,6 +46,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{0d508f98-e79d-4049-983e-6a607579c3e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{852fcfca-fd68-499b-8c4b-5215c9ef48b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -110,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="Map\Map.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\DirectSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\AudioPlayer.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\DirectSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\AudioPlayer.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
