@@ -5,6 +5,8 @@
 class Map:public ObjectBase
 {
 public:
+	Map();
+	~Map();
 	void Init();
 	void Create();
 	void Load();

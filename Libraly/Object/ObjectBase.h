@@ -28,6 +28,8 @@ protected:
 	float m_sprite_height;	  //‰æ‘œ‚Ì‚‚³
 	float m_range;			  //Ë’ö‹——£
 	float m_speed;			  //“®‚­‘¬‚³
+	float m_tu;
+	float m_tv;
 	
 
 };

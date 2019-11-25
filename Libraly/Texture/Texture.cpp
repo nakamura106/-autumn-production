@@ -9,8 +9,9 @@ static Texture** g_TextureList[MAX_TEXTURE_CATEGORY] = { nullptr };
 // シーン追加時に記入を忘れないように
 int TextureCaterogySize[] = {
 	TitleCategoryTextureList::TitleTextureMax,
-	GameEndCategoryTextureList::GameEndTextureMax,
 	GameCategoryTextureList::GameTextureMax,
+	GameEndCategoryTextureList::GameEndTextureMax,
+	
 	};
 
 // IDチェック
@@ -27,7 +28,7 @@ void InitTexture()
 		for (int j = 0; j < TextureCaterogySize[i]; j++)
 		{
 			g_TextureList[i][j] = (Texture*)malloc(sizeof(Texture));
-			g_TextureList[i][j]->TexutreData = nullptr;
+			g_TextureList[i][j]->TextureData = nullptr;
 		}
 	}
 }
@@ -41,13 +42,13 @@ void ReleaseCategoryTexture(int release_category)
 
 	for (int i = 0; i < TextureCaterogySize[release_category]; i++)
 	{
-		if (g_TextureList[release_category][i]->TexutreData == nullptr)
+		if (g_TextureList[release_category][i]->TextureData == nullptr)
 		{
 			continue;
 		}
 
-		g_TextureList[release_category][i]->TexutreData->Release();
-		g_TextureList[release_category][i]->TexutreData = nullptr;
+		g_TextureList[release_category][i]->TextureData->Release();
+		g_TextureList[release_category][i]->TextureData = nullptr;
 	}
 }
 
