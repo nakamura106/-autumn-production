@@ -142,6 +142,7 @@
     <ClCompile Include="Engine\Input.cpp" />
     <ClCompile Include="Engine\Sound.cpp" />
     <ClCompile Include="Engine\Windows.cpp" />
+    <ClCompile Include="Hedgehog.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Engine\Sound.h" />
     <ClInclude Include="Engine\Vec.h" />
     <ClInclude Include="Engine\Windows.h" />
+    <ClInclude Include="Hedgehog.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Object\Definition.h" />

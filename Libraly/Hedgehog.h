@@ -1,9 +1,20 @@
 #pragma once
+#include "EnemyBase/EnemyBase.h"
 
+//!~
 
-#include"../Object/ObjectBase.h"
+typedef enum AttackRepertoryofHedgeHog
+{
+	Rush,
+	HeadButt,
+	NeedleFire,
+	None,
+	AttackRepertoryMax,
+}EnemyAttackRepertory;
 
-class EnemyBase :public ObjectBase
+//~!
+
+class Hedgehog :public EnemyBase 
 {
 public:
 
@@ -31,26 +42,23 @@ public:
 	virtual void CureSleepiness();
 	virtual void CureFatigue();
 
-	virtual void DamageSleepness(int damage_sleep_);
-	virtual void DamageFatigue(int damage_fatigue_);
-
 protected:
 
 	float m_sleep_gauge;	//–°‚èƒQ[ƒW
 	float m_fatigue_gauge;	//”æ˜JƒQ[ƒW
-	int m_time_of_break;	//‹xŒeŠÔ
-	bool m_is_break;		//‹xŒe‚µ‚Ä‚¢‚é‚©
-	bool m_is_hit_judge;	//“–‚½‚è”»’è‚ª‘¶İ‚·‚é‚©
-	float m_speed;			//ƒXƒs[ƒh
-	
-	Position m_enemy_pos;
+	int m_TimeofBreak;		//‹xŒeŠÔ
+	bool m_IsBreak;			//‹xŒe‚µ‚Ä‚¢‚é‚©
+	bool m_IsHitJudge;		//“–‚½‚è”»’è‚ª‘¶İ‚·‚é‚©
+	int m_speed;			//ƒXƒs[ƒh
+
+
 	Enemy m_Enemy_Id;
 	EnemyStateType m_State;
-	EnemyAttackRepertory m_attack_repertory;
+	AttackRepertoryofHedgeHog m_attack_repertory;
 	EnemytoPlayerState m_enemy_to_player_state;
 
 public:
-	EnemyBase();
-	~EnemyBase();
+	Hedgehog();
+	~Hedgehog();
 
 };

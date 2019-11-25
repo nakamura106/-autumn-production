@@ -111,6 +111,9 @@
     <ClCompile Include="Map\Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="Hedgehog.cpp">
+      <Filter>EnemyBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Hedgehog.h">
+      <Filter>EnemyBase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

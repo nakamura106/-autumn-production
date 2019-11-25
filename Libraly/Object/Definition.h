@@ -21,11 +21,25 @@ enum class PlayerState
 	Think
 };
 
+enum class EnemytoPlayerState
+{
+	Separated,
+	Close,
+	Escape,
+	Pursue,
+	EtoPStateTypeMax,
+};
+
+enum class EnemyAttackRepertory
+{
+	VariableEnumrate_Type,	//確エネミークラスでtypedefして使うクラス
+};
+
 enum class Enemy
 {
-	BossType01,
-	BossType02,
-	BossType03,
+	Hedgehog,
+	Seagull,
+	Gorilla,
 
 	BossTypeMax,
 };
