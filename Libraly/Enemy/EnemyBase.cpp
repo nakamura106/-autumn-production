@@ -23,15 +23,16 @@ EnemyBase::EnemyBase()
 	m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
-	m_fatigue_gauge = NULL;
-	m_sleep_gauge = NULL;
+	m_fatigue_gauge = 0.f;
+	m_sleep_gauge = 0.f;
 	m_time_of_break = 0;
 	m_is_break = false;
-	m_is_delete = true;
+	m_is_delete = false;
 	m_is_hit_judge = false;
+
 	//	仮決め
-	m_enemy_pos.x = 500.0f;
-	m_enemy_pos.y = 500.0f;
+	m_pos.x = 500.0f;
+	m_pos.y = 500.0f;
 	m_speed = 10.0f;
 }
 
@@ -41,11 +42,6 @@ EnemyBase::~EnemyBase()
 }
 
 void EnemyBase::Init()
-{
-
-}
-
-void EnemyBase::Create()
 {
 
 }
@@ -60,17 +56,6 @@ void EnemyBase::Draw()
 
 }
 
-//	値渡し用
-
-int EnemyBase::GetEnemyPosX()		//エネミーのx座標を取得
-{
-	return m_pos.x;
-}
-
-int EnemyBase::GetEnemyPosY()		//エネミーのy座標を取得
-{
-	return m_pos.y;
-}
 
 EnemyStateType EnemyBase::GetEnemyState()	//エネミーの状態を取得
 {
@@ -234,16 +219,6 @@ void EnemyBase::EnemyBreak()		//エネミー休憩
 
 
 
-}
-
-int EnemyBase::GetSleepGauge()
-{
-	return m_sleep_gauge;
-}
-
-int EnemyBase::GetFatigueGauge()
-{
-	return m_fatigue_gauge;
 }
 
 void EnemyBase::CureSleepiness()
