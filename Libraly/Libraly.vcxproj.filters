@@ -114,9 +114,6 @@
     <ClCompile Include="Map\Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="Hedgehog.cpp">
-      <Filter>EnemyBase</Filter>
-    </ClCompile>
     <ClCompile Include="Sound\DirectSound.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
@@ -193,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Hedgehog.h">
-      <Filter>EnemyBase</Filter>
     </ClInclude>
     <ClInclude Include="Sound\DirectSound.h">
       <Filter>Sound</Filter>

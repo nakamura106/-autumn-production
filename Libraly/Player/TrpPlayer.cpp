@@ -144,6 +144,16 @@ void TrpPlayer::P_Controll()
 	{
 		Jump();
 	}
+	
+	if (m_pos.x <= 0)
+	{
+		m_pos.x += P_speed;
+	}
+
+	if (m_pos.x >= 704.0f)
+	{
+		m_pos.x -= P_speed;
+	}
 }
 
 void TrpPlayer::InitAnimation()
