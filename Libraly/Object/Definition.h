@@ -51,7 +51,7 @@ enum class EnemytoPlayerState
 
 enum class EnemyAttackRepertory
 {
-	VariableEnumrate_Type,	//確エネミークラスでtypedefして使うクラス
+	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
 };
 
 enum class Enemy
@@ -81,8 +81,27 @@ enum Direction
 
 struct Position
 {
+	Position() {
+		x = 0.0f;
+		y = 0.0f;
+	}
+
 	float x;
 	float y;
+};
+
+struct DrawParam
+{
+	DrawParam() {
+		x = 0.0f;
+		y = 0.0f;
+		tu = 0.0f;
+		tv = 0.0f;
+		category_id = 0;
+		texture_id = 0;
+	}
+	float x, y, tu, tv;
+	int category_id, texture_id;
 };
 
 struct UVANIMATION
