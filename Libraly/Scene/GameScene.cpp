@@ -5,10 +5,11 @@
 #include "../Scene/GameScene.h"
 #include "../Map/Map.h"
 #include"../Player/TrpPlayer.h"
-
+#include"../Enemy/EnemyBase.h"
 
 Map map;
 TrpPlayer player;
+EnemyBase enemy;
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -49,7 +50,7 @@ void DrawGameScene()
 
 	player.Draw();
 
-
+	enemy.Draw();
 
 
 
@@ -68,7 +69,7 @@ void InitGameScene()
 
 	map.Init();
 	
-
+	enemy.Init();
 
 
 	ChangeSceneStep(SceneStep::MainStep);
@@ -82,7 +83,7 @@ void MainGameScene()
 
 	player.Update();
 
-
+	enemy.Update();
 
 }
 
