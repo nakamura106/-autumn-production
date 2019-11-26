@@ -10,7 +10,9 @@ public:
 	ObjectManager();
 	~ObjectManager();
 
+	// マネージャー初期化、コンストラクタ時のみ
 	void Init();
+	// オブジェクト作成
 	void CreateObject();
 	void Update();
 	void Draw();
@@ -18,10 +20,8 @@ public:
 
 private:
 	static const int MAX_CHARA_OBJ = 50;
-	static const int MAX_BULLET_OBJ = 100;
 
-	ObjectBase* chara_objects[50];
-	ObjectBase* bullets_objects[MAX_BULLET_OBJ];
+	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };
 
