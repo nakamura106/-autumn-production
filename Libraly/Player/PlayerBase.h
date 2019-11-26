@@ -39,11 +39,14 @@ public:
 	virtual void DamageAnimation() = 0;
 	virtual void JumpDamageAnimation() = 0;
 	virtual void OpeningAnimation() = 0;
+	virtual void Jump() = 0;
 	virtual Position GetPos() = 0;
 
 
 protected:
-	int		m_hp;				//‘Ì—Í
+	int		m_hp;		 //‘Ì—Í
+	bool	m_is_jump;	 //ƒWƒƒƒ“ƒv”»’è
+	bool	m_is_active; //“®‚¢‚Ä‚¢‚é‚©‚Ì”»’è
 	UVANIMATION wait_animation_Right[12];
 	UVANIMATION wait_animation_Left[12];
 	UVANIMATION move_animation_Right[12];

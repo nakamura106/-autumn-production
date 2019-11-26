@@ -39,6 +39,7 @@ public:
 	 void DamageAnimation();
 	 void JumpDamageAnimation();
 	 void OpeningAnimation() ;
+	 void Jump();
 	 Position GetPos();
 
 private:

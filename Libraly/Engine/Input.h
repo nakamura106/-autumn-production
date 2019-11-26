@@ -20,7 +20,7 @@
 #define A_KEY		0x0040		// Aキー
 #define S_KEY		0x0080		// Sキー
 #define D_KEY		0x0100		// Dキー
-#define SPACE_KEY   0x0120      // SPACEキー
+#define SPACE_KEY   0x0200      // SPACEキー
 
 
 /** @brief マウスボタンの種類 */

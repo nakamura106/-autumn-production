@@ -23,6 +23,8 @@ void TrpPlayer::Init()
 {
 	m_is_delete = false;
 	m_is_invincible = false;
+	m_is_jump = false;
+	m_is_active = false;
 	m_hp = 5;
 	m_direction = RIGHT;
 	m_state = (int)P_State::Wait;
@@ -107,28 +109,41 @@ Position TrpPlayer::GetPos()
 
 void TrpPlayer::P_Controll()
 {
-	if (GetKey(LEFT_KEY) == true)
-	{
-		m_state = (int)P_State::Move;
-		m_direction = LEFT;
-		m_pos.x -= P_speed;
+	if (m_is_active == true) {
+		m_is_active = false;
 	}
-	else
-	{
-		m_state = (int)P_State::Wait;
-	}
+	
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
 		m_direction = RIGHT;
 		m_pos.x += P_speed;
+		m_is_active = true;
 	}
+
+	if (GetKey(LEFT_KEY) == true)
+	{
+		m_state = (int)P_State::Move;
+		m_direction = LEFT;
+		m_pos.x -= P_speed;
+		m_is_active = true;
+	}
+
 	if (GetKey(SPACE_KEY) == true)
 	{
-		m_state = (int)P_State::Jump;
+		m_is_jump = true;
+		m_is_active = true;
 	}
-	
 
+	if (m_is_active == false)
+	{
+		m_state = (int)P_State::Wait;
+	}
+
+	if (m_is_jump == true)
+	{
+		Jump();
+	}
 }
 
 void TrpPlayer::InitAnimation()
@@ -960,4 +975,23 @@ void TrpPlayer::OpeningAnimation()
 		}
 	
 
+}
+
+void TrpPlayer::Jump()
+{
+	static float jump_power = P_jump_power;
+	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)	
+	{
+		m_state = (int)P_State::Jump;
+	}
+
+	m_pos.y -= jump_power;
+	jump_power -= Gravity;
+
+	if (m_pos.y >= P_posY)
+	{
+		jump_power = P_jump_power;	
+		m_is_jump = false;
+		m_is_active = false;
+	}
 }
