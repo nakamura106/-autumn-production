@@ -22,14 +22,14 @@ EnemyBase::EnemyBase()
 	m_State = EnemyStateType::EnemyStateTypeMax;
 	m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
-	
+
 	m_fatigue_gauge = NULL;
 	m_sleep_gauge = NULL;
 	m_time_of_break = 0;
 	m_is_break = false;
 	m_is_delete = true;
 	m_is_hit_judge = false;
-//	仮決め
+	//	仮決め
 	m_enemy_pos.x = 500.0f;
 	m_enemy_pos.y = 500.0f;
 	m_speed = 10.0f;
@@ -126,8 +126,8 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	/*
 		エネミーの状態の変更
 	*/
-	
-	if (m_fatigue_gauge <= Num_of_TakeaBreak) 
+
+	if (m_fatigue_gauge <= Num_of_TakeaBreak)
 	{
 		if (m_time_of_break < Limit_of_BreakTime)
 		{
@@ -139,12 +139,12 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 		{
 			m_State = EnemyStateType::Refuge;
 			m_time_of_break--;
-			if (m_time_of_break == 0) 
+			if (m_time_of_break == 0)
 			{
 				m_is_break == false;
 			}
 		}
-	}	
+	}
 
 	/*
 		プレイヤーの位置情報を取得して、適切な距離を保つ。
@@ -180,30 +180,30 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 		敵からプレイヤーへの状態に応じて攻撃種を変更
 	*/
 
-	switch (m_enemy_to_player_state) 
+	switch (m_enemy_to_player_state)
 	{
 	case EnemytoPlayerState::Separated:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-	
+
 		break;
 
 	case EnemytoPlayerState::Close:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-		
+
 		break;
 
 	case EnemytoPlayerState::Escape:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-		
+
 		break;
-		
+
 	case EnemytoPlayerState::Pursue:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-	
+
 		break;
 
 

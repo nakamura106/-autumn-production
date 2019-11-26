@@ -37,9 +37,6 @@
     <Filter Include="Player\TrpPlayer">
       <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EnemyBase">
-      <UniqueIdentifier>{7c0b1ba8-2e99-4295-a423-c0fa4f105b3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Bullet">
       <UniqueIdentifier>{b4da0ac4-7ea4-4f25-9852-17aae52e256d}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{cb681894-14d9-4196-b8e3-0d16aac142ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{c5d26246-5762-478a-8b47-11a4b8320792}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +96,6 @@
     <ClCompile Include="Player\TrpPlayer.cpp">
       <Filter>Player\TrpPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBase\EnemyBase.cpp">
-      <Filter>EnemyBase</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet\BulletBase.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
@@ -114,14 +111,17 @@
     <ClCompile Include="Map\Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="Hedgehog.cpp">
-      <Filter>EnemyBase</Filter>
-    </ClCompile>
     <ClCompile Include="Sound\DirectSound.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
     <ClCompile Include="Sound\AudioPlayer.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyBase.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Mouse.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +176,6 @@
     <ClInclude Include="Player\TrpPlayer.h">
       <Filter>Player\TrpPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBase\EnemyBase.h">
-      <Filter>EnemyBase</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet\BulletBase.h">
       <Filter>Bullet</Filter>
     </ClInclude>
@@ -194,14 +191,17 @@
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Hedgehog.h">
-      <Filter>EnemyBase</Filter>
-    </ClInclude>
     <ClInclude Include="Sound\DirectSound.h">
       <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound\AudioPlayer.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyBase.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Mouse.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

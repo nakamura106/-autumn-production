@@ -1,3 +1,5 @@
+#include "Mouse.h"
+
 //#include "HedgeHog.h"
 //#include "Player/TrpPlayer.h"
 //

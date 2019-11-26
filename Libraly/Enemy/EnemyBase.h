@@ -1,7 +1,7 @@
-#pragma once
+#ifndef ENEMYBASE_H_
+#define ENEMYBASE_H_
 
-
-#include"../Object/ObjectBase.h"
+#include "../Object/ObjectBase.h"
 
 class EnemyBase :public ObjectBase
 {
@@ -42,7 +42,7 @@ protected:
 	bool m_is_break;		//休憩しているか
 	bool m_is_hit_judge;	//当たり判定が存在するか
 	float m_speed;			//スピード
-	
+
 	Position m_enemy_pos;
 	Enemy m_Enemy_Id;
 	EnemyStateType m_State;
@@ -54,3 +54,6 @@ public:
 	~EnemyBase();
 
 };
+
+
+#endif

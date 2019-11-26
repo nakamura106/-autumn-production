@@ -1,4 +1,6 @@
-//#pragma once
+#ifndef MOUSE_H_
+#define MOUSE_H_
+
 //#include "EnemyBase/EnemyBase.h"
 //
 ////!~
@@ -62,3 +64,5 @@
 //	~Hedgehog();
 //
 //};
+
+#endif
