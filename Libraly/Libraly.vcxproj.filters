@@ -49,6 +49,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{c5d26246-5762-478a-8b47-11a4b8320792}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{33dcfe55-e941-4d51-a4f9-10da382780ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -122,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="Enemy\Mouse.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UiBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UiManager.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +211,12 @@
     </ClInclude>
     <ClInclude Include="Enemy\Mouse.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UiBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UiManager.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

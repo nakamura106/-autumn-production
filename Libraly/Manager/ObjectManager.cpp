@@ -1,5 +1,15 @@
 #include "ObjectManager.h"
 
+ObjectManager* ObjectManager::Instance()
+{
+	if (p_instance == 0)
+	{
+		p_instance = new ObjectManager;
+	}
+
+	return  p_instance;
+}
+
 ObjectManager::ObjectManager()
 {
 	Init();

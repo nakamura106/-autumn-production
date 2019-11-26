@@ -156,6 +156,8 @@
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
+    <ClCompile Include="UI\UiBase.cpp" />
+    <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet\BulletBase.h" />
@@ -183,6 +185,8 @@
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Texture\Texture.h" />
+    <ClInclude Include="UI\UiBase.h" />
+    <ClInclude Include="UI\UiManager.h" />
     <ClInclude Include="Utility\Size.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

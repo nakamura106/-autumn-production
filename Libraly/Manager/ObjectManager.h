@@ -7,8 +7,7 @@
 class ObjectManager
 {
 public:
-	ObjectManager();
-	~ObjectManager();
+	static ObjectManager* Instance();
 
 	// マネージャー初期化、コンストラクタ時のみ
 	void Init();
@@ -17,14 +16,19 @@ public:
 	void Update();
 	void Draw();
 
+protected:
+	ObjectManager();
+	~ObjectManager();
 
 private:
-	static const int MAX_CHARA_OBJ = 50;
+	static ObjectManager* p_instance;
+	static const int MAX_CHARA_OBJ = 5;
 
 	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };
 
+ObjectManager* ObjectManager::p_instance = 0;
 
 
 #endif
