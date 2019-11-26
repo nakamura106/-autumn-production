@@ -46,6 +46,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{0d508f98-e79d-4049-983e-6a607579c3e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{cb681894-14d9-4196-b8e3-0d16aac142ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -113,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="Hedgehog.cpp">
       <Filter>EnemyBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\DirectSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\AudioPlayer.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +196,12 @@
     </ClInclude>
     <ClInclude Include="Hedgehog.h">
       <Filter>EnemyBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\DirectSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\AudioPlayer.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
