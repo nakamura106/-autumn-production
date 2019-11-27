@@ -60,10 +60,10 @@ enum class EnemytoPlayerState
 
 enum class EnemyAttackRepertory
 {
-	VariableEnumrate_Type,	//確エネミークラスでtypedefして使うクラス
+	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
 };
 
-enum class Enemy
+enum class EnemyID
 {
 	Hedgehog,
 	Seagull,
@@ -90,8 +90,26 @@ enum Direction
 
 struct Position
 {
+	Position() {
+		x = 0.0f;
+		y = 0.0f;
+	}
+
 	float x;
 	float y;
+};
+
+// 描画用変数の構造体
+struct DrawParam
+{
+	DrawParam() {
+		tu = 0.0f;
+		tv = 0.0f;
+		category_id = 0;
+		texture_id = 0;
+	}
+	float tu, tv; 
+	int category_id, texture_id; // GetTexture()の中身で使う
 };
 
 struct UVANIMATION

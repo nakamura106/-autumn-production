@@ -18,70 +18,115 @@ TrpPlayer trpplayer;
 
 EnemyBase::EnemyBase()
 {
-	m_Enemy_Id = Enemy::BossTypeMax;
-	m_State = EnemyStateType::EnemyStateTypeMax;
+	m_enemy_id = EnemyID::BossTypeMax;
+	m_state = EnemyStateType::EnemyStateTypeMax;
 	m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
-	
-	m_fatigue_gauge = NULL;
-	m_sleep_gauge = NULL;
+
+	m_fatigue_gauge = 0.f;
+	m_sleep_gauge = 0.f;
 	m_time_of_break = 0;
 	m_is_break = false;
-	m_is_delete = true;
+	m_is_delete = false;
 	m_is_hit_judge = false;
-//	仮決め
-	m_enemy_pos.x = 500.0f;
-	m_enemy_pos.y = 500.0f;
+
+	m_anim_timer = 0;
+
+	//	仮決め
+	m_pos.x = 500.0f;
+	m_pos.y = 0.0f;
 	m_speed = 10.0f;
+
+	//描画情報格納
+	m_draw_param.tu = 1;
+	m_draw_param.tv = 1;
+	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
+	m_draw_param.texture_id = GameCategoryTextureList::GameBoss_WalkTex;
+	
 }
 
 EnemyBase::~EnemyBase()
 {
-
+	
 }
 
 void EnemyBase::Init()
 {
-
-}
-
-void EnemyBase::Create()
-{
-
+	/*11/26 注!!仮実装のコード*/
+	LoadTexture("Res/Tex/Boss1_Walk_Left.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void EnemyBase::Update()
 {
-
+	AnimationUpdate();
 }
 
 void EnemyBase::Draw()
 {
+	//ObjectBase::Draw();
+
+	DrawUVTexture(
+		m_pos.x, 
+		m_pos.y, 
+		M_ENEMY_SYZE, 
+		M_ENEMY_SYZE, 
+		GetTexture(m_draw_param.category_id, m_draw_param.texture_id), 
+		m_draw_param.tu / M_ANIM_TEX_WIDTH, 
+		m_draw_param.tv / M_ANIM_TEX_HEIGHT
+	);
 
 }
 
-//	値渡し用
+void EnemyBase::AnimationUpdate() {
 
-int EnemyBase::GetEnemyPosX()		//エネミーのx座標を取得
-{
-	return m_pos.x;
+	++m_anim_timer;
+
+	if (m_anim_timer >= M_ANIM_FLAME) {//画像を変更する
+
+		m_anim_timer = 0;
+
+		//横分割枚目を加算
+		++m_draw_param.tu;
+
+		//横分割枚目が画像の分割数以上の場合
+		if (m_draw_param.tu > M_ANIM_TEX_WIDTH) {
+
+			m_draw_param.tu = 1;
+
+			//縦分割枚目を加算
+			++m_draw_param.tv;
+		}
+
+		//縦分割枚目が画像の分割数以上の場合
+		if (m_draw_param.tv > M_ANIM_TEX_HEIGHT) {
+
+			m_draw_param.tv = 1;
+
+		}
+
+		//tuとtvから計算した現在何枚目のアニメーションかが総枚数を超えていた場合、
+		//tuとtvをリセット
+		if (((m_draw_param.tv - 1) * M_ANIM_TEX_WIDTH + m_draw_param.tu) > M_ANIM_TEX_ALL) {
+
+			m_draw_param.tu = m_draw_param.tv = 1;
+
+		}
+
+	}
+
 }
 
-int EnemyBase::GetEnemyPosY()		//エネミーのy座標を取得
-{
-	return m_pos.y;
-}
 
 EnemyStateType EnemyBase::GetEnemyState()	//エネミーの状態を取得
 {
-	return m_State;
+	return m_state;
 }
 
 //	～ここまで～
 
 void EnemyBase::UpdateState()		//エネミーの状態の更新	//必要？？
 {
-	switch (m_State)
+	switch (m_state)
 	{
 	case EnemyStateType::Idle:
 
@@ -126,25 +171,25 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	/*
 		エネミーの状態の変更
 	*/
-	
-	if (m_fatigue_gauge <= Num_of_TakeaBreak) 
+
+	if (m_fatigue_gauge <= Num_of_TakeaBreak)
 	{
 		if (m_time_of_break < Limit_of_BreakTime)
 		{
 			m_is_break = true;
-			m_State = EnemyStateType::Break;
+			m_state = EnemyStateType::Break;
 			m_time_of_break++;
 		}
 		else if (m_is_break == true)
 		{
-			m_State = EnemyStateType::Refuge;
+			m_state = EnemyStateType::Refuge;
 			m_time_of_break--;
-			if (m_time_of_break == 0) 
+			if (m_time_of_break == 0)
 			{
-				m_is_break == false;
+				m_is_break = false;
 			}
 		}
-	}	
+	}
 
 	/*
 		プレイヤーの位置情報を取得して、適切な距離を保つ。
@@ -180,30 +225,30 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 		敵からプレイヤーへの状態に応じて攻撃種を変更
 	*/
 
-	switch (m_enemy_to_player_state) 
+	switch (m_enemy_to_player_state)
 	{
 	case EnemytoPlayerState::Separated:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-	
+
 		break;
 
 	case EnemytoPlayerState::Close:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-		
+
 		break;
 
 	case EnemytoPlayerState::Escape:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-		
+
 		break;
-		
+
 	case EnemytoPlayerState::Pursue:
 
 		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
-	
+
 		break;
 
 
@@ -234,16 +279,6 @@ void EnemyBase::EnemyBreak()		//エネミー休憩
 
 
 
-}
-
-int EnemyBase::GetSleepGauge()
-{
-	return m_sleep_gauge;
-}
-
-int EnemyBase::GetFatigueGauge()
-{
-	return m_fatigue_gauge;
 }
 
 void EnemyBase::CureSleepiness()

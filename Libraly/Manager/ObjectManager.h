@@ -2,29 +2,35 @@
 #define OBJECTMANAGER_H_
 
 #include "../Object/ObjectBase.h"
+#include "../Player/TrpPlayer.h"
 
 
 class ObjectManager
 {
 public:
-	ObjectManager();
-	~ObjectManager();
+	static ObjectManager* Instance();
 
+	// マネージャー初期化、コンストラクタ時のみ
 	void Init();
+	// オブジェクト作成
 	void CreateObject();
 	void Update();
 	void Draw();
 
 
-private:
-	static const int MAX_CHARA_OBJ = 50;
-	static const int MAX_BULLET_OBJ = 100;
+protected:
+	ObjectManager();
+	~ObjectManager();
 
-	ObjectBase* chara_objects[50];
-	ObjectBase* bullets_objects[MAX_BULLET_OBJ];
+private:
+
+	static ObjectManager* p_instance;	
+	static const int MAX_CHARA_OBJ = 5;
+	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };
 
+ObjectManager* ObjectManager::p_instance = 0;
 
 
 #endif

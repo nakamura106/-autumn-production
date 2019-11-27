@@ -135,7 +135,8 @@
     <ClCompile Include="Bullet\BulletBase.cpp" />
     <ClCompile Include="Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
-    <ClCompile Include="EnemyBase\EnemyBase.cpp" />
+    <ClCompile Include="Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Enemy\Mouse.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Graphics.cpp" />
@@ -155,12 +156,16 @@
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
+    <ClCompile Include="UI\PlayerUi.cpp" />
+    <ClCompile Include="UI\UiBase.cpp" />
+    <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet\BulletBase.h" />
     <ClInclude Include="Bullet\EnemyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
-    <ClInclude Include="EnemyBase\EnemyBase.h" />
+    <ClInclude Include="Enemy\EnemyBase.h" />
+    <ClInclude Include="Enemy\Mouse.h" />
     <ClInclude Include="Engine\Anime.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Graphics.h" />
@@ -181,6 +186,9 @@
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Texture\Texture.h" />
+    <ClInclude Include="UI\PlayerUi.h" />
+    <ClInclude Include="UI\UiBase.h" />
+    <ClInclude Include="UI\UiManager.h" />
     <ClInclude Include="Utility\Size.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
