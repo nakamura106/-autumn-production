@@ -38,11 +38,10 @@ EnemyBase::EnemyBase()
 	m_speed = 10.0f;
 
 	//•`‰æî•ñŠi”[
-	m_param.tu = 1;
-	m_param.tv = 1;
-	m_param.category_id = TEXTURE_CATEGORY_GAME;
-	m_param.texture_id = GameCategoryTextureList::GameBoss_WalkTex;
-	m_param.x = m_param.y = 500.f;
+	m_draw_param.tu = 1;
+	m_draw_param.tv = 1;
+	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
+	m_draw_param.texture_id = GameCategoryTextureList::GameBoss_WalkTex;
 	
 }
 
@@ -54,7 +53,7 @@ EnemyBase::~EnemyBase()
 void EnemyBase::Init()
 {
 	/*11/26 ’!!‰¼ŽÀ‘•‚ÌƒR[ƒh*/
-	LoadTexture("Res/Tex/Boss1_Walk_Left.png", m_param.category_id, m_param.texture_id);
+	LoadTexture("Res/Tex/Boss1_Walk_Left.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void EnemyBase::Update()
@@ -71,9 +70,9 @@ void EnemyBase::Draw()
 		m_pos.y, 
 		M_ENEMY_SYZE, 
 		M_ENEMY_SYZE, 
-		GetTexture(m_param.category_id, m_param.texture_id), 
-		m_param.tu / M_ANIM_TEX_WIDTH, 
-		m_param.tv / M_ANIM_TEX_HEIGHT
+		GetTexture(m_draw_param.category_id, m_draw_param.texture_id), 
+		m_draw_param.tu / M_ANIM_TEX_WIDTH, 
+		m_draw_param.tv / M_ANIM_TEX_HEIGHT
 	);
 
 }
@@ -87,29 +86,29 @@ void EnemyBase::AnimationUpdate() {
 		m_anim_timer = 0;
 
 		//‰¡•ªŠ„–‡–Ú‚ð‰ÁŽZ
-		++m_param.tu;
+		++m_draw_param.tu;
 
 		//‰¡•ªŠ„–‡–Ú‚ª‰æ‘œ‚Ì•ªŠ„”ˆÈã‚Ìê‡
-		if (m_param.tu > M_ANIM_TEX_WIDTH) {
+		if (m_draw_param.tu > M_ANIM_TEX_WIDTH) {
 
-			m_param.tu = 1;
+			m_draw_param.tu = 1;
 
 			//c•ªŠ„–‡–Ú‚ð‰ÁŽZ
-			++m_param.tv;
+			++m_draw_param.tv;
 		}
 
 		//c•ªŠ„–‡–Ú‚ª‰æ‘œ‚Ì•ªŠ„”ˆÈã‚Ìê‡
-		if (m_param.tv > M_ANIM_TEX_HEIGHT) {
+		if (m_draw_param.tv > M_ANIM_TEX_HEIGHT) {
 
-			m_param.tv = 1;
+			m_draw_param.tv = 1;
 
 		}
 
 		//tu‚Ætv‚©‚çŒvŽZ‚µ‚½Œ»Ý‰½–‡–Ú‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚©‚ª‘–‡”‚ð’´‚¦‚Ä‚¢‚½ê‡A
 		//tu‚Ætv‚ðƒŠƒZƒbƒg
-		if (((m_param.tv - 1) * M_ANIM_TEX_WIDTH + m_param.tu) > M_ANIM_TEX_ALL) {
+		if (((m_draw_param.tv - 1) * M_ANIM_TEX_WIDTH + m_draw_param.tu) > M_ANIM_TEX_ALL) {
 
-			m_param.tu = m_param.tv = 1;
+			m_draw_param.tu = m_draw_param.tv = 1;
 
 		}
 
