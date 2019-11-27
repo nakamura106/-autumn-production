@@ -29,13 +29,20 @@ UiManager::~UiManager()
 
 void UiManager::Init()
 {
+	for (int i = 0; i < MAX_UI_OBJ; i++)
+	{
+		if (ui_objects[i] != nullptr)
+		{
+			ui_objects[i] = nullptr;
+		}
+	}
 }
 
 void UiManager::Update()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)
 	{
-		
+		ui_objects[i]->Update();
 	}
 }
 
@@ -43,6 +50,6 @@ void UiManager::Draw()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)
 	{
-
+		ui_objects[i]->Draw();
 	}
 }

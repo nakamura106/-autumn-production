@@ -57,6 +57,7 @@ enum GameCategoryTextureList
 	GameBoss_Needle_AttackTex,				//!<ハリネズミ攻撃
 	GameBoss_SleepTex,						//!<敵睡眠
 	GameBoss_Fatigue,						//!<敵疲労
+	GamePlayerUi,							//!<プレイヤーHP
 	GamePointerTex,			//!< ポインタ
 	GameTextureMax,			//!< リスト最大数
 };

@@ -1,14 +1,10 @@
 #ifndef UIBASE_H_
 #define UIBASE_H_
 
-struct UiParam
-{
-	UiParam() {
-		x = 0;
-		y = 0;
-	}
-	float x, y;
-};
+#include "../Engine/Graphics.h"
+#include "../Texture/Texture.h"
+#include "../Object/Definition.h"
+
 
 class UiBase {
 public:
@@ -19,8 +15,9 @@ public:
 	virtual void Update() = 0;
 	void Draw();
 
-private:
-	UiParam m_param;
+protected:
+	Position m_pos;
+	DrawParam m_param;
 };
 
 #endif

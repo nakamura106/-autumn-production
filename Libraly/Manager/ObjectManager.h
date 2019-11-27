@@ -2,6 +2,7 @@
 #define OBJECTMANAGER_H_
 
 #include "../Object/ObjectBase.h"
+#include "../Player/TrpPlayer.h"
 
 
 class ObjectManager
@@ -16,14 +17,15 @@ public:
 	void Update();
 	void Draw();
 
+
 protected:
 	ObjectManager();
 	~ObjectManager();
 
 private:
-	static ObjectManager* p_instance;
-	static const int MAX_CHARA_OBJ = 5;
 
+	static ObjectManager* p_instance;	
+	static const int MAX_CHARA_OBJ = 5;
 	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };

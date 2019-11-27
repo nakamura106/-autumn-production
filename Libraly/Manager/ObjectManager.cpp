@@ -41,10 +41,9 @@ void ObjectManager::Init()
 
 void ObjectManager::CreateObject()
 {
-	for (int i = 0; i < MAX_CHARA_OBJ; i++)
-	{
-		
-	}
+
+//	chara_objects[0] = new TrpPlayer();
+
 }
 
 void ObjectManager::Update()

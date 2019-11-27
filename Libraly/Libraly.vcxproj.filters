@@ -132,6 +132,9 @@
     <ClCompile Include="UI\UiManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\PlayerUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -216,6 +219,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UiManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\PlayerUi.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
