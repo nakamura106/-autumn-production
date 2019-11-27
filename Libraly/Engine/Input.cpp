@@ -319,6 +319,27 @@ void KeyUpDate()
 		{
 			g_InputState.now |= SPACE_KEY;
 		}
+		if (KeyState[DIK_SPACE] & 0x80)
+		{
+			g_InputState.now |= SPACE_KEY;
+		}
+		if (KeyState[DIK_1] & 0x80)
+		{
+			g_InputState.now |= ONE_KEY;
+		}
+		if (KeyState[DIK_2] & 0x80)
+		{
+			g_InputState.now |= TWO_KEY;
+		}
+		if (KeyState[DIK_3] & 0x80)
+		{
+			g_InputState.now |= THREE_KEY;
+		}
+		if (KeyState[DIK_LSHIFT] & 0x80)
+		{
+			g_InputState.now |= SHIFT_KEY;
+		}
+		
 
 		g_InputState.trg = (g_InputState.now & (~old));	// トリガー情報取得
 		g_InputState.ntrg = (~g_InputState.now) & old;	// 逆トリガー情報取得
