@@ -21,7 +21,10 @@
 #define S_KEY		0x0080		// Sキー
 #define D_KEY		0x0100		// Dキー
 #define SPACE_KEY   0x0200      // SPACEキー
-
+#define ONE_KEY     0x0400      // 1キー
+#define TWO_KEY     0x0800      // 2キー
+#define THREE_KEY   0x1600		// 3キー
+#define SHIFT_KEY   0x3200		// Shiftキー
 
 /** @brief マウスボタンの種類 */
 enum MouseButton
