@@ -25,15 +25,11 @@ void TrpPlayer::Init()
 	m_is_invincible = false;
 	m_is_jump = false;
 	m_is_active = false;
-	m_hp = 5;
+	m_hp = P_MaxHP;
 	m_direction = RIGHT;
 	m_state = (int)P_State::Wait;
 	m_pos.x = P_posX;
 	m_pos.y = P_posY;
-	m_centerX = m_pos.x + 128.0f;
-	m_centerY = m_pos.y + 128.0f;
-	m_sprite_width = 256.0f;
-	m_sprite_height = 256.0f;
 	m_range = P_trp_range;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
 	Load();
@@ -163,7 +159,7 @@ void TrpPlayer::P_Controll()
 		m_pos.x += P_speed;
 	}
 
-	if (m_pos.x >= 704.0f)
+	if (m_pos.x >= Centerofscreen)
 	{
 		m_pos.x -= P_speed;
 	}
@@ -179,7 +175,7 @@ void TrpPlayer::InitAnimation()
 
 	
 		R_X = 0, R_Y = 0;
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < MaxAnimationNum; i++)
 		{
 			
 				Animation[i].m_RectX = R_X;
@@ -190,9 +186,9 @@ void TrpPlayer::InitAnimation()
 
 				R_X += RectX;
 
-				if (R_X >= 1.0f)
+				if (R_X >= MaxRectX)
 				{
-					if (R_Y <= 0.75f)
+					if (R_Y <= MaxRectY)
 					{
 						R_Y += RectY;
 					}
@@ -235,7 +231,7 @@ void TrpPlayer::DrawAnimation()
 		{
 			Animation[i].m_Display_Flame = Dispflame;
 			i++;
-			if (i >= 11)
+			if (i >= MaxAnimationNum)
 			{
 				i = 0;
 			}
@@ -243,13 +239,13 @@ void TrpPlayer::DrawAnimation()
 	}
 	if (m_direction == LEFT)
 	{
-		DrawUVTexture(m_pos.x-128.f, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[i].m_RectX, Animation[i].m_RectY);
+		DrawUVTexture(m_pos.x+lrAdjustment, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[i].m_RectX, Animation[i].m_RectY);
 		Animation[i].m_Display_Flame--;
 		if (Animation[i].m_Display_Flame <= 0)
 		{
 			Animation[i].m_Display_Flame = Dispflame;
 			i++;
-			if (i >= 11)
+			if (i >= MaxAnimationNum)
 			{
 				i = 0;
 			}

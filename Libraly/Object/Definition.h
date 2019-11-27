@@ -8,12 +8,21 @@
 #define P_trp_range		1000.0f	//攻撃範囲
 #define P_speed			5.0f	//移動速度
 #define P_jump_power	17.0f	//ジャンプ力
+#define P_MaxHP			5		//プレイヤーの体力
 #define Gravity			0.5f	//落下用重力
 #define Dispflame		6		//描画時間
 #define Rect_Height     256.0f	//矩形の高さ
 #define Rect_Width		256.0f	//矩形の幅
 #define RectX			0.25f	//矩形の左上座標X
 #define RectY			0.25f	//矩形の左上座標Y
+#define MaxRectX		1.0f	//統合画像の端X
+#define MaxRectY		0.75f	//統合画像の下端Y
+#define MaxAnimationNum	12		//アニメーションの枚数
+#define InitRectX		0.0f	//矩形座標初期化用X
+#define InitRectY		0.0f	//矩形座標初期化用Y
+#define Centerofscreen	704.0f	//プレイヤー停止用画面中央
+#define lrAdjustment	-128.0f	//左右描画ずれ調整用
+
 
 enum class Player
 {
