@@ -18,7 +18,7 @@ public:
 
 protected:
 	Position m_pos;			//座標
-	DrawParam m_param;		// 描画用構造体
+	DrawParam m_draw_param;		// 描画用構造体
 	int m_direction;		//向き
 	bool m_is_delete;		//削除判定用
 	bool m_is_invincible;	//無敵状態

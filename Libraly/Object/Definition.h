@@ -90,18 +90,17 @@ struct Position
 	float y;
 };
 
+// 描画用変数の構造体
 struct DrawParam
 {
 	DrawParam() {
-		x = 0.0f;
-		y = 0.0f;
 		tu = 0.0f;
 		tv = 0.0f;
 		category_id = 0;
 		texture_id = 0;
 	}
-	float x, y, tu, tv;
-	int category_id, texture_id;
+	float tu, tv; 
+	int category_id, texture_id; // GetTexture()の中身で使う
 };
 
 struct UVANIMATION

@@ -12,6 +12,6 @@ ObjectBase::~ObjectBase()
 
 void ObjectBase::Draw()
 {
-	DrawUVScrollTexture(m_param.x, m_param.y, GetTexture(m_param.category_id, m_param.texture_id), m_param.tu, m_param.tv);
+	DrawUVScrollTexture(m_pos.x, m_pos.y, GetTexture(m_draw_param.category_id, m_draw_param.texture_id), m_draw_param.tu, m_draw_param.tv);
 }
  
