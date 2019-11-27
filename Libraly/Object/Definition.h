@@ -54,7 +54,7 @@ enum class EnemyAttackRepertory
 	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
 };
 
-enum class Enemy
+enum class EnemyID
 {
 	Hedgehog,
 	Seagull,
