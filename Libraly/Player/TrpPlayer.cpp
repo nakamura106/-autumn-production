@@ -64,46 +64,52 @@ void TrpPlayer::Create()
 void TrpPlayer::Update()
 {
 	P_Controll();
+	UpdateAnimation();
 }
 
-void TrpPlayer::Draw()
+void TrpPlayer::UpdateAnimation()
 {
-	if (m_is_delete==false)
+	if (m_is_delete == false)
 	{
 		switch (m_state)
 		{
 		case (int)P_State::Wait:
-			GetMotion(GamePlayer_Taiki_Tp_LeftTex,GamePlayer_Taiki_Tp_RightTex);
-			DrawAnimation();
+			GetMotion(GamePlayer_Taiki_Tp_LeftTex, GamePlayer_Taiki_Tp_RightTex);
 			break;
+		
 		case(int)P_State::Move:
 			GetMotion(GamePlayer_Walk_Tp_LeftTex, GamePlayer_Walk_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump:
 			GetMotion(GamePlayer_Jump_Tp_LeftTex, GamePlayer_Jump_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump_Attack:
 			GetMotion(GamePlayer_JumpAttack_Tp_LeftTex, GamePlayer_JumpAttack_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump_Damage:
 			GetMotion(GamePlayer_JumpDamage_Tp_LeftTex, GamePlayer_JumpDamage_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Damage:
 			GetMotion(GamePlayer_Damage_Tp_LeftTex, GamePlayer_Damage_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Attack:
 			GetMotion(GamePlayer_Attack_Tp_LeftTex, GamePlayer_Attack_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		default:
 			break;
 		}
 	}
+}
+
+void TrpPlayer::Draw()
+{
+	DrawAnimation();
 }
 
 Position TrpPlayer::GetPos()

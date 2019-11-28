@@ -19,7 +19,7 @@ public:
 	virtual void P_Controll() = 0;
 	virtual void InitAnimation()=0;
 	virtual void DrawAnimation() = 0;
-	
+	virtual void UpdateAnimation() = 0;
 	virtual void Jump() = 0;
 	virtual Position GetPos() = 0;
 
