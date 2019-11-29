@@ -21,19 +21,20 @@ public:
 	virtual void DrawAnimation() = 0;
 	virtual void UpdateAnimation() = 0;
 	virtual void Jump() = 0;
+	virtual void ReleaseNote() = 0;
+	virtual void GetMotion(int Llist, int Rlist)=0;
 	virtual Position GetPos() = 0;
 
 
 protected:
 	int		m_hp;							//体力
-	bool	m_is_jump;						//ジャンプ判定
+	bool	m_do_jump;						//ジャンプ判定
 	bool	m_is_active;					//動いているかの判定
-	int m_List;								//テクスチャーリスト保存用
+	bool	m_play_note[6];					//音符生成
+	int		m_List;							//テクスチャーリスト保存用
+	int		m_Key;							//長調か短調か
 
-
-	UVANIMATION Animation[MaxAnimationNum];	//[アニメーションの種類][左右][アニメーションの枚数]
-
-
+	UVANIMATION Animation[MaxAnimationNum];	//アニメーションのスプリット保存用
 
 	UVANIMATION clear_animation_Right[12];	//アニメーションの枚数が違うので放置
 	UVANIMATION clear_animation_Left[12];	//同文

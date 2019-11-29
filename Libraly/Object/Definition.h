@@ -49,6 +49,12 @@ enum class P_State
 
 };
 
+enum class Key
+{
+	Major,
+	Minor,
+};
+
 enum class EnemytoPlayerState
 {
 	Separated,
@@ -114,13 +120,13 @@ struct DrawParam
 
 struct UVANIMATION
 {
-	int m_Rect_Num;			// 矩形番号
+				
 	float m_RectX;			// 矩形の左上座標X
 	float m_RectY;			// 矩形の左上座標Y
 	float m_Rect_Width;		// 矩形の横幅
 	float m_Rect_Height;		// 矩形の高さ
 	int m_Display_Flame;		// 表示フレーム数
-	int Next_Rect_Num;		// 次の矩形番号
+		
 };
 
 #endif

@@ -35,7 +35,7 @@ EnemyBase::EnemyBase()
 	//	‰¼Œˆ‚ß
 	m_pos.x = 500.0f;
 	m_pos.y = 0.0f;
-	m_speed = 10.0f;
+	
 
 	//•`‰æî•ñŠi”[
 	m_draw_param.tu = 1;

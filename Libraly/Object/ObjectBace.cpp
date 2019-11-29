@@ -2,7 +2,6 @@
 
 ObjectBase::ObjectBase()
 {
-	m_speed = 0.0f;
 	m_is_delete = false;
 }
 

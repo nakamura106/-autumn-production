@@ -4,6 +4,7 @@
 #include"../Object/Definition.h"
 #include"../Engine/Vec.h"
 #include"../Engine/Input.h"
+#include"../Map/Map.h"
 
 
 
@@ -23,15 +24,19 @@ void TrpPlayer::Init()
 {
 	m_is_delete = false;
 	m_is_invincible = false;
-	m_is_jump = false;
+	m_do_jump = false;
 	m_is_active = false;
 	m_hp = P_MaxHP;
 	m_direction = RIGHT;
 	m_state = (int)P_State::Wait;
+	m_Key = (int)Key::Major;
 	m_pos.x = P_posX;
 	m_pos.y = P_posY;
-	m_range = P_trp_range;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
+	for (int i = 0; i < 6; i++)
+	{
+		m_play_note[i] = false;
+	}
 	Load();
 	InitAnimation();
 }
@@ -57,14 +62,17 @@ void TrpPlayer::Load()
 
 void TrpPlayer::Create()
 {
-	
-	
+
 }
 
 void TrpPlayer::Update()
 {
 	P_Controll();
 	UpdateAnimation();
+	/*if (バレットのXがplayerのrange超えたら処理を行う)
+	{
+		ReleaseNote();
+	}*/
 }
 
 void TrpPlayer::UpdateAnimation()
@@ -141,13 +149,44 @@ void TrpPlayer::P_Controll()
 
 	if (GetKey(SPACE_KEY) == true)
 	{
-		m_is_jump = true;
+		m_do_jump = true;
 		m_is_active = true;
+	}
+
+	if (GetKey(SHIFT_KEY) == true)
+	{
+		m_Key = (int)Key::Minor;
+	}
+	else
+	{
+		m_Key = (int)Key::Major;
 	}
 
 	if (GetKey(ONE_KEY) == true)
 	{
+		m_play_note[0] = true;
+		if (m_play_note[0]!=true&&m_Key == (int)Key::Minor)
+		{
+			m_play_note[3] = true;
+		}
+	}
 
+	if (GetKey(TWO_KEY) == true)
+	{
+		m_play_note[1] = true;
+		if (m_play_note[1] != true && m_Key == (int)Key::Minor)
+		{
+			m_play_note[4] = true;
+		}
+	}
+
+	if (GetKey(THREE_KEY) == true)
+	{
+		m_play_note[2] = true;
+		if (m_play_note[2] != true && m_Key == (int)Key::Minor)
+		{
+			m_play_note[5] = true;
+		}
 	}
 
 	if (m_is_active == false)
@@ -155,7 +194,7 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Wait;
 	}
 
-	if (m_is_jump == true)
+	if (m_do_jump == true)
 	{
 		Jump();
 	}
@@ -170,17 +209,25 @@ void TrpPlayer::P_Controll()
 		m_pos.x -= P_speed;
 	}
 
-	
+	if (m_pos.y <= P_posX)
+	{
+		m_pos.y += Gravity;
+	}
+
+}
+
+void TrpPlayer::ReleaseNote()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		m_play_note[i] = false;
+	}
 }
 
 void TrpPlayer::InitAnimation()
 {
-
-
-	static float R_X, R_Y;
-
-	
-		R_X = 0, R_Y = 0;
+		static float R_X=0, R_Y=0;
+		
 		for (int i = 0; i < MaxAnimationNum; i++)
 		{
 			
@@ -205,10 +252,6 @@ void TrpPlayer::InitAnimation()
 					R_X = 0;
 				}
 		}
-	
-
-
-
 }
 
 void TrpPlayer::GetMotion(int Llist_, int Rlist_)
@@ -226,8 +269,6 @@ void TrpPlayer::GetMotion(int Llist_, int Rlist_)
 void TrpPlayer::DrawAnimation()
 {
 	static int i = 0;
-
-
 
 	if (m_direction == RIGHT)
 	{
@@ -257,7 +298,6 @@ void TrpPlayer::DrawAnimation()
 			}
 		}
 	}
-
 }
 
 
@@ -275,7 +315,7 @@ void TrpPlayer::Jump()
 	if (m_pos.y >= P_posY)
 	{
 		jump_power = P_jump_power;	
-		m_is_jump = false;
+		m_do_jump = false;
 		m_is_active = false;
 	}
 }

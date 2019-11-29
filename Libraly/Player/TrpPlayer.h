@@ -20,7 +20,8 @@ public:
 	 void InitAnimation()override;
 	 void DrawAnimation()override;
 	 void UpdateAnimation()override;
-	 void Jump();
+	 void Jump()override;
+	 void ReleaseNote()override;
 	 void GetMotion(int Llist,int Rlist);
 	 Position GetPos()override;
 
