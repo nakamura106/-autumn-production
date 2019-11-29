@@ -3,14 +3,15 @@
 
 //!~
 
-typedef enum AttackRepertoryofHedgeHog
-{
-	Rush,		//突進
-	HeadButt,	//頭突き
-	NeedleFire,	//トゲ発射
-	None,		//何もなし
-	AttackRepertoryMax,
-}EnemyAttackRepertory;
+//typedef enum AttackRepertoryofHedgeHog
+//{
+//	Rush,		//突進
+//	HeadButt,	//頭突き
+//	NeedleFire,	//トゲ発射
+//	None,		//何もなし
+//	AttackRepertoryMax,
+//
+//}EnemyAttackRepertory;
 
 //~!
 
