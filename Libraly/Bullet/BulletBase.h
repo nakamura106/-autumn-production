@@ -8,9 +8,17 @@ class BulletBase :public ObjectBase
 public:
 	BulletBase();
 	~BulletBase();
+	virtual void Init();
+	virtual void Update();
+	virtual void Load();
+	void Create() {}
 
 private:
 
+protected:
+
+
 };
+
 
 #endif
