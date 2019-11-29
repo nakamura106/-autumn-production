@@ -1,21 +1,21 @@
-#ifndef PLAYERUI_H_
-#define PLAYERUI_H_
+#ifndef ENEMYUI_H_
+#define ENEMYUI_H_
 
 #include "UiBase.h"
 
-class PlayerUi :public UiBase
+class EnemyUi :public UiBase
 {
 public:
-	PlayerUi();
-	~PlayerUi();
+	EnemyUi();
+	~EnemyUi();
 
 	void Init()override;
 	void Update()override;
 	void Draw()override;
-
 
 private:
 
 };
 
 #endif
+

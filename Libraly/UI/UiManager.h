@@ -2,6 +2,7 @@
 #define UIMANAGER_H_
 
 #include "UiBase.h"
+#include "PlayerUi.h"
 
 class UiManager
 {
@@ -9,6 +10,7 @@ public:
 	static UiManager* Instance();
 
 	void Init();
+	void Create();
 	void Update();
 	void Draw();
 
@@ -23,8 +25,6 @@ private:
 	UiBase* ui_objects[MAX_UI_OBJ];
 
 };
-
-UiManager* UiManager::p_instance = 0;
 
 #endif
 
