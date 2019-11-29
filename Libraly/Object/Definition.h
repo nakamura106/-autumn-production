@@ -127,9 +127,19 @@ struct UVANIMATION
 	float m_RectX;			// 矩形の左上座標X
 	float m_RectY;			// 矩形の左上座標Y
 	float m_Rect_Width;		// 矩形の横幅
-	float m_Rect_Height;		// 矩形の高さ
-	int m_Display_Flame;		// 表示フレーム数
+	float m_Rect_Height;	// 矩形の高さ
+	int m_Display_Flame;	// 表示フレーム数
 		
+};
+
+struct EffectInfo
+{
+	float m_x;			//エフェクトのx座標
+	float m_y;			//エフェクトのy座標
+	int m_timer;		//描画時間タイマー
+	int m_tex_id;		//テクスチャーid保存用
+	bool m_is_active;	//描画判断用
+
 };
 
 #endif
