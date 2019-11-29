@@ -75,7 +75,7 @@ void TrpPlayer::Update()
 
 void TrpPlayer::UpdateAnimation()
 {
-	//
+	//削除判定がfalse(削除処理が実行されない)ならモーションごとにTextureidを送る
 	if (m_is_delete == false)
 	{
 		switch (m_state)
@@ -128,11 +128,16 @@ Position TrpPlayer::GetPos()
 
 void TrpPlayer::P_Controll()
 {
+	/*ボタンを離した後にモーションが
+	継続してしまわないようにする処理*/
 	if (m_is_active == true) 
 	{
 		m_is_active = false;
 	}
 	
+	// ※までボタン処理
+
+	//右移動
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
@@ -144,6 +149,7 @@ void TrpPlayer::P_Controll()
 		m_is_active = true;
 	}
 
+	//左移動
 	if (GetKey(LEFT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
@@ -155,12 +161,14 @@ void TrpPlayer::P_Controll()
 		m_is_active = true;
 	}
 
+	//ジャンプ処理
 	if (GetKey(SPACE_KEY) == true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
 	}
 
+	//長調短調切り替え処理(押している間のみ)
 	if (GetKey(SHIFT_KEY) == true)
 	{
 		m_Key = (int)Key::Minor;
@@ -170,6 +178,7 @@ void TrpPlayer::P_Controll()
 		m_Key = (int)Key::Major;
 	}
 
+	//音符生成
 	if (GetKey(ONE_KEY) == true)
 	{
 		m_play_note[0] = true;
@@ -179,6 +188,7 @@ void TrpPlayer::P_Controll()
 		}
 	}
 
+	//音符生成
 	if (GetKey(TWO_KEY) == true)
 	{
 		m_play_note[1] = true;
@@ -188,6 +198,7 @@ void TrpPlayer::P_Controll()
 		}
 	}
 
+	//音符生成
 	if (GetKey(THREE_KEY) == true)
 	{
 		m_play_note[2] = true;
@@ -196,27 +207,33 @@ void TrpPlayer::P_Controll()
 			m_play_note[5] = true;
 		}
 	}
+	// ※
 
+	//activeがfalseなら待機状態にする処理
 	if (m_is_active == false)
 	{
 		m_state = (int)P_State::Wait;
 	}
 
+	//プレイヤーがジャンプしているか判定する(しているならジャンプ関数を呼び出す)
 	if (m_do_jump == true)
 	{
 		Jump();
 	}
-	
-	if (m_pos.x <= 0)
+
+	//画面端との当たり判定
+	if (m_pos.x <= -lrAdjustment)
 	{
 		m_pos.x += P_speed;
 	}
 
+	//プレイヤーを画面中央に止めるの処理
 	if (m_pos.x >= Centerofscreen)
 	{
 		m_pos.x -= P_speed;
 	}
 
+	//プレイヤーに重力をかける処理
 	if (m_pos.y <= P_posX)
 	{
 		m_pos.y += Gravity;

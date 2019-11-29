@@ -8,3 +8,7 @@ PlayerBase::~PlayerBase()
 {
 
 }
+void PlayerBase::Create()
+{
+
+}
