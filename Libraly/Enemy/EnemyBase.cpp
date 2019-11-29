@@ -103,12 +103,12 @@ void EnemyBase::AnimationUpdate() {
 			m_draw_param.tu = 1;
 
 			//c•ªŠ„–‡–Ú‚ð‰ÁŽZ
-			++m_param.tv;
+			++m_draw_param.tv;
 
 			//c•ªŠ„–‡–Ú‚ª‰æ‘œ‚Ì•ªŠ„”ˆÈã‚Ìê‡
-			if (m_param.tv > M_ANIM_TEX_HEIGHT) {
+			if (m_draw_param.tv > M_ANIM_TEX_HEIGHT) {
 
-				m_param.tv = 1;
+				m_draw_param.tv = 1;
 
 			}
 		}
