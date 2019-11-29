@@ -1,40 +1,40 @@
-//#ifndef MOUSE_H_
-//#define MOUSE_H_
-//
-//#include "EnemyBase.h"
-//
-////!~
-//
-//typedef enum AttackRepertoryofHedgeHog
-//{
-//	Rush,
-//	HeadButt,
-//	NeedleFire,
-//	None,
-//	AttackRepertoryMax,
-//}EnemyAttackRepertory;
-//
-////~!
-//
-//class Hedgehog :public EnemyBase 
-//{
-//public:
-//	Hedgehog();
-//	~Hedgehog();
-//
-//	virtual void Init() = 0;
-//	virtual void Create() = 0;
-//	virtual void Update() = 0;
-//	virtual void Draw() = 0;
-//
-//	virtual void ChangeState();
-//
-//	virtual void EnemyMove();
-//	virtual void EnemyRefuge();
-//	virtual void EnemyAttack();
-//	virtual void EnemyIdle();
-//	virtual void EnemyBreak();
-//
-//};
-//
-//#endif
+#pragma once
+#include "EnemyBase.h"
+
+//!~
+
+typedef enum AttackRepertoryofHedgeHog
+{
+	Rush,		//ìÀêi
+	HeadButt,	//ì™ìÀÇ´
+	NeedleFire,	//ÉgÉQî≠éÀ
+	None,		//âΩÇ‡Ç»Çµ
+	AttackRepertoryMax,
+}EnemyAttackRepertory;
+
+//~!
+
+class HedgeHog :public EnemyBase
+{
+public:
+	void Init();
+	void Create();
+	void Update();
+	void Draw();
+
+	void EnemyAttack();
+
+protected:
+	bool m_is_speed_up;		//â¡ë¨Ç∑ÇÈÇ©		
+
+public:
+	HedgeHog();
+	~HedgeHog();
+
+	void Headbutt();
+
+	void Rush();
+
+	void NeedleFire();
+
+};

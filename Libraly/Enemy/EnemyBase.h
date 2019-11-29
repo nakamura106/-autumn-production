@@ -41,14 +41,18 @@ public:
 	/*
 		ó‘Ô‚Ìˆ—
 	*/
+	/*‘Ò‹@*/
+	virtual void EnemyIdle();
+	/*’ÇÕ‰E*/
+	virtual void EnemyChase_R();
+	/*’ÇÕ¶*/
+	virtual void EnemyChase_L();
 	/*ˆÚ“®*/
 	virtual void EnemyMove();
 	/*“¦‘–(”æ˜J)*/
 	virtual void EnemyRefuge();
 	/*UŒ‚*/
 	virtual void EnemyAttack();
-	/*‘Ò‹@*/
-	virtual void EnemyWait();
 	/*‹xŒe*/
 	virtual void EnemyBreak();
 
@@ -69,6 +73,8 @@ public:
 	virtual void DamageSleepness(int damage_sleep_);
 	/*”æ˜J“x‚Ì‘‰Á*/
 	virtual void DamageFatigue(int damage_fatigue_);
+	/*UŒ‚Œã‚Ìˆ—*/
+	virtual void BackBeforeAttackState();
 
 private:
 	/*ƒfƒoƒbƒO(‰¼À‘•)—p “c’†’Ç‰Á*/
@@ -85,6 +91,9 @@ protected:
 	int		m_time_of_break;	//‹xŒeŠÔ
 	bool	m_is_break;			//‹xŒe‚µ‚Ä‚¢‚é‚©
 	bool	m_is_hit_judge;		//“–‚½‚è”»’è‚ª‘¶İ‚·‚é‚©
+	int		m_refuge_time;		//“¦‚°‰ñ‚éŠÔ
+	int		m_atk_time_count;	//UŒ‚ŠÔŠuƒJƒEƒ“ƒ^[
+	float	m_speed;			//ƒXƒs[ƒh
 
 	EnemyID	m_enemy_id;			//“G‚ÌID
 	EnemyStateType m_state;		//“G‚Ìó‘Ô

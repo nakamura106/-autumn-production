@@ -55,12 +55,13 @@ enum class Key
 	Minor,
 };
 
+//敵から見るプレイヤーの動作
 enum class EnemytoPlayerState
 {
-	Separated,
-	Close,
-	Escape,
-	Pursue,
+	Separated,	//離れた
+	Close,		//近い
+	Escape,		//逃げる
+	Pursue,		//追う
 	EtoPStateTypeMax,
 };
 
@@ -81,11 +82,10 @@ enum class EnemyID
 enum class EnemyStateType 
 {
 	Wait,	//待機
-	Walk,	//移動
+	Warn,	//警戒
 	Attack,	//攻撃
 	Refuge,	//ピンチ状態のエネミー逃走
-	//Breakは動詞に壊すなどがあるため、Restに変更
-	//Rest,	//待機(疲労時)
+	Rest,	//待機(疲労時)
 	Chase,	//追跡
 	Sleep,	//睡眠中
 	EnemyStateTypeMax,
