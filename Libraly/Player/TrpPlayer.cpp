@@ -30,6 +30,7 @@ void TrpPlayer::Init()
 	m_direction = RIGHT;
 	m_state = (int)P_State::Wait;
 	m_Key = (int)Key::Major;
+	m_i = 0;
 	m_pos.x = P_posX;
 	m_pos.y = P_posY;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
@@ -60,15 +61,12 @@ void TrpPlayer::Load()
 
 }
 
-void TrpPlayer::Create()
-{
-
-}
 
 void TrpPlayer::Update()
 {
 	P_Controll();
 	UpdateAnimation();
+	DrawAnimation();
 	/*if (バレットのXがplayerのrange超えたら処理を行う)
 	{
 		ReleaseNote();
@@ -77,6 +75,7 @@ void TrpPlayer::Update()
 
 void TrpPlayer::UpdateAnimation()
 {
+	//
 	if (m_is_delete == false)
 	{
 		switch (m_state)
@@ -117,7 +116,9 @@ void TrpPlayer::UpdateAnimation()
 
 void TrpPlayer::Draw()
 {
-	DrawAnimation();
+	
+	DrawUVTexture(m_pos.x, m_pos.y, Animation[m_i].m_Rect_Width, Animation[m_i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[m_i].m_RectX, Animation[m_i].m_RectY);
+
 }
 
 Position TrpPlayer::GetPos()
@@ -135,6 +136,9 @@ void TrpPlayer::P_Controll()
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		if (m_direction == LEFT) {
+			m_pos.x += lrAdjustment;
+		}
 		m_direction = RIGHT;
 		m_pos.x += P_speed;
 		m_is_active = true;
@@ -143,6 +147,9 @@ void TrpPlayer::P_Controll()
 	if (GetKey(LEFT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		if (m_direction == RIGHT) {
+			m_pos.x -= lrAdjustment;
+		}
 		m_direction = LEFT;
 		m_pos.x -= P_speed;
 		m_is_active = true;
@@ -229,14 +236,14 @@ void TrpPlayer::InitAnimation()
 {
 		static float R_X=0, R_Y=0;
 		
-		for (int i = 0; i < MaxAnimationNum; i++)
+		for (m_i = 0; m_i < MaxAnimationNum; m_i++)
 		{
 			
-				Animation[i].m_RectX = R_X;
-				Animation[i].m_RectY = R_Y;
-				Animation[i].m_Rect_Height = Rect_Height;
-				Animation[i].m_Rect_Width = Rect_Width;
-				Animation[i].m_Display_Flame = Dispflame;
+				Animation[m_i].m_RectX = R_X;
+				Animation[m_i].m_RectY = R_Y;
+				Animation[m_i].m_Rect_Height = Rect_Height;
+				Animation[m_i].m_Rect_Width = Rect_Width;
+				Animation[m_i].m_Display_Flame = Dispflame;
 
 				R_X += RectX;
 
@@ -269,33 +276,30 @@ void TrpPlayer::GetMotion(int Llist_, int Rlist_)
 
 void TrpPlayer::DrawAnimation()
 {
-	static int i = 0;
-
 	if (m_direction == RIGHT)
 	{
-		DrawUVTexture(m_pos.x, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME,m_List), Animation[i].m_RectX, Animation[i].m_RectY);
-		Animation[i].m_Display_Flame--;
-		if (Animation[i].m_Display_Flame <= 0)
+		Animation[m_i].m_Display_Flame--;
+		if (Animation[m_i].m_Display_Flame <= 0)
 		{
-			Animation[i].m_Display_Flame = Dispflame;
-			i++;
-			if (i >= MaxAnimationNum)
+			Animation[m_i].m_Display_Flame = Dispflame;
+			m_i++;
+			if (m_i >= MaxAnimationNum)
 			{
-				i = 0;
+				m_i = 0;
 			}
 		}
 	}
 	if (m_direction == LEFT)
 	{
-		DrawUVTexture(m_pos.x+lrAdjustment, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[i].m_RectX, Animation[i].m_RectY);
-		Animation[i].m_Display_Flame--;
-		if (Animation[i].m_Display_Flame <= 0)
+		
+		Animation[m_i].m_Display_Flame--;
+		if (Animation[m_i].m_Display_Flame <= 0)
 		{
-			Animation[i].m_Display_Flame = Dispflame;
-			i++;
-			if (i >= MaxAnimationNum)
+			Animation[m_i].m_Display_Flame = Dispflame;
+			m_i++;
+			if (m_i >= MaxAnimationNum)
 			{
-				i = 0;
+				m_i = 0;
 			}
 		}
 	}

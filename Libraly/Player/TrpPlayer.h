@@ -10,10 +10,11 @@ class TrpPlayer :public PlayerBase
 public:
 	TrpPlayer();
 	~TrpPlayer();
-
+	 //!< ‰Šú‰»
 	 void Init()override;
+	 //
 	 void Load()override;
-	 void Create()override;
+	 
 	 void Update()override;
 	 void Draw()override;
 	 void P_Controll()override;

@@ -11,14 +11,21 @@ class PlayerBase :public ObjectBase
 public:
 	PlayerBase();
 	~PlayerBase();
+	//!< 初期化関数
 	virtual void Init() = 0;
+	//!< 画像読込用関数(ゲームシーンにべた書き予定)
 	virtual void Load() = 0;
-	virtual void Create() = 0;
+	//!< アップデート関数(処理更新用)
 	virtual void Update() = 0;
+	//!< 描画関数(オブジェクトベースでまとめてやる予定)
 	virtual void Draw() = 0;
+	//!< プレイヤーコントロール関数(プレイヤーの操作)
 	virtual void P_Controll() = 0;
+	//!< アニメーションの初期化関数
 	virtual void InitAnimation()=0;
+	//!< アニメーションの描画関数(画像をアニメーションさせるための関数)
 	virtual void DrawAnimation() = 0;
+	//!< アニメーションのアップデート関数(状態によってアニメーションを変える関数 ※)
 	virtual void UpdateAnimation() = 0;
 	virtual void Jump() = 0;
 	virtual void ReleaseNote() = 0;
@@ -33,6 +40,7 @@ protected:
 	bool	m_play_note[6];					//音符生成
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
+	int     m_i;							//アニメーション切り替え用
 
 	UVANIMATION Animation[MaxAnimationNum];	//アニメーションのスプリット保存用
 

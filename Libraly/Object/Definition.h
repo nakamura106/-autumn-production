@@ -21,7 +21,7 @@
 #define InitRectX		0.0f	//矩形座標初期化用X
 #define InitRectY		0.0f	//矩形座標初期化用Y
 #define Centerofscreen	704.0f	//プレイヤー停止用画面中央
-#define lrAdjustment	-128.0f	//左右描画ずれ調整用
+#define lrAdjustment	128.0f	//左右描画ずれ調整用
 
 
 enum class Player
