@@ -2,19 +2,25 @@
 #include "../Player/TrpPlayer.h"
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
+#define Refuge_Time	100				//逃げ回る時間
 #define Limit_of_BreakTime 100		//MAXの休憩時間
 #define Cure_of_SleepinessPoint 1	//時間回復する眠気の値
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
+
+#define Fatigue_Gauge_Max 100		//疲労ゲージ上限
+#define Sleep_Gauge_Max	100			//睡眠ゲージ上限
+
+#define Attack_Interval 100			//攻撃感覚
 
 //仮変数（定数）用意できたら消す分
 
 const int player_pos_x = 100;
 const int player_pos_y = 100;
 
-//ここまで
-
 TrpPlayer trpplayer;
+
+//ここまで
 
 EnemyBase::EnemyBase()
 {
@@ -29,6 +35,7 @@ EnemyBase::EnemyBase()
 	m_is_break = false;
 	m_is_delete = false;
 	m_is_hit_judge = false;
+	m_speed = 1.f;
 
 	m_anim_timer = 0;
 
@@ -142,7 +149,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 	{
 	//待機状態
 	case EnemyStateType::Wait:
-		EnemyWait();
+		EnemyIdle();
 		next_state = ChangeStateFromWait();
 		break;
 
@@ -152,7 +159,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		break;
 */
 	//移動状態
-	case EnemyStateType::Walk:
+	case EnemyStateType::Warn:
 		EnemyMove();
 		next_state = ChangeStateFromWalk();
 		break;
@@ -195,32 +202,42 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 
 void EnemyBase::ChangeState()		//エネミーが行動する条件
 {
+	m_atk_time_count++;
+
 	/*
 		エネミーの状態の変更
 	*/
 
-	if (m_fatigue_gauge <= Num_of_TakeaBreak)
+	if (m_atk_time_count == 500 /*仮設定*/)
 	{
-		if (m_time_of_break < Limit_of_BreakTime)
-		{
-			m_is_break = true;
-			//m_state = EnemyStateType::Rest;
-			m_time_of_break++;
-		}
-		else if (m_is_break == true)
-		{
-			m_state = EnemyStateType::Refuge;
-			m_time_of_break--;
-			if (m_time_of_break == 0)
-			{
-				m_is_break = false;
-			}
-		}
+		m_state = EnemyStateType::Attack;
 	}
 
 	/*
-		プレイヤーの位置情報を取得して、適切な距離を保つ。
+		11/29　田中コメントアウト
+		m_centerXメンバが消えたことによって、エラー発生
+		m_centerXメンバの代わりとなるものが必要
 	*/
+	//if (m_is_break == true)
+	//{
+	//	m_state = EnemyStateType::Break;
+	//}
+	//else if (m_fatigue_gauge < Num_of_TakeaBreak)
+	//{
+	//	m_state = EnemyStateType::Refuge;
+	//}
+	//else if (m_centerX + Distance_of_Maintain < trpplayer->GetPos.m_centerX)
+	//{
+	//	m_state = EnemyStateType::Warn_R;
+	//}
+	//else if (m_centerX - Distance_of_Maintain > trpplayer->GetPos.m_centerX)
+	//{
+	//	m_state = EnemyStateType::Warn_L;
+	//}
+	//else
+	//{
+	//	m_state = EnemyStateType::Idle;	//処理のエラーの場合待機へ戻る。
+	//}
 }
  
 EnemyStateType EnemyBase::ChangeStateFromWait()
@@ -230,7 +247,7 @@ EnemyStateType EnemyBase::ChangeStateFromWait()
 
 EnemyStateType EnemyBase::ChangeStateFromWalk()
 {
-	return EnemyStateType::Walk;
+	return EnemyStateType::Warn;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromAttack()
@@ -256,14 +273,50 @@ void EnemyBase::EnemyMove()			//エネミー移動
 
 }
 
+void EnemyBase::EnemyChase_R()
+{
+	/*
+		敵が自分より右方向へ遠くにいる場合の追跡
+	*/
+
+	m_pos.x + m_speed;
+
+	m_enemy_to_player_state = EnemytoPlayerState::Separated;
+}
+
+void EnemyBase::EnemyChase_L()
+{
+	/*
+		敵が自分より左方向へ遠くにいる場合の追跡
+	*/
+
+	m_pos.x - m_speed;
+
+	m_enemy_to_player_state = EnemytoPlayerState::Separated;
+}
+
 void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 {
 	/*
 		ピンチ状態のエネミー逃走
 	*/
 
+	m_refuge_time--;
 
+	if (m_refuge_time == 0)
+	{
+		m_is_break = true;
+		m_refuge_time = Refuge_Time;
+	}
+	else
+	{
+		/*
+			enemy逃げる処理
+		*/
 
+		m_enemy_to_player_state = EnemytoPlayerState::Escape;
+
+	}
 }
 
 void EnemyBase::EnemyAttack()		//エネミー攻撃
@@ -308,7 +361,7 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 
 }
 
-void EnemyBase::EnemyWait()			//エネミー待機
+void EnemyBase::EnemyIdle()			//エネミー待機
 {
 	/*
 		エネミーの待機（その場で待機アニメーション）
@@ -324,8 +377,17 @@ void EnemyBase::EnemyBreak()		//エネミー休憩
 		エネミーの疲労待機（その場で疲労待機アニメーション）
 	*/
 
+	int cure_fatigue = Fatigue_Gauge_Max - m_fatigue_gauge;
 
-
+	if (cure_fatigue > 0)
+	{
+		m_fatigue_gauge -= Cure_of_FatiguePoint * 5;	//だいたい通常回復の五倍くらい？
+		cure_fatigue -= Cure_of_FatiguePoint * 5;
+	}
+	else
+	{
+		m_is_break = false;
+	}
 }
 
 void EnemyBase::CureSleepiness()
@@ -348,4 +410,13 @@ void EnemyBase::DamageFatigue(int damage_fatigue_)
 	m_fatigue_gauge += damage_fatigue_;
 }
 
+void EnemyBase::BackBeforeAttackState()
+{
+	EnemyStateType before_attack = GetEnemyState();
+
+	m_state = EnemyStateType::Attack;
+	/*
+		各エネミー攻撃後にbefore_attackの中身をm_stateに反映する
+	*/
+}
 
