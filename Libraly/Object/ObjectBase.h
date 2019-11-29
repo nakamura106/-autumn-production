@@ -24,7 +24,7 @@ protected:
 	bool m_is_invincible;	//無敵状態
 	int m_state;			//状態
 	int m_flame_count;		//フレームカウント
-	
+	float m_speed;
 
 
 };

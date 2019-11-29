@@ -28,6 +28,7 @@ void TrpPlayer::Init()
 	m_is_active = false;
 	m_hp = P_MaxHP;
 	m_direction = RIGHT;
+	m_speed = P_speed;
 	m_state = (int)P_State::Wait;
 	m_Key = (int)Key::Major;
 	m_i = 0;
@@ -145,7 +146,7 @@ void TrpPlayer::P_Controll()
 			m_pos.x += lrAdjustment;
 		}
 		m_direction = RIGHT;
-		m_pos.x += P_speed;
+		m_pos.x += m_speed;
 		m_is_active = true;
 	}
 
@@ -157,7 +158,7 @@ void TrpPlayer::P_Controll()
 			m_pos.x -= lrAdjustment;
 		}
 		m_direction = LEFT;
-		m_pos.x -= P_speed;
+		m_pos.x -= m_speed;
 		m_is_active = true;
 	}
 
@@ -224,13 +225,13 @@ void TrpPlayer::P_Controll()
 	//画面端との当たり判定
 	if (m_pos.x <= -lrAdjustment)
 	{
-		m_pos.x += P_speed;
+		m_pos.x += m_speed;
 	}
 
 	//プレイヤーを画面中央に止めるの処理
 	if (m_pos.x >= Centerofscreen)
 	{
-		m_pos.x -= P_speed;
+		m_pos.x -= m_speed;
 	}
 
 	//プレイヤーに重力をかける処理

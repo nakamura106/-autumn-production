@@ -3,7 +3,7 @@
 #include"../Object/ObjectBase.h"
 #include"../Object/Definition.h"
 
-class Map
+class Map:public ObjectBase
 {
 public:
 	Map();
@@ -13,6 +13,7 @@ public:
 	void Update();
 	void MapScroll();
 	void Draw();
+	void Create(){}
 
 private:
 	Position m_pos;			//ç¿ïW
