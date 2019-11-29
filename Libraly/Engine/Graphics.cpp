@@ -421,7 +421,7 @@ bool CreateGraphicsDevice(D3DPRESENT_PARAMETERS * present_param)
 	present_param->BackBufferCount = 1;
 
 	// ウィンドウモード設定 => 定数で切り替え
-	present_param->Windowed = false;
+	present_param->Windowed = true;
 
 	// スワップエフェクト => バックバッファとフロントバッファへの切り替え方法
 	present_param->SwapEffect = D3DSWAPEFFECT_DISCARD;

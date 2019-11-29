@@ -127,7 +127,8 @@ Position TrpPlayer::GetPos()
 
 void TrpPlayer::P_Controll()
 {
-	if (m_is_active == true) {
+	if (m_is_active == true) 
+	{
 		m_is_active = false;
 	}
 	
