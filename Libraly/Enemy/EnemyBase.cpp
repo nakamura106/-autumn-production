@@ -222,7 +222,7 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 		プレイヤーの位置情報を取得して、適切な距離を保つ。
 	*/
 }
-
+ 
 EnemyStateType EnemyBase::ChangeStateFromWait()
 {
 	return EnemyStateType::Wait;
