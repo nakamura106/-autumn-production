@@ -139,7 +139,10 @@ struct EffectInfo
 	int m_timer;		//描画時間タイマー
 	int m_tex_id;		//テクスチャーid保存用
 	bool m_is_active;	//描画判断用
-
+	float m_width;		//横幅
+	float m_height;		//高さ
+	float m_tu;
+	float m_tv;
 };
 
 #endif

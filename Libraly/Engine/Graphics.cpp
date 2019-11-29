@@ -5,6 +5,8 @@
 #include "../Engine/Windows.h"
 #include "../Utility/Size.h"
 #include "../Engine/Vec.h"
+#include"Texture.h"
+#include "../Texture/Texture.h"
 
 
 // 静的ライブラリ
@@ -296,6 +298,11 @@ void DrawUVScrollTexture(float x, float y, Texture * texture_data, float tu, flo
 	g_D3DDevice->SetTexture(0, texture_data->TextureData);
 
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
+}
+
+void DrawEffact(EffectInfo& effect)
+{
+	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
 }
 
 //！！！テスト中！！！
