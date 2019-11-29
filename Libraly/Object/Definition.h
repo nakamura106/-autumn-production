@@ -80,11 +80,14 @@ enum class EnemyID
 
 enum class EnemyStateType 
 {
-	Idle,
-	Warn,
-	Attack,
-	Refuge,
-	Break,
+	Wait,	//待機
+	Walk,	//移動
+	Attack,	//攻撃
+	Refuge,	//ピンチ状態のエネミー逃走
+	//Breakは動詞に壊すなどがあるため、Restに変更
+	//Rest,	//待機(疲労時)
+	Chase,	//追跡
+	Sleep,	//睡眠中
 	EnemyStateTypeMax,
 };
 
