@@ -8,6 +8,7 @@
 
 
 // タイトルシーンの初期化
+
 void InitTitleScene();
 // タイトルシーンのメイン処理
 void MainTitleScene();
