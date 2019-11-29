@@ -52,6 +52,7 @@ enum GameCategoryTextureList
 	GamePlayer_Clear_Tp_LeftTex,			//!<クリア左
 	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
+	GamePlayerBullet_1Tex,					//!<プレイヤーの弾１
 	GameBoss_TaikiTex,						//!<敵待機
 	GameBoss_WalkTex,						//!<敵歩行
 	GameBoss_Needle_AttackTex,				//!<ハリネズミ攻撃
