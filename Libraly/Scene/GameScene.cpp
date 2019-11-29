@@ -6,10 +6,13 @@
 #include "../Map/Map.h"
 #include"../Player/TrpPlayer.h"
 #include"../Enemy/EnemyBase.h"
+#include "../UI/UiManager.h"
+
 
 Map map;
 TrpPlayer player;
 EnemyBase enemy;
+
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -52,9 +55,7 @@ void DrawGameScene()
 
 	enemy.Draw();
 
-
-
-
+	UiManager::Instance()->Draw();
 
 }
 
@@ -62,14 +63,13 @@ void DrawGameScene()
 
 void InitGameScene()
 {
-
-	
-
 	player.Init();
 
 	map.Init();
 	
 	enemy.Init();
+
+	UiManager::Instance()->Create();
 
 
 	ChangeSceneStep(SceneStep::MainStep);

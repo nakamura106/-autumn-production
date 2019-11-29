@@ -1,10 +1,12 @@
 #include "UiManager.h"
 
+UiManager* UiManager::p_instance = 0;
+
 UiManager* UiManager::Instance()
 {
 	if (p_instance == 0)
 	{
-		p_instance = new UiManager;
+		p_instance = new UiManager();
 	}
 
 	return p_instance;
@@ -38,6 +40,11 @@ void UiManager::Init()
 	}
 }
 
+void UiManager::Create()
+{
+	ui_objects[0] = new PlayerUi();
+}
+
 void UiManager::Update()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)
@@ -50,6 +57,9 @@ void UiManager::Draw()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)
 	{
-		ui_objects[i]->Draw();
+		if (ui_objects[i] != nullptr)
+		{
+			ui_objects[i]->Draw();
+		}
 	}
 }

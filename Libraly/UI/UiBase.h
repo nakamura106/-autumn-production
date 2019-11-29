@@ -9,11 +9,11 @@
 class UiBase {
 public:
 	UiBase();
-	~UiBase();
+	virtual ~UiBase();
 
 	virtual void Init() = 0;
 	virtual void Update() = 0;
-	void Draw();
+	virtual void Draw();
 
 protected:
 	Position m_pos;

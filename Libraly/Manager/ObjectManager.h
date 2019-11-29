@@ -2,8 +2,6 @@
 #define OBJECTMANAGER_H_
 
 #include "../Object/ObjectBase.h"
-#include "../Player/TrpPlayer.h"
-
 
 class ObjectManager
 {
@@ -29,8 +27,6 @@ private:
 	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };
-
-ObjectManager* ObjectManager::p_instance = 0;
 
 
 #endif

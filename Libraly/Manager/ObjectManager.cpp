@@ -1,4 +1,8 @@
 #include "ObjectManager.h"
+#include "../Player/TrpPlayer.h"
+
+
+ObjectManager* ObjectManager::p_instance = 0;
 
 ObjectManager* ObjectManager::Instance()
 {
