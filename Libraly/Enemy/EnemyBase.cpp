@@ -103,12 +103,12 @@ void EnemyBase::AnimationUpdate() {
 			m_draw_param.tu = 1;
 
 			//縦分割枚目を加算
-			++m_param.tv;
+			++m_draw_param.tv;
 
 			//縦分割枚目が画像の分割数以上の場合
-			if (m_param.tv > M_ANIM_TEX_HEIGHT) {
+			if (m_draw_param.tv > M_ANIM_TEX_HEIGHT) {
 
-				m_param.tv = 1;
+				m_draw_param.tv = 1;
 
 			}
 		}
@@ -222,7 +222,7 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 		プレイヤーの位置情報を取得して、適切な距離を保つ。
 	*/
 }
-
+ 
 EnemyStateType EnemyBase::ChangeStateFromWait()
 {
 	return EnemyStateType::Wait;
