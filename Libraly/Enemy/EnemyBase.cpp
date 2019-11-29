@@ -54,18 +54,29 @@ EnemyBase::~EnemyBase()
 void EnemyBase::Init()
 {
 	/*11/26 注!!仮実装のコード*/
-	LoadTexture("Res/Tex/Boss1_Walk_Left.png", m_param.category_id, m_param.texture_id);
+	LoadTexture("Res/Tex/Boss1_Walk_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_WalkTex);
+	LoadTexture("Res/Tex/Boss1_Tukare_Left.png",TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_Fatigue);
+	LoadTexture("Res/Tex/Boss1_Down_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_TaikiTex);
+	LoadTexture("Res/Tex/Boss1_Sleep_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_SleepTex);
+	
+
 }
 
 void EnemyBase::Update()
 {
+	//現在の状態における動作の更新
+	UpdateState();
+
+	//アニメーション(パラパラ画像)値の更新
 	AnimationUpdate();
+
 }
 
 void EnemyBase::Draw()
 {
 	//ObjectBase::Draw();
 
+	//本来はObjectBaseにこの関数を置くのが適切
 	DrawUVTexture(
 		m_pos.x, 
 		m_pos.y, 
@@ -96,13 +107,13 @@ void EnemyBase::AnimationUpdate() {
 
 			//縦分割枚目を加算
 			++m_param.tv;
-		}
 
-		//縦分割枚目が画像の分割数以上の場合
-		if (m_param.tv > M_ANIM_TEX_HEIGHT) {
+			//縦分割枚目が画像の分割数以上の場合
+			if (m_param.tv > M_ANIM_TEX_HEIGHT) {
 
-			m_param.tv = 1;
+				m_param.tv = 1;
 
+			}
 		}
 
 		//tuとtvから計算した現在何枚目のアニメーションかが総枚数を超えていた場合、
@@ -125,37 +136,48 @@ EnemyStateType EnemyBase::GetEnemyState()	//エネミーの状態を取得
 
 //	～ここまで～
 
-void EnemyBase::UpdateState()		//エネミーの状態の更新	//必要？？
+void EnemyBase::UpdateState()		//エネミーの状態の更新
 {
+	//次の状態を示す変数
+	EnemyStateType next_state = m_state;
+
 	switch (m_state)
 	{
-	case EnemyStateType::Idle:
-
-		EnemyIdle();
-
+	//待機状態
+	case EnemyStateType::Wait:
+		EnemyWait();
+		next_state = ChangeStateFromWait();
 		break;
 
-	case EnemyStateType::Break:
-
+	//疲労待機状態
+	/*case EnemyStateType::Rest:
 		EnemyBreak();
-
 		break;
-
-	case EnemyStateType::Warn:
-
+*/
+	//移動状態
+	case EnemyStateType::Walk:
 		EnemyMove();
-
+		next_state = ChangeStateFromWalk();
 		break;
 
+	//攻撃状態
 	case EnemyStateType::Attack:
-
 		EnemyAttack();
-
+		next_state = ChangeStateFromAttack();
 		break;
 
+	//逃走状態(次のフェーズ移行？)
 	case EnemyStateType::Refuge:
-
 		EnemyRefuge();
+		break;
+
+	//追跡状態
+	case EnemyStateType::Chase:
+		next_state = ChangeStateFromChase();
+		break;
+
+	//睡眠状態(眠気度MAX)
+	case EnemyStateType::Sleep:
 
 		break;
 
@@ -165,6 +187,13 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新	//必要？？
 		*/
 		break;
 	}
+
+	//状態の変更
+	if (m_state != next_state) {
+		//next_sceneを専用の変数に渡し、状態遷移
+
+	}
+
 }
 
 void EnemyBase::ChangeState()		//エネミーが行動する条件
@@ -178,7 +207,7 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 		if (m_time_of_break < Limit_of_BreakTime)
 		{
 			m_is_break = true;
-			m_state = EnemyStateType::Break;
+			//m_state = EnemyStateType::Rest;
 			m_time_of_break++;
 		}
 		else if (m_is_break == true)
@@ -195,6 +224,26 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	/*
 		プレイヤーの位置情報を取得して、適切な距離を保つ。
 	*/
+}
+
+EnemyStateType EnemyBase::ChangeStateFromWait()
+{
+	return EnemyStateType::Wait;
+}
+
+EnemyStateType EnemyBase::ChangeStateFromWalk()
+{
+	return EnemyStateType::Walk;
+}
+
+EnemyStateType EnemyBase::ChangeStateFromAttack()
+{
+	return EnemyStateType::Attack;
+}
+
+EnemyStateType EnemyBase::ChangeStateFromChase()
+{
+	return EnemyStateType::Chase;
 }
 
 void EnemyBase::EnemyMove()			//エネミー移動
@@ -262,7 +311,7 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 
 }
 
-void EnemyBase::EnemyIdle()			//エネミー待機
+void EnemyBase::EnemyWait()			//エネミー待機
 {
 	/*
 		エネミーの待機（その場で待機アニメーション）
