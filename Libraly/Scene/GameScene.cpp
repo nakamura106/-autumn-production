@@ -53,7 +53,7 @@ void DrawGameScene()
 
 	player.Draw();
 
-	enemy.Draw();
+	//enemy.Draw();
 
 	UiManager::Instance()->Draw();
 
@@ -83,7 +83,9 @@ void MainGameScene()
 
 	player.Update();
 
-	enemy.Update();
+	//enemy.Update();
+
+	map.Update();
 
 }
 

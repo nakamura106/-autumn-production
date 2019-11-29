@@ -4,6 +4,7 @@
 #include"../Object/Definition.h"
 #include"../Engine/Vec.h"
 #include"../Engine/Input.h"
+#include"../Map/Map.h"
 
 
 
@@ -23,19 +24,19 @@ void TrpPlayer::Init()
 {
 	m_is_delete = false;
 	m_is_invincible = false;
-	m_is_jump = false;
+	m_do_jump = false;
 	m_is_active = false;
-	m_hp = 5;
+	m_hp = P_MaxHP;
 	m_direction = RIGHT;
 	m_state = (int)P_State::Wait;
+	m_Key = (int)Key::Major;
 	m_pos.x = P_posX;
 	m_pos.y = P_posY;
-	m_centerX = m_pos.x + 128.0f;
-	m_centerY = m_pos.y + 128.0f;
-	m_sprite_width = 256.0f;
-	m_sprite_height = 256.0f;
-	m_range = P_trp_range;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
+	for (int i = 0; i < 6; i++)
+	{
+		m_play_note[i] = false;
+	}
 	Load();
 	InitAnimation();
 }
@@ -61,53 +62,62 @@ void TrpPlayer::Load()
 
 void TrpPlayer::Create()
 {
-	
-	
+
 }
 
 void TrpPlayer::Update()
 {
 	P_Controll();
+	UpdateAnimation();
+	/*if (バレットのXがplayerのrange超えたら処理を行う)
+	{
+		ReleaseNote();
+	}*/
 }
 
-void TrpPlayer::Draw()
+void TrpPlayer::UpdateAnimation()
 {
-	if (m_is_delete==false)
+	if (m_is_delete == false)
 	{
 		switch (m_state)
 		{
 		case (int)P_State::Wait:
-			GetMotion(GamePlayer_Taiki_Tp_LeftTex,GamePlayer_Taiki_Tp_RightTex);
-			DrawAnimation();
+			GetMotion(GamePlayer_Taiki_Tp_LeftTex, GamePlayer_Taiki_Tp_RightTex);
 			break;
+		
 		case(int)P_State::Move:
 			GetMotion(GamePlayer_Walk_Tp_LeftTex, GamePlayer_Walk_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump:
 			GetMotion(GamePlayer_Jump_Tp_LeftTex, GamePlayer_Jump_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump_Attack:
 			GetMotion(GamePlayer_JumpAttack_Tp_LeftTex, GamePlayer_JumpAttack_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Jump_Damage:
 			GetMotion(GamePlayer_JumpDamage_Tp_LeftTex, GamePlayer_JumpDamage_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Damage:
 			GetMotion(GamePlayer_Damage_Tp_LeftTex, GamePlayer_Damage_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		case(int)P_State::Attack:
 			GetMotion(GamePlayer_Attack_Tp_LeftTex, GamePlayer_Attack_Tp_RightTex);
-			DrawAnimation();
 			break;
+		
 		default:
 			break;
 		}
 	}
+}
+
+void TrpPlayer::Draw()
+{
+	DrawAnimation();
 }
 
 Position TrpPlayer::GetPos()
@@ -139,13 +149,44 @@ void TrpPlayer::P_Controll()
 
 	if (GetKey(SPACE_KEY) == true)
 	{
-		m_is_jump = true;
+		m_do_jump = true;
 		m_is_active = true;
+	}
+
+	if (GetKey(SHIFT_KEY) == true)
+	{
+		m_Key = (int)Key::Minor;
+	}
+	else
+	{
+		m_Key = (int)Key::Major;
 	}
 
 	if (GetKey(ONE_KEY) == true)
 	{
+		m_play_note[0] = true;
+		if (m_play_note[0]!=true&&m_Key == (int)Key::Minor)
+		{
+			m_play_note[3] = true;
+		}
+	}
 
+	if (GetKey(TWO_KEY) == true)
+	{
+		m_play_note[1] = true;
+		if (m_play_note[1] != true && m_Key == (int)Key::Minor)
+		{
+			m_play_note[4] = true;
+		}
+	}
+
+	if (GetKey(THREE_KEY) == true)
+	{
+		m_play_note[2] = true;
+		if (m_play_note[2] != true && m_Key == (int)Key::Minor)
+		{
+			m_play_note[5] = true;
+		}
 	}
 
 	if (m_is_active == false)
@@ -153,7 +194,7 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Wait;
 	}
 
-	if (m_is_jump == true)
+	if (m_do_jump == true)
 	{
 		Jump();
 	}
@@ -163,23 +204,31 @@ void TrpPlayer::P_Controll()
 		m_pos.x += P_speed;
 	}
 
-	if (m_pos.x >= 704.0f)
+	if (m_pos.x >= Centerofscreen)
 	{
 		m_pos.x -= P_speed;
 	}
 
-	
+	if (m_pos.y <= P_posX)
+	{
+		m_pos.y += Gravity;
+	}
+
+}
+
+void TrpPlayer::ReleaseNote()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		m_play_note[i] = false;
+	}
 }
 
 void TrpPlayer::InitAnimation()
 {
-
-
-	static float R_X, R_Y;
-
-	
-		R_X = 0, R_Y = 0;
-		for (int i = 0; i < 12; i++)
+		static float R_X=0, R_Y=0;
+		
+		for (int i = 0; i < MaxAnimationNum; i++)
 		{
 			
 				Animation[i].m_RectX = R_X;
@@ -190,9 +239,9 @@ void TrpPlayer::InitAnimation()
 
 				R_X += RectX;
 
-				if (R_X >= 1.0f)
+				if (R_X >= MaxRectX)
 				{
-					if (R_Y <= 0.75f)
+					if (R_Y <= MaxRectY)
 					{
 						R_Y += RectY;
 					}
@@ -203,10 +252,6 @@ void TrpPlayer::InitAnimation()
 					R_X = 0;
 				}
 		}
-	
-
-
-
 }
 
 void TrpPlayer::GetMotion(int Llist_, int Rlist_)
@@ -225,8 +270,6 @@ void TrpPlayer::DrawAnimation()
 {
 	static int i = 0;
 
-
-
 	if (m_direction == RIGHT)
 	{
 		DrawUVTexture(m_pos.x, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME,m_List), Animation[i].m_RectX, Animation[i].m_RectY);
@@ -235,7 +278,7 @@ void TrpPlayer::DrawAnimation()
 		{
 			Animation[i].m_Display_Flame = Dispflame;
 			i++;
-			if (i >= 11)
+			if (i >= MaxAnimationNum)
 			{
 				i = 0;
 			}
@@ -243,19 +286,18 @@ void TrpPlayer::DrawAnimation()
 	}
 	if (m_direction == LEFT)
 	{
-		DrawUVTexture(m_pos.x-128.f, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[i].m_RectX, Animation[i].m_RectY);
+		DrawUVTexture(m_pos.x+lrAdjustment, m_pos.y, Animation[i].m_Rect_Width, Animation[i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[i].m_RectX, Animation[i].m_RectY);
 		Animation[i].m_Display_Flame--;
 		if (Animation[i].m_Display_Flame <= 0)
 		{
 			Animation[i].m_Display_Flame = Dispflame;
 			i++;
-			if (i >= 11)
+			if (i >= MaxAnimationNum)
 			{
 				i = 0;
 			}
 		}
 	}
-
 }
 
 
@@ -273,7 +315,7 @@ void TrpPlayer::Jump()
 	if (m_pos.y >= P_posY)
 	{
 		jump_power = P_jump_power;	
-		m_is_jump = false;
+		m_do_jump = false;
 		m_is_active = false;
 	}
 }

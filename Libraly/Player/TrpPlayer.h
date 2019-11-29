@@ -19,8 +19,9 @@ public:
 	 void P_Controll()override;
 	 void InitAnimation()override;
 	 void DrawAnimation()override;
-	
-	 void Jump();
+	 void UpdateAnimation()override;
+	 void Jump()override;
+	 void ReleaseNote()override;
 	 void GetMotion(int Llist,int Rlist);
 	 Position GetPos()override;
 
