@@ -2,9 +2,23 @@
 
 BulletBase::BulletBase()
 {
-	Init();
+	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
+	m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
 
-	Load();
+	/*アニメーション用仮メンバ初期化*/
+	m_anim_timer		= 0;
+	m_anim_tex_all		= 16;
+	m_anim_tex_width	= 4;
+	m_anim_tex_height	= 4;
+	m_anim_flame		= 12;
+
+	m_move_count		= 0.f;
+	m_move_limit		= 800.f;
+	m_speed				= 3.f;
+
+	//座標仮指定
+	m_pos.y = 500.f;
+	m_pos.x = 0.f;
 }
 
 BulletBase::~BulletBase()
@@ -14,27 +28,13 @@ BulletBase::~BulletBase()
 
 void BulletBase::Init()
 {
-	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
-	m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
-
-	/*アニメーション用仮メンバ初期化*/
-	m_anim_timer		= 0;
-	m_anim_tex_all		= 16;
-	m_anim_tex_width	= 4;
-	m_anim_tex_height	= 4;
-	m_anim_flame		= 5;
-
-	m_move_count	= 0.f;
-	m_move_limit	= 500.f;
-	m_speed			= 5.f;
-
-	//座標仮指定
-	m_pos.y = 500.f;
-	m_pos.x = 0.f;
+	Load();
 }
 
 void BulletBase::Update()
 {
+	MoveUpdate();
+
 	AnimationUpdate();
 }
 
@@ -49,8 +49,8 @@ void BulletBase::Draw()
 		M_BULLET_SYZE,
 		M_BULLET_SYZE,
 		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
-		m_draw_param.tu / m_anim_tex_width,
-		m_draw_param.tv / m_anim_tex_height
+		(m_draw_param.tu-1) / m_anim_tex_width,
+		(m_draw_param.tv-1) / m_anim_tex_height
 	);
 }
 

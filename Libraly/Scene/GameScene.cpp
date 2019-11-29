@@ -7,12 +7,13 @@
 #include"../Player/TrpPlayer.h"
 #include"../Enemy/EnemyBase.h"
 #include "../UI/UiManager.h"
+#include"../Bullet/PlayerBullet.h"
 
 
 Map map;
 TrpPlayer player;
 EnemyBase enemy;
-
+PlayerBullet p_bullet;
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -47,13 +48,13 @@ SceneId UpdateGameScene()
 void DrawGameScene()
 {
 
-
-
 	map.Draw();
 
 	enemy.Draw();
 
 	player.Draw();
+
+	p_bullet.Draw();
 
 	UiManager::Instance()->Draw();
 
@@ -63,11 +64,14 @@ void DrawGameScene()
 
 void InitGameScene()
 {
-	player.Init();
 
 	map.Init();
 	
 	enemy.Init();
+
+	player.Init();
+
+	p_bullet.Init();
 
 	UiManager::Instance()->Create();
 
@@ -80,12 +84,14 @@ void InitGameScene()
 void MainGameScene()
 {
 	UpdateInput();
+	
+	map.Update();
+	
+	enemy.Update();
 
 	player.Update();
 
-	enemy.Update();
-
-	map.Update();
+	p_bullet.Update();
 
 }
 
