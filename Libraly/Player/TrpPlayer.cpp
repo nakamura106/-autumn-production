@@ -1,6 +1,6 @@
 #include"TrpPlayer.h"
 #include"../Engine/Graphics.h"
-#include"../Texture/Texture.h"
+//#include"../Texture/Texture.h"
 #include"../Object/Definition.h"
 #include"../Engine/Vec.h"
 #include"../Engine/Input.h"

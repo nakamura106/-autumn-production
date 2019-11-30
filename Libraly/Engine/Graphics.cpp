@@ -1,11 +1,10 @@
 #include <d3d9.h>
 #include <d3dx9.h>
-#include"../Object/Definition.h"
+
 #include "../Engine/Graphics.h"
 #include "../Engine/Windows.h"
 #include "../Utility/Size.h"
 #include "../Engine/Vec.h"
-#include"Texture.h"
 #include "../Texture/Texture.h"
 
 
@@ -300,10 +299,10 @@ void DrawUVScrollTexture(float x, float y, Texture * texture_data, float tu, flo
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
-//void DrawEffact(EffectInfo& effect)
-//{
-//	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
-//}
+void DrawEffact(EffectInfo effect)
+{
+	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
+}
 
 //！！！テスト中！！！
 float center_x, center_y;

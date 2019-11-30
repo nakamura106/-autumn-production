@@ -7,6 +7,7 @@
 
 #include <Windows.h>
 #include <d3d9.h>
+#include"../Object/Definition.h"
 
 /** @brief フォントカラー */
 enum FontColor
@@ -143,8 +144,7 @@ void DrawIntegratedTexture(float x, float y, Texture* texture_data, float tu, fl
 
 void DrawObjIntegratedTexture(float x, float y, Texture* texture_data, float tu, float tv, float spriteX, float spriteY, int spriteNumX, int spriteNumY, float z);
 
-
-//void DrawEffact(EffectInfo& effact);
+void DrawEffact(EffectInfo effect);
 
 #endif
 
