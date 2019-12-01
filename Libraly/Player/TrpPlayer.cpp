@@ -32,6 +32,7 @@ void TrpPlayer::Init()
 	m_state = (int)P_State::Wait;
 	m_Key = (int)Key::Major;
 	m_i = 0;
+	m_map_pos = P_posX;
 	m_pos.x = P_posX;
 	m_pos.y = P_posY;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
@@ -145,6 +146,10 @@ void TrpPlayer::P_Controll()
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
 		}
+		if (m_map_pos <= 3800)
+		{
+			m_map_pos += m_speed;
+		}
 		m_direction = RIGHT;
 		m_pos.x += m_speed;
 		m_is_active = true;
@@ -157,8 +162,15 @@ void TrpPlayer::P_Controll()
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
 		}
+		if (m_map_pos >= 0)
+		{
+			m_map_pos -= m_speed;
+		}
+		if (m_map_pos <= m_pos.x)
+		{
+			m_pos.x -= m_speed;
+		}
 		m_direction = LEFT;
-		m_pos.x -= m_speed;
 		m_is_active = true;
 	}
 

@@ -28,9 +28,9 @@ enum GameCategoryTextureList
 	GamefloorTex,							//!<床
 	Gamefloor2Tex,							//!<床2
 	GameFgTex,								//!<近景
-	GameObject,								//!< フリー
-	GameObject2,							//!< フリー
-	GameObject3,							//!< フリー
+	GameObject,								//!< 草1
+	GameObject2,							//!< 草２
+	GameObject3,							//!< 草３
 	GameObject4,							//!< フリー
 	GameObject5,							//!< フリー
 	GamePlayer_Taiki_Tp_LeftTex,			//!<プレイヤー待機左

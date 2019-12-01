@@ -10,7 +10,7 @@ Map bg;		//背景
 Map floor;	//床
 Map floor2; //床2
 Map fg;		//近景
-Map obj;	//オブジェクト
+Map obj[3];	//オブジェクト
 
 Map::Map()
 {
@@ -36,9 +36,12 @@ void Map::Init()
 	fg.m_pos.x = 0;
 	fg.m_pos.y = 0;
 	fg.m_speed = 0;
-	obj.m_pos.x = 0;
-	obj.m_pos.y = 0;
-	obj.m_speed = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		obj[i].m_pos.x = 500.0f;
+		obj[i].m_pos.y = P_posY;
+		obj[i].m_speed = 0;
+	}
 	Load();
 }
 
@@ -48,6 +51,9 @@ void Map::Load()
 	LoadTexture("Res/Tex/海 手すり.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);
 	LoadTexture("Res/Tex/海 浜辺.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);
 	LoadTexture("Res/Tex/海 草.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);
+	LoadTexture("Res/Tex/葉小.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);
+	LoadTexture("Res/Tex/葉中.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject2);
+	LoadTexture("Res/Tex/葉大.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject3);
 }
 
 void Map::Update()
@@ -56,16 +62,16 @@ void Map::Update()
 	{
 		if (fg.m_pos.x >= -3800.0f)
 		{
-			floor.m_pos.x -= P_speed;
+			obj[0].m_pos.x = floor.m_pos.x -= P_speed;
 			floor2.m_pos.x -= 3.0f;
-			fg.m_pos.x -= P_speed * 2;
+			 fg.m_pos.x -= P_speed * 2;
 		}
 	}
 	if (GetKey(LEFT_KEY) == true)
 	{
 		if (fg.m_pos.x < 0.0f)
 		{
-			floor.m_pos.x += P_speed;
+			obj[0].m_pos.x = floor.m_pos.x += P_speed;
 			floor2.m_pos.x += 3.0f;
 			fg.m_pos.x += P_speed * 2;
 		}
@@ -85,5 +91,6 @@ void Map::Draw()
 	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
 	DrawTexture(floor.m_pos.x, floor.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
+	DrawTexture(obj[0].m_pos.x, obj[0].m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
 	
 }
