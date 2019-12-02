@@ -12,21 +12,26 @@ public:
 
 	virtual void Init() = 0;
 	virtual void Load() = 0;
-	virtual void Create() = 0;
 	virtual void Update() = 0;
 	virtual void Draw();
 
 protected:
-	Position m_pos;			//座標
-	DrawParam m_draw_param;	// 描画用構造体
-	int m_direction;		//向き
+	/*統合画像のアニメーション用関数*/
+	void AnimationUpdate();
+
+	Position		m_pos;			//座標
+	DrawParam		m_draw_param;	//描画用構造体
+	AnimationParam	m_anim_param;	//アニメーション用構造体
+
+	int m_direction;		//向き(enum Directionを使用)
 	bool m_is_delete;		//削除判定用
 	bool m_is_invincible;	//無敵状態
 	int m_state;			//状態
-	int m_flame_count;		//フレームカウント
-	float m_speed;
+	float m_speed;			//移動速度
 
-
+	//デバッグ用変数(12/2田中追加)
+	int m_animation_timer;
+	
 };
 
 #endif

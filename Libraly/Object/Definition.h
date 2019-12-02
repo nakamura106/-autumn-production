@@ -93,7 +93,7 @@ enum class EnemyStateType
 
 enum Direction 
 {
-	 LEFT,
+	LEFT,
 	RIGHT,
 };
 
@@ -114,11 +114,38 @@ struct DrawParam
 	DrawParam() {
 		tu = 0.0f;
 		tv = 0.0f;
+		tex_size_x = 0.0f;
+		tex_size_y = 0.0f;
 		category_id = 0;
 		texture_id = 0;
 	}
-	float tu, tv; 
-	int category_id, texture_id; // GetTexture()の中身で使う
+	float tu;
+	float tv; 
+	float tex_size_x;//テクスチャの横サイズ
+	float tex_size_y;//テクスチャの縦サイズ
+
+	// GetTexture()の中身で使う
+	int category_id;	
+	int texture_id;		
+};
+
+//UVアニメーション用構造体(ObjectBaseで使用)
+struct AnimationParam 
+{
+	AnimationParam() {
+		split_width = 1;
+		split_height = 1;
+		split_all = 1;
+		change_flame = 1;
+	}
+
+	int split_width;	//横分割数
+	int split_height;	//縦分割数
+	int split_all;		//合計分割数(縦×横-不要部分)
+	int change_flame;	//画像変更のタイミング(フレーム数)
+
+	/*Note:「split」は割れ目・分裂の意味*/
+	
 };
 
 struct UVANIMATION
