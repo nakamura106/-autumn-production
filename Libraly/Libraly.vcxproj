@@ -157,7 +157,7 @@
     <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="UI\EnemyUi.cpp" />
-    <ClCompile Include="UI\PlayerUi.cpp" />
+    <ClCompile Include="UI\PlayerBaseUi.cpp" />
     <ClCompile Include="UI\UiBase.cpp" />
     <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
@@ -188,7 +188,7 @@
     <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="UI\EnemyUi.h" />
-    <ClInclude Include="UI\PlayerUi.h" />
+    <ClInclude Include="UI\PlayerBaseUi.h" />
     <ClInclude Include="UI\UiBase.h" />
     <ClInclude Include="UI\UiManager.h" />
     <ClInclude Include="Utility\Size.h" />

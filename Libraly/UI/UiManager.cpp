@@ -42,7 +42,7 @@ void UiManager::Init()
 
 void UiManager::Create()
 {
-	ui_objects[0] = new PlayerUi();
+	ui_objects[0] = new PlayerBaseUi();
 }
 
 void UiManager::Update()

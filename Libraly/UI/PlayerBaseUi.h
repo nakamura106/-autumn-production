@@ -1,13 +1,13 @@
-#ifndef PLAYERUI_H_
-#define PLAYERUI_H_
+#ifndef PLAYERBASEUI_H_
+#define PLAYERBASEUI_H_
 
 #include "UiBase.h"
 
-class PlayerUi :public UiBase
+class PlayerBaseUi :public UiBase
 {
 public:
-	PlayerUi();
-	~PlayerUi();
+	PlayerBaseUi();
+	~PlayerBaseUi();
 
 	void Init()override;
 	void Update()override;

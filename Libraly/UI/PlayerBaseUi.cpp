@@ -1,16 +1,16 @@
-#include "PlayerUi.h"
+#include "PlayerBaseUi.h"
 
 
-PlayerUi::PlayerUi()
+PlayerBaseUi::PlayerBaseUi()
 {
 	Init();
 }
 
-PlayerUi::~PlayerUi()
+PlayerBaseUi::~PlayerBaseUi()
 {
 }
 
-void PlayerUi::Init()
+void PlayerBaseUi::Init()
 {
 	m_pos.x = 20.0f;
 	m_pos.y = 20.0f;
@@ -19,13 +19,14 @@ void PlayerUi::Init()
 	m_param.texture_id = GameCategoryTextureList::GamePlayerUi;
 }
 
-void PlayerUi::Update()
+void PlayerBaseUi::Update()
 {
 
 }
 
-void PlayerUi::Draw()
+void PlayerBaseUi::Draw()
 {
 	// DrawTexture(0.0f, 0.0f, GetTexture(m_param.category_id, m_param.texture_id));
-	DrawUVTexture(m_pos.x, m_pos.y, 524.0f, 222.0f, GetTexture(m_param.category_id, m_param.texture_id), 4096.0f, 256.0f);
+	DrawUVTexture(m_pos.x, m_pos.y, 524.0f, 222.0f, GetTexture(m_param.category_id, m_param.texture_id), 0.12792969f * 4, 0);
+
 }

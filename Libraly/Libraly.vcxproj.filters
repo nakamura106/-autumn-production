@@ -132,10 +132,10 @@
     <ClCompile Include="UI\UiManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\PlayerUi.cpp">
+    <ClCompile Include="UI\EnemyUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\EnemyUi.cpp">
+    <ClCompile Include="UI\PlayerBaseUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -224,10 +224,10 @@
     <ClInclude Include="UI\UiManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\PlayerUi.h">
+    <ClInclude Include="UI\EnemyUi.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\EnemyUi.h">
+    <ClInclude Include="UI\PlayerBaseUi.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

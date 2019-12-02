@@ -53,6 +53,20 @@ enum GameCategoryTextureList
 	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
 	GamePlayerBullet_1Tex,					//!<プレイヤーの弾１
+	GameBulletUi_RedLeft,					//!<プレイヤー弾UI
+	GameBulletUi_RedCenter,					//!<プレイヤー弾UI 				
+	GameBulletUi_RedRight,					//!<プレイヤー弾UI
+	GameBulletUi_PinkCenter,				//!<プレイヤー弾UI
+	GameBulletUi_PurpleRight,				//!<プレイヤー弾UI
+	GameBulletUi_BlueLeft,					//!<プレイヤー弾UI
+	GameBulletUi_BlueCenter,				//!<プレイヤー弾UI
+	GameBulletUi_BlueRight,					//!<プレイヤー弾UI
+	GameBulletUi_GreenCenter,				//!<プレイヤー弾UI
+	GameBulletUi_YellowRight,				//!<プレイヤー弾UI
+	GamePlayerHp_3Tex,						//!<プレイヤー耐久残り3
+	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り2
+	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り1
+	GamePlayerHp_0Tex,						//!<プレイヤー耐久残り0
 	GameBoss_TaikiTex,						//!<敵待機
 	GameBoss_WalkTex,						//!<敵歩行
 	GameBoss_Needle_AttackTex,				//!<ハリネズミ攻撃
