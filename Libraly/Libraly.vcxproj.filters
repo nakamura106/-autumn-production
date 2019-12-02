@@ -138,6 +138,9 @@
     <ClCompile Include="UI\EnemyUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\FlameTimer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="UI\EnemyUi.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FlameTimer.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

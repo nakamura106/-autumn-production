@@ -8,6 +8,7 @@
 #include"../Enemy/EnemyBase.h"
 #include "../UI/UiManager.h"
 #include"../Bullet/PlayerBullet.h"
+#include"../Engine/FlameTimer.h"
 
 
 Map map;
@@ -57,6 +58,8 @@ void DrawGameScene()
 	p_bullet.Draw();
 
 	UiManager::Instance()->Draw();
+
+	FlameTimer::Debug::DrawTimer();
 
 }
 

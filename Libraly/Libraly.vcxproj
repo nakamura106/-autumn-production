@@ -139,6 +139,7 @@
     <ClCompile Include="Enemy\Mouse.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\FlameTimer.cpp" />
     <ClCompile Include="Engine\Graphics.cpp" />
     <ClCompile Include="Engine\Input.cpp" />
     <ClCompile Include="Engine\Sound.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Enemy\Mouse.h" />
     <ClInclude Include="Engine\Anime.h" />
     <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\FlameTimer.h" />
     <ClInclude Include="Engine\Graphics.h" />
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\Sound.h" />

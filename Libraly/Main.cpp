@@ -5,6 +5,7 @@
 #include "../Libraly/Engine/Input.h"
 #include "../Libraly/Engine/Graphics.h"
 #include "../Libraly/Engine/Sound.h"
+#include "../Libraly/Engine/FlameTimer.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -47,10 +48,13 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		}
 		else
 		{
-
+			//タイマー動作
+			FlameTimer::DoNotUse::ActiveTimer();
+			FlameTimer::DoNotUse::CountTimer();
 
 			UpdateScene();
 
+			
 
 		}
 	}
