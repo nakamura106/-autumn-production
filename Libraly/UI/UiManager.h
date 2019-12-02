@@ -2,7 +2,7 @@
 #define UIMANAGER_H_
 
 #include "UiBase.h"
-#include "PlayerUi.h"
+#include "PlayerBaseUi.h"
 
 class UiManager
 {
