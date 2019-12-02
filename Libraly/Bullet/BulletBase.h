@@ -6,7 +6,7 @@
 class BulletBase :public ObjectBase
 {
 public:
-	BulletBase();
+	BulletBase(float x_, float y_, float move_speed_, Direction direction_);
 	~BulletBase();
 	virtual void Init();
 	virtual void Update();

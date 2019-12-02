@@ -6,7 +6,7 @@
 class EnemyBullet :public BulletBase
 {
 public:
-	EnemyBullet();
+	EnemyBullet(float x_, float y_, float move_speed_, Direction direction_);
 	~EnemyBullet();
 
 private:

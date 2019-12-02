@@ -1,24 +1,27 @@
 #include "BulletBase.h"
 
-BulletBase::BulletBase()
+BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction direction_)
 {
+	//オブジェクトからの情報を格納
+	m_pos.x = x_;
+	m_pos.y = y_;
+	m_speed = move_speed_;
+	m_direction = direction_;
+
+	//使用画像設定
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
 
-	/*アニメーション用仮メンバ初期化*/
+	//アニメーション用仮メンバ初期化
 	m_anim_timer		= 0;
 	m_anim_tex_all		= 16;
 	m_anim_tex_width	= 4;
 	m_anim_tex_height	= 4;
 	m_anim_flame		= 12;
 
+	//移動距離判定用
 	m_move_count		= 0.f;
 	m_move_limit		= 800.f;
-	m_speed				= 3.f;
-
-	//座標仮指定
-	m_pos.y = 500.f;
-	m_pos.x = 0.f;
 }
 
 BulletBase::~BulletBase()
@@ -28,6 +31,7 @@ BulletBase::~BulletBase()
 
 void BulletBase::Init()
 {
+	//画像情報読み込み
 	Load();
 }
 
@@ -101,8 +105,15 @@ void BulletBase::AnimationUpdate()
 
 void BulletBase::MoveUpdate()
 {
-	m_pos.x += m_speed;
-
+	//向きによって飛ぶ方向が変化
+	if (m_direction == Direction::RIGHT) {
+		m_pos.x += m_speed;
+	}
+	else if(m_direction==Direction::LEFT){
+		m_pos.x -= m_speed;
+	}
+	
+	//有効距離をカウント
 	m_move_count += m_speed;
 
 	if (m_move_count >= m_move_limit) {

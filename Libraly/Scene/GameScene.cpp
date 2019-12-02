@@ -13,7 +13,7 @@
 Map map;
 TrpPlayer player;
 EnemyBase enemy;
-PlayerBullet p_bullet;
+PlayerBullet p_bullet(100.f, 700.f, 5.f, Direction::RIGHT);
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
