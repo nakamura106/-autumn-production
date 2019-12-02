@@ -6,7 +6,7 @@
 class PlayerBullet :public BulletBase
 {
 public:
-	PlayerBullet();
+	PlayerBullet(float x_, float y_, float move_speed_, Direction direction_);
 	~PlayerBullet();
 
 private:
