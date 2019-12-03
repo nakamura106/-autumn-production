@@ -13,11 +13,6 @@
 
 #define Attack_Interval 100			//攻撃感覚
 
-//仮変数（定数）用意できたら消す分
-
-const int player_pos_x = 100;
-const int player_pos_y = 100;
-
 TrpPlayer trpplayer;
 
 //ここまで
@@ -39,8 +34,10 @@ EnemyBase::EnemyBase()
 
 	m_anim_timer = 0;
 
+//	TrpPlayer* trpplayer;
+
 	//	仮決め
-	m_pos.x = 500.0f;
+	m_pos.x = 1000.0f;
 	m_pos.y = 0.0f;
 	
 
@@ -68,6 +65,13 @@ void EnemyBase::Init()
 
 void EnemyBase::Update()
 {
+#if 1
+
+	//Stateの遷移
+	ChangeState();
+
+#endif
+
 	//現在の状態における動作の更新
 	UpdateState();
 
@@ -154,10 +158,11 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		break;
 
 	//疲労待機状態
-	/*case EnemyStateType::Rest:
-		EnemyBreak();
+	case EnemyStateType::Rest:
+		EnemyRest();
+		next_state = ChangeStateFromRest();
 		break;
-*/
+
 	//移動状態
 	case EnemyStateType::Warn:
 		EnemyMove();
@@ -170,9 +175,10 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		next_state = ChangeStateFromAttack();
 		break;
 
-	//逃走状態(次のフェーズ移行？)
+	//逃走状態(次のフェーズ移行？) ← ではなくゲージが一定以下の場合逃げる処理
 	case EnemyStateType::Refuge:
 		EnemyRefuge();
+		next_state = ChangeStateFromRefuge();
 		break;
 
 	//追跡状態
@@ -192,11 +198,13 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		break;
 	}
 
+	/*
 	//状態の変更
 	if (m_state != next_state) {
 		//next_sceneを専用の変数に渡し、状態遷移
-
+		m_state = next_state;
 	}
+	*/
 
 }
 
@@ -211,6 +219,7 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	if (m_atk_time_count == 500 /*仮設定*/)
 	{
 		m_state = EnemyStateType::Attack;
+		m_atk_time_count = 0;
 	}
 
 	/*
@@ -218,26 +227,27 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 		m_centerXメンバが消えたことによって、エラー発生
 		m_centerXメンバの代わりとなるものが必要
 	*/
-	//if (m_is_break == true)
-	//{
-	//	m_state = EnemyStateType::Break;
-	//}
-	//else if (m_fatigue_gauge < Num_of_TakeaBreak)
-	//{
-	//	m_state = EnemyStateType::Refuge;
-	//}
-	//else if (m_centerX + Distance_of_Maintain < trpplayer->GetPos.m_centerX)
-	//{
-	//	m_state = EnemyStateType::Warn_R;
-	//}
-	//else if (m_centerX - Distance_of_Maintain > trpplayer->GetPos.m_centerX)
-	//{
-	//	m_state = EnemyStateType::Warn_L;
-	//}
-	//else
-	//{
-	//	m_state = EnemyStateType::Idle;	//処理のエラーの場合待機へ戻る。
-	//}
+
+	if (m_is_break == true)
+	{
+		m_state = EnemyStateType::Rest;
+	}
+	else if (m_fatigue_gauge < Num_of_TakeaBreak)
+	{
+		m_state = EnemyStateType::Refuge;
+	}
+	else if (m_pos.x + Distance_of_Maintain < trpplayer.GetPos().x)
+	{
+		m_state = EnemyStateType::Chase;
+	}
+	else if (m_pos.x - Distance_of_Maintain > trpplayer.GetPos().x)
+	{
+		m_state = EnemyStateType::Chase;
+	}
+	else
+	{
+		m_state = EnemyStateType::Wait;	//処理のエラーの場合待機へ戻る。
+	}
 }
  
 EnemyStateType EnemyBase::ChangeStateFromWait()
@@ -248,6 +258,16 @@ EnemyStateType EnemyBase::ChangeStateFromWait()
 EnemyStateType EnemyBase::ChangeStateFromWalk()
 {
 	return EnemyStateType::Warn;
+}
+
+EnemyStateType EnemyBase::ChangeStateFromRefuge() 
+{
+	return EnemyStateType::Refuge;
+}
+
+EnemyStateType EnemyBase::ChangeStateFromRest() 
+{
+	return EnemyStateType::Rest;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromAttack()
@@ -266,13 +286,18 @@ void EnemyBase::EnemyMove()			//エネミー移動
 		通常状態のエネミー移動（適切な距離まで距離を詰める）
 	*/
 
-	if (m_pos.x < player_pos_x + Distance_of_Maintain || m_pos.x < player_pos_x - Distance_of_Maintain)
-	{
-		m_pos.x;		//書きかけ
-	}
 
+	if (trpplayer.GetPos().x > m_pos.x)
+	{
+		m_pos.x += m_speed;
+	}
+	else 
+	{
+		m_pos.x -= m_speed;
+	}
 }
 
+#if 0
 void EnemyBase::EnemyChase_R()
 {
 	/*
@@ -295,6 +320,8 @@ void EnemyBase::EnemyChase_L()
 	m_enemy_to_player_state = EnemytoPlayerState::Separated;
 }
 
+#endif
+
 void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 {
 	/*
@@ -313,6 +340,8 @@ void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 		/*
 			enemy逃げる処理
 		*/
+
+		
 
 		m_enemy_to_player_state = EnemytoPlayerState::Escape;
 
@@ -371,7 +400,7 @@ void EnemyBase::EnemyIdle()			//エネミー待機
 
 }
 
-void EnemyBase::EnemyBreak()		//エネミー休憩
+void EnemyBase::EnemyRest()		//エネミー休憩
 {
 	/*
 		エネミーの疲労待機（その場で疲労待機アニメーション）

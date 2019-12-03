@@ -70,6 +70,16 @@ enum class EnemyAttackRepertory
 	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
 };
 
+//特設
+enum AttackRepertoryofHedgeHog
+{
+	Rush,		//突進
+	HeadButt,	//頭突き
+	NeedleFire,	//トゲ発射
+	None,		//何もなし
+	AttackRepertoryMax,
+};
+
 enum class EnemyID
 {
 	Hedgehog,

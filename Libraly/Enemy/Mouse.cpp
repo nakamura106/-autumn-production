@@ -22,7 +22,7 @@ HedgeHog::HedgeHog()
 {
 	m_enemy_id = EnemyID::BossTypeMax;
 	m_state = EnemyStateType::EnemyStateTypeMax;
-	//m_attack_repertory = EnemyAttackRepertory::None;
+	m_attack_repertory = AttackRepertoryofHedgeHog::None;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
 	m_fatigue_gauge = NULL;
@@ -39,6 +39,11 @@ HedgeHog::HedgeHog()
 	m_speed = 10.0f;
 }
 
+HedgeHog::~HedgeHog()
+{
+}
+
+/*
 HedgeHog::~HedgeHog()
 {
 
@@ -63,6 +68,7 @@ void HedgeHog::Draw()
 {
 
 }
+*/
 
 void HedgeHog::EnemyAttack()		//エネミー攻撃
 {
@@ -70,39 +76,42 @@ void HedgeHog::EnemyAttack()		//エネミー攻撃
 		敵からプレイヤーへの状態に応じて攻撃種を変更
 	*/
 
-	//switch (m_enemy_to_player_state)
-	//{
-	//case EnemytoPlayerState::Separated:
+	switch (m_enemy_to_player_state)
+	{
+	case EnemytoPlayerState::Separated:
 
-	//	m_attack_repertory = EnemyAttackRepertory::Rush;
+		Rush();
+		m_attack_repertory = AttackRepertoryofHedgeHog::Rush;
 
-	//	break;
+		break;
 
-	//case EnemytoPlayerState::Close:
+	case EnemytoPlayerState::Close:
 
-	//	m_attack_repertory = EnemyAttackRepertory::HeadButt;
+		Headbutt();
+		m_attack_repertory = AttackRepertoryofHedgeHog::HeadButt;
 
-	//	break;
+		break;
 
-	//case EnemytoPlayerState::Escape:
+	case EnemytoPlayerState::Escape:
 
-	//	m_attack_repertory = EnemyAttackRepertory::NeedleFire;
+		NeedleFire();
+		m_attack_repertory = AttackRepertoryofHedgeHog::NeedleFire;
 
-	//	break;
+		break;
 
-	//case EnemytoPlayerState::Pursue:
+	case EnemytoPlayerState::Pursue:
 
-	//	m_attack_repertory = EnemyAttackRepertory::None;
+		m_attack_repertory = AttackRepertoryofHedgeHog::None;
 
-	//	break;
+		break;
 
 
-	//default:
-	//	/*
-	//		!!
-	//	*/
-	//	break;
-	//}
+	default:
+		/*
+			!!
+		*/
+		break;
+	}
 
 }
 

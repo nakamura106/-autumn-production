@@ -33,6 +33,14 @@ public:
 	virtual EnemyStateType ChangeStateFromWait();
 	/*ˆÚ“®ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
 	virtual EnemyStateType ChangeStateFromWalk();
+
+	//’Ç‰Á
+	/*“¦‘–ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromRefuge();
+	/*‹xŒeó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromRest();
+	//’Ç‰Á‚±‚±‚Ü‚Å
+
 	/*UŒ‚ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
 	virtual EnemyStateType ChangeStateFromAttack();
 	/*’ÇÕó‘Ô‚©‚ç‚Ì‘JˆÚ*/
@@ -43,10 +51,14 @@ public:
 	*/
 	/*‘Ò‹@*/
 	virtual void EnemyIdle();
+
+#if 0
 	/*’ÇÕ‰E*/
 	virtual void EnemyChase_R();
 	/*’ÇÕ¶*/
 	virtual void EnemyChase_L();
+#endif
+
 	/*ˆÚ“®*/
 	virtual void EnemyMove();
 	/*“¦‘–(”æ˜J)*/
@@ -54,7 +66,7 @@ public:
 	/*UŒ‚*/
 	virtual void EnemyAttack();
 	/*‹xŒe*/
-	virtual void EnemyBreak();
+	virtual void EnemyRest();
 
 	/*
 		ƒQƒbƒ^[ŒQ
