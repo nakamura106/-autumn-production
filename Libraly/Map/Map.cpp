@@ -60,37 +60,42 @@ void Map::Update()
 {
 	if (GetKey(RIGHT_KEY) == true)
 	{
-		if (fg.m_pos.x >= -3800.0f)
-		{
-			obj[0].m_pos.x = floor.m_pos.x -= P_speed;
-			floor2.m_pos.x -= 3.0f;
-			 fg.m_pos.x -= P_speed * 2;
-		}
+		MapScroll(RIGHT);
 	}
 	if (GetKey(LEFT_KEY) == true)
 	{
-		if (fg.m_pos.x < 0.0f)
-		{
-			obj[0].m_pos.x = floor.m_pos.x += P_speed;
-			floor2.m_pos.x += 3.0f;
-			fg.m_pos.x += P_speed * 2;
-		}
+		MapScroll(LEFT);
 	}
-	
 }
 
-void Map::MapScroll()
+void Map::MapScroll(int direction_)
 {
-	
+	if (direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
+	{
+		obj[0].m_pos.x -= P_speed;
+		floor.m_pos.x -= P_speed;
+		floor2.m_pos.x -= 3.0f;
+		fg.m_pos.x -= P_speed * 2;
+	}
+	if (direction_==LEFT&&fg.m_pos.x < 0.0f)
+	{
+		obj[0].m_pos.x += P_speed;
+		floor.m_pos.x += P_speed;
+		floor2.m_pos.x += 3.0f;
+		fg.m_pos.x += P_speed * 2;
+	}
+}
+
+void Map::HitJudgement()
+{
+
 }
 
 void Map::Draw()
 {
-	
 	DrawTexture(bg.m_pos.x, bg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
 	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
 	DrawTexture(floor.m_pos.x, floor.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
 	DrawTexture(obj[0].m_pos.x, obj[0].m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
-	
 }

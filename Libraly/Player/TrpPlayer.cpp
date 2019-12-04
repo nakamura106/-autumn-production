@@ -60,7 +60,6 @@ void TrpPlayer::Load()
 	LoadTexture("Res/Tex/Player_JumpDamage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_RightTex);
 	LoadTexture("Res/Tex/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player_Walk_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_RightTex);
-
 }
 
 
@@ -118,9 +117,7 @@ void TrpPlayer::UpdateAnimation()
 
 void TrpPlayer::Draw()
 {
-	
 	DrawUVTexture(m_pos.x, m_pos.y, Animation[m_i].m_Rect_Width, Animation[m_i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[m_i].m_RectX, Animation[m_i].m_RectY);
-
 }
 
 Position TrpPlayer::GetPos()
@@ -194,7 +191,10 @@ void TrpPlayer::P_Controll()
 	//âπïÑê∂ê¨
 	if (GetKey(ONE_KEY) == true)
 	{
-		m_play_note[0] = true;
+		if (m_play_note[3] != true && m_Key == (int)Key::Major)
+		{
+			m_play_note[0] = true;
+		}
 		if (m_play_note[0]!=true&&m_Key == (int)Key::Minor)
 		{
 			m_play_note[3] = true;
@@ -204,7 +204,10 @@ void TrpPlayer::P_Controll()
 	//âπïÑê∂ê¨
 	if (GetKey(TWO_KEY) == true)
 	{
-		m_play_note[1] = true;
+		if (m_play_note[4] != true && m_Key == (int)Key::Major)
+		{
+			m_play_note[1] = true;
+		}
 		if (m_play_note[1] != true && m_Key == (int)Key::Minor)
 		{
 			m_play_note[4] = true;
@@ -214,7 +217,10 @@ void TrpPlayer::P_Controll()
 	//âπïÑê∂ê¨
 	if (GetKey(THREE_KEY) == true)
 	{
-		m_play_note[2] = true;
+		if (m_play_note[5] != true && m_Key == (int)Key::Major)
+		{
+			m_play_note[2] = true;
+		}
 		if (m_play_note[2] != true && m_Key == (int)Key::Minor)
 		{
 			m_play_note[5] = true;
@@ -251,7 +257,6 @@ void TrpPlayer::P_Controll()
 	{
 		m_pos.y += Gravity;
 	}
-
 }
 
 void TrpPlayer::ReleaseNote()

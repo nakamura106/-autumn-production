@@ -24,6 +24,7 @@
 #define lrAdjustment	128.0f	//¶‰E•`‰æ‚¸‚ê’²®—p
 
 
+
 enum class Player
 {
 	PlayerTypeTrumpet,

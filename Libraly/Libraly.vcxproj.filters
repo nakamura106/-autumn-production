@@ -46,10 +46,10 @@
     <Filter Include="UI">
       <UniqueIdentifier>{33dcfe55-e941-4d51-a4f9-10da382780ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player">
+    <Filter Include="Player">
       <UniqueIdentifier>{f5d7317f-950c-4b78-b7bb-c3f711bb4988}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\TrpPlayer">
+    <Filter Include="Player\TrpPlayer">
       <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -97,7 +97,7 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Player\TrpPlayer.cpp">
-      <Filter>Object\Player\TrpPlayer</Filter>
+      <Filter>Player\TrpPlayer</Filter>
     </ClCompile>
     <ClCompile Include="Bullet\BulletBase.cpp">
       <Filter>Bullet</Filter>
@@ -109,7 +109,7 @@
       <Filter>Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerBase.cpp">
-      <Filter>Object\Player</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map.cpp">
       <Filter>Map</Filter>
@@ -192,7 +192,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Player\TrpPlayer.h">
-      <Filter>Object\Player\TrpPlayer</Filter>
+      <Filter>Player\TrpPlayer</Filter>
     </ClInclude>
     <ClInclude Include="Bullet\BulletBase.h">
       <Filter>Bullet</Filter>
@@ -204,7 +204,7 @@
       <Filter>Bullet</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerBase.h">
-      <Filter>Object\Player</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>

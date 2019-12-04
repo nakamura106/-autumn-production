@@ -8,11 +8,12 @@ class Map:public ObjectBase
 public:
 	Map();
 	~Map();
-	void Init();
-	void Load();
-	void Update();
-	void MapScroll();
-	void Draw();
+	void Init()override;
+	void Load()override;
+	void Update()override;
+	void Draw()override;
+	void MapScroll(int direction_);
+	void HitJudgement();
 	void Create(){}
 
 private:
