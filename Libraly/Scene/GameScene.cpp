@@ -5,7 +5,7 @@
 #include "../Scene/GameScene.h"
 #include "../Map/Map.h"
 #include"../Player/TrpPlayer.h"
-#include"../Enemy/EnemyBase.h"
+#include"../Enemy/Mouse.h"
 #include "../UI/UiManager.h"
 #include"../Bullet/PlayerBullet.h"
 #include"../Engine/FlameTimer.h"
@@ -13,7 +13,7 @@
 
 Map map;
 TrpPlayer player;
-EnemyBase enemy;
+HedgeHog enemy;
 PlayerBullet p_bullet(100.f, 700.f, 5.f, Direction::RIGHT);
 
 // ゲーム本編シーンの初期化

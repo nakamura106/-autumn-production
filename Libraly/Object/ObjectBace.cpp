@@ -10,6 +10,7 @@ ObjectBase::ObjectBase()
 	m_speed = 0.f;
 
 	m_animation_timer = 0;
+	m_animation_end = false;
 }
 
 ObjectBase::~ObjectBase()
@@ -34,6 +35,8 @@ void ObjectBase::Draw()
 void ObjectBase::AnimationUpdate() 
 {
 	++m_animation_timer;
+	
+	m_animation_end = false;
 
 	if (m_animation_timer >= m_anim_param.change_flame) {//画像を変更する
 
@@ -63,6 +66,9 @@ void ObjectBase::AnimationUpdate()
 		if (((m_draw_param.tv - 1) * m_anim_param.split_width + m_draw_param.tu) > m_anim_param.split_all) {
 
 			m_draw_param.tu = m_draw_param.tv = 1;
+
+			//アニメーションの終わりであるフラグをオン
+			m_animation_end = true;
 
 		}
 

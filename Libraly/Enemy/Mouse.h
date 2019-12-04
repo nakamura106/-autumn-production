@@ -17,27 +17,35 @@ typedef enum AttackRepertoryofHedgeHog
 class HedgeHog :public EnemyBase
 {
 public:
-	/*
+	HedgeHog();
+	~HedgeHog();
+	
 	void Init();
-	void Create();
-	void Update();
-	void Draw();
-	*/
+	//void Update();
+	
 
-	void EnemyAttack();
-
-protected:
+private:
 	bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©	
 	AttackRepertoryofHedgeHog m_attack_repertory;
 
-public:
-	HedgeHog();
-	~HedgeHog();
+	/*‘Ò‹@ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	EnemyStateType ChangeStateFromWait();
+	/*ˆÚ“®ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	EnemyStateType ChangeStateFromWalk();
+	/*“¦‘–ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	EnemyStateType ChangeStateFromRefuge();
+	/*UŒ‚ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	EnemyStateType ChangeStateFromAttack();
+	/*’ÇÕó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	EnemyStateType ChangeStateFromChase();
+
+	void EnemyAttack();
 
 	void Headbutt();
 
 	void Rush();
 
 	void NeedleFire();
+
 
 };
