@@ -261,6 +261,7 @@ void TrpPlayer::P_Controll()
 
 void TrpPlayer::ReleaseNote()
 {
+	//音符の演奏(ストック)をすべて破棄する
 	for (int i = 0; i < 6; i++)
 	{
 		m_play_note[i] = false;
@@ -270,7 +271,7 @@ void TrpPlayer::ReleaseNote()
 void TrpPlayer::InitAnimation()
 {
 		static float R_X=0, R_Y=0;
-		
+		//配列に画像を切り抜く大きさをいれていく
 		for (m_i = 0; m_i < MaxAnimationNum; m_i++)
 		{
 			
@@ -299,10 +300,12 @@ void TrpPlayer::InitAnimation()
 
 void TrpPlayer::GetMotion(int Llist_, int Rlist_)
 {
+	//プレイヤーが右向きなら右向きの画像を変数に入れる
 	if (m_direction == RIGHT)
 	{
 		m_List = Rlist_;
 	}
+	//左向きなら左向きの画像を変数に入れる
 	if (m_direction == LEFT)
 	{
 		m_List = Llist_;
@@ -311,19 +314,23 @@ void TrpPlayer::GetMotion(int Llist_, int Rlist_)
 
 void TrpPlayer::DrawAnimation()
 {
+	//プレイヤーの向きが右向きなら
 	if (m_direction == RIGHT)
 	{
 		Animation[m_i].m_Display_Flame--;
+		//DisplayFlameが0より小さければ変数に定数Dispflameを入れる
 		if (Animation[m_i].m_Display_Flame <= 0)
 		{
 			Animation[m_i].m_Display_Flame = Dispflame;
 			m_i++;
+			//切り抜いた画像が最後まで来たら最初に戻す
 			if (m_i >= MaxAnimationNum)
 			{
 				m_i = 0;
 			}
 		}
 	}
+	//プレイヤーが左向きなら↓同文
 	if (m_direction == LEFT)
 	{
 		
@@ -344,6 +351,8 @@ void TrpPlayer::DrawAnimation()
 void TrpPlayer::Jump()
 {
 	static float jump_power = P_jump_power;
+
+	//プレイヤーがDamage状態、Attack状態でなければジャンプ状態にする
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)	
 	{
 		m_state = (int)P_State::Jump;
@@ -352,6 +361,7 @@ void TrpPlayer::Jump()
 	m_pos.y -= jump_power;
 	jump_power -= Gravity;
 
+	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
 	if (m_pos.y >= P_posY)
 	{
 		jump_power = P_jump_power;	

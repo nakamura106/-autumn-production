@@ -58,18 +58,22 @@ void Map::Load()
 
 void Map::Update()
 {
+	//右キーを押したときスクロール関数に右向き(スクロール方向)を送る
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		MapScroll(RIGHT);
 	}
+	//左キーを押したときスクロール関数に左向き(スクロール方向)を送る
 	if (GetKey(LEFT_KEY) == true)
 	{
 		MapScroll(LEFT);
 	}
+	HitJudgement();
 }
 
 void Map::MapScroll(int direction_)
 {
+	//向きが右向きかつマップの端が-3800以上の時にスクロールする
 	if (direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
 	{
 		obj[0].m_pos.x -= P_speed;
@@ -77,6 +81,7 @@ void Map::MapScroll(int direction_)
 		floor2.m_pos.x -= 3.0f;
 		fg.m_pos.x -= P_speed * 2;
 	}
+	//向きが左向きかつマップの端が0以下の時にスクロールする
 	if (direction_==LEFT&&fg.m_pos.x < 0.0f)
 	{
 		obj[0].m_pos.x += P_speed;
@@ -88,7 +93,7 @@ void Map::MapScroll(int direction_)
 
 void Map::HitJudgement()
 {
-
+	
 }
 
 void Map::Draw()
