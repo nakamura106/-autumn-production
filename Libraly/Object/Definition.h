@@ -92,7 +92,7 @@ enum class EnemyID
 enum class EnemyStateType 
 {
 	Wait,	//待機
-	Warn,	//警戒
+	Move,	//警戒
 	Attack,	//攻撃
 	Refuge,	//ピンチ状態のエネミー逃走
 	Rest,	//待機(疲労時)

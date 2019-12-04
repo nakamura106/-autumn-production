@@ -33,9 +33,6 @@ HedgeHog::HedgeHog()
 	m_is_delete = true;
 	m_is_hit_judge = false;
 	m_is_speed_up = false;
-	//	‰¼Œˆ‚ß
-	m_pos.x = 500.0f;
-	m_pos.y = 500.0f;
 	m_speed = 10.0f;
 }
 

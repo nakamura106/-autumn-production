@@ -13,39 +13,44 @@
 
 #define Attack_Interval 100			//攻撃感覚
 
-TrpPlayer trpplayer;
-
 //ここまで
 
 EnemyBase::EnemyBase()
 {
-	m_enemy_id = EnemyID::BossTypeMax;
-	m_state = EnemyStateType::EnemyStateTypeMax;
-	m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
+	m_enemy_id				= EnemyID::BossTypeMax;
+	m_state					= EnemyStateType::Move;
+	m_attack_repertory		= EnemyAttackRepertory::VariableEnumrate_Type;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
 	m_fatigue_gauge = 0.f;
-	m_sleep_gauge = 0.f;
+	m_sleep_gauge	= 0.f;
 	m_time_of_break = 0;
-	m_is_break = false;
-	m_is_delete = false;
-	m_is_hit_judge = false;
-	m_speed = 1.f;
-
-	m_anim_timer = 0;
+	m_is_break		= false;
+	m_is_delete		= false;
+	m_is_hit_judge	= false;
+	m_speed			= 3.f;
+	m_direction		= Direction::LEFT;
 
 //	TrpPlayer* trpplayer;
 
 	//	仮決め
-	m_pos.x = 1000.0f;
-	m_pos.y = 0.0f;
+	m_pos.x = M_INIT_POS_X;
+	m_pos.y = M_INIT_POS_Y;
 	
 
 	//描画情報格納
-	m_draw_param.tu = 1;
-	m_draw_param.tv = 1;
-	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
-	m_draw_param.texture_id = GameCategoryTextureList::GameBoss_WalkTex;
+	m_draw_param.tu				= 1;
+	m_draw_param.tv				= 1;
+	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
+	m_draw_param.texture_id		= GameCategoryTextureList::GameBoss_WalkTex;
+	m_draw_param.tex_size_x		= M_ENEMY_SYZE;
+	m_draw_param.tex_size_y		= M_ENEMY_SYZE;
+
+	//アニメーション情報格納
+	m_anim_param.change_flame	= M_ANIM_FLAME;
+	m_anim_param.split_all		= M_ANIM_TEX_ALL;
+	m_anim_param.split_width	= M_ANIM_TEX_WIDTH;
+	m_anim_param.split_height	= M_ANIM_TEX_HEIGHT;
 	
 }
 
@@ -57,82 +62,22 @@ EnemyBase::~EnemyBase()
 void EnemyBase::Init()
 {
 	/*11/26 注!!仮実装のコード*/
-	LoadTexture("Res/Tex/Boss1_Walk_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_WalkTex);
-	LoadTexture("Res/Tex/Boss1_Tukare_Left.png",TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_Fatigue);
-	LoadTexture("Res/Tex/Boss1_Down_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_TaikiTex);
-	LoadTexture("Res/Tex/Boss1_Sleep_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_SleepTex);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Walk_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_WalkTex);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Left.png",TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_Fatigue);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_TaikiTex);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_SleepTex);
 }
 
 void EnemyBase::Update()
 {
-#if 1
-
 	//Stateの遷移
-	ChangeState();
-
-#endif
+	//ChangeState();
 
 	//現在の状態における動作の更新
 	UpdateState();
 
 	//アニメーション(パラパラ画像)値の更新
 	AnimationUpdate();
-
-}
-
-void EnemyBase::Draw()
-{
-	//ObjectBase::Draw();
-
-	//本来はObjectBaseにこの関数を置くのが適切
-	DrawUVTexture(
-		m_pos.x, 
-		m_pos.y, 
-		M_ENEMY_SYZE, 
-		M_ENEMY_SYZE, 
-		GetTexture(m_draw_param.category_id, m_draw_param.texture_id), 
-		m_draw_param.tu / M_ANIM_TEX_WIDTH, 
-		m_draw_param.tv / M_ANIM_TEX_HEIGHT
-	);
-
-}
-
-void EnemyBase::AnimationUpdate() {
-
-	++m_anim_timer;
-
-	if (m_anim_timer >= M_ANIM_FLAME) {//画像を変更する
-
-		m_anim_timer = 0;
-
-		//横分割枚目を加算
-		++m_draw_param.tu;
-
-		//横分割枚目が画像の分割数以上の場合
-		if (m_draw_param.tu > M_ANIM_TEX_WIDTH) {
-
-			m_draw_param.tu = 1;
-
-			//縦分割枚目を加算
-			++m_draw_param.tv;
-
-			//縦分割枚目が画像の分割数以上の場合
-			if (m_draw_param.tv > M_ANIM_TEX_HEIGHT) {
-
-				m_draw_param.tv = 1;
-
-			}
-		}
-
-		//tuとtvから計算した現在何枚目のアニメーションかが総枚数を超えていた場合、
-		//tuとtvをリセット
-		if (((m_draw_param.tv - 1) * M_ANIM_TEX_WIDTH + m_draw_param.tu) > M_ANIM_TEX_ALL) {
-
-			m_draw_param.tu = m_draw_param.tv = 1;
-
-		}
-
-	}
 
 }
 
@@ -153,7 +98,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 	{
 	//待機状態
 	case EnemyStateType::Wait:
-		EnemyIdle();
+		EnemyWait();
 		next_state = ChangeStateFromWait();
 		break;
 
@@ -164,7 +109,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		break;
 
 	//移動状態
-	case EnemyStateType::Warn:
+	case EnemyStateType::Move:
 		EnemyMove();
 		next_state = ChangeStateFromWalk();
 		break;
@@ -175,7 +120,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		next_state = ChangeStateFromAttack();
 		break;
 
-	//逃走状態(次のフェーズ移行？) ← ではなくゲージが一定以下の場合逃げる処理
+	//逃走状態(ゲージが一定以下の場合逃げる処理)
 	case EnemyStateType::Refuge:
 		EnemyRefuge();
 		next_state = ChangeStateFromRefuge();
@@ -236,18 +181,18 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	{
 		m_state = EnemyStateType::Refuge;
 	}
-	else if (m_pos.x + Distance_of_Maintain < trpplayer.GetPos().x)
-	{
-		m_state = EnemyStateType::Chase;
-	}
-	else if (m_pos.x - Distance_of_Maintain > trpplayer.GetPos().x)
-	{
-		m_state = EnemyStateType::Chase;
-	}
-	else
-	{
-		m_state = EnemyStateType::Wait;	//処理のエラーの場合待機へ戻る。
-	}
+	//else if (m_pos.x + Distance_of_Maintain < trpplayer.GetPos().x)
+	//{
+	//	m_state = EnemyStateType::Chase;
+	//}
+	//else if (m_pos.x - Distance_of_Maintain > trpplayer.GetPos().x)
+	//{
+	//	m_state = EnemyStateType::Chase;
+	//}
+	//else
+	//{
+	//	m_state = EnemyStateType::Wait;	//処理のエラーの場合待機へ戻る。
+	//}
 }
  
 EnemyStateType EnemyBase::ChangeStateFromWait()
@@ -257,7 +202,7 @@ EnemyStateType EnemyBase::ChangeStateFromWait()
 
 EnemyStateType EnemyBase::ChangeStateFromWalk()
 {
-	return EnemyStateType::Warn;
+	return EnemyStateType::Move;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromRefuge() 
@@ -286,15 +231,13 @@ void EnemyBase::EnemyMove()			//エネミー移動
 		通常状態のエネミー移動（適切な距離まで距離を詰める）
 	*/
 
-
-	if (trpplayer.GetPos().x > m_pos.x)
-	{
+	if (m_direction == Direction::RIGHT) {
 		m_pos.x += m_speed;
 	}
-	else 
-	{
+	else if (m_direction == Direction::LEFT) {
 		m_pos.x -= m_speed;
 	}
+
 }
 
 #if 0
@@ -340,8 +283,6 @@ void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 		/*
 			enemy逃げる処理
 		*/
-
-		
 
 		m_enemy_to_player_state = EnemytoPlayerState::Escape;
 
@@ -390,7 +331,7 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 
 }
 
-void EnemyBase::EnemyIdle()			//エネミー待機
+void EnemyBase::EnemyWait()			//エネミー待機
 {
 	/*
 		エネミーの待機（その場で待機アニメーション）

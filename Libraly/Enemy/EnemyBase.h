@@ -16,13 +16,9 @@ public:
 	virtual void Init();
 	/*更新*/
 	virtual void Update();
-	/*描画*/
-	void Draw();
-	/*アニメーション 田中追加*/ 
-	void AnimationUpdate();
 
 	/*状態の更新*/
-	virtual void UpdateState();
+	void UpdateState();
 
 	/*
 		状態遷移
@@ -33,14 +29,10 @@ public:
 	virtual EnemyStateType ChangeStateFromWait();
 	/*移動状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromWalk();
-
-	//追加
 	/*逃走状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromRefuge();
 	/*休憩状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromRest();
-	//追加ここまで
-
 	/*攻撃状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromAttack();
 	/*追跡状態からの遷移*/
@@ -50,7 +42,7 @@ public:
 		状態の処理
 	*/
 	/*待機*/
-	virtual void EnemyIdle();
+	virtual void EnemyWait();
 
 #if 0
 	/*追跡右*/
@@ -89,13 +81,14 @@ public:
 	virtual void BackBeforeAttackState();
 
 private:
-	/*デバッグ(仮実装)用 田中追加*/
-	int m_anim_timer;					//アニメーション時のフレーム計測用タイマー
-	const int	M_ANIM_FLAME = 10;		//画像変更を行うフレーム周期
-	const int	M_ANIM_TEX_ALL = 10;	//画像のアニメーション枚数
-	const int	M_ANIM_TEX_WIDTH = 5;	//横の分割数
-	const int	M_ANIM_TEX_HEIGHT = 2;	//縦の分割数
-	const float M_ENEMY_SYZE = 1024.f;	//テクスチャのサイズ(本来は縦横がある)
+	/*初期化用初期値*/
+	const int	M_ANIM_FLAME		= 7;		//画像変更を行うフレーム周期
+	const int	M_ANIM_TEX_ALL		= 12;		//画像のアニメーション枚数
+	const int	M_ANIM_TEX_WIDTH	= 4;		//横の分割数
+	const int	M_ANIM_TEX_HEIGHT	= 4;		//縦の分割数
+	const float M_ENEMY_SYZE		= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
+	const float	M_INIT_POS_X		= 700.f;	//初期x座標
+	const float M_INIT_POS_Y		= -100.f;	//初期y座標
 
 protected:
 	float	m_sleep_gauge;		//眠りゲージ
@@ -111,11 +104,6 @@ protected:
 	EnemyStateType m_state;		//敵の状態
 	EnemyAttackRepertory m_attack_repertory;	//攻撃のバリエーション
 	EnemytoPlayerState m_enemy_to_player_state;	//プレイヤーとの関係？
-
-	/*アニメーション用 田中追加*/
-	int m_anim_tex_w;	//統合画像の横分割数
-	int m_anim_tex_h;	//統合画像の縦分割数
-	int m_anim_tex_all;	//統合画像の使用する分割画像総数(空白は含めない)
 
 };
 

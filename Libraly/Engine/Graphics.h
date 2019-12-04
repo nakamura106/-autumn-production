@@ -90,7 +90,7 @@ void DrawTexture(float x, float y, Texture* texture_data);
 * @param[in] tv テクスチャV座標
 */
 
-void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv);
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, bool is_turn = false);
 
 void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, float tv);
 

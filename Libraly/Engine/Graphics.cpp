@@ -129,30 +129,39 @@ void DrawTexture(float x, float y, Texture* texture_data)
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
-void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv)
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, bool is_turn)
 {
 	float ttu = sprite_width / texture_data->Width;
 	float ttv = sprite_height / texture_data->Height;
 
-	
+	//計算用変数
+	float calc_tu1 = tu;
+	float calc_tu2 = tu + ttu;
+
+	if (is_turn) {
+		float tmp = calc_tu1;
+		calc_tu1 = calc_tu2;
+		calc_tu2 = tmp;
+	}
+
 	CustomVertex v[4] =
 	{
 		// 左上
-		{ x, y, 0.0f, 1.0f, tu, tv },
+		{ x	, y, 0.0f, 1.0f, calc_tu1, tv },
 		// 右上
-		{ x + sprite_width, y, 0.0f, 1.0f, tu + ttu, tv },
+		{ x + sprite_width, y, 0.0f, 1.0f, calc_tu2, tv },
 		// 右下
-		{ x + sprite_width, y + sprite_height, 0.0f, 1.0f, tu + ttu, tv + ttv },
+		{ x + sprite_width, y + sprite_height, 0.0f, 1.0f, calc_tu2, tv + ttv },
 		// 左下 
-		{ x, y + sprite_height, 0.0f, 1.0f, tu, tv + ttv },
+		{ x, y + sprite_height, 0.0f, 1.0f, calc_tu1, tv + ttv },
 	};
 
-		// 頂点構造の指定
-		g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+	// 頂点構造の指定
+	g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
 
-		g_D3DDevice->SetTexture(0, texture_data->TextureData);
+	g_D3DDevice->SetTexture(0, texture_data->TextureData);
 
-		g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
+	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 
 }
 
