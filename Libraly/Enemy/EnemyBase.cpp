@@ -18,7 +18,7 @@
 EnemyBase::EnemyBase()
 {
 	m_enemy_id				= EnemyID::BossTypeMax;
-	m_state					= EnemyStateType::Move;
+	m_state					= EnemyStateType::Walk;
 	m_attack_repertory		= EnemyAttackRepertory::VariableEnumrate_Type;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
@@ -42,7 +42,7 @@ EnemyBase::EnemyBase()
 	m_draw_param.tu				= 1;
 	m_draw_param.tv				= 1;
 	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
-	m_draw_param.texture_id		= GameCategoryTextureList::GameBoss_WalkTex;
+	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
 	m_draw_param.tex_size_x		= M_ENEMY_SYZE;
 	m_draw_param.tex_size_y		= M_ENEMY_SYZE;
 
@@ -51,6 +51,9 @@ EnemyBase::EnemyBase()
 	m_anim_param.split_all		= M_ANIM_TEX_ALL;
 	m_anim_param.split_width	= M_ANIM_TEX_WIDTH;
 	m_anim_param.split_height	= M_ANIM_TEX_HEIGHT;
+
+	//saveflame(フレーム数計測用変数)
+	m_state_saveflame = 0;
 	
 }
 
@@ -61,11 +64,7 @@ EnemyBase::~EnemyBase()
 
 void EnemyBase::Init()
 {
-	/*11/26 注!!仮実装のコード*/
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Walk_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_WalkTex);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Left.png",TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_Fatigue);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_TaikiTex);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBoss_SleepTex);
+	
 }
 
 void EnemyBase::Update()
@@ -102,14 +101,8 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		next_state = ChangeStateFromWait();
 		break;
 
-	//疲労待機状態
-	case EnemyStateType::Rest:
-		EnemyRest();
-		next_state = ChangeStateFromRest();
-		break;
-
 	//移動状態
-	case EnemyStateType::Move:
+	case EnemyStateType::Walk:
 		EnemyMove();
 		next_state = ChangeStateFromWalk();
 		break;
@@ -143,13 +136,13 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		break;
 	}
 
-	/*
+	
 	//状態の変更
 	if (m_state != next_state) {
 		//next_sceneを専用の変数に渡し、状態遷移
-		m_state = next_state;
+		ChangeState(next_state);
 	}
-	*/
+	
 
 }
 
@@ -175,7 +168,7 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 
 	if (m_is_break == true)
 	{
-		m_state = EnemyStateType::Rest;
+		//m_state = EnemyStateType::Rest;
 	}
 	else if (m_fatigue_gauge < Num_of_TakeaBreak)
 	{
@@ -194,7 +187,48 @@ void EnemyBase::ChangeState()		//エネミーが行動する条件
 	//	m_state = EnemyStateType::Wait;	//処理のエラーの場合待機へ戻る。
 	//}
 }
+
+void EnemyBase::ChangeState(EnemyStateType next_state_)
+{
+	//状態変更
+	m_state = next_state_;
+
+	switch (next_state_)
+	{
+	case EnemyStateType::Wait:
+		InitWaitState();
+		break;
+
+	case EnemyStateType::Walk:
+		InitWalkState();
+		break;
+
+	case EnemyStateType::Attack:
+		InitAttackState();
+		break;
+
+	case EnemyStateType::Refuge:
+		InitRefugeState();
+		break;
+
+	case EnemyStateType::Chase:
+		InitChaseState();
+		break;
+
+	case EnemyStateType::Sleep:
+		InitSleepState();
+		break;
+
+	default:
+		return;
+	}
+
+	m_state_saveflame = FlameTimer::GetNowFlame();
+
+}
  
+
+
 EnemyStateType EnemyBase::ChangeStateFromWait()
 {
 	return EnemyStateType::Wait;
@@ -202,17 +236,12 @@ EnemyStateType EnemyBase::ChangeStateFromWait()
 
 EnemyStateType EnemyBase::ChangeStateFromWalk()
 {
-	return EnemyStateType::Move;
+	return EnemyStateType::Walk;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromRefuge() 
 {
 	return EnemyStateType::Refuge;
-}
-
-EnemyStateType EnemyBase::ChangeStateFromRest() 
-{
-	return EnemyStateType::Rest;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromAttack()
@@ -224,6 +253,86 @@ EnemyStateType EnemyBase::ChangeStateFromChase()
 {
 	return EnemyStateType::Chase;
 }
+
+
+
+void EnemyBase::InitWaitState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiRight;
+	}
+
+}
+
+void EnemyBase::InitWalkState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkRight;
+	}
+
+}
+
+void EnemyBase::InitRefugeState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkRight;
+	}
+
+}
+
+void EnemyBase::InitAttackState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
+	}
+	
+}
+
+void EnemyBase::InitChaseState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkRight;
+	}
+
+}
+
+void EnemyBase::InitSleepState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepRight;
+	}
+
+}
+
+void EnemyBase::ChangeDirection()
+{
+	if (m_direction == Direction::LEFT) {
+		m_direction = Direction::RIGHT;
+	}
+	else {
+		m_direction = Direction::LEFT;
+	}
+}
+
+
 
 void EnemyBase::EnemyMove()			//エネミー移動
 {
@@ -336,6 +445,13 @@ void EnemyBase::EnemyWait()			//エネミー待機
 	/*
 		エネミーの待機（その場で待機アニメーション）
 	*/
+
+
+
+}
+
+void EnemyBase::EnemyChase()
+{
 
 
 

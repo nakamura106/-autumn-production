@@ -92,10 +92,9 @@ enum class EnemyID
 enum class EnemyStateType 
 {
 	Wait,	//待機
-	Move,	//警戒
+	Walk,	//警戒
 	Attack,	//攻撃
 	Refuge,	//ピンチ状態のエネミー逃走
-	Rest,	//待機(疲労時)
 	Chase,	//追跡
 	Sleep,	//睡眠中
 	EnemyStateTypeMax,

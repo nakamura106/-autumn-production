@@ -67,11 +67,23 @@ enum GameCategoryTextureList
 	GamePlayerHp_2Tex,						//!<ƒvƒŒƒCƒ„[‘Ï‹vŽc‚è2
 	GamePlayerHp_1Tex,						//!<ƒvƒŒƒCƒ„[‘Ï‹vŽc‚è1
 	GamePlayerHp_0Tex,						//!<ƒvƒŒƒCƒ„[‘Ï‹vŽc‚è0
-	GameBoss_TaikiTex,						//!<“G‘Ò‹@
-	GameBoss_WalkTex,						//!<“G•às
-	GameBoss_Needle_AttackTex,				//!<ƒnƒŠƒlƒYƒ~UŒ‚
-	GameBoss_SleepTex,						//!<“G‡–°
-	GameBoss_Fatigue,						//!<“G”æ˜J
+
+	/*Enemy—p*/
+	GameEnemy_TaikiLeft,					//!<“G‘Ò‹@
+	GameEnemy_TaikiRight,
+	GameEnemy_WalkLeft,						//!<“G•às
+	GameEnemy_WalkRight,
+	GameEnemy_NeedleAttackLeft,				//!<ƒnƒŠƒlƒYƒ~UŒ‚
+	GameEnemy_NeedleAttackRight,
+	GameEnemy_DashAttackLeft,				//!<ƒ_ƒbƒVƒ…UŒ‚
+	GameEnemy_DashAttackRight,
+	GameEnemy_SleepLeft,					//!<“G‡–°
+	GameEnemy_SleepRight,
+	GameEnemy_FatigueLeft,					//!<“G”æ˜J
+	GameEnemy_FatigueRight,
+	GameEnemy_DownLeft,						//!<“GŽ€–S
+	GameEnemy_DownRight,
+
 	GamePlayerUi,							//!<ƒvƒŒƒCƒ„[HP
 	GamePointerTex,			//!< ƒ|ƒCƒ“ƒ^
 	GameTextureMax,			//!< ƒŠƒXƒgÅ‘å”

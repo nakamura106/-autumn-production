@@ -2,14 +2,13 @@
 #define ENEMYBASE_H_
 
 #include "../Object/ObjectBase.h"
+#include"../Engine/FlameTimer.h"
 
 class EnemyBase :public ObjectBase
 {
 public:
 	EnemyBase();
 	virtual ~EnemyBase();
-
-	void Create() {}
 	void Load(){}
 
 	/*‰Šú‰»*/
@@ -19,46 +18,6 @@ public:
 
 	/*ó‘Ô‚ÌXV*/
 	void UpdateState();
-
-	/*
-		ó‘Ô‘JˆÚ
-	*/
-	virtual void ChangeState();
-
-	/*‘Ò‹@ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromWait();
-	/*ˆÚ“®ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromWalk();
-	/*“¦‘–ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromRefuge();
-	/*‹xŒeó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromRest();
-	/*UŒ‚ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromAttack();
-	/*’ÇÕó‘Ô‚©‚ç‚Ì‘JˆÚ*/
-	virtual EnemyStateType ChangeStateFromChase();
-
-	/*
-		ó‘Ô‚Ìˆ—
-	*/
-	/*‘Ò‹@*/
-	virtual void EnemyWait();
-
-#if 0
-	/*’ÇÕ‰E*/
-	virtual void EnemyChase_R();
-	/*’ÇÕ¶*/
-	virtual void EnemyChase_L();
-#endif
-
-	/*ˆÚ“®*/
-	virtual void EnemyMove();
-	/*“¦‘–(”æ˜J)*/
-	virtual void EnemyRefuge();
-	/*UŒ‚*/
-	virtual void EnemyAttack();
-	/*‹xŒe*/
-	virtual void EnemyRest();
 
 	/*
 		ƒQƒbƒ^[ŒQ
@@ -91,6 +50,61 @@ private:
 	const float M_INIT_POS_Y		= -100.f;	//‰ŠúyÀ•W
 
 protected:
+
+	/*
+		ó‘Ô‚Ìˆ—
+	*/
+	/*‘Ò‹@*/
+	virtual void EnemyWait();
+	/*’ÇÕ*/
+	virtual void EnemyChase();
+	/*ˆÚ“®*/
+	virtual void EnemyMove();
+	/*“¦‘–(”æ˜J)*/
+	virtual void EnemyRefuge();
+	/*UŒ‚*/
+	virtual void EnemyAttack();
+	/*‹xŒe*/
+	virtual void EnemyRest();
+
+	/*
+		ó‘Ô‘JˆÚ
+		ƒfƒoƒbƒO—p‚Æ‚µ‚Äg—p
+	*/
+	virtual void ChangeState();
+	void ChangeState(EnemyStateType next_state_);
+
+	/*‘Ò‹@ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromWait();
+	/*ˆÚ“®ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromWalk();
+	/*“¦‘–ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromRefuge();
+	/*UŒ‚ó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromAttack();
+	/*’ÇÕó‘Ô‚©‚ç‚Ì‘JˆÚ*/
+	virtual EnemyStateType ChangeStateFromChase();
+
+	
+	/*
+		ó‘Ô‰Šú‰»
+	*/
+	/*‘Ò‹@ó‘Ô*/
+	virtual void InitWaitState();
+	/*ˆÚ“®ó‘Ô*/
+	virtual void InitWalkState();
+	/*“¦‘–ó‘Ô*/
+	virtual void InitRefugeState();
+	/*UŒ‚ó‘Ô*/
+	virtual void InitAttackState();
+	/*’ÇÕó‘Ô*/
+	virtual void InitChaseState();
+	/*–°‚èó‘Ô(ƒNƒŠƒAH)*/
+	virtual void InitSleepState();
+
+	/*Œü‚«•ÏX*/
+	void ChangeDirection();
+
 	float	m_sleep_gauge;		//–°‚èƒQ[ƒW
 	float	m_fatigue_gauge;	//”æ˜JƒQ[ƒW
 	int		m_time_of_break;	//‹xŒeŠÔ
@@ -100,10 +114,12 @@ protected:
 	int		m_atk_time_count;	//UŒ‚ŠÔŠuƒJƒEƒ“ƒ^[
 	float	m_speed;			//ƒXƒs[ƒh
 
-	EnemyID	m_enemy_id;			//“G‚ÌID
-	EnemyStateType m_state;		//“G‚Ìó‘Ô
-	EnemyAttackRepertory m_attack_repertory;	//UŒ‚‚ÌƒoƒŠƒG[ƒVƒ‡ƒ“
-	EnemytoPlayerState m_enemy_to_player_state;	//ƒvƒŒƒCƒ„[‚Æ‚ÌŠÖŒWH
+	EnemyID					m_enemy_id;				//“G‚ÌID
+	EnemyStateType			m_state;				//“G‚Ìó‘Ô
+	EnemyAttackRepertory	m_attack_repertory;		//UŒ‚‚ÌƒoƒŠƒG[ƒVƒ‡ƒ“
+	EnemytoPlayerState		m_enemy_to_player_state;//ƒvƒŒƒCƒ„[‚Æ‚ÌŠÖŒWH
+
+	int		m_state_saveflame;	//ó‘ÔŒp‘±‚ÌƒtƒŒ[ƒ€”Œv‘ª—p
 
 };
 
