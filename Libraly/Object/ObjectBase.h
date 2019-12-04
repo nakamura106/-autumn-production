@@ -15,6 +15,10 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw();
 
+	Position GetPos() {
+		return m_pos;
+	}
+
 protected:
 	/*統合画像のアニメーション用関数*/
 	void AnimationUpdate();
@@ -31,6 +35,7 @@ protected:
 
 	//デバッグ用変数(12/2田中追加)
 	int m_animation_timer;
+	bool m_animation_end;	//アニメーションの最後かどうか
 	
 };
 
