@@ -88,7 +88,7 @@ void EndInput()
 void UpdateInput()
 {
 	UpdateMouse();
-	KeyUpDate();
+	UpDateKey();
 
 	g_PrevMouseState = g_CurrentMouseState;
 	// マウスの状態を取得します
@@ -254,7 +254,7 @@ bool CreateKeyboardDevice()
 
 	return true;
 }
-void KeyUpDate()
+void UpDateKey()
 {
 	// キー情報取格納用
 	BYTE KeyState[256];

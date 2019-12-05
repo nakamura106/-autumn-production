@@ -1,0 +1,7 @@
+Woods1　6000:1080
+Woods2　3840:1080
+Woods3　3000:1080
+Woods4　1920:1080
+Grass Small　429:344
+Grass Medium　372:447
+Grass Large　633:499

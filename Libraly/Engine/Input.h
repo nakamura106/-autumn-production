@@ -84,7 +84,7 @@ bool OnMouseUp(MouseButton button_type);
 Vec2 GetMousePos();
 
 bool CreateKeyboardDevice();
-void KeyUpDate();
+void UpDateKey();
 bool GetKey(DWORD key_code);
 bool GetKeyDown(DWORD key_code);
 bool GetKeyUp(DWORD key_code);

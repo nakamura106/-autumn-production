@@ -47,13 +47,16 @@ void Map::Init()
 
 void Map::Load()
 {
-	LoadTexture("Res/Tex/äC îwåi.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);
-	LoadTexture("Res/Tex/äC éËÇ∑ÇË.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);
-	LoadTexture("Res/Tex/äC ïlï”.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);
-	LoadTexture("Res/Tex/äC ëê.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);
-	LoadTexture("Res/Tex/ótè¨.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);
-	LoadTexture("Res/Tex/ótíÜ.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject2);
-	LoadTexture("Res/Tex/ótëÂ.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject3);
+	//É}ÉbÉv
+	LoadTexture("Res/Tex/Map/äC/sea1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//ëê
+	LoadTexture("Res/Tex/Map/äC/sea2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	//éËÇ∑ÇË
+	LoadTexture("Res/Tex/Map/äC/sea3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//ïlï”
+	LoadTexture("Res/Tex/Map/äC/sea4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		//äC
+	
+	
+	LoadTexture("Res/Tex/Map/êX/Grass Small.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);
+	LoadTexture("Res/Tex/Map/êX/Grass Medium.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject2);
+	LoadTexture("Res/Tex/Map/êX/Grass Large.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject3);
 }
 
 void Map::Update()
