@@ -11,7 +11,6 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Load();
-			void Draw();
 			void Create() {}
 
 private:
@@ -19,6 +18,7 @@ private:
 	void MoveUpdate();
 
 	const float M_BULLET_SYZE = 128.f;
+	const float M_MOVE_LIMIT_DEFAULT = 400.f;
 	
 	/*アニメーション用(仮メンバ)*/
 	int m_anim_timer;

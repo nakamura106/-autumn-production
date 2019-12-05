@@ -2,17 +2,7 @@
 #include "EnemyBase.h"
 
 
-/*
-typedef enum AttackRepertoryofHedgeHog
-{
-	Rush,		//突進
-	HeadButt,	//頭突き
-	NeedleFire,	//トゲ発射
-	None,		//何もなし
-	AttackRepertoryMax,
 
-}EnemyAttackRepertory;
-*/
 
 class HedgeHog :public EnemyBase
 {
@@ -25,9 +15,20 @@ public:
 	
 
 private:
-	bool m_is_speed_up;		//加速するか	
-	AttackRepertoryofHedgeHog m_attack_repertory;
+	//ハリネズミの攻撃レパートリー
+	enum class AttackRepertoryHedgeHog
+	{
+		Rush,		//突進
+		HeadButt,	//頭突き
+		NeedleFire,	//トゲ発射
+		AttackRepertoryMax
+	};
 
+	//ハリ発射位置調整用
+	//note:Adjustは「調整」という意味
+	const float M_NEEDLE_ADJUST_X = 180.f;
+	const float M_NEEDLE_ADJUST_Y = 630.f;
+	
 	/*待機状態からの遷移*/
 	EnemyStateType ChangeStateFromWait();
 	/*移動状態からの遷移*/
@@ -39,13 +40,20 @@ private:
 	/*追跡状態からの遷移*/
 	EnemyStateType ChangeStateFromChase();
 
+	/*攻撃レパートリーの初期化*/
+	void InitAttackRepertory();
+
+	/*EnemyBaseで呼び出す攻撃処理*/
 	void EnemyAttack();
 
+	/*ハリネズミ各攻撃の処理*/
 	void Headbutt();
-
 	void Rush();
+	void ShotNeedle();
+	
+	/*ハリ発射*/
+	void CreateNeedle();
 
-	void NeedleFire();
-
-
+	bool m_is_speed_up;		//加速するか
+	bool m_do_needle;		//ハリ発射を行ったかどうか
 };

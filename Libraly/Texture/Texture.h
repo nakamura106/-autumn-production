@@ -83,6 +83,7 @@ enum GameCategoryTextureList
 	GameEnemy_FatigueRight,
 	GameEnemy_DownLeft,						//!<“GŽ€–S
 	GameEnemy_DownRight,
+	GameEnemy_Bullet_Needle,				//!<“G‚Ì’e(ƒnƒŠ)
 
 	GamePlayerUi,							//!<ƒvƒŒƒCƒ„[HP
 	GamePointerTex,			//!< ƒ|ƒCƒ“ƒ^

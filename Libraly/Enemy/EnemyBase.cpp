@@ -19,7 +19,7 @@ EnemyBase::EnemyBase()
 {
 	m_enemy_id				= EnemyID::BossTypeMax;
 	m_state					= EnemyStateType::Walk;
-	m_attack_repertory		= EnemyAttackRepertory::VariableEnumrate_Type;
+	m_attack_repertory		= 0;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
 	m_fatigue_gauge = 0.f;
@@ -59,7 +59,28 @@ EnemyBase::EnemyBase()
 
 EnemyBase::~EnemyBase()
 {
+	//bullet解放
+	for (auto& i : bullet_list) {
+		delete i;
+		i = nullptr;
+	}
+	std::vector<EnemyBullet*>().swap(bullet_list);
+
+}
+
+void EnemyBase::Draw()
+{
+	//エネミーの描画
+	ObjectBase::Draw();
+
+	//弾の描画
+	for (const auto& i : bullet_list) {
 	
+		if (i != nullptr) {
+			i->Draw();
+		}
+
+	}
 }
 
 void EnemyBase::Init()
@@ -77,6 +98,9 @@ void EnemyBase::Update()
 
 	//アニメーション(パラパラ画像)値の更新
 	AnimationUpdate();
+
+	//弾の制御
+	BulletControl();
 
 }
 
@@ -205,6 +229,7 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 
 	case EnemyStateType::Attack:
 		InitAttackState();
+		InitAttackRepertory();
 		break;
 
 	case EnemyStateType::Refuge:
@@ -408,25 +433,25 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 	{
 	case EnemytoPlayerState::Separated:
 
-		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
+		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
 
 		break;
 
 	case EnemytoPlayerState::Close:
 
-		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
+		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
 
 		break;
 
 	case EnemytoPlayerState::Escape:
 
-		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
+		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
 
 		break;
 
 	case EnemytoPlayerState::Pursue:
 
-		m_attack_repertory = EnemyAttackRepertory::VariableEnumrate_Type;
+		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
 
 		break;
 
@@ -438,6 +463,24 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 		break;
 	}
 
+}
+
+void EnemyBase::BulletControl()
+{
+	for (int i = 0;i < bullet_list.size();++i) {
+		//弾の更新
+		bullet_list[i]->Update();
+
+		//弾のis_deleteがtrueの場合、弾消滅
+		if (bullet_list[i]->GetIsDelete()) {
+			//メモリ解放
+			delete bullet_list[i];
+
+			//弾を消滅
+			bullet_list.erase(bullet_list.begin() + i);
+
+		}
+	}
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機

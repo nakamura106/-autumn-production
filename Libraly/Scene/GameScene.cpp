@@ -14,7 +14,6 @@
 Map map;
 TrpPlayer player;
 HedgeHog enemy;
-PlayerBullet p_bullet(100.f, 700.f, 5.f, Direction::RIGHT);
 
 // ゲーム本編シーンの初期化
 void InitGameScene();
@@ -55,8 +54,6 @@ void DrawGameScene()
 
 	player.Draw();
 
-	p_bullet.Draw();
-
 	UiManager::Instance()->Draw();
 
 	FlameTimer::Debug::DrawTimer();
@@ -73,8 +70,6 @@ void InitGameScene()
 	enemy.Init();
 
 	player.Init();
-
-	p_bullet.Init();
 
 	UiManager::Instance()->Create();
 
@@ -93,8 +88,6 @@ void MainGameScene()
 	enemy.Update();
 
 	player.Update();
-
-	p_bullet.Update();
 
 }
 
