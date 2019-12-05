@@ -8,6 +8,7 @@ class EnemyBullet :public BulletBase
 public:
 	EnemyBullet(float x_, float y_, float move_speed_, Direction direction_);
 	~EnemyBullet();
+	void Init();
 
 private:
 

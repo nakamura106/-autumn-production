@@ -38,6 +38,8 @@ void ObjectBase::AnimationUpdate()
 	
 	m_animation_end = false;
 
+	if (m_anim_param.split_all == 1)return;
+
 	if (m_animation_timer >= m_anim_param.change_flame) {//画像を変更する
 
 		m_animation_timer = 0;
@@ -63,7 +65,7 @@ void ObjectBase::AnimationUpdate()
 
 		//tuとtvから計算した現在何枚目のアニメーションかが総枚数を超えていた場合、
 		//tuとtvをリセット
-		if (((m_draw_param.tv - 1) * m_anim_param.split_width + m_draw_param.tu) > m_anim_param.split_all) {
+		if (GetAnimationTexNum() > m_anim_param.split_all) {
 
 			m_draw_param.tu = m_draw_param.tv = 1;
 
@@ -73,5 +75,10 @@ void ObjectBase::AnimationUpdate()
 		}
 
 	}
+}
+
+int ObjectBase::GetAnimationTexNum()
+{
+	return ((m_draw_param.tv - 1) * m_anim_param.split_width + m_draw_param.tu);
 }
  

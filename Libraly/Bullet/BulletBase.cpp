@@ -22,7 +22,7 @@ BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction directio
 
 	//移動距離判定用
 	m_move_count		= 0.f;
-	m_move_limit		= 800.f;
+	m_move_limit		= M_MOVE_LIMIT_DEFAULT;
 }
 
 BulletBase::~BulletBase()
@@ -41,14 +41,6 @@ void BulletBase::Update()
 	MoveUpdate();
 
 	AnimationUpdate();
-}
-
-void BulletBase::Draw()
-{
-	//消滅状態の場合、描画しない(デバッグ用)
-	if (m_is_delete) return;
-
-	ObjectBase::Draw();
 }
 
 void BulletBase::Load()

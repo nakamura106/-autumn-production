@@ -3,6 +3,8 @@
 
 #include "../Object/ObjectBase.h"
 #include"../Engine/FlameTimer.h"
+#include"../Bullet/EnemyBullet.h"
+#include<vector>
 
 class EnemyBase :public ObjectBase
 {
@@ -10,6 +12,7 @@ public:
 	EnemyBase();
 	virtual ~EnemyBase();
 	void Load(){}
+	void Draw();
 
 	/*初期化*/
 	virtual void Init();
@@ -49,6 +52,8 @@ private:
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
 	const float M_INIT_POS_Y		= -100.f;	//初期y座標
 
+	void BulletControl();
+
 protected:
 
 	/*
@@ -85,7 +90,6 @@ protected:
 	/*追跡状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromChase();
 
-	
 	/*
 		状態初期化
 	*/
@@ -105,6 +109,9 @@ protected:
 	/*向き変更*/
 	void ChangeDirection();
 
+	/*攻撃レパートリーの初期化*/
+	virtual void InitAttackRepertory() = 0;
+
 	float	m_sleep_gauge;		//眠りゲージ
 	float	m_fatigue_gauge;	//疲労ゲージ
 	int		m_time_of_break;	//休憩時間
@@ -116,10 +123,11 @@ protected:
 
 	EnemyID					m_enemy_id;				//敵のID
 	EnemyStateType			m_state;				//敵の状態
-	EnemyAttackRepertory	m_attack_repertory;		//攻撃のバリエーション
+	int						m_attack_repertory;		//攻撃のバリエーション
 	EnemytoPlayerState		m_enemy_to_player_state;//プレイヤーとの関係？
 
 	int		m_state_saveflame;	//状態継続のフレーム数計測用
+	std::vector<EnemyBullet*> bullet_list;
 
 };
 

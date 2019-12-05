@@ -33,6 +33,7 @@ HedgeHog::HedgeHog()
 	m_is_hit_judge = false;
 	m_is_speed_up = false;
 	//m_speed = 5.0f;
+	m_do_needle = false;
 }
 
 HedgeHog::~HedgeHog()
@@ -57,6 +58,33 @@ void HedgeHog::Init()
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Down_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_NeedleAttackLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_NeedleAttackRight);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Needle);
+
+}
+
+void HedgeHog::InitAttackRepertory()
+{
+	switch (m_attack_repertory)
+	{
+		//トゲ発射
+	case (int)AttackRepertoryHedgeHog::NeedleFire:
+		if (m_direction == Direction::LEFT) {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
+		}
+		else {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
+		}
+		break;
+
+	default:
+		if (m_direction == Direction::LEFT) {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
+		}
+		else {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
+		}
+		break;
+	}
 }
 
 void HedgeHog::EnemyAttack()		//エネミー攻撃
@@ -65,25 +93,18 @@ void HedgeHog::EnemyAttack()		//エネミー攻撃
 		敵からプレイヤーへの状態に応じて攻撃種を変更
 	*/
 
-	switch (m_enemy_to_player_state)
+	switch (m_attack_repertory)
 	{
-	case EnemytoPlayerState::Separated:
+	case (int)AttackRepertoryHedgeHog::Rush:
 		Rush();
-		m_attack_repertory = AttackRepertoryofHedgeHog::Rush;
 		break;
 
-	case EnemytoPlayerState::Close:
+	case (int)AttackRepertoryHedgeHog::HeadButt:
 		Headbutt();
-		m_attack_repertory = AttackRepertoryofHedgeHog::HeadButt;
 		break;
 
-	case EnemytoPlayerState::Escape:
-		NeedleFire();
-		m_attack_repertory = AttackRepertoryofHedgeHog::NeedleFire;
-		break;
-
-	case EnemytoPlayerState::Pursue:
-		m_attack_repertory = AttackRepertoryofHedgeHog::None;
+	case (int)AttackRepertoryHedgeHog::NeedleFire:
+		ShotNeedle();
 		break;
 
 	default:
@@ -109,7 +130,8 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
-	if (FlameTimer::GetNowFlame(m_state_saveflame) > 120 && m_animation_end) {
+	if (FlameTimer::GetNowFlame(m_state_saveflame) > 60 && m_animation_end) {
+		m_attack_repertory = (int)AttackRepertoryHedgeHog::NeedleFire;
 		return EnemyStateType::Attack;
 	}
 
@@ -124,6 +146,7 @@ EnemyStateType HedgeHog::ChangeStateFromRefuge()
 EnemyStateType HedgeHog::ChangeStateFromAttack()
 {
 	if (m_animation_end) {
+		m_do_needle = false;
 		return EnemyStateType::Wait;
 	}
 
@@ -162,7 +185,7 @@ void HedgeHog::Rush()
 
 }
 
-void HedgeHog::NeedleFire()
+void HedgeHog::ShotNeedle()
 {
 	/*
 		とげ発射処理
@@ -170,8 +193,33 @@ void HedgeHog::NeedleFire()
 		追尾　なし
 		発射　3way 2回くらい？
 	*/
+	if (GetAnimationTexNum() > 7 && !m_do_needle) {
+		//発射したかどうかのフラグをON
+		m_do_needle = true;
 
-	//	アニメーション変更ある？
+		//弾発射
+		CreateNeedle();
+
+	}
+
+}
+
+void HedgeHog::CreateNeedle()
+{
+	Position b_pos;
+
+	//発射位置調整
+	b_pos.y = m_pos.y + M_NEEDLE_ADJUST_Y;
+
+	if (m_direction == Direction::LEFT) {
+		b_pos.x = m_pos.x + M_NEEDLE_ADJUST_X;
+	}
+	else {
+		b_pos.x = m_pos.x - M_NEEDLE_ADJUST_X + m_draw_param.tex_size_x;
+	}
+
+	//Bullet(ハリ)生成
+	bullet_list.push_back(new EnemyBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction));
 
 }
 

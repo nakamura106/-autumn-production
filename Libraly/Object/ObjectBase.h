@@ -15,13 +15,16 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw();
 
-	Position GetPos() {
-		return m_pos;
-	}
+	//座標ゲッター
+	Position GetPos() { return m_pos; }
+	//削除判定ゲッター
+	bool GetIsDelete() { return m_is_delete; }
 
 protected:
 	/*統合画像のアニメーション用関数*/
 	void AnimationUpdate();
+	/*アニメーション進行ゲッター*/
+	int GetAnimationTexNum();
 
 	Position		m_pos;			//座標
 	DrawParam		m_draw_param;	//描画用構造体
