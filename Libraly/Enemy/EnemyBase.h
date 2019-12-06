@@ -5,12 +5,17 @@
 #include"../Engine/FlameTimer.h"
 #include"../Bullet/EnemyBullet.h"
 #include<vector>
+#include<string>
+
+//AIリストの大きさ
+const int G_ENEMY_AILIST_MAX = 10;
 
 class EnemyBase :public ObjectBase
 {
 public:
 	EnemyBase();
 	virtual ~EnemyBase();
+
 	void Load(){}
 	void Draw();
 
@@ -112,6 +117,12 @@ protected:
 	/*攻撃レパートリーの初期化*/
 	virtual void InitAttackRepertory() = 0;
 
+	/*csvファイル読み込み*/
+	//引数にAIの番号と.csvを除いた
+	//ファイル名を入れる
+	//例：Res/Csv/EnemyAI1.csv→Res/Csv/EnemyAI
+	void LoadAIData(std::string file_name_);
+
 	float	m_sleep_gauge;		//眠りゲージ
 	float	m_fatigue_gauge;	//疲労ゲージ
 	int		m_time_of_break;	//休憩時間
@@ -127,7 +138,9 @@ protected:
 	EnemytoPlayerState		m_enemy_to_player_state;//プレイヤーとの関係？
 
 	int		m_state_saveflame;	//状態継続のフレーム数計測用
+
 	std::vector<EnemyBullet*> bullet_list;
+	std::vector<EnemyAIParam*> m_ai_list[G_ENEMY_AILIST_MAX];		//AIのパターンが格納されたリスト
 
 };
 

@@ -131,7 +131,7 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
 	if (FlameTimer::GetNowFlame(m_state_saveflame) > 60 && m_animation_end) {
-		m_attack_repertory = (int)AttackRepertoryHedgeHog::NeedleFire;
+		m_attack_repertory = AttackRepertoryofHedgeHog::NeedleFire;
 		return EnemyStateType::Attack;
 	}
 

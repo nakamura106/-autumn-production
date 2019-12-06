@@ -29,6 +29,10 @@ private:
 	const float M_NEEDLE_ADJUST_X = 180.f;
 	const float M_NEEDLE_ADJUST_Y = 630.f;
 	
+	std::string M_AIDataFileName = "Res/Csv/Mouse/EnemyAI";
+	bool m_is_speed_up;		//加速するか	
+	AttackRepertoryofHedgeHog m_attack_repertory;
+
 	/*待機状態からの遷移*/
 	EnemyStateType ChangeStateFromWait();
 	/*移動状態からの遷移*/
@@ -54,6 +58,6 @@ private:
 	/*ハリ発射*/
 	void CreateNeedle();
 
-	bool m_is_speed_up;		//加速するか
+	//bool m_is_speed_up;		//加速するか
 	bool m_do_needle;		//ハリ発射を行ったかどうか
 };
