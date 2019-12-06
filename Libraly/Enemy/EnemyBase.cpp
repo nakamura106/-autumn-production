@@ -1,5 +1,6 @@
 #include "EnemyBase.h"
 #include "../Player/TrpPlayer.h"
+#include"../Engine/FileLoader.h"
 
 #define Num_of_TakeaBreak  100		//‹xŒe‚ğ‚Æ‚éi”æ˜J“x‚Ìj”’l
 #define Refuge_Time	100				//“¦‚°‰ñ‚éŠÔ
@@ -54,12 +55,24 @@ EnemyBase::EnemyBase()
 
 	//saveflame(ƒtƒŒ[ƒ€”Œv‘ª—p•Ï”)
 	m_state_saveflame = 0;
+
+	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+		m_ai_list[i].clear();
+	}
 	
 }
 
 EnemyBase::~EnemyBase()
 {
-	
+	//AIƒŠƒXƒg‚Ìdelete
+	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+
+		for (int j = 0;j < m_ai_list[i].size();++j) {
+
+			if (m_ai_list[i][j] != nullptr)delete m_ai_list[i][j];
+
+		}
+	}
 }
 
 void EnemyBase::Init()
@@ -329,6 +342,48 @@ void EnemyBase::ChangeDirection()
 	}
 	else {
 		m_direction = Direction::LEFT;
+	}
+}
+
+void EnemyBase::LoadAIData(std::string file_name_)
+{
+	//‚P`‚P‚O‚ÌŠî–{”z—ñ
+	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+
+		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(file_name_ + FileLoadTool::ItoC(i + 1) + ".csv");
+
+		//vector”z—ñ
+		for (int j = 1;j < file[i].size();++j) {
+
+			//vectorŠg’£
+			m_ai_list[i].push_back(new EnemyAIParam());
+
+
+			//ó‘Ô‚ğŠi”[
+			if (*file[j][(int)EnemyAIArrayNum::State] < (int)EnemyStateType::EnemyStateTypeMax) {
+				m_ai_list[i][j - 1]->e_state = (EnemyStateType)* file[j][(int)EnemyAIArrayNum::State];
+			}
+			else {
+				m_ai_list[i][j - 1]->e_state = EnemyStateType::Wait;
+			}
+
+			//ó‘ÔŒp‘±ğŒ‚ğŠi”[
+			if (*file[j][(int)EnemyAIArrayNum::Transition_Term] < (int)EnemyTransitionTerm::EnemyTransitionTerm_Max) {
+				m_ai_list[i][j - 1]->e_transition_term = (EnemyTransitionTerm)* file[j][(int)EnemyAIArrayNum::Transition_Term];
+			}
+			else {
+				m_ai_list[i][j - 1]->e_transition_term = EnemyTransitionTerm::FlameTime;
+			}
+			
+			//s“®‘¬“x’l‚ğŠi”[
+			m_ai_list[i][j - 1]->e_speed_default	= *file[j][(int)EnemyAIArrayNum::Speed_Default];
+			m_ai_list[i][j - 1]->e_speed_sleep		= *file[j][(int)EnemyAIArrayNum::Speed_Sleep];
+			m_ai_list[i][j - 1]->e_speed_tired		= *file[j][(int)EnemyAIArrayNum::Speed_Tired];
+			
+			//ó‘ÔŒp‘±ğŒ‚Åg—p‚·‚é’l‚ğŠi”[
+			m_ai_list[i][j - 1]->e_transition_num	= *file[j][(int)EnemyAIArrayNum::Transition_Num];
+
+		}
 	}
 }
 

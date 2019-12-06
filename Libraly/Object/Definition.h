@@ -66,6 +66,49 @@ enum class EnemytoPlayerState
 	EtoPStateTypeMax,
 };
 
+//状態持続条件
+enum class EnemyTransitionTerm {
+	Straight,	//直進
+	PassPlayer,	//プレイヤーを通り越す
+	Distance,	//距離
+	FlameTime,	//経過フレーム数(時間)
+	EnemyTransitionTerm_Max
+};
+
+enum class EnemyStateType
+{
+	Wait,	//待機
+	Walk,	//警戒
+	Attack,	//攻撃
+	Refuge,	//ピンチ状態のエネミー逃走
+	Chase,	//追跡
+	Sleep,	//睡眠中
+	EnemyStateTypeMax,
+};
+
+
+//AIのパラメータ
+struct EnemyAIParam {
+	EnemyStateType		e_state;			//遷移する状態
+	float				e_speed_default;	//通常のスピード
+	float				e_speed_sleep;		//眠気時のスピード
+	float				e_speed_tired;		//疲労時のスピード
+	EnemyTransitionTerm e_transition_term;	//状態持続条件
+	int					e_transition_num;	//状態持続条件に対応する値
+};
+
+//CsvでのAIのパラメータの配列番号
+enum class EnemyAIArrayNum {
+	OrderNum,
+	State,
+	Speed_Default,
+	Speed_Sleep,
+	Speed_Tired,
+	Transition_Term,
+	Transition_Num,
+	EnemyAIArrayNum_Max
+};
+
 enum class EnemyAttackRepertory
 {
 	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
@@ -88,17 +131,6 @@ enum class EnemyID
 	Gorilla,
 
 	BossTypeMax,
-};
-
-enum class EnemyStateType 
-{
-	Wait,	//待機
-	Walk,	//警戒
-	Attack,	//攻撃
-	Refuge,	//ピンチ状態のエネミー逃走
-	Chase,	//追跡
-	Sleep,	//睡眠中
-	EnemyStateTypeMax,
 };
 
 enum Direction 

@@ -141,6 +141,9 @@
     <ClCompile Include="Engine\FlameTimer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\FileLoader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -234,6 +237,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Engine\FlameTimer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FileLoader.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

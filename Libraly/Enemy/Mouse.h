@@ -25,6 +25,7 @@ public:
 	
 
 private:
+	std::string M_AIDataFileName = "Res/Csv/Mouse/EnemyAI";
 	bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©	
 	AttackRepertoryofHedgeHog m_attack_repertory;
 
