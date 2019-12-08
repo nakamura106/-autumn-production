@@ -9,9 +9,8 @@ public:
 	PlayerHpUi();
 	~PlayerHpUi();
 
-	void Init();
-	void Update();
-	void Draw();
+	void Init()override;
+	void Update()override;
 
 protected:
 	// Player‚ÌHpó‘Ô‚ğæ“¾‚µ‘±‚¯‚éŠÖ”

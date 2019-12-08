@@ -9,9 +9,8 @@ public:
 	PlayerBulletUi();
 	~PlayerBulletUi();
 
-	void Init();
-	void Update();
-	void Draw();
+	void Init()override;
+	void Update()override;
 
 private:
 

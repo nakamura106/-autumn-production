@@ -144,9 +144,6 @@
     <ClCompile Include="UI\UiManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\EnemyUi.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="UI\PlayerBaseUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -175,6 +172,15 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\PlayerBulletUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\EnemyBaseUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\SleepGaugeUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\FatigueGaugeUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,9 +269,6 @@
     <ClInclude Include="UI\UiManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\EnemyUi.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="UI\PlayerBaseUi.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -294,6 +297,15 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\PlayerBulletUi.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\EnemyBaseUi.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\SleepGaugeUi.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\FatigueGaugeUi.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -48,14 +48,9 @@ void PlayerHpUi::Update()
 
 }
 
-void PlayerHpUi::Draw()
-{
-	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, m_param.texture_id));
-}
-
 void PlayerHpUi::GetPlayerHpState()
 {
-	int pHp = 1;	// 仮変数　本来はplayerobjから数値を取得する
+	int pHp = 3;	// 仮変数　本来はplayerobjから数値を取得する
 
 	switch (pHp)
 	{
