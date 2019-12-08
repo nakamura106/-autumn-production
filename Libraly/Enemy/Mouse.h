@@ -48,7 +48,7 @@ private:
 	EnemyAIType ChangeAIType();
 
 	/*攻撃レパートリーの初期化*/
-	void InitAttackRepertory();
+	//void InitAttackRepertory();
 
 	/*EnemyBaseで呼び出す攻撃処理*/
 	void EnemyAttack1();

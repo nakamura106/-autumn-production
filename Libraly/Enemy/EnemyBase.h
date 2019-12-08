@@ -135,7 +135,7 @@ protected:
 	void ChangeDirection();
 
 	/*攻撃レパートリーの初期化*/
-	virtual void InitAttackRepertory() = 0;
+	//virtual void InitAttackRepertory() = 0;
 
 	/*csvファイル読み込み*/
 	//引数にAIの番号と.csvを除いた
