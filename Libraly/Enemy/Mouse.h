@@ -31,7 +31,7 @@ private:
 	
 	std::string M_AIDataFileName = "Res/Csv/Mouse/EnemyAI";
 	bool m_is_speed_up;		//加速するか	
-	AttackRepertoryofHedgeHog m_attack_repertory;
+	AttackRepertoryHedgeHog m_attack_repertory;
 
 	/*待機状態からの遷移*/
 	EnemyStateType ChangeStateFromWait();
@@ -40,20 +40,20 @@ private:
 	/*逃走状態からの遷移*/
 	EnemyStateType ChangeStateFromRefuge();
 	/*攻撃状態からの遷移*/
-	EnemyStateType ChangeStateFromAttack();
+	EnemyStateType ChangeStateFromAttack1();
 	/*追跡状態からの遷移*/
 	EnemyStateType ChangeStateFromChase();
+
+	/*AI変更関数*/
+	EnemyAIType ChangeAIType();
 
 	/*攻撃レパートリーの初期化*/
 	void InitAttackRepertory();
 
 	/*EnemyBaseで呼び出す攻撃処理*/
-	void EnemyAttack();
-
-	/*ハリネズミ各攻撃の処理*/
-	void Headbutt();
-	void Rush();
-	void ShotNeedle();
+	void EnemyAttack1();
+	void EnemyAttack2();
+	void EnemyAttack3();
 	
 	/*ハリ発射*/
 	void CreateNeedle();
