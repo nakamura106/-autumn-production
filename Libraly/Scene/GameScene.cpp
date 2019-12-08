@@ -12,10 +12,6 @@
 #include"../Engine/FlameTimer.h"
 
 
-Map map;
-TrpPlayer player;
-HedgeHog enemy;
-
 // ゲーム本編シーンの初期化
 void InitGameScene();
 // ゲーム本編シーンのメイン処理
@@ -43,18 +39,8 @@ SceneId UpdateGameScene()
 
 
 
-
-
-
 void DrawGameScene()
 {
-
-	map.Draw();
-
-	enemy.Draw();
-
-	player.Draw();
-
 	ObjectManager::Instance()->Draw();
 
 	UiManager::Instance()->Draw();
@@ -67,16 +53,12 @@ void DrawGameScene()
 
 void InitGameScene()
 {
-
-	map.Init();
-	
-	enemy.Init();
-
-	player.Init();
+	ObjectManager::Instance()->CreateObject();
 
 	ObjectManager::Instance()->Init();
 
 	UiManager::Instance()->Create();
+
 
 
 	ChangeSceneStep(SceneStep::MainStep);
@@ -88,12 +70,6 @@ void MainGameScene()
 {
 	UpdateInput();
 	
-	map.Update();
-	
-	enemy.Update();
-
-	player.Update();
-
 	ObjectManager::Instance()->Update();
 
 	UiManager::Instance()->Update();
