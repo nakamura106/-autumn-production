@@ -53,6 +53,8 @@ enum GameCategoryTextureList
 	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
 	GamePlayerBullet_1Tex,					//!<プレイヤーの弾１
+
+	/*UI用*/
 	GameBulletUi_RedLeft,					//!<プレイヤー弾UI
 	GameBulletUi_RedCenter,					//!<プレイヤー弾UI 				
 	GameBulletUi_RedRight,					//!<プレイヤー弾UI
@@ -67,6 +69,7 @@ enum GameCategoryTextureList
 	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り2
 	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り1
 	GamePlayerHp_0Tex,						//!<プレイヤー耐久残り0
+	GameEnemyDropItemUi,					//!<敵ドロップアイテム
 
 	/*Enemy用*/
 	GameEnemy_TaikiLeft,					//!<敵待機
