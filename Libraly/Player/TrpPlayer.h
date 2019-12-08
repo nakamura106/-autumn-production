@@ -34,5 +34,12 @@ private:
 	void P_Controll()override;
 	//!< ‰æ‘œ“Çž—pŠÖ”(ƒQ[ƒ€ƒV[ƒ“‚É‚×‚½‘‚«—\’è)
 	void Load()override;
+
+
+	int atkjudge();
+
+	void Drawatk();
+
+	 int notebox[3];
 };
 
