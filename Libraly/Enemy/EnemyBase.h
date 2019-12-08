@@ -7,9 +7,6 @@
 #include<vector>
 #include<string>
 
-//AIリストの大きさ
-const int G_ENEMY_AILIST_MAX = 10;
-
 class EnemyBase :public ObjectBase
 {
 public:
@@ -23,9 +20,6 @@ public:
 	virtual void Init();
 	/*更新*/
 	virtual void Update();
-
-	/*状態の更新*/
-	void UpdateState();
 
 	/*
 		ゲッター群
@@ -64,6 +58,16 @@ protected:
 	/*
 		状態の処理
 	*/
+	
+	/*状態の更新*/
+	//将来的には廃止　AIのパターン分け仕様に変更
+	void UpdateState();
+
+	void UpdateAIState();
+
+	/*AIState遷移*/
+	void TransitionStraight();
+
 	/*待機*/
 	virtual void EnemyWait();
 	/*追跡*/
@@ -73,7 +77,9 @@ protected:
 	/*逃走(疲労時)*/
 	virtual void EnemyRefuge();
 	/*攻撃*/
-	virtual void EnemyAttack();
+	virtual void EnemyAttack1();
+	virtual void EnemyAttack2();
+	virtual void EnemyAttack3();
 	/*休憩*/
 	virtual void EnemyRest();
 
@@ -81,7 +87,14 @@ protected:
 		状態遷移
 		デバッグ用として使用
 	*/
-	virtual void ChangeState();
+
+	/*状態遷移関数②：AI情報を元に遷移*/
+	void ChangeAIState();
+
+	/*AI変更関数：戻り値で戻したAIに変更する*/
+	virtual EnemyAIType ChangeAIType() = 0;
+
+	/*状態遷移関数①：引数で渡した状態に遷移*/
 	void ChangeState(EnemyStateType next_state_);
 
 	/*待機状態からの遷移*/
@@ -91,7 +104,7 @@ protected:
 	/*逃走状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromRefuge();
 	/*攻撃状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromAttack();
+	virtual EnemyStateType ChangeStateFromAttack1();
 	/*追跡状態からの遷移*/
 	virtual EnemyStateType ChangeStateFromChase();
 
@@ -105,7 +118,10 @@ protected:
 	/*逃走状態*/
 	virtual void InitRefugeState();
 	/*攻撃状態*/
-	virtual void InitAttackState();
+	virtual void InitAttack1State();
+	virtual void InitAttack2State();
+	virtual void InitAttack3State();
+	
 	/*追跡状態*/
 	virtual void InitChaseState();
 	/*眠り状態(クリア？)*/
@@ -140,7 +156,9 @@ protected:
 	int		m_state_saveflame;	//状態継続のフレーム数計測用
 
 	std::vector<EnemyBullet*> bullet_list;
-	std::vector<EnemyAIParam*> m_ai_list[G_ENEMY_AILIST_MAX];		//AIのパターンが格納されたリスト
+	std::vector<EnemyAIParam*> m_ai_list[(int)EnemyAIType::EnemyAIType_Max];		//AIのパターンが格納されたリスト
+	EnemyAIType m_now_ai;		//現在使用しているAI
+	int m_now_ai_num;	//現在使用しているAIの進行度
 
 };
 
