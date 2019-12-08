@@ -66,7 +66,11 @@ protected:
 	void UpdateAIState();
 
 	/*AIState‘JˆÚ*/
-	void TransitionStraight();
+	bool TransitionStraight();
+	bool TransitionPassPlayer();
+	bool TransitionFrontPlayer();
+	bool TransitionDistance();
+	bool TransitionFlameTime();
 
 	/*‘Ò‹@*/
 	virtual void EnemyWait();

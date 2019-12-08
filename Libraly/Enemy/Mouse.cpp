@@ -21,7 +21,6 @@ TrpPlayer* trpplayer;
 HedgeHog::HedgeHog()
 {
 	m_enemy_id = EnemyID::BossTypeMax;
-	m_attack_repertory = AttackRepertoryHedgeHog::NeedleFire;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
 	m_fatigue_gauge = NULL;
@@ -62,39 +61,15 @@ void HedgeHog::Init()
 
 }
 
-void HedgeHog::InitAttackRepertory()
-{
-	switch (m_attack_repertory)
-	{
-		//トゲ発射
-	case AttackRepertoryHedgeHog::NeedleFire:
-		if (m_direction == Direction::LEFT) {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
-		}
-		else {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
-		}
-		break;
-
-	default:
-		if (m_direction == Direction::LEFT) {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
-		}
-		else {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
-		}
-		break;
-	}
-}
-
 void HedgeHog::EnemyAttack1()		//エネミー攻撃
 {
 	/*
-		頭突き処理
-		プレイヤー方向に頭突き
-		ｘ方向へ素早く移動して元の座標まで戻る
-		頭突き距離　150
+		突進処理
+		一定加速後同じ速度で減速
 	*/
+
+
+
 }
 
 void HedgeHog::EnemyAttack2()
@@ -117,10 +92,7 @@ void HedgeHog::EnemyAttack2()
 
 void HedgeHog::EnemyAttack3()
 {
-	/*
-		突進処理
-		一定加速後同じ速度で減速
-	*/
+	
 }
 
 EnemyStateType HedgeHog::ChangeStateFromWait()
@@ -138,7 +110,6 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
 	if (FlameTimer::GetNowFlame(m_state_saveflame) > 60 && m_animation_end) {
-		m_attack_repertory = AttackRepertoryHedgeHog::NeedleFire;
 		return EnemyStateType::Attack1;
 	}
 

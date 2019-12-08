@@ -16,13 +16,13 @@ public:
 
 private:
 	//ハリネズミの攻撃レパートリー
-	enum class AttackRepertoryHedgeHog
-	{
-		Rush,		//突進
-		HeadButt,	//頭突き
-		NeedleFire,	//トゲ発射
-		AttackRepertoryMax
-	};
+	//enum class AttackRepertoryHedgeHog
+	//{
+	//	Rush,		//突進
+	//	HeadButt,	//頭突き
+	//	NeedleFire,	//トゲ発射
+	//	AttackRepertoryMax
+	//};
 
 	//ハリ発射位置調整用
 	//note:Adjustは「調整」という意味
@@ -31,7 +31,7 @@ private:
 	
 	std::string M_AIDataFileName = "Res/Csv/Mouse/EnemyAI";
 	bool m_is_speed_up;		//加速するか	
-	AttackRepertoryHedgeHog m_attack_repertory;
+	//AttackRepertoryHedgeHog m_attack_repertory;
 
 	/*待機状態からの遷移*/
 	EnemyStateType ChangeStateFromWait();

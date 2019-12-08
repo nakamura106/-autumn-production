@@ -207,27 +207,27 @@ void EnemyBase::UpdateAIState()
 	{
 		//画面端まで移動
 	case EnemyTransitionTerm::Straight:
-
+		can_change_ai_state = TransitionStraight();
 		break;
 
 		//プレイヤーを越える
 	case EnemyTransitionTerm::PassPlayer:
-
+		can_change_ai_state = TransitionPassPlayer();
 		break;
 
 		//プレイヤーを前にした場合
 	case EnemyTransitionTerm::FrontPlayer:
-
+		can_change_ai_state = TransitionFrontPlayer();
 		break;
 
 		//距離
 	case EnemyTransitionTerm::Distance:
-
+		can_change_ai_state = TransitionDistance();
 		break;
 
 		//時間
 	case EnemyTransitionTerm::FlameTime:
-
+		can_change_ai_state = TransitionFlameTime();
 		break;
 
 	default:
@@ -238,6 +238,31 @@ void EnemyBase::UpdateAIState()
 		//次の状態へ
 		ChangeAIState();
 	}
+}
+
+bool EnemyBase::TransitionStraight()
+{
+	return false;
+}
+
+bool EnemyBase::TransitionPassPlayer()
+{
+	return false;
+}
+
+bool EnemyBase::TransitionFrontPlayer()
+{
+	return false;
+}
+
+bool EnemyBase::TransitionDistance()
+{
+	return false;
+}
+
+bool EnemyBase::TransitionFlameTime()
+{
+	return false;
 }
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
