@@ -22,7 +22,9 @@
 #define InitRectY		0.0f	//矩形座標初期化用Y
 #define Centerofscreen	704.0f	//プレイヤー停止用画面中央
 #define lrAdjustment	128.0f	//左右描画ずれ調整用
-
+#define sel_X			0		//引数X選択
+#define sel_Y			1		//引数Y選択
+#define sel_XY			2		//引数XY選択
 
 
 enum class Player

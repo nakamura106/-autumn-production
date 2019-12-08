@@ -35,8 +35,7 @@ public:
 	virtual void ReleaseNote() = 0;
 	//!< ‰æ‘œ‚ðŒÄ‚Ño‚µ‚Ä•Ï”(Draw‚ÅŽg‚¤)‚ÉŠi”[‚·‚éŠÖ”
 	virtual void GetMotion(int Llist, int Rlist)=0;
-	//!< Œ»Ý‚ÌÀ•W‚ð“n‚·ŠÖ”
-	virtual Position GetPos() = 0;
+	
 
 
 protected:

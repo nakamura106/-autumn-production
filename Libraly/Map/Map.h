@@ -4,11 +4,7 @@
 #include"../Object/Definition.h"
 
 
-Map bg;		//背景
-Map floor1;	//床
-Map floor2; //床2
-Map fg;		//近景
-Map obj[3];	//オブジェクト
+
 
 
 class Map:public ObjectBase
@@ -42,3 +38,5 @@ private:
 
 
 };
+
+

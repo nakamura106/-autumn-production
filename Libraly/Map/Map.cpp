@@ -4,7 +4,11 @@
 #include"../Engine/Input.h"
 #include"../Player/TrpPlayer.h"
 
-
+Map bg;		//背景
+Map floor1;	//床
+Map floor2; //床2
+Map fg;		//近景
+Map obj[3];	//オブジェクト
 
 
 
@@ -73,7 +77,7 @@ void Map::Update()
 void Map::MapScroll(int direction_)
 {
 	//向きが右向きかつマップの端が-3800以上の時にスクロールする
-	if (player.Getpos() &&direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
+	if (/*GetPos().x<=Centerofscreen &&*/direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
 	{
 		obj[0].m_pos.x -= P_speed;
 		floor1.m_pos.x -= P_speed;
@@ -81,7 +85,7 @@ void Map::MapScroll(int direction_)
 		fg.m_pos.x -= P_speed * 2;
 	}
 	//向きが左向きかつマップの端が0以下の時にスクロールする
-	if (direction_==LEFT&&fg.m_pos.x < 0.0f)
+	if (/*GetPos().x>=0&&*/direction_==LEFT&&fg.m_pos.x < 0.0f)
 	{
 		obj[0].m_pos.x += P_speed;
 		floor1.m_pos.x += P_speed;
