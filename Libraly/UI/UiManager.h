@@ -3,6 +3,8 @@
 
 #include "UiBase.h"
 #include "PlayerBaseUi.h"
+#include "PlayerBulletUi.h"
+#include "PlayerHpUi.h"
 
 class UiManager
 {

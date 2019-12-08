@@ -171,6 +171,12 @@
     <ClCompile Include="Utility\Rectangle\CollisionRectangle.cpp">
       <Filter>Utility\Collision\Rectangle</Filter>
     </ClCompile>
+    <ClCompile Include="UI\PlayerHpUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\PlayerBulletUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -283,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="Utility\Rectangle\CollisionRectangle.h">
       <Filter>Utility\Collision\Rectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\PlayerHpUi.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\PlayerBulletUi.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

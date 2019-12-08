@@ -1,0 +1,21 @@
+#ifndef PLAYERBULLETUI_H_
+#define PLAYERBULLETUI_H_
+
+#include "UiBase.h"
+
+class PlayerBulletUi :public UiBase
+{
+public:
+	PlayerBulletUi();
+	~PlayerBulletUi();
+
+	void Init();
+	void Update();
+	void Draw();
+
+private:
+
+};
+
+#endif
+

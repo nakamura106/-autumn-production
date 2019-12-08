@@ -43,6 +43,8 @@ void UiManager::Init()
 void UiManager::Create()
 {
 	ui_objects[0] = new PlayerBaseUi();
+	ui_objects[1] = new PlayerHpUi();
+	ui_objects[2] = new PlayerBulletUi();
 }
 
 void UiManager::Update()

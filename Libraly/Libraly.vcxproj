@@ -161,6 +161,8 @@
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="UI\EnemyUi.cpp" />
     <ClCompile Include="UI\PlayerBaseUi.cpp" />
+    <ClCompile Include="UI\PlayerBulletUi.cpp" />
+    <ClCompile Include="UI\PlayerHpUi.cpp" />
     <ClCompile Include="UI\UiBase.cpp" />
     <ClCompile Include="UI\UiManager.cpp" />
     <ClCompile Include="Utility\Circle\CollisionCircle.cpp" />
@@ -199,6 +201,8 @@
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="UI\EnemyUi.h" />
     <ClInclude Include="UI\PlayerBaseUi.h" />
+    <ClInclude Include="UI\PlayerBulletUi.h" />
+    <ClInclude Include="UI\PlayerHpUi.h" />
     <ClInclude Include="UI\UiBase.h" />
     <ClInclude Include="UI\UiManager.h" />
     <ClInclude Include="Utility\Circle\CollisionCircle.h" />
