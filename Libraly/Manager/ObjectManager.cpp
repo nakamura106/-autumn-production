@@ -1,5 +1,7 @@
 #include "ObjectManager.h"
 #include "../Player/TrpPlayer.h"
+#include "../Map/Map.h"
+#include "../Enemy/Mouse.h"
 
 
 ObjectManager* ObjectManager::p_instance = 0;
@@ -47,6 +49,8 @@ void ObjectManager::CreateObject()
 {
 
 	chara_objects[0] = new TrpPlayer();
+	chara_objects[1] = new Map();
+	chara_objects[2] = new HedgeHog();
 
 }
 
