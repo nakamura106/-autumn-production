@@ -51,7 +51,10 @@ void UiManager::Update()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)
 	{
-		ui_objects[i]->Update();
+		if (ui_objects[i] != nullptr)
+		{
+			ui_objects[i]->Update();
+		}
 	}
 }
 

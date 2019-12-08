@@ -54,7 +54,10 @@ void ObjectManager::Update()
 {
 	for (int i = 0; i < MAX_CHARA_OBJ; i++)
 	{
-		chara_objects[i]->Update();
+		if (chara_objects[i] != nullptr)
+		{
+			chara_objects[i]->Update();
+		}
 	}
 }
 
@@ -62,6 +65,9 @@ void ObjectManager::Draw()
 {
 	for (int i = 0; i < MAX_CHARA_OBJ; i++)
 	{
-		chara_objects[i]->Draw();
+		if (chara_objects[i] != nullptr)
+		{
+			chara_objects[i]->Draw();
+		}
 	}
 }

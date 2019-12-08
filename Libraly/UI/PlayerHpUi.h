@@ -13,7 +13,12 @@ public:
 	void Update();
 	void Draw();
 
+protected:
+	// Player‚ÌHpó‘Ô‚ğæ“¾‚µ‘±‚¯‚éŠÖ”
+	void GetPlayerHpState();
+
 private:
+	int m_hp_state;	// PlayerHP‚Ìó‘Ô‚ğ—ñ‹“Œ^‚Å•Û‘¶‚·‚é
 
 };
 

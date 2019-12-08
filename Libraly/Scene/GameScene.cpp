@@ -89,6 +89,8 @@ void MainGameScene()
 
 	player.Update();
 
+	UiManager::Instance()->Update();
+
 }
 
 SceneId FinishGameScene()
