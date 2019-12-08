@@ -6,11 +6,7 @@
 
 
 
-Map bg;		//背景
-Map floor;	//床
-Map floor2; //床2
-Map fg;		//近景
-Map obj[3];	//オブジェクト
+
 
 Map::Map()
 {
@@ -27,9 +23,9 @@ void Map::Init()
 	bg.m_pos.x = 0;
 	bg.m_pos.y = 0;
 	bg.m_speed = 0;
-	floor.m_pos.x = 0;
-	floor.m_pos.y = 0;
-	floor.m_speed = 0;
+	floor1.m_pos.x = 0;
+	floor1.m_pos.y = 0;
+	floor1.m_speed = 0;
 	floor2.m_pos.x = 0.0f;
 	floor2.m_pos.y = 0;
 	floor2.m_speed = 0;
@@ -77,10 +73,10 @@ void Map::Update()
 void Map::MapScroll(int direction_)
 {
 	//向きが右向きかつマップの端が-3800以上の時にスクロールする
-	if (direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
+	if (player.Getpos() &&direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
 	{
 		obj[0].m_pos.x -= P_speed;
-		floor.m_pos.x -= P_speed;
+		floor1.m_pos.x -= P_speed;
 		floor2.m_pos.x -= 3.0f;
 		fg.m_pos.x -= P_speed * 2;
 	}
@@ -88,7 +84,7 @@ void Map::MapScroll(int direction_)
 	if (direction_==LEFT&&fg.m_pos.x < 0.0f)
 	{
 		obj[0].m_pos.x += P_speed;
-		floor.m_pos.x += P_speed;
+		floor1.m_pos.x += P_speed;
 		floor2.m_pos.x += 3.0f;
 		fg.m_pos.x += P_speed * 2;
 	}
@@ -103,7 +99,7 @@ void Map::Draw()
 {
 	DrawTexture(bg.m_pos.x, bg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
 	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
-	DrawTexture(floor.m_pos.x, floor.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
+	DrawTexture(floor1.m_pos.x, floor1.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
 	DrawTexture(obj[0].m_pos.x, obj[0].m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
 }

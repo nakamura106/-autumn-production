@@ -1,9 +1,9 @@
 #pragma once
 
-#pragma once
 
 #include"PlayerBase.h"
 
+TrpPlayer player;
 
 class TrpPlayer :public PlayerBase
 {
@@ -17,7 +17,7 @@ public:
 	 //!< 描画関数(オブジェクトベースでまとめてやる予定)
 	 void Draw()override;
 	 //!< 現在の座標を渡す関数
-	 Position GetPos()override;
+	 Position GetPos(int select)override;
 private:
 	//!< プレイヤーのジャンプ処理関数
 	void Jump()override;
