@@ -69,20 +69,38 @@ enum class EnemytoPlayerState
 //状態持続条件
 enum class EnemyTransitionTerm {
 	Straight,	//直進
-	PassPlayer,	//プレイヤーを通り越す
+	PassPlayer,	//プレイヤーとの距離が一致した
+	FrontPlayer,//プレイヤーを前にした
 	Distance,	//距離
 	FlameTime,	//経過フレーム数(時間)
 	EnemyTransitionTerm_Max
+};
+
+//AIの種類
+enum class EnemyAIType {
+	AI1,
+	AI2,
+	AI3,
+	AI4,
+	AI5,
+	AI6,
+	AI7,
+	AI8,
+	AI9,
+	AI10,
+	EnemyAIType_Max
 };
 
 enum class EnemyStateType
 {
 	Wait,	//待機
 	Walk,	//警戒
-	Attack,	//攻撃
 	Refuge,	//ピンチ状態のエネミー逃走
 	Chase,	//追跡
 	Sleep,	//睡眠中
+	Attack1,//攻撃
+	Attack2,//攻撃2
+	Attack3,//攻撃3
 	EnemyStateTypeMax,
 };
 
@@ -112,16 +130,6 @@ enum class EnemyAIArrayNum {
 enum class EnemyAttackRepertory
 {
 	VariableEnumrate_Type,	//各エネミークラスでtypedefして使うクラス
-};
-
-//特設
-enum AttackRepertoryofHedgeHog
-{
-	Rush,		//突進
-	HeadButt,	//頭突き
-	NeedleFire,	//トゲ発射
-	None,		//何もなし
-	AttackRepertoryMax,
 };
 
 enum class EnemyID
@@ -213,5 +221,6 @@ struct EffectInfo
 	float m_tu;
 	float m_tv;
 };
+
 
 #endif

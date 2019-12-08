@@ -21,7 +21,7 @@ TrpPlayer* trpplayer;
 HedgeHog::HedgeHog()
 {
 	m_enemy_id = EnemyID::BossTypeMax;
-	m_attack_repertory = AttackRepertoryofHedgeHog::None;
+	m_attack_repertory = AttackRepertoryHedgeHog::NeedleFire;
 	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
 
 	m_fatigue_gauge = NULL;
@@ -67,7 +67,7 @@ void HedgeHog::InitAttackRepertory()
 	switch (m_attack_repertory)
 	{
 		//トゲ発射
-	case (int)AttackRepertoryHedgeHog::NeedleFire:
+	case AttackRepertoryHedgeHog::NeedleFire:
 		if (m_direction == Direction::LEFT) {
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
 		}
@@ -87,33 +87,40 @@ void HedgeHog::InitAttackRepertory()
 	}
 }
 
-void HedgeHog::EnemyAttack()		//エネミー攻撃
+void HedgeHog::EnemyAttack1()		//エネミー攻撃
 {
 	/*
-		敵からプレイヤーへの状態に応じて攻撃種を変更
+		頭突き処理
+		プレイヤー方向に頭突き
+		ｘ方向へ素早く移動して元の座標まで戻る
+		頭突き距離　150
 	*/
+}
 
-	switch (m_attack_repertory)
-	{
-	case (int)AttackRepertoryHedgeHog::Rush:
-		Rush();
-		break;
+void HedgeHog::EnemyAttack2()
+{
+	/*
+		とげ発射処理
+		とげ発射方向　－＞　プレイヤーの座標
+		追尾　なし
+		発射　3way 2回くらい？
+	*/
+	if (GetAnimationTexNum() > 7 && !m_do_needle) {
+		//発射したかどうかのフラグをON
+		m_do_needle = true;
 
-	case (int)AttackRepertoryHedgeHog::HeadButt:
-		Headbutt();
-		break;
+		//弾発射
+		CreateNeedle();
 
-	case (int)AttackRepertoryHedgeHog::NeedleFire:
-		ShotNeedle();
-		break;
-
-	default:
-		/*
-			!!
-		*/
-		break;
 	}
+}
 
+void HedgeHog::EnemyAttack3()
+{
+	/*
+		突進処理
+		一定加速後同じ速度で減速
+	*/
 }
 
 EnemyStateType HedgeHog::ChangeStateFromWait()
@@ -131,8 +138,8 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
 	if (FlameTimer::GetNowFlame(m_state_saveflame) > 60 && m_animation_end) {
-		m_attack_repertory = AttackRepertoryofHedgeHog::NeedleFire;
-		return EnemyStateType::Attack;
+		m_attack_repertory = AttackRepertoryHedgeHog::NeedleFire;
+		return EnemyStateType::Attack1;
 	}
 
 	return EnemyStateType::Walk;
@@ -143,14 +150,14 @@ EnemyStateType HedgeHog::ChangeStateFromRefuge()
 	return EnemyStateType::Refuge;
 }
 
-EnemyStateType HedgeHog::ChangeStateFromAttack()
+EnemyStateType HedgeHog::ChangeStateFromAttack1()
 {
 	if (m_animation_end) {
 		m_do_needle = false;
 		return EnemyStateType::Wait;
 	}
 
-	return EnemyStateType::Attack;
+	return EnemyStateType::Attack1;
 }
 
 EnemyStateType HedgeHog::ChangeStateFromChase()
@@ -158,50 +165,12 @@ EnemyStateType HedgeHog::ChangeStateFromChase()
 	return EnemyStateType::Chase;
 }
 
-
-//	ハリネズミAttackの処理（仮）
-
-void HedgeHog::Headbutt()
+EnemyAIType HedgeHog::ChangeAIType()
 {
-	/*
-		頭突き処理
-		プレイヤー方向に頭突き
-		ｘ方向へ素早く移動して元の座標まで戻る
-		頭突き距離　150
-	*/
+	//Enemyの位置や向き、プレイヤーとの関係によって
+	//次に使用するAIが変化する
 
-	//	アニメーション変更
-
-}
-
-void HedgeHog::Rush()
-{
-	/*
-		突進処理
-		一定加速後同じ速度で減速
-	*/
-
-	//	アニメーション変更
-
-}
-
-void HedgeHog::ShotNeedle()
-{
-	/*
-		とげ発射処理
-		とげ発射方向　－＞　プレイヤーの座標
-		追尾　なし
-		発射　3way 2回くらい？
-	*/
-	if (GetAnimationTexNum() > 7 && !m_do_needle) {
-		//発射したかどうかのフラグをON
-		m_do_needle = true;
-
-		//弾発射
-		CreateNeedle();
-
-	}
-
+	return EnemyAIType::AI1;
 }
 
 void HedgeHog::CreateNeedle()

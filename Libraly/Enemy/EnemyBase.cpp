@@ -56,10 +56,14 @@ EnemyBase::EnemyBase()
 	//saveflame(フレーム数計測用変数)
 	m_state_saveflame = 0;
 
-	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 		m_ai_list[i].clear();
 	}
 	
+	m_now_ai = EnemyAIType::AI1;
+	m_now_ai_num = 0;
+
+
 }
 
 EnemyBase::~EnemyBase()
@@ -72,7 +76,7 @@ EnemyBase::~EnemyBase()
 	std::vector<EnemyBullet*>().swap(bullet_list);
 
 	//AIリストのdelete
-	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 
 		for (int j = 0;j < m_ai_list[i].size();++j) {
 
@@ -146,10 +150,20 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 		next_state = ChangeStateFromWalk();
 		break;
 
-	//攻撃状態
-	case EnemyStateType::Attack:
-		EnemyAttack();
-		next_state = ChangeStateFromAttack();
+	//攻撃1状態
+	case EnemyStateType::Attack1:
+		EnemyAttack1();
+		next_state = ChangeStateFromAttack1();
+		break;
+
+	//攻撃2状態
+	case EnemyStateType::Attack2:
+		EnemyAttack2();
+		break;
+
+	//攻撃3状態
+	case EnemyStateType::Attack3:
+		EnemyAttack3();
 		break;
 
 	//逃走状態(ゲージが一定以下の場合逃げる処理)
@@ -185,46 +199,76 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 
 }
 
-void EnemyBase::ChangeState()		//エネミーが行動する条件
+void EnemyBase::UpdateAIState()
 {
-	m_atk_time_count++;
+	bool can_change_ai_state = false;
 
-	/*
-		エネミーの状態の変更
-	*/
-
-	if (m_atk_time_count == 500 /*仮設定*/)
+	switch (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_term)
 	{
-		m_state = EnemyStateType::Attack;
-		m_atk_time_count = 0;
+		//画面端まで移動
+	case EnemyTransitionTerm::Straight:
+
+		break;
+
+		//プレイヤーを越える
+	case EnemyTransitionTerm::PassPlayer:
+
+		break;
+
+		//プレイヤーを前にした場合
+	case EnemyTransitionTerm::FrontPlayer:
+
+		break;
+
+		//距離
+	case EnemyTransitionTerm::Distance:
+
+		break;
+
+		//時間
+	case EnemyTransitionTerm::FlameTime:
+
+		break;
+
+	default:
+		break;
 	}
 
-	/*
-		11/29　田中コメントアウト
-		m_centerXメンバが消えたことによって、エラー発生
-		m_centerXメンバの代わりとなるものが必要
-	*/
+	if (can_change_ai_state) {
+		//次の状態へ
+		ChangeAIState();
+	}
+}
 
-	if (m_is_break == true)
-	{
-		//m_state = EnemyStateType::Rest;
+void EnemyBase::ChangeAIState()		//エネミーが行動する条件
+{
+	if (static_cast<int>(m_now_ai) >= static_cast<int>(EnemyAIType::EnemyAIType_Max)) {
+		//エラー:アクセスする場所が存在しない
+		return;
 	}
-	else if (m_fatigue_gauge < Num_of_TakeaBreak)
-	{
-		m_state = EnemyStateType::Refuge;
+
+	//使用中AIを次の状態に進行
+	++m_now_ai_num;
+	
+	if (m_now_ai_num >= m_ai_list[static_cast<int>(m_now_ai)].size()) {
+		//aiの変更
+		//ここで、AI条件分岐関数を呼び出す
+		EnemyAIType next_ai = ChangeAIType();
+
+		//返ってきた値が無効値の場合、「AI1」にする
+		if (next_ai >= EnemyAIType::EnemyAIType_Max) {
+			next_ai = EnemyAIType::AI1;
+		}
+
+		//AI変更
+		m_now_ai = next_ai;
+		m_now_ai_num = 0;
+
 	}
-	//else if (m_pos.x + Distance_of_Maintain < trpplayer.GetPos().x)
-	//{
-	//	m_state = EnemyStateType::Chase;
-	//}
-	//else if (m_pos.x - Distance_of_Maintain > trpplayer.GetPos().x)
-	//{
-	//	m_state = EnemyStateType::Chase;
-	//}
-	//else
-	//{
-	//	m_state = EnemyStateType::Wait;	//処理のエラーの場合待機へ戻る。
-	//}
+
+	//状態遷移
+	ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
+	
 }
 
 void EnemyBase::ChangeState(EnemyStateType next_state_)
@@ -242,9 +286,17 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 		InitWalkState();
 		break;
 
-	case EnemyStateType::Attack:
-		InitAttackState();
-		InitAttackRepertory();
+	case EnemyStateType::Attack1:
+		InitAttack1State();
+		//InitAttackRepertory();
+		break;
+
+	case EnemyStateType::Attack2:
+		InitAttack2State();
+		break;
+
+	case EnemyStateType::Attack3:
+		InitAttack3State();
 		break;
 
 	case EnemyStateType::Refuge:
@@ -284,9 +336,9 @@ EnemyStateType EnemyBase::ChangeStateFromRefuge()
 	return EnemyStateType::Refuge;
 }
 
-EnemyStateType EnemyBase::ChangeStateFromAttack()
+EnemyStateType EnemyBase::ChangeStateFromAttack1()
 {
-	return EnemyStateType::Attack;
+	return EnemyStateType::Attack1;
 }
 
 EnemyStateType EnemyBase::ChangeStateFromChase()
@@ -329,7 +381,7 @@ void EnemyBase::InitRefugeState()
 
 }
 
-void EnemyBase::InitAttackState()
+void EnemyBase::InitAttack1State()
 {
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
@@ -337,7 +389,26 @@ void EnemyBase::InitAttackState()
 	else {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
 	}
-	
+}
+
+void EnemyBase::InitAttack2State()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
+	}
+}
+
+void EnemyBase::InitAttack3State()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
+	}
 }
 
 void EnemyBase::InitChaseState()
@@ -375,7 +446,7 @@ void EnemyBase::ChangeDirection()
 void EnemyBase::LoadAIData(std::string file_name_)
 {
 	//１～１０の基本配列
-	for (int i = 0;i < G_ENEMY_AILIST_MAX;++i) {
+	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 
 		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(file_name_ + FileLoadTool::ItoC(i + 1) + ".csv");
 
@@ -480,7 +551,7 @@ void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 	}
 }
 
-void EnemyBase::EnemyAttack()		//エネミー攻撃
+void EnemyBase::EnemyAttack1()		//エネミー攻撃
 {
 	/*
 		敵からプレイヤーへの状態に応じて攻撃種を変更
@@ -520,6 +591,14 @@ void EnemyBase::EnemyAttack()		//エネミー攻撃
 		break;
 	}
 
+}
+
+void EnemyBase::EnemyAttack2()
+{
+}
+
+void EnemyBase::EnemyAttack3()
+{
 }
 
 void EnemyBase::BulletControl()
@@ -600,7 +679,7 @@ void EnemyBase::BackBeforeAttackState()
 {
 	EnemyStateType before_attack = GetEnemyState();
 
-	m_state = EnemyStateType::Attack;
+	m_state = EnemyStateType::Attack1;
 	/*
 		各エネミー攻撃後にbefore_attackの中身をm_stateに反映する
 	*/
