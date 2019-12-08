@@ -22,6 +22,7 @@
 #define SHIFT_KEY	0x0100		// Shiftキー
 #define SPACE_KEY   0x0200      // SPACEキー
 #define A_KEY		0x0400		// Aキー	
+#define E_KEY		0x0800		// Eキー
 
 /** @brief マウスボタンの種類 */
 enum MouseButton

@@ -51,7 +51,11 @@ private:
 	const float	M_INIT_POS_X		= 700.f;	//‰ŠúxÀ•W
 	const float M_INIT_POS_Y		= -100.f;	//‰ŠúyÀ•W
 
+	bool m_can_state_transition;
+
 	void BulletControl();
+
+	void DebugKeyAction();
 
 protected:
 

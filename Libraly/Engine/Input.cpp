@@ -323,6 +323,10 @@ void UpDateKey()
 		{
 			g_InputState.now |= SHIFT_KEY;
 		}
+		if (KeyState[DIK_E] & 0x80) 
+		{
+			g_InputState.now |= E_KEY;
+		}
 		
 
 		g_InputState.trg = (g_InputState.now & (~old));	// ƒgƒŠƒK[î•ñæ“¾

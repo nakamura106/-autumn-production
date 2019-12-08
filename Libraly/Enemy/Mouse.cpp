@@ -68,7 +68,12 @@ void HedgeHog::EnemyAttack1()		//エネミー攻撃
 		一定加速後同じ速度で減速
 	*/
 
-
+	if (m_direction == Direction::LEFT) {
+		m_pos.x -= m_speed * 2;
+	}
+	else {
+		m_pos.x += m_speed * 2;
+	}
 
 }
 

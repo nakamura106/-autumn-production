@@ -110,9 +110,9 @@ enum class EnemyStateType
 //AIのパラメータ
 struct EnemyAIParam {
 	EnemyStateType		e_state;			//遷移する状態
-	float				e_speed_default;	//通常のスピード
-	float				e_speed_sleep;		//眠気時のスピード
-	float				e_speed_tired;		//疲労時のスピード
+	int					e_speed_default;	//通常のスピード
+	int					e_speed_sleep;		//眠気時のスピード
+	int					e_speed_tired;		//疲労時のスピード
 	EnemyTransitionTerm e_transition_term;	//状態持続条件
 	int					e_transition_num;	//状態持続条件に対応する値
 };

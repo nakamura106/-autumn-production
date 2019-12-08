@@ -1,6 +1,7 @@
 #include "EnemyBase.h"
 #include "../Player/TrpPlayer.h"
 #include"../Engine/FileLoader.h"
+#include"../Engine/Input.h"
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
 #define Refuge_Time	100				//逃げ回る時間
@@ -62,7 +63,7 @@ EnemyBase::EnemyBase()
 	
 	m_now_ai = EnemyAIType::AI1;
 	m_now_ai_num = 0;
-
+	m_can_state_transition = true;
 
 }
 
@@ -78,7 +79,7 @@ EnemyBase::~EnemyBase()
 	//AIリストのdelete
 	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 
-		for (int j = 0;j < m_ai_list[i].size();++j) {
+		for (int j = 0;j < static_cast<int>(m_ai_list[i].size());++j) {
 
 			if (m_ai_list[i][j] != nullptr)delete m_ai_list[i][j];
 
@@ -111,6 +112,9 @@ void EnemyBase::Update()
 {
 	//Stateの遷移
 	//ChangeState();
+
+	//デバッグ用
+	DebugKeyAction();
 
 	//現在の状態における動作の更新
 	UpdateState();
@@ -191,7 +195,7 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 
 	
 	//状態の変更
-	if (m_state != next_state) {
+	if (m_state != next_state && m_can_state_transition) {
 		//next_sceneを専用の変数に渡し、状態遷移
 		ChangeState(next_state);
 	}
@@ -275,7 +279,7 @@ void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 	//使用中AIを次の状態に進行
 	++m_now_ai_num;
 	
-	if (m_now_ai_num >= m_ai_list[static_cast<int>(m_now_ai)].size()) {
+	if (m_now_ai_num >= static_cast<int>(m_ai_list[static_cast<int>(m_now_ai)].size())) {
 		//aiの変更
 		//ここで、AI条件分岐関数を呼び出す
 		EnemyAIType next_ai = ChangeAIType();
@@ -476,7 +480,7 @@ void EnemyBase::LoadAIData(std::string file_name_)
 		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(file_name_ + FileLoadTool::ItoC(i + 1) + ".csv");
 
 		//vector配列
-		for (int j = 1;j < file[i].size();++j) {
+		for (int j = 1;j < static_cast<int>(file[i].size());++j) {
 
 			//vector拡張
 			m_ai_list[i].push_back(new EnemyAIParam());
@@ -628,7 +632,7 @@ void EnemyBase::EnemyAttack3()
 
 void EnemyBase::BulletControl()
 {
-	for (int i = 0;i < bullet_list.size();++i) {
+	for (int i = 0;i < static_cast<int>(bullet_list.size());++i) {
 		//弾の更新
 		bullet_list[i]->Update();
 
@@ -641,6 +645,23 @@ void EnemyBase::BulletControl()
 			bullet_list.erase(bullet_list.begin() + i);
 
 		}
+	}
+}
+
+void EnemyBase::DebugKeyAction()
+{
+	static bool s_is_key = false;
+
+	if (GetKey(E_KEY)) {
+		if (!s_is_key) {
+			//待ち状態に遷移
+			ChangeState(EnemyStateType::Wait);
+			m_can_state_transition = !m_can_state_transition;
+		}
+		s_is_key = true;
+	}
+	else {
+		s_is_key = false;
 	}
 }
 
@@ -667,7 +688,7 @@ void EnemyBase::EnemyRest()		//エネミー休憩
 		エネミーの疲労待機（その場で疲労待機アニメーション）
 	*/
 
-	int cure_fatigue = Fatigue_Gauge_Max - m_fatigue_gauge;
+	int cure_fatigue = (int)(Fatigue_Gauge_Max - m_fatigue_gauge);
 
 	if (cure_fatigue > 0)
 	{
