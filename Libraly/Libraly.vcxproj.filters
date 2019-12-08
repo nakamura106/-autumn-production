@@ -52,6 +52,18 @@
     <Filter Include="Player\TrpPlayer">
       <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\Collision">
+      <UniqueIdentifier>{841a3b8a-bcd1-4851-9d56-53c0027c41c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Collision\Circle">
+      <UniqueIdentifier>{da847ba8-d894-4e34-8022-2d49910c1c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Collision\Rectangle">
+      <UniqueIdentifier>{04ddb2bc-0685-42c5-bcb0-3bff2cdeeab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Collision\Line">
+      <UniqueIdentifier>{8f071b62-4344-41cd-8263-924a6f91d5dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -143,6 +155,21 @@
     </ClCompile>
     <ClCompile Include="Engine\FileLoader.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\CollisionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\CollisionBase.cpp">
+      <Filter>Utility\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Circle\CollisionCircle.cpp">
+      <Filter>Utility\Collision\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Line\CollisionLine.cpp">
+      <Filter>Utility\Collision\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Rectangle\CollisionRectangle.cpp">
+      <Filter>Utility\Collision\Rectangle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +268,21 @@
     </ClInclude>
     <ClInclude Include="Engine\FileLoader.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\CollisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\CollisionBase.h">
+      <Filter>Utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Circle\CollisionCircle.h">
+      <Filter>Utility\Collision\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Line\CollisionLine.h">
+      <Filter>Utility\Collision\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Rectangle\CollisionRectangle.h">
+      <Filter>Utility\Collision\Rectangle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

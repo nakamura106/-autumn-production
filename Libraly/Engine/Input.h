@@ -16,15 +16,12 @@
 #define LEFT_KEY	0x0004		// 左キー
 #define RIGHT_KEY	0x0008		// 右キー
 #define RETURN_KEY	0x0010		// リターンキー
-#define W_KEY		0x0020		// Wキー
-#define A_KEY		0x0040		// Aキー
-#define S_KEY		0x0080		// Sキー
-#define D_KEY		0x0100		// Dキー
+#define ONE_KEY 	0x0020		// 1キー
+#define TWO_KEY		0x0040		// 2キー
+#define THREE_KEY	0x0080		// 3キー
+#define SHIFT_KEY	0x0100		// Shiftキー
 #define SPACE_KEY   0x0200      // SPACEキー
-#define ONE_KEY     0x0400      // 1キー
-#define TWO_KEY     0x0800      // 2キー
-#define THREE_KEY   0x1600		// 3キー
-#define SHIFT_KEY   0x3200		// Shiftキー
+	
 
 /** @brief マウスボタンの種類 */
 enum MouseButton

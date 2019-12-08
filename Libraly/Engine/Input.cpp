@@ -299,22 +299,7 @@ void UpDateKey()
 		{
 			g_InputState.now |= RETURN_KEY;
 		}
-		if (KeyState[DIK_W] & 0x80)
-		{
-			g_InputState.now |= W_KEY;
-		}
-		if (KeyState[DIK_A] & 0x80)
-		{
-			g_InputState.now |= A_KEY;
-		}
-		if (KeyState[DIK_S] & 0x80)
-		{
-			g_InputState.now |= S_KEY;
-		}
-		if (KeyState[DIK_D] & 0x80)
-		{
-			g_InputState.now |= D_KEY;
-		}
+		
 		if (KeyState[DIK_SPACE] & 0x80)
 		{
 			g_InputState.now |= SPACE_KEY;

@@ -146,6 +146,7 @@
     <ClCompile Include="Engine\Sound.cpp" />
     <ClCompile Include="Engine\Windows.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Manager\CollisionManager.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
@@ -162,6 +163,10 @@
     <ClCompile Include="UI\PlayerBaseUi.cpp" />
     <ClCompile Include="UI\UiBase.cpp" />
     <ClCompile Include="UI\UiManager.cpp" />
+    <ClCompile Include="Utility\Circle\CollisionCircle.cpp" />
+    <ClCompile Include="Utility\CollisionBase.cpp" />
+    <ClCompile Include="Utility\Line\CollisionLine.cpp" />
+    <ClCompile Include="Utility\Rectangle\CollisionRectangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet\BulletBase.h" />
@@ -178,6 +183,7 @@
     <ClInclude Include="Engine\Sound.h" />
     <ClInclude Include="Engine\Vec.h" />
     <ClInclude Include="Engine\Windows.h" />
+    <ClInclude Include="Manager\CollisionManager.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Object\Definition.h" />
@@ -195,6 +201,10 @@
     <ClInclude Include="UI\PlayerBaseUi.h" />
     <ClInclude Include="UI\UiBase.h" />
     <ClInclude Include="UI\UiManager.h" />
+    <ClInclude Include="Utility\Circle\CollisionCircle.h" />
+    <ClInclude Include="Utility\CollisionBase.h" />
+    <ClInclude Include="Utility\Line\CollisionLine.h" />
+    <ClInclude Include="Utility\Rectangle\CollisionRectangle.h" />
     <ClInclude Include="Utility\Size.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
