@@ -46,7 +46,7 @@ void ObjectManager::Init()
 void ObjectManager::CreateObject()
 {
 
-//	chara_objects[0] = new TrpPlayer();
+	chara_objects[0] = new TrpPlayer();
 
 }
 

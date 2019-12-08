@@ -7,6 +7,7 @@
 #include"../Player/TrpPlayer.h"
 #include"../Enemy/Mouse.h"
 #include "../UI/UiManager.h"
+#include "../Manager/ObjectManager.h"
 #include"../Bullet/PlayerBullet.h"
 #include"../Engine/FlameTimer.h"
 
@@ -54,6 +55,8 @@ void DrawGameScene()
 
 	player.Draw();
 
+	ObjectManager::Instance()->Draw();
+
 	UiManager::Instance()->Draw();
 
 	FlameTimer::Debug::DrawTimer();
@@ -70,6 +73,8 @@ void InitGameScene()
 	enemy.Init();
 
 	player.Init();
+
+	ObjectManager::Instance()->Init();
 
 	UiManager::Instance()->Create();
 
@@ -88,6 +93,8 @@ void MainGameScene()
 	enemy.Update();
 
 	player.Update();
+
+	ObjectManager::Instance()->Update();
 
 	UiManager::Instance()->Update();
 
