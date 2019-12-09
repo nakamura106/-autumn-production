@@ -193,9 +193,10 @@ struct DrawParam
 };
 
 // 当たり判定用構造体
-struct Rectangle
+struct HitRectangle
 {
-	
+	float shift_x, shift_y;	// 座標調整変数
+	float width, height;	// 当たり判定用矩形の幅、高さ
 };
 
 //UVアニメーション用構造体(ObjectBaseで使用)

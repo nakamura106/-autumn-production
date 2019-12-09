@@ -81,4 +81,12 @@ int ObjectBase::GetAnimationTexNum()
 {
 	return ((m_draw_param.tv - 1) * m_anim_param.split_width + m_draw_param.tu);
 }
+
+void ObjectBase::SetRectangle()
+{
+	m_rect_param.shift_x = 0.0f;
+	m_rect_param.shift_y = 0.0f;
+	m_rect_param.height = 0.0f;
+	m_rect_param.width = 0.0f;
+}
  

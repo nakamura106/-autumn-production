@@ -29,6 +29,7 @@ protected:
 	Position		m_pos;			//座標
 	DrawParam		m_draw_param;	//描画用構造体
 	AnimationParam	m_anim_param;	//アニメーション用構造体
+	HitRectangle	m_rect_param;			//当たり判定用構造体
 
 	int m_direction;		//向き(enum Directionを使用)
 	bool m_is_delete;		//削除判定用
@@ -39,6 +40,8 @@ protected:
 	//デバッグ用変数(12/2田中追加)
 	int m_animation_timer;
 	bool m_animation_end;	//アニメーションの最後かどうか
+
+	virtual void SetRectangle();	// 当たり判定構造体パラメータ設定関数　後で消す
 	
 };
 
