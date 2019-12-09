@@ -192,6 +192,12 @@ struct DrawParam
 	int texture_id;		
 };
 
+// 当たり判定用構造体
+struct Rectangle
+{
+	
+};
+
 //UVアニメーション用構造体(ObjectBaseで使用)
 struct AnimationParam 
 {
