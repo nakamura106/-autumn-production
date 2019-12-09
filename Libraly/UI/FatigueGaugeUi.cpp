@@ -1,6 +1,7 @@
 #include "EnemyBaseUi.h"
 #include "FatigueGaugeUi.h"
 
+
 FatigueGaugeUi::FatigueGaugeUi()
 {
 	Init();
@@ -19,10 +20,17 @@ void FatigueGaugeUi::Init()
 	m_pos.y = 30.0f;
 	m_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_param.texture_id = GameCategoryTextureList::GameEnemyFatigueGauge;
+
+	m_slid_param.SlidMax = 100.0f;
+	m_slid_param.SlidMin = 0.0f;
+	m_slid_param.SlidNum = 30.0f;
 }
 
 void FatigueGaugeUi::Update()
 {
+	// •`‰æ”ä—¦•ÏX
+	m_slid_param.rate = (m_slid_param.SlidNum - m_slid_param.SlidMin) / (m_slid_param.SlidMax - m_slid_param.SlidMin);
+
 }
 
 void FatigueGaugeUi::Draw()

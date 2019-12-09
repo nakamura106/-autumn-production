@@ -64,6 +64,9 @@
     <Filter Include="Utility\Collision\Line">
       <UniqueIdentifier>{8f071b62-4344-41cd-8263-924a6f91d5dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataBank">
+      <UniqueIdentifier>{3b071d3f-50e0-4c69-bf6e-8dc29020ef6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -185,6 +188,12 @@
     </ClCompile>
     <ClCompile Include="Utility\HitTest.cpp">
       <Filter>Utility\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\EnemyAchieve.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBank\DataBank.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="Utility\HitTest.h">
       <Filter>Utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\EnemyAchieve.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBank\DataBank.h">
+      <Filter>DataBank</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

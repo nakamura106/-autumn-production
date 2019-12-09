@@ -18,6 +18,7 @@ public:
 protected:
 	Position m_pos;
 	DrawParam m_param;
+	Slider m_slid_param;
 };
 
 #endif

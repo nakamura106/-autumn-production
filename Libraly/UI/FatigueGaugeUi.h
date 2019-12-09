@@ -3,6 +3,7 @@
 
 #include "UiBase.h"
 
+
 class FatigueGaugeUi :public UiBase
 {
 public:

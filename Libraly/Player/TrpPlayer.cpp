@@ -6,6 +6,7 @@
 #include"../Engine/Input.h"
 #include"../Map/Map.h"
 #include"../Bullet/PlayerBullet.h"
+#include "../DataBank/DataBank.h"
 
 
 

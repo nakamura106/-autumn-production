@@ -135,6 +135,7 @@
     <ClCompile Include="Bullet\BulletBase.cpp" />
     <ClCompile Include="Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="DataBank\DataBank.cpp" />
     <ClCompile Include="Enemy\EnemyBase.cpp" />
     <ClCompile Include="Enemy\Mouse.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
+    <ClCompile Include="UI\EnemyAchieve.cpp" />
     <ClCompile Include="UI\EnemyBaseUi.cpp" />
     <ClCompile Include="UI\FatigueGaugeUi.cpp" />
     <ClCompile Include="UI\PlayerBaseUi.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="Bullet\BulletBase.h" />
     <ClInclude Include="Bullet\EnemyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
+    <ClInclude Include="DataBank\DataBank.h" />
     <ClInclude Include="Enemy\EnemyBase.h" />
     <ClInclude Include="Enemy\Mouse.h" />
     <ClInclude Include="Engine\Anime.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Texture\Texture.h" />
+    <ClInclude Include="UI\EnemyAchieve.h" />
     <ClInclude Include="UI\EnemyBaseUi.h" />
     <ClInclude Include="UI\FatigueGaugeUi.h" />
     <ClInclude Include="UI\PlayerBaseUi.h" />
