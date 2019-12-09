@@ -122,9 +122,9 @@ enum class EnemyDirection {
 struct EnemyAIParam {
 	EnemyAIParam() {
 		e_state = EnemyStateType::Wait;
-		e_speed_default = 0.f;
-		e_speed_sleep = 0.f;
-		e_speed_tired = 0.f;
+		e_speed_default = 0;
+		e_speed_sleep = 0;
+		e_speed_tired = 0;
 		e_transition_term = EnemyTransitionTerm::FlameTime;
 		e_transition_num = 0;
 		e_direction = EnemyDirection::Same;
