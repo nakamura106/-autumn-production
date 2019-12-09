@@ -2,6 +2,7 @@
 #include "../Player/TrpPlayer.h"
 #include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
+#include"../Manager/ObjectManager.h"
 #include<stdlib.h>
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
@@ -206,27 +207,27 @@ void EnemyBase::UpdateAIState()
 	{
 		//画面端まで移動
 	case EnemyTransitionTerm::Straight:
-		can_change_ai_state = TransitionStraight();
+		can_change_ai_state = AITransitionStraight();
 		break;
 
 		//プレイヤーを越える
 	case EnemyTransitionTerm::PassPlayer:
-		can_change_ai_state = TransitionPassPlayer();
+		can_change_ai_state = AITransitionPassPlayer();
 		break;
 
 		//プレイヤーを前にした場合
 	case EnemyTransitionTerm::FrontPlayer:
-		can_change_ai_state = TransitionFrontPlayer();
+		can_change_ai_state = AITransitionFrontPlayer();
 		break;
 
 		//距離
 	case EnemyTransitionTerm::Distance:
-		can_change_ai_state = TransitionDistance();
+		can_change_ai_state = AITransitionDistance();
 		break;
 
 		//時間
 	case EnemyTransitionTerm::FlameTime:
-		can_change_ai_state = TransitionFlameTime();
+		can_change_ai_state = AITransitionFlameTime();
 		break;
 
 	default:
@@ -236,14 +237,18 @@ void EnemyBase::UpdateAIState()
 	if (can_change_ai_state) {
 		//次の状態へ
 		ChangeAIState();
+
+		//敵のゲージ量によってスピードが変化
+		m_speed = m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+
 	}
 }
 
-bool EnemyBase::TransitionStraight()
+bool EnemyBase::AITransitionBase()
 {
 	//仮実装　画面は端まではいける
 	if ((m_pos.x <= 0.f || (m_pos.x + m_draw_param.tex_size_x) > 1920.f)
-		&& m_animation_end) 
+		&& m_animation_end)
 	{
 		return true;
 	}
@@ -251,24 +256,62 @@ bool EnemyBase::TransitionStraight()
 	return false;
 }
 
-bool EnemyBase::TransitionPassPlayer()
+bool EnemyBase::AITransitionStraight()
 {
-	//プレイヤーのx座標をゲット
-
-	return false;
+	return AITransitionBase();
 }
 
-bool EnemyBase::TransitionFrontPlayer()
+bool EnemyBase::AITransitionPassPlayer()
 {
 	//プレイヤーのx座標をゲット
-	float p_pos_x;
+	if (m_player_direction_relationship == Direction::LEFT) {
 
+		if (m_pos.x + m_draw_param.tex_size_x / 2.f <
+			ObjectManager::Instance()->GetPlayerObject()->GetPos().x)
+		{
+			return true;
+		}
+	}
+	else {
+
+		if ((m_pos.x + m_draw_param.tex_size_x / 2.f) >
+			ObjectManager::Instance()->GetPlayerObject()->GetPos().x)
+		{
+			return true;
+		}
+	}
+
+	return AITransitionBase();
+}
+
+bool EnemyBase::AITransitionFrontPlayer()
+{
+
+	float p_pos_x = ObjectManager::Instance()->GetPlayerObject()->GetPos().x;
+
+	//プレイヤーのx座標をゲット
 	
+	if (m_direction == Direction::LEFT) {
+		//E=L,P=L
+		if (m_player_direction_relationship == Direction::LEFT) {
+			if (p_pos_x >= m_pos.x) {
+				return true;
+			}
+		}
+	}
+	else {
+		//E=R,P=L
+		if (m_player_direction_relationship == Direction::RIGHT) {
+			if (p_pos_x <= (m_pos.x + m_draw_param.tex_size_x)) {
+				return true;
+			}
+		}
+	}
 
-	return false;
+	return AITransitionBase();
 }
 
-bool EnemyBase::TransitionDistance()
+bool EnemyBase::AITransitionDistance()
 {
 	if (fabsf(m_state_save_pos_x - m_pos.x) >=
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
@@ -277,10 +320,10 @@ bool EnemyBase::TransitionDistance()
 		return true;
 	}
 
-	return false;
+	return AITransitionBase();
 }
 
-bool EnemyBase::TransitionFlameTime()
+bool EnemyBase::AITransitionFlameTime()
 {
 	if (FlameTimer::GetNowFlame(m_state_saveflame) >= 
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
@@ -289,7 +332,7 @@ bool EnemyBase::TransitionFlameTime()
 		return true;
 	}
 
-	return false;
+	return AITransitionBase();
 }
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
@@ -372,7 +415,12 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 	m_state_save_pos_x = m_pos.x;
 
 	//プレイヤーがどちらの方向にいるのかを格納
-	m_player_direction_relationship = Direction::LEFT;
+	if (m_pos.x > ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
+		m_player_direction_relationship = Direction::RIGHT;
+	}
+	else {
+		m_player_direction_relationship = Direction::LEFT;
+	}
 
 }
  

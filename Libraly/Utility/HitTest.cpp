@@ -25,8 +25,8 @@ bool IsHitTest(ObjectBase *obj1,ObjectBase *obj2)
 	rect2.y += rect2.shift_y + (rect2.height / 2.0f);
 
 
-	if (rect1.x - rect2.x <= fabsf((rect1.width / 2.0f) + (rect2.width / 2.0f))
-		&& rect1.y - rect2.y <= fabsf((rect1.height / 2.0f) + (rect2.height / 2.0f)))
+	if (fabsf(rect1.x - rect2.x) <= (rect1.width / 2.0f) + (rect2.width / 2.0f)
+		&& fabsf(rect1.y - rect2.y)<= (rect1.height / 2.0f) + (rect2.height / 2.0f))
 	{
 		return true;
 	}
