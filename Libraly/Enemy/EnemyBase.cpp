@@ -113,7 +113,8 @@ void EnemyBase::Update()
 	DebugKeyAction();
 
 	//現在の状態における動作の更新
-	UpdateState();
+	//UpdateState();
+	UpdateAIState();
 
 	//アニメーション(パラパラ画像)値の更新
 	AnimationUpdate();
@@ -201,6 +202,62 @@ void EnemyBase::UpdateState()		//エネミーの状態の更新
 
 void EnemyBase::UpdateAIState()
 {
+	switch (m_state)
+	{
+		//待機状態
+	case EnemyStateType::Wait:
+		EnemyWait();
+		break;
+
+		//移動状態
+	case EnemyStateType::Walk:
+		EnemyMove();
+		break;
+
+		//攻撃1状態
+	case EnemyStateType::Attack1:
+		EnemyAttack1();
+		break;
+
+		//攻撃2状態
+	case EnemyStateType::Attack2:
+		EnemyAttack2();
+		break;
+
+		//攻撃3状態
+	case EnemyStateType::Attack3:
+		EnemyAttack3();
+		break;
+
+		//逃走状態(ゲージが一定以下の場合逃げる処理)
+	case EnemyStateType::Refuge:
+		EnemyRefuge();
+		break;
+
+		//追跡状態
+	case EnemyStateType::Chase:
+		EnemyMove();
+		break;
+
+		//睡眠状態(眠気度MAX)
+	case EnemyStateType::Sleep:
+
+		break;
+
+	default:
+		/*
+			!!
+		*/
+		break;
+	}
+
+	//AI状態遷移
+	AITransitionUpdate();
+
+}
+
+void EnemyBase::AITransitionUpdate()
+{
 	bool can_change_ai_state = false;
 
 	switch (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_term)
@@ -234,12 +291,20 @@ void EnemyBase::UpdateAIState()
 		break;
 	}
 
+
+	//状態遷移・AI変更を行う
 	if (can_change_ai_state) {
-		//次の状態へ
+		//次の状態に行くための値を設定
 		ChangeAIState();
 
 		//敵のゲージ量によってスピードが変化
 		m_speed = m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+
+		//AIに合わせて向き変更
+		ChangeAIDirection();
+
+		//値に沿って状態遷移
+		ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
 
 	}
 }
@@ -294,7 +359,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
 		if (m_player_direction_relationship == Direction::LEFT) {
-			if (p_pos_x >= m_pos.x) {
+			if (p_pos_x + 256.f >= m_pos.x) {
 				return true;
 			}
 		}
@@ -335,6 +400,27 @@ bool EnemyBase::AITransitionFlameTime()
 	return AITransitionBase();
 }
 
+void EnemyBase::ChangeAIDirection()
+{
+	switch (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_direction)
+	{
+	case EnemyDirection::Right:
+		m_direction = Direction::RIGHT;
+		break;
+
+	case EnemyDirection::Left:
+		m_direction = Direction::LEFT;
+		break;
+
+	case EnemyDirection::Reverse:
+		m_direction = !m_direction;
+		break;
+
+	default:
+		break;
+	}
+}
+
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 {
 	if (static_cast<int>(m_now_ai) >= static_cast<int>(EnemyAIType::EnemyAIType_Max)) {
@@ -360,9 +446,6 @@ void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 		m_now_ai_num = 0;
 
 	}
-
-	//状態遷移
-	ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
 	
 }
 
@@ -410,12 +493,15 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 		return;
 	}
 
+	//全状態共通の初期化関数
+	InitAllState();
+
 	//現在の状態を格納
 	m_state_saveflame = FlameTimer::GetNowFlame();
 	m_state_save_pos_x = m_pos.x;
 
 	//プレイヤーがどちらの方向にいるのかを格納
-	if (m_pos.x > ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
+	if (m_pos.x < ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
 		m_player_direction_relationship = Direction::RIGHT;
 	}
 	else {
@@ -518,6 +604,9 @@ void EnemyBase::InitAttack3State()
 
 void EnemyBase::InitChaseState()
 {
+	//方向をプレイヤーの側にする
+	m_direction = m_player_direction_relationship;
+
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
 	}
@@ -553,10 +642,12 @@ void EnemyBase::LoadAIData(std::string file_name_)
 	//１～１０の基本配列
 	for (int i = 0;i < static_cast<int>(EnemyAIType::EnemyAIType_Max);++i) {
 
-		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(file_name_ + FileLoadTool::ItoC(i + 1) + ".csv");
+		std::string f_name = file_name_ + FileLoadTool::ItoC(i + 1) + ".csv";
+
+		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(f_name);
 
 		//vector配列
-		for (int j = 1;j < static_cast<int>(file[i].size());++j) {
+		for (int j = 1;j < static_cast<int>(file.size());++j) {
 
 			//vector拡張
 			m_ai_list[i].push_back(new EnemyAIParam());
@@ -613,31 +704,6 @@ void EnemyBase::EnemyMove()			//エネミー移動
 	}
 
 }
-
-#if 0
-void EnemyBase::EnemyChase_R()
-{
-	/*
-		敵が自分より右方向へ遠くにいる場合の追跡
-	*/
-
-	m_pos.x + m_speed;
-
-	m_enemy_to_player_state = EnemytoPlayerState::Separated;
-}
-
-void EnemyBase::EnemyChase_L()
-{
-	/*
-		敵が自分より左方向へ遠くにいる場合の追跡
-	*/
-
-	m_pos.x - m_speed;
-
-	m_enemy_to_player_state = EnemytoPlayerState::Separated;
-}
-
-#endif
 
 void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 {

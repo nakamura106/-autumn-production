@@ -33,6 +33,9 @@ HedgeHog::HedgeHog()
 	//m_speed = 5.0f;
 	m_do_needle = false;
 	SetRectangle();
+
+	LoadAIData(M_AIDataFileName);
+	
 }
 
 HedgeHog::~HedgeHog()
@@ -175,5 +178,11 @@ void HedgeHog::CreateNeedle()
 	//Bullet(ハリ)生成
 	bullet_list.push_back(new EnemyBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction));
 
+}
+
+void HedgeHog::InitAllState()
+{
+	//ニードルリセット
+	m_do_needle = false;
 }
 

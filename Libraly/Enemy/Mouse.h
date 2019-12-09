@@ -31,7 +31,7 @@ private:
 	const float M_NEEDLE_ADJUST_X = 180.f;
 	const float M_NEEDLE_ADJUST_Y = 630.f;
 	
-	std::string M_AIDataFileName = "Res/Csv/Mouse/EnemyAI";
+	std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
 	bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©	
 	//AttackRepertoryHedgeHog m_attack_repertory;
 
@@ -59,6 +59,8 @@ private:
 	
 	/*ƒnƒŠ”­Ë*/
 	void CreateNeedle();
+
+	void InitAllState();
 
 	//bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©
 	bool m_do_needle;		//ƒnƒŠ”­Ë‚ğs‚Á‚½‚©‚Ç‚¤‚©
