@@ -71,11 +71,12 @@ protected:
 	void UpdateAIState();
 
 	/*AIState‘JˆÚ*/
-	bool TransitionStraight();
-	bool TransitionPassPlayer();
-	bool TransitionFrontPlayer();
-	bool TransitionDistance();
-	bool TransitionFlameTime();
+	bool AITransitionBase();
+	bool AITransitionStraight();
+	bool AITransitionPassPlayer();
+	bool AITransitionFrontPlayer();
+	bool AITransitionDistance();
+	bool AITransitionFlameTime();
 
 	/*‘Ò‹@*/
 	virtual void EnemyWait();
