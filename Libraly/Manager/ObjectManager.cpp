@@ -80,3 +80,12 @@ void ObjectManager::Draw()
 		}
 	}
 }
+
+ObjectBase* ObjectManager::GetPlayerObject()
+{
+	for (int i = 0; i < MAX_CHARA_OBJ; ++i) {
+		if (chara_objects[i] == nullptr)continue;
+		
+	}
+	return chara_objects[1];
+}

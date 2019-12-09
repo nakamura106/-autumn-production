@@ -183,6 +183,9 @@
     <ClCompile Include="UI\FatigueGaugeUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\HitTest.cpp">
+      <Filter>Utility\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="UI\FatigueGaugeUi.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\HitTest.h">
+      <Filter>Utility\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
