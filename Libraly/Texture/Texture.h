@@ -76,7 +76,7 @@ enum GameCategoryTextureList
 	GameEnemyAutoHealGauge,					//!<自動回復ライン
 	GameEnemySleepCircle,					//!<眠気円
 	GameEnemyFatigueCircle,					//!<疲労円
-	GameEnemyDropItemUi,					//!<敵ドロップアイテム
+	GameEnemyAchieveUi,						//!<敵ドロップアイテム
 
 
 	/*Enemy用*/
