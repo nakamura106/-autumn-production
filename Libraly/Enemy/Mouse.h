@@ -12,6 +12,8 @@ public:
 	
 	void Init();
 	//void Update();
+
+	void SetRectangle()override;
 	
 
 private:

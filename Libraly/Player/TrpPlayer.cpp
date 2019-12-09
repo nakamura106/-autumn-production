@@ -48,6 +48,7 @@ void TrpPlayer::Init()
 	}
 	Load();
 	InitAnimation();
+	SetRectangle();
 }
 
 void TrpPlayer::Load()
@@ -126,6 +127,14 @@ void TrpPlayer::Draw()
 	DrawUVTexture(m_pos.x, m_pos.y, Animation[m_i].m_Rect_Width, Animation[m_i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[m_i].m_RectX, Animation[m_i].m_RectY);
 	
 	Drawatk();
+}
+
+void TrpPlayer::SetRectangle()
+{
+	m_rect_param.shift_x = 9.0f;
+	m_rect_param.shift_y = 9.0f;
+	m_rect_param.width = 114.0f;
+	m_rect_param.height = 245.0f;
 }
 
 int TrpPlayer::atkjudge()

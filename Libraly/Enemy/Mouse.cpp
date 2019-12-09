@@ -24,12 +24,15 @@ HedgeHog::HedgeHog()
 	m_fatigue_gauge	= NULL;
 	m_sleep_gauge	= NULL;
 	m_time_of_break = 0;
-	m_refuge_time	= Refuge_Time;
-	m_is_break		= false;
-	m_is_delete		= true;
-	m_is_hit_judge	= false;
-	m_is_speed_up	= false;
-	m_do_needle		= false;
+
+	m_refuge_time = Refuge_Time;
+	m_is_break = false;
+	m_is_delete = true;
+	m_is_hit_judge = false;
+	m_is_speed_up = false;
+	//m_speed = 5.0f;
+	m_do_needle = false;
+	SetRectangle();
 }
 
 HedgeHog::~HedgeHog()
@@ -56,6 +59,15 @@ void HedgeHog::Init()
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_NeedleAttackRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Needle);
 
+}
+
+
+void HedgeHog::SetRectangle()
+{
+	m_rect_param.shift_x = 105.0f;
+	m_rect_param.shift_y = 440.0f;
+	m_rect_param.width = 829.0f;
+	m_rect_param.height = 561.0f;
 }
 
 void HedgeHog::EnemyAttack1()		//エネミー攻撃
