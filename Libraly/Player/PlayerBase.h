@@ -5,6 +5,8 @@
 #include"../Object/Definition.h"
 #include"../Object/ObjectBase.h"
 #include"../Engine/Texture.h"
+#include"../Bullet/PlayerBullet.h"
+#include<vector>
 
 class PlayerBase :public ObjectBase
 {
@@ -13,7 +15,7 @@ public:
 	~PlayerBase();
 	//!< 初期化関数
 	virtual void Init() = 0;
-
+	virtual void CreateBullets() = 0;
 	void Create();
 	//!< 画像読込用関数(ゲームシーンにべた書き予定)
 	virtual void Load() = 0;
@@ -36,7 +38,7 @@ public:
 	//!< 画像を呼び出して変数(Drawで使う)に格納する関数
 	virtual void GetMotion(int Llist, int Rlist)=0;
 	
-
+	void BulletControl();
 
 protected:
 	bool	m_do_jump;						//ジャンプ判定
@@ -48,7 +50,7 @@ protected:
 	int     m_i;							//アニメーション切り替え用
 	float	m_map_pos;						//マップ中央固定用
 
-
+	std::vector<PlayerBullet*> bullet_list;
 
 	UVANIMATION Animation[MaxAnimationNum];	//アニメーションのスプリット保存用
 

@@ -35,12 +35,16 @@ private:
 	//!< ‰æ‘œ“Çž—pŠÖ”(ƒQ[ƒ€ƒV[ƒ“‚É‚×‚½‘‚«—\’è)
 	void Load()override;
 
+	void CreateBullets()override;
+
 
 	int atkjudge();
 
 	void Drawatk();
 
 	int timer;
+
+	bool m_do_bullet_firing;
 
 	 int notebox[3];
 };
