@@ -27,7 +27,7 @@ protected:
 	/*アニメーション進行ゲッター*/
 	int GetAnimationTexNum();
 
-	ObjectRavel		m_obj_ravel;		//ラベル
+	ObjectRavel		m_obj_ravel;	//ラベル
 	Position		m_pos;			//座標
 	DrawParam		m_draw_param;	//描画用構造体
 	AnimationParam	m_anim_param;	//アニメーション用構造体

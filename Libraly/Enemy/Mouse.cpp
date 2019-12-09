@@ -19,7 +19,7 @@
 TrpPlayer* trpplayer;
 
 HedgeHog::HedgeHog()
-	:EnemyBase(5.f,	EnemyID::Hedgehog)
+	:EnemyBase(3.f,	EnemyID::Hedgehog)
 {
 	m_fatigue_gauge	= NULL;
 	m_sleep_gauge	= NULL;

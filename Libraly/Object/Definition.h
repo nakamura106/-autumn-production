@@ -70,16 +70,6 @@ enum class Key
 	Minor,
 };
 
-//状態持続条件
-enum class EnemyTransitionTerm {
-	Straight,	//直進
-	PassPlayer,	//プレイヤーとの距離が一致した
-	FrontPlayer,//プレイヤーを前にした
-	Distance,	//距離
-	FlameTime,	//経過フレーム数(時間)
-	EnemyTransitionTerm_Max
-};
-
 //AIの種類
 enum class EnemyAIType {
 	AI1,
@@ -95,28 +85,58 @@ enum class EnemyAIType {
 	EnemyAIType_Max
 };
 
+//状態持続条件
+enum class EnemyTransitionTerm {
+	Straight,	//0:直進
+	PassPlayer,	//1:プレイヤーとの距離が一致した
+	FrontPlayer,//2:プレイヤーを前にした
+	Distance,	//3:距離
+	FlameTime,	//4:経過フレーム数(時間)
+	EnemyTransitionTerm_Max
+};
+
 enum class EnemyStateType
 {
-	Wait,	//待機
-	Walk,	//警戒
-	Refuge,	//ピンチ状態のエネミー逃走
-	Chase,	//追跡
-	Sleep,	//睡眠中
-	Attack1,//攻撃
-	Attack2,//攻撃2
-	Attack3,//攻撃3
+	Wait,	//0:待機
+	Walk,	//1:警戒
+	Refuge,	//2:ピンチ状態のエネミー逃走
+	Chase,	//3:追跡
+	Sleep,	//4:睡眠中
+	Attack1,//5:攻撃
+	Attack2,//6:攻撃2
+	Attack3,//7:攻撃3
 	EnemyStateTypeMax,
+};
+
+//Enemyのcsvからの値を判定するため
+enum class EnemyDirection {
+	Right,	//0:右方向
+	Left,	//1:左方向
+	Reverse,//2:逆方向
+	Same,	//3:同じ方向
+	EnemyDirection_Max
 };
 
 
 //AIのパラメータ
 struct EnemyAIParam {
+	EnemyAIParam() {
+		e_state = EnemyStateType::Wait;
+		e_speed_default = 0.f;
+		e_speed_sleep = 0.f;
+		e_speed_tired = 0.f;
+		e_transition_term = EnemyTransitionTerm::FlameTime;
+		e_transition_num = 0;
+		e_direction = EnemyDirection::Same;
+	}
+
 	EnemyStateType		e_state;			//遷移する状態
 	int					e_speed_default;	//通常のスピード
 	int					e_speed_sleep;		//眠気時のスピード
 	int					e_speed_tired;		//疲労時のスピード
 	EnemyTransitionTerm e_transition_term;	//状態持続条件
 	int					e_transition_num;	//状態持続条件に対応する値
+	EnemyDirection		e_direction;		//向き
 };
 
 //CsvでのAIのパラメータの配列番号
@@ -128,6 +148,7 @@ enum class EnemyAIArrayNum {
 	Speed_Tired,
 	Transition_Term,
 	Transition_Num,
+	Enemy_Direction,
 	EnemyAIArrayNum_Max
 };
 
