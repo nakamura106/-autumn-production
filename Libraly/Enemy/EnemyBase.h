@@ -68,7 +68,10 @@ protected:
 	//将来的には廃止　AIのパターン分け仕様に変更
 	void UpdateState();
 
+	//新状態遷移:
 	void UpdateAIState();
+
+	void AITransitionUpdate();
 
 	/*AIState遷移*/
 	bool AITransitionBase();
@@ -77,6 +80,9 @@ protected:
 	bool AITransitionFrontPlayer();
 	bool AITransitionDistance();
 	bool AITransitionFlameTime();
+
+	/*AI状態遷移時、向き変更*/
+	void ChangeAIDirection();
 
 	/*待機*/
 	virtual void EnemyWait();
@@ -121,6 +127,8 @@ protected:
 	/*
 		状態初期化
 	*/
+	/*全状態共通*/
+	virtual void InitAllState() {}
 	/*待機状態*/
 	virtual void InitWaitState();
 	/*移動状態*/
