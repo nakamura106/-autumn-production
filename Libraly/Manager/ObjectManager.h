@@ -7,14 +7,13 @@ class ObjectManager
 {
 public:
 	static ObjectManager* Instance();
-
+	
 	// マネージャー初期化、コンストラクタ時のみ
 	void Init();
 	// オブジェクト作成
 	void CreateObject();
 	void Update();
 	void Draw();
-
 
 protected:
 	ObjectManager();

@@ -53,6 +53,9 @@ enum GameCategoryTextureList
 	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
 	GamePlayerBullet_1Tex,					//!<プレイヤーの弾１
+
+	/*UI用*/
+	GamePlayerUi,							//!<プレイヤーHP
 	GameBulletUi_RedLeft,					//!<プレイヤー弾UI
 	GameBulletUi_RedCenter,					//!<プレイヤー弾UI 				
 	GameBulletUi_RedRight,					//!<プレイヤー弾UI
@@ -67,6 +70,14 @@ enum GameCategoryTextureList
 	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り2
 	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り1
 	GamePlayerHp_0Tex,						//!<プレイヤー耐久残り0
+	GameEnemyUi,							//!<エネミーUIの基盤
+	GameEnemySleepGauge,					//!<眠気ゲージ
+	GameEnemyFatigueGauge,					//!<疲労ゲージ
+	GameEnemyAutoHealGauge,					//!<自動回復ライン
+	GameEnemySleepCircle,					//!<眠気円
+	GameEnemyFatigueCircle,					//!<疲労円
+	GameEnemyDropItemUi,					//!<敵ドロップアイテム
+
 
 	/*Enemy用*/
 	GameEnemy_TaikiLeft,					//!<敵待機
@@ -85,7 +96,6 @@ enum GameCategoryTextureList
 	GameEnemy_DownRight,
 	GameEnemy_Bullet_Needle,				//!<敵の弾(ハリ)
 
-	GamePlayerUi,							//!<プレイヤーHP
 	GamePointerTex,			//!< ポインタ
 	GameTextureMax,			//!< リスト最大数
 };
