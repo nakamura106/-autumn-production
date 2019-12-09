@@ -11,6 +11,7 @@ class EnemyBase :public ObjectBase
 {
 public:
 	EnemyBase();
+	EnemyBase(float speed_, EnemyID enemy_id_);
 	virtual ~EnemyBase();
 
 	void Load(){}
@@ -159,7 +160,6 @@ protected:
 	EnemyID					m_enemy_id;				//敵のID
 	EnemyStateType			m_state;				//敵の状態
 	int						m_attack_repertory;		//攻撃のバリエーション
-	EnemytoPlayerState		m_enemy_to_player_state;//プレイヤーとの関係？
 
 	int		m_state_saveflame;	//状態継続のフレーム数計測用
 

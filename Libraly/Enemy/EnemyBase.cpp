@@ -17,28 +17,20 @@
 
 //‚±‚±‚Ü‚Å
 
-EnemyBase::EnemyBase()
+EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
+	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_)
 {
-	m_enemy_id				= EnemyID::BossTypeMax;
-	m_state					= EnemyStateType::Walk;
-	m_attack_repertory		= 0;
-	m_enemy_to_player_state = EnemytoPlayerState::EtoPStateTypeMax;
-
-	m_fatigue_gauge = 0.f;
-	m_sleep_gauge	= 0.f;
-	m_time_of_break = 0;
-	m_is_break		= false;
-	m_is_delete		= false;
-	m_is_hit_judge	= false;
-	m_speed			= 3.f;
-	m_direction		= Direction::LEFT;
-
-//	TrpPlayer* trpplayer;
-
-	//	‰¼Œˆ‚ß
-	m_pos.x = M_INIT_POS_X;
-	m_pos.y = M_INIT_POS_Y;
-	
+	m_enemy_id			= enemy_id_;
+	m_state				= EnemyStateType::Walk;
+	m_attack_repertory	= 0;
+	m_fatigue_gauge		= 0.f;
+	m_sleep_gauge		= 0.f;
+	m_time_of_break		= 0;
+	m_is_break			= false;
+	m_is_delete			= false;
+	m_is_hit_judge		= false;
+	m_pos.x				= M_INIT_POS_X;
+	m_pos.y				= M_INIT_POS_Y;
 
 	//•`‰æî•ñŠi”[
 	m_draw_param.tu				= 1;
@@ -60,10 +52,10 @@ EnemyBase::EnemyBase()
 	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 		m_ai_list[i].clear();
 	}
-	
-	m_now_ai = EnemyAIType::AI1;
-	m_now_ai_num = 0;
-	m_can_state_transition = true;
+
+	m_now_ai				= EnemyAIType::AI1;
+	m_now_ai_num			= 0;
+	m_can_state_transition	= true;
 
 }
 
@@ -575,51 +567,13 @@ void EnemyBase::EnemyRefuge()		//”æ˜Jó‘Ô‚Ì“¦‘–
 			enemy“¦‚°‚éˆ—
 		*/
 
-		m_enemy_to_player_state = EnemytoPlayerState::Escape;
+		//m_enemy_to_player_state = EnemytoPlayerState::Escape;
 
 	}
 }
 
 void EnemyBase::EnemyAttack1()		//ƒGƒlƒ~[UŒ‚
 {
-	/*
-		“G‚©‚çƒvƒŒƒCƒ„[‚Ö‚Ìó‘Ô‚É‰‚¶‚ÄUŒ‚í‚ğ•ÏX
-	*/
-
-	switch (m_enemy_to_player_state)
-	{
-	case EnemytoPlayerState::Separated:
-
-		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
-
-		break;
-
-	case EnemytoPlayerState::Close:
-
-		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
-
-		break;
-
-	case EnemytoPlayerState::Escape:
-
-		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
-
-		break;
-
-	case EnemytoPlayerState::Pursue:
-
-		m_attack_repertory = (int)EnemyAttackRepertory::VariableEnumrate_Type;
-
-		break;
-
-
-	default:
-		/*
-			!!
-		*/
-		break;
-	}
-
 }
 
 void EnemyBase::EnemyAttack2()

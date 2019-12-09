@@ -29,6 +29,15 @@
 #define B				2		//B
 
 
+//オブジェクトの役割を示す
+enum class ObjectRavel 
+{
+	Ravel_Player,	//プレイヤー
+	Ravel_Boss,		//BOSS(Enemy)
+	Ravel_MapObj,	//マップ上のオブジェクト
+	ObjectRavel_Max
+};
+
 enum class Player
 {
 	PlayerTypeTrumpet,
@@ -58,16 +67,6 @@ enum class Key
 {
 	Major,
 	Minor,
-};
-
-//敵から見るプレイヤーの動作
-enum class EnemytoPlayerState
-{
-	Separated,	//離れた
-	Close,		//近い
-	Escape,		//逃げる
-	Pursue,		//追う
-	EtoPStateTypeMax,
 };
 
 //状態持続条件

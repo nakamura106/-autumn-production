@@ -1,16 +1,21 @@
 ﻿#include "ObjectBase.h"
 
 ObjectBase::ObjectBase()
+	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, 5.f)
 {
-	/*注意‼　すべてのメンバの初期化は必須!!*/
-	m_direction = Direction::RIGHT;
-	m_is_delete = false;
-	m_is_invincible = false;
-	m_state = 0;
-	m_speed = 0.f;
 
-	m_animation_timer = 0;
-	m_animation_end = false;
+}
+
+ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_)
+{
+	m_obj_ravel			= obj_ravel_;
+	m_direction			= direction_;
+	m_speed				= speed_;
+	m_is_delete			= false;
+	m_is_invincible		= false;
+	m_state				= 0;
+	m_animation_timer	= 0;
+	m_animation_end		= false;
 }
 
 ObjectBase::~ObjectBase()
