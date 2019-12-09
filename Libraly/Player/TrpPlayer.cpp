@@ -170,10 +170,11 @@ int TrpPlayer::atkjudge()
 				m_do_attack = true;
 				m_is_active = true;
 			}
-			if (timer2 >= 200)
+			if (timer2 >= 140)
 			{
 				m_is_release = true;
 				ReleaseNote();
+				
 			}
 		}
 		else
@@ -186,10 +187,11 @@ int TrpPlayer::atkjudge()
 				m_do_attack = true;
 				m_is_active = true;
 			}
-			if (timer2 >= 200)
+			if (timer2 >= 140)
 			{
 				m_is_release = true;
 				ReleaseNote();
+				
 			}
 		}
 	}
@@ -213,7 +215,7 @@ int TrpPlayer::atkjudge()
 				m_do_attack = true;
 				m_is_active = true;
 			}
-			if (timer2 >= 200)
+			if (timer2 >= 140)
 			{
 				m_is_release = true;
 				ReleaseNote();
@@ -229,7 +231,7 @@ int TrpPlayer::atkjudge()
 				m_do_attack = true;
 				m_is_active = true;
 			}
-			if (timer2 >= 200)
+			if (timer2 >= 140)
 			{
 				m_is_release = true;
 				ReleaseNote();
@@ -338,7 +340,7 @@ void TrpPlayer::P_Controll()
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
 		}
-		if (m_map_pos >= 0)
+		if (m_map_pos >= -128.0f)
 		{
 			m_map_pos -= m_speed;
 		}
@@ -452,7 +454,9 @@ void TrpPlayer::ReleaseNote()
 		m_play_note[i] = false;
 	}
 	m_do_bullet_firing = false;
-
+	
+	m_is_release=false;
+	
 }
 
 void TrpPlayer::InitAnimation()
@@ -559,11 +563,13 @@ void TrpPlayer::Jump()
 
 void TrpPlayer::Attack()
 {
+
+	
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Jump)
 	{
 		m_state = (int)P_State::Attack;
 	}
-	if (m_i >= MaxAnimationNum)
+	if (m_i > 11)
 	{
 		m_do_attack = false;
 		m_is_active = false;
