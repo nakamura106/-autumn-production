@@ -30,10 +30,15 @@ private:
 	//!< 当たり判定関数(プレイヤーがオブジェクトに当たっているか判定する関数)
 	void HitJudgement();
 
-	Position m_pos;			// 座標
-	DrawParam m_draw_param;	// 描画用構造体
-	float m_speed;			// マップのスクロール速度
+	
+	float floor1;
+	float floor2;
+	float fg;
+	float obj[3];
 
+
+
+	
 
 
 

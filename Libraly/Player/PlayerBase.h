@@ -41,7 +41,7 @@ public:
 protected:
 	bool	m_do_jump;						//ジャンプ判定
 	bool	m_is_active;					//動いているかの判定
-	bool	m_play_note[6];					//音符生成
+	bool	m_play_note[2];					//音符生成
 	int		m_hp;							//体力
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か

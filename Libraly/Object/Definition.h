@@ -4,11 +4,12 @@
 // 構造体、enumまとめ用
 
 #define P_posX			100.0f  //初期座標
-#define P_posY			600.0f	//初期座標
+#define P_posYsea		600.0f	//初期座標海
+#define P_posYforest	650.0f	//初期座標森
 #define P_trp_range		1000.0f	//攻撃範囲
 #define P_speed			5.0f	//移動速度
 #define P_jump_power	17.0f	//ジャンプ力
-#define P_MaxHP			5		//プレイヤーの体力
+#define P_MaxHP			4		//プレイヤーの体力
 #define Gravity			0.5f	//落下用重力
 #define Dispflame		6		//描画時間
 #define Rect_Height     256.0f	//矩形の高さ
@@ -27,7 +28,7 @@
 #define sel_XY			2		//引数XY選択
 #define A				1		//A
 #define B				2		//B
-
+#define floor2speed		3		//
 
 enum class Player
 {
@@ -143,6 +144,26 @@ enum class EnemyID
 	Gorilla,
 
 	BossTypeMax,
+};
+
+enum class MapObjId
+{
+	bg,
+	floor1,
+	floor2,
+	fg,
+	obj1,
+	obj2,
+	obj3,
+	MaxObj,
+};
+
+enum class Mapvar
+{
+	X,
+	Y,
+	speed,
+	Maxvar,
 };
 
 enum Direction 

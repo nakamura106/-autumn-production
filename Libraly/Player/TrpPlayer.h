@@ -40,6 +40,8 @@ private:
 
 	void Drawatk();
 
+	int timer;
+
 	 int notebox[3];
 };
 
