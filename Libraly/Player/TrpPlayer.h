@@ -17,6 +17,8 @@ public:
 	 //!< 描画関数(オブジェクトベースでまとめてやる予定)
 	 void Draw()override;
 
+	 void SetRectangle()override;
+
 private:
 	//!< プレイヤーのジャンプ処理関数
 	void Jump()override;
