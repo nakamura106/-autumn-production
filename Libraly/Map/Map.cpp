@@ -4,11 +4,7 @@
 #include"../Engine/Input.h"
 #include"../Player/TrpPlayer.h"
 
-Map bg;		//îwåi
-Map floor1;	//è∞
-Map floor2; //è∞2
-Map fg;		//ãﬂåi
-Map obj[3];	//ÉIÉuÉWÉFÉNÉg
+
 
 
 
@@ -24,34 +20,25 @@ Map::~Map()
 
 void Map::Init()
 {
-	bg.m_pos.x = 0;
-	bg.m_pos.y = 0;
-	bg.m_speed = 0;
-	floor1.m_pos.x = 0;
-	floor1.m_pos.y = 0;
-	floor1.m_speed = 0;
-	floor2.m_pos.x = 0.0f;
-	floor2.m_pos.y = 0;
-	floor2.m_speed = 0;
-	fg.m_pos.x = 0;
-	fg.m_pos.y = 0;
-	fg.m_speed = 0;
-	for (int i = 0; i < 3; i++)
-	{
-		obj[i].m_pos.x = 500.0f;
-		obj[i].m_pos.y = P_posY;
-		obj[i].m_speed = 0;
-	}
+	fg = 0;
+	floor1 = 0;
+	floor2 = 0;
+	obj[0] = 400.0f;
+	obj[1] = 1200.0f;
+	obj[2] = 2000.f;
+	m_speed = P_speed;
+	m_pos.x = 0;
+	m_pos.y = 0;
 	Load();
 }
 
 void Map::Load()
 {
 	//É}ÉbÉv
-	LoadTexture("Res/Tex/Map/äC/sea1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//ëê
-	LoadTexture("Res/Tex/Map/äC/sea2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	//éËÇ∑ÇË
-	LoadTexture("Res/Tex/Map/äC/sea3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//ïlï”
-	LoadTexture("Res/Tex/Map/äC/sea4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		//äC
+	LoadTexture("Res/Tex/Map/êX/Woods1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//ëê
+	LoadTexture("Res/Tex/Map/êX/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	    //éËÇ∑ÇË
+	LoadTexture("Res/Tex/Map/êX/Woods3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//ïlï”
+	LoadTexture("Res/Tex/Map/êX/Woods4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		    //äC
 	
 	
 	LoadTexture("Res/Tex/Map/êX/Grass Small.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);
@@ -77,20 +64,24 @@ void Map::Update()
 void Map::MapScroll(int direction_)
 {
 	//å¸Ç´Ç™âEå¸Ç´Ç©Ç¬É}ÉbÉvÇÃí[Ç™-3800à»è„ÇÃéûÇ…ÉXÉNÉçÅ[ÉãÇ∑ÇÈ
-	if (/*GetPos().x<=Centerofscreen &&*/direction_==RIGHT&&fg.m_pos.x >= -3800.0f)
+	if (/*GetPos().x<=Centerofscreen &&*/direction_==RIGHT&&fg>= -3800.0f)
 	{
-		obj[0].m_pos.x -= P_speed;
-		floor1.m_pos.x -= P_speed;
-		floor2.m_pos.x -= 3.0f;
-		fg.m_pos.x -= P_speed * 2;
+		fg -= P_speed * 2;
+		floor1 -= P_speed;
+		obj[0] -= P_speed;
+		obj[1] -= P_speed;
+		obj[2] -= P_speed;
+		floor2 -= floor2speed;
 	}
 	//å¸Ç´Ç™ç∂å¸Ç´Ç©Ç¬É}ÉbÉvÇÃí[Ç™0à»â∫ÇÃéûÇ…ÉXÉNÉçÅ[ÉãÇ∑ÇÈ
-	if (/*GetPos().x>=0&&*/direction_==LEFT&&fg.m_pos.x < 0.0f)
+	if (/*GetPos().x>=0&&*/direction_==LEFT&&fg< 0.0f)
 	{
-		obj[0].m_pos.x += P_speed;
-		floor1.m_pos.x += P_speed;
-		floor2.m_pos.x += 3.0f;
-		fg.m_pos.x += P_speed * 2;
+		fg += P_speed * 2;
+		floor1 += P_speed;
+		obj[0] += P_speed;
+		obj[1] += P_speed;
+		obj[2] += P_speed;
+		floor2 += floor2speed;
 	}
 }
 
@@ -101,9 +92,11 @@ void Map::HitJudgement()
 
 void Map::Draw()
 {
-	DrawTexture(bg.m_pos.x, bg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
-	DrawTexture(floor2.m_pos.x, floor2.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
-	DrawTexture(floor1.m_pos.x, floor1.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
-	DrawTexture(fg.m_pos.x, fg.m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
-	DrawTexture(obj[0].m_pos.x, obj[0].m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
+	DrawTexture(0.0f, 0.0f, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
+	DrawTexture(floor2, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
+	DrawTexture(floor1, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
+	DrawTexture(fg, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
+	DrawTexture(obj[0], P_posYforest, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
+	DrawTexture(obj[1], P_posYforest-100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject2));
+	DrawTexture(obj[2], P_posYforest-100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject3));
 }
