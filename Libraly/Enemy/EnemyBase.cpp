@@ -467,7 +467,7 @@ void EnemyBase::ChangeDirection()
 void EnemyBase::LoadAIData(std::string file_name_)
 {
 	//‚P`‚P‚O‚ÌŠî–{”z—ñ
-	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
+	for (int i = 0;i < static_cast<int>(EnemyAIType::EnemyAIType_Max);++i) {
 
 		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(file_name_ + FileLoadTool::ItoC(i + 1) + ".csv");
 
@@ -479,29 +479,36 @@ void EnemyBase::LoadAIData(std::string file_name_)
 
 
 			//ó‘Ô‚ğŠi”[
-			if (*file[j][(int)EnemyAIArrayNum::State] < (int)EnemyStateType::EnemyStateTypeMax) {
-				m_ai_list[i][j - 1]->e_state = (EnemyStateType)* file[j][(int)EnemyAIArrayNum::State];
+			if (*file[j][static_cast<int>(EnemyAIArrayNum::State)] < static_cast<int>(EnemyStateType::EnemyStateTypeMax)) {
+				m_ai_list[i][j - 1]->e_state = (EnemyStateType)* file[j][static_cast<int>(EnemyAIArrayNum::State)];
 			}
 			else {
 				m_ai_list[i][j - 1]->e_state = EnemyStateType::Wait;
 			}
 
 			//ó‘ÔŒp‘±ğŒ‚ğŠi”[
-			if (*file[j][(int)EnemyAIArrayNum::Transition_Term] < (int)EnemyTransitionTerm::EnemyTransitionTerm_Max) {
-				m_ai_list[i][j - 1]->e_transition_term = (EnemyTransitionTerm)* file[j][(int)EnemyAIArrayNum::Transition_Term];
+			if (*file[j][static_cast<int>(EnemyAIArrayNum::Transition_Term)] < static_cast<int>(EnemyTransitionTerm::EnemyTransitionTerm_Max)) {
+				m_ai_list[i][j - 1]->e_transition_term = (EnemyTransitionTerm)* file[j][static_cast<int>(EnemyAIArrayNum::Transition_Term)];
 			}
 			else {
 				m_ai_list[i][j - 1]->e_transition_term = EnemyTransitionTerm::FlameTime;
 			}
-			
-			//s“®‘¬“x’l‚ğŠi”[
-			m_ai_list[i][j - 1]->e_speed_default	= *file[j][(int)EnemyAIArrayNum::Speed_Default];
-			m_ai_list[i][j - 1]->e_speed_sleep		= *file[j][(int)EnemyAIArrayNum::Speed_Sleep];
-			m_ai_list[i][j - 1]->e_speed_tired		= *file[j][(int)EnemyAIArrayNum::Speed_Tired];
-			
-			//ó‘ÔŒp‘±ğŒ‚Åg—p‚·‚é’l‚ğŠi”[
-			m_ai_list[i][j - 1]->e_transition_num	= *file[j][(int)EnemyAIArrayNum::Transition_Num];
 
+			//s“®‘¬“x’l‚ğŠi”[
+			m_ai_list[i][j - 1]->e_speed_default = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Default)];
+			m_ai_list[i][j - 1]->e_speed_sleep = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Sleep)];
+			m_ai_list[i][j - 1]->e_speed_tired = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Tired)];
+
+			//ó‘ÔŒp‘±ğŒ‚Åg—p‚·‚é’l‚ğŠi”[
+			m_ai_list[i][j - 1]->e_transition_num = *file[j][static_cast<int>(EnemyAIArrayNum::Transition_Num)];
+
+			//Œü‚«î•ñ‚ğŠi”[
+			if (*file[j][static_cast<int>(EnemyAIArrayNum::Enemy_Direction)] < static_cast<int>(EnemyDirection::EnemyDirection_Max)) {
+				m_ai_list[i][j - 1]->e_direction = static_cast<EnemyDirection>(*file[j][static_cast<int>(EnemyAIArrayNum::Enemy_Direction)]);
+			}
+			else {
+				m_ai_list[i][j - 1]->e_direction = EnemyDirection::Same;
+			}
 		}
 	}
 }

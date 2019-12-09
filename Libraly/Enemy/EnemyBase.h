@@ -155,7 +155,6 @@ protected:
 	bool	m_is_hit_judge;		//当たり判定が存在するか
 	int		m_refuge_time;		//逃げ回る時間
 	int		m_atk_time_count;	//攻撃間隔カウンター
-	float	m_speed;			//スピード
 
 	EnemyID					m_enemy_id;				//敵のID
 	EnemyStateType			m_state;				//敵の状態
