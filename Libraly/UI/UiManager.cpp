@@ -1,5 +1,6 @@
 #include "UiManager.h"
 
+
 UiManager* UiManager::p_instance = 0;
 
 UiManager* UiManager::Instance()
@@ -45,6 +46,9 @@ void UiManager::Create()
 	ui_objects[0] = new PlayerBaseUi();
 	ui_objects[1] = new PlayerHpUi();
 	ui_objects[2] = new PlayerBulletUi();
+	ui_objects[3] = new FatigueGaugeUi();
+	ui_objects[4] = new SleepGaugeUi();
+	ui_objects[5] = new EnemyBaseUi();
 }
 
 void UiManager::Update()

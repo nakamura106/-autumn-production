@@ -41,6 +41,10 @@ void TrpPlayer::Init()
 	{
 		m_play_note[i] = false;
 	}
+	for (int i = 0; i < 3; i++)
+	{
+		notebox[i] = 0;
+	}
 	Load();
 	InitAnimation();
 }
@@ -119,39 +123,97 @@ void TrpPlayer::UpdateAnimation()
 void TrpPlayer::Draw()
 {
 	DrawUVTexture(m_pos.x, m_pos.y, Animation[m_i].m_Rect_Width, Animation[m_i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[m_i].m_RectX, Animation[m_i].m_RectY);
-	if (m_play_note[0] == true)
-	{
-		DrawFont(40, 200, "1", Regular,Red);
-	}
-	if (m_play_note[1] == true)
-	{
-		DrawFont(60, 200, "2", Regular, Red);
-	}
-	if (m_play_note[2] == true)
-	{
-		DrawFont(80, 200, "3", Regular, Red);
-	}
-	if (m_play_note[3] == true)
-	{
-		DrawFont(100, 200, "4", Regular, Red);
-	}
-	if (m_play_note[4] == true)
-	{
-		DrawFont(120, 200, "5", Regular, Red);
-	}
-	if (m_play_note[5] == true)
-	{
-		DrawFont(140, 200, "6", Regular, Red);
-	}
 	
+	Drawatk();
 }
 
+int TrpPlayer::atkjudge()
+{
+	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A &&
+		notebox[0 || 1 || 2] != 0)
+	{
+		if (notebox[1] == A)
+		{
+			return 1;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+	
+	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B&&
+		notebox[0 || 1 || 2] != 0)
+	{
+		if (notebox[1] == B)
+		{
+			return 3;
+		}
+		else
+		{
+			return 4;
+		}
+	}
+
+	if (notebox[0] == A && notebox[1] == A && notebox[2] == B || notebox[0] == A && notebox[1] == B && notebox[2] == B ||
+		notebox[0] == B && notebox[1] == B && notebox[2] == A || notebox[0] == B && notebox[1] == A && notebox[2] == A)
+	{
+		return 5;
+	}
+	return 0;
+}
+
+void TrpPlayer::Drawatk()
+{
+	if (notebox[0] == A)
+	{
+		DrawFont(40, 200, "A", Large, Red);
+	}
+	if (notebox[0] == B)
+	{
+		DrawFont(40, 200, "B", Large, Red);
+	}
+	if (notebox[1] == A)
+	{
+		DrawFont(80, 200, "A", Large, Red);
+	}
+	if (notebox[1] == B)
+	{
+		DrawFont(80, 200, "B", Large, Red);
+	}
+	if (notebox[2] == A)
+	{
+		DrawFont(120, 200, "A", Large, Red);
+	}
+	if (notebox[2] == B)
+	{
+		DrawFont(120, 200, "B", Large, Red);
+	}
+	if (atkjudge() == 1)
+	{
+		DrawFont(180, 200, "AAAUŒ‚¬Œ÷", Large, Red);
+	}
+	if (atkjudge() == 2)
+	{
+		DrawFont(180, 200, "ABAUŒ‚¬Œ÷", Large, Red);
+	}
+	if (atkjudge() == 3)
+	{
+		DrawFont(180, 200, "BBBUŒ‚¬Œ÷", Large, Red);
+	}
+	if (atkjudge() == 4)
+	{
+		DrawFont(180, 200, "BABUŒ‚¬Œ÷", Large, Red);
+	}
+	if (atkjudge() == 5)
+	{
+		DrawFont(180, 200, "UŒ‚Ž¸”s", Large, Red);
+	}
+}
 
 void TrpPlayer::P_Controll()
 {
 
-	static int atkcount = 0;
-	static int count = 0;
 
 	/*ƒ{ƒ^ƒ“‚ð—£‚µ‚½Œã‚Éƒ‚[ƒVƒ‡ƒ“‚ª
 	Œp‘±‚µ‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É‚·‚éˆ—*/
@@ -165,10 +227,11 @@ void TrpPlayer::P_Controll()
 	if (GetKey(A_KEY) == true)
 	{
 		ReleaseNote();
-		
+		 
+		 
 		//PlayerBullet(m_pos.x, m_pos.y, 10.0f, m_direction);
 	}
-	count++;
+	
 	//‰EˆÚ“®
 	if (GetKey(RIGHT_KEY) == true)
 	{
@@ -225,45 +288,87 @@ void TrpPlayer::P_Controll()
 	//‰¹•„¶¬
 	if (GetKey(ONE_KEY) == true)
 	{
-		if (m_play_note[3] != true && m_Key == (int)Key::Major)
+		if (m_play_note[0] != true&&m_Key == (int)Key::Major)
 		{
 			m_play_note[0] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = A;
+					break;
+				}
+			}
 		}
-		if (m_play_note[0]!=true&& m_Key == (int)Key::Minor)
+		if (m_play_note[3] != true&& m_Key == (int)Key::Minor)
 		{
 			m_play_note[3] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = B;
+					break;
+				}
+			}
 		}
 	}
 
 	//‰¹•„¶¬
 	if (GetKey(TWO_KEY) == true)
 	{
-		if (m_play_note[4] != true && m_Key == (int)Key::Major)
+		if (m_play_note[1] != true  && m_Key == (int)Key::Major)
 		{
 			m_play_note[1] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = A;
+					break;
+				}
+			}
 		}
-		if (m_play_note[1] != true && m_Key == (int)Key::Minor)
+		if (m_play_note[4] != true && m_Key == (int)Key::Minor)
 		{
 			m_play_note[4] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = B;
+					break;
+				}
+			}
 		}
 	}
 
 	//‰¹•„¶¬
 	if (GetKey(THREE_KEY) == true)
 	{
-		if (m_play_note[5] != true && m_Key == (int)Key::Major)
+		if (m_play_note[2] != true&& m_Key == (int)Key::Major)
 		{
 			m_play_note[2] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = A;
+					break;
+				}
+			}
 		}
-		if (m_play_note[2] != true && m_Key == (int)Key::Minor)
+		if (m_play_note[5] != true&& m_Key == (int)Key::Minor)
 		{
 			m_play_note[5] = true;
-			atkcount++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (notebox[i] == 0)
+				{
+					notebox[i] = B;
+					break;
+				}
+			}
 		}
 	}
 	// ¦
@@ -301,6 +406,11 @@ void TrpPlayer::P_Controll()
 
 void TrpPlayer::ReleaseNote()
 {
+	for (int i = 0; i < 3; i++)
+	{
+		notebox[i] = 0;
+	}
+	
 	//‰¹•„‚Ì‰‰‘t(ƒXƒgƒbƒN)‚ð‚·‚×‚Ä”jŠü‚·‚é
 	for (int i = 0; i < 6; i++)
 	{

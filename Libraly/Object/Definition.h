@@ -25,6 +25,8 @@
 #define sel_X			0		//ˆø”X‘I‘ğ
 #define sel_Y			1		//ˆø”Y‘I‘ğ
 #define sel_XY			2		//ˆø”XY‘I‘ğ
+#define A				1		//A
+#define B				2		//B
 
 
 enum class Player
