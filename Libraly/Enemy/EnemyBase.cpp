@@ -2,6 +2,7 @@
 #include "../Player/TrpPlayer.h"
 #include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
+#include<stdlib.h>
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
 #define Refuge_Time	100				//逃げ回る時間
@@ -48,6 +49,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 
 	//saveflame(フレーム数計測用変数)
 	m_state_saveflame = 0;
+	m_state_save_pos_x = 0;
+	m_player_direction_relationship = Direction::LEFT;
 
 	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 		m_ai_list[i].clear();
@@ -238,26 +241,54 @@ void EnemyBase::UpdateAIState()
 
 bool EnemyBase::TransitionStraight()
 {
+	//仮実装　画面は端まではいける
+	if ((m_pos.x <= 0.f || (m_pos.x + m_draw_param.tex_size_x) > 1920.f)
+		&& m_animation_end) 
+	{
+		return true;
+	}
+
 	return false;
 }
 
 bool EnemyBase::TransitionPassPlayer()
 {
+	//プレイヤーのx座標をゲット
+
 	return false;
 }
 
 bool EnemyBase::TransitionFrontPlayer()
 {
+	//プレイヤーのx座標をゲット
+	float p_pos_x;
+
+	
+
 	return false;
 }
 
 bool EnemyBase::TransitionDistance()
 {
+	if (fabsf(m_state_save_pos_x - m_pos.x) >=
+		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
+		&& m_animation_end)
+	{
+		return true;
+	}
+
 	return false;
 }
 
 bool EnemyBase::TransitionFlameTime()
 {
+	if (FlameTimer::GetNowFlame(m_state_saveflame) >= 
+		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
+		&& m_animation_end)
+	{
+		return true;
+	}
+
 	return false;
 }
 
@@ -336,7 +367,12 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 		return;
 	}
 
+	//現在の状態を格納
 	m_state_saveflame = FlameTimer::GetNowFlame();
+	m_state_save_pos_x = m_pos.x;
+
+	//プレイヤーがどちらの方向にいるのかを格納
+	m_player_direction_relationship = Direction::LEFT;
 
 }
  

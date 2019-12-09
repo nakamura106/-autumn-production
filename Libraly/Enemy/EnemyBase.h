@@ -161,6 +161,8 @@ protected:
 	int						m_attack_repertory;		//攻撃のバリエーション
 
 	int		m_state_saveflame;	//状態継続のフレーム数計測用
+	float	m_state_save_pos_x;	//移動距離測定用
+	Direction m_player_direction_relationship;//プレイヤーとの位置関係
 
 	std::vector<EnemyBullet*> bullet_list;
 	std::vector<EnemyAIParam*> m_ai_list[(int)EnemyAIType::EnemyAIType_Max];		//AIのパターンが格納されたリスト
