@@ -130,8 +130,7 @@ void TrpPlayer::Draw()
 
 int TrpPlayer::atkjudge()
 {
-	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A &&
-		notebox[0 || 1 || 2] != 0)
+	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A)
 	{
 		if (notebox[1] == A)
 		{
@@ -143,8 +142,7 @@ int TrpPlayer::atkjudge()
 		}
 	}
 	
-	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B&&
-		notebox[0 || 1 || 2] != 0)
+	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B)
 	{
 		if (notebox[1] == B)
 		{
