@@ -42,9 +42,13 @@ private:
 
 	void Drawatk();
 
-	int timer;
+	int timer;				//âπïÑê∂ê¨óp
+
+	int timer2;				//Releasenote()óp
 
 	bool m_do_bullet_firing;
+
+	bool m_is_release;
 
 	 int notebox[3];
 };

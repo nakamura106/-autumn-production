@@ -18,7 +18,7 @@ private:
 	void MoveUpdate();
 
 	const float M_BULLET_SYZE = 128.f;
-	const float M_MOVE_LIMIT_DEFAULT = 400.f;
+	const float M_MOVE_LIMIT_DEFAULT = 1000.f;
 	
 	/*アニメーション用(仮メンバ)*/
 	int m_anim_timer;

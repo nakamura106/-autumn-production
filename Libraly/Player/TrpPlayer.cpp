@@ -27,6 +27,7 @@ void TrpPlayer::Init()
 	m_is_invincible = false;
 	m_do_jump = false;
 	m_is_active = false;
+	m_is_release = false;
 	m_do_bullet_firing = false;
 	m_hp = P_MaxHP;
 	m_direction = RIGHT;
@@ -38,6 +39,7 @@ void TrpPlayer::Init()
 	m_pos.x = P_posX;
 	m_pos.y = P_posYforest;
 	timer = 70;
+	timer2 = 0;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
 	for (int i = 0; i < 2; i++)
 	{
@@ -146,53 +148,75 @@ int TrpPlayer::atkjudge()
 {
 	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A)
 	{
+		if (m_is_release == false)
+		{
+			timer2++;
+		}
+		
 		if (notebox[1] == A)
 		{
-			if (!m_do_bullet_firing) {
-				//発射したかどうかのフラグをON
+			if (!m_do_bullet_firing)
+			{
 				m_do_bullet_firing = true;
-
 				//弾発射
 				CreateBullets();
-
 			}
-		
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
+			}
 		}
 		else
 		{
-			if (!m_do_bullet_firing) {
-				//発射したかどうかのフラグをON
+			if (!m_do_bullet_firing)
+			{
 				m_do_bullet_firing = true;
-
 				//弾発射
 				CreateBullets();
-
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
 			}
 		}
 	}
 	
 	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B)
 	{
+		if (m_is_release == false)
+		{
+			timer2++;
+		}
 		if (notebox[1] == B)
 		{
-			if (!m_do_bullet_firing) {
-				//発射したかどうかのフラグをON
+			
+		
+			if (!m_do_bullet_firing)
+			{
 				m_do_bullet_firing = true;
-
 				//弾発射
 				CreateBullets();
-
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
 			}
 		}
 		else
 		{
-			if ( !m_do_bullet_firing) {
-				//発射したかどうかのフラグをON
+			if (!m_do_bullet_firing)
+			{
 				m_do_bullet_firing = true;
-
 				//弾発射
 				CreateBullets();
-
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
 			}
 		}
 	}
@@ -219,7 +243,7 @@ void TrpPlayer::CreateBullets()
 	}
 
 	//Bullet(弾)生成
-	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction));
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y+700, 5.f, (Direction)m_direction));
 
 }
 
@@ -273,13 +297,7 @@ void TrpPlayer::P_Controll()
 	
 	// ※までボタン処理
 	
-	if (GetKey(A_KEY) == true)
-	{
-		ReleaseNote();
-		 
-		 
-		//PlayerBullet(m_pos.x, m_pos.y, 10.0f, m_direction);
-	}
+	
 	
 	//右移動
 	if (GetKey(RIGHT_KEY) == true)
@@ -400,16 +418,20 @@ void TrpPlayer::P_Controll()
 
 void TrpPlayer::ReleaseNote()
 {
+	timer2 = 0;
+
+	//音符の演奏(ストック)をすべて破棄する
 	for (int i = 0; i < 3; i++)
 	{
 		notebox[i] = 0;
 	}
 	
-	//音符の演奏(ストック)をすべて破棄する
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		m_play_note[i] = false;
 	}
+	m_do_bullet_firing = false;
+
 }
 
 void TrpPlayer::InitAnimation()

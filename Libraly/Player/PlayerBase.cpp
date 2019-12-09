@@ -1,6 +1,7 @@
 #include"PlayerBase.h"
 
 PlayerBase::PlayerBase()
+	:ObjectBase(ObjectRavel::Ravel_Player,Direction::RIGHT,P_speed)
 {
 
 }
