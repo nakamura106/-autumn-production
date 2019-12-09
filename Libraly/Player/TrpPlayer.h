@@ -37,6 +37,8 @@ private:
 	//!< ‰æ‘œ“Çž—pŠÖ”(ƒQ[ƒ€ƒV[ƒ“‚É‚×‚½‘‚«—\’è)
 	void Load()override;
 
+	void Attack();
+
 	void CreateBullets()override;
 
 
@@ -51,6 +53,8 @@ private:
 	bool m_do_bullet_firing;
 
 	bool m_is_release;
+
+	bool m_do_attack;
 
 	 int notebox[3];
 };

@@ -28,6 +28,7 @@ void TrpPlayer::Init()
 	m_do_jump = false;
 	m_is_active = false;
 	m_is_release = false;
+	m_do_attack = false;
 	m_do_bullet_firing = false;
 	m_hp = P_MaxHP;
 	m_direction = RIGHT;
@@ -157,6 +158,7 @@ int TrpPlayer::atkjudge()
 {
 	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A)
 	{
+		
 		if (m_is_release == false)
 		{
 			timer2++;
@@ -169,6 +171,8 @@ int TrpPlayer::atkjudge()
 				m_do_bullet_firing = true;
 				//’e”­ŽË
 				CreateBullets();
+				m_do_attack = true;
+				m_is_active = true;
 			}
 			if (timer2 >= 200)
 			{
@@ -183,6 +187,8 @@ int TrpPlayer::atkjudge()
 				m_do_bullet_firing = true;
 				//’e”­ŽË
 				CreateBullets();
+				m_do_attack = true;
+				m_is_active = true;
 			}
 			if (timer2 >= 200)
 			{
@@ -194,6 +200,7 @@ int TrpPlayer::atkjudge()
 	
 	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B)
 	{
+		
 		if (m_is_release == false)
 		{
 			timer2++;
@@ -207,6 +214,8 @@ int TrpPlayer::atkjudge()
 				m_do_bullet_firing = true;
 				//’e”­ŽË
 				CreateBullets();
+				m_do_attack = true;
+				m_is_active = true;
 			}
 			if (timer2 >= 200)
 			{
@@ -221,6 +230,8 @@ int TrpPlayer::atkjudge()
 				m_do_bullet_firing = true;
 				//’e”­ŽË
 				CreateBullets();
+				m_do_attack = true;
+				m_is_active = true;
 			}
 			if (timer2 >= 200)
 			{
@@ -406,6 +417,11 @@ void TrpPlayer::P_Controll()
 		Jump();
 	}
 
+	if (m_do_attack == true)
+	{
+		Attack();
+	}
+
 	//‰æ–Ê’[‚Æ‚Ì“–‚½‚è”»’è
 	if (m_pos.x <= -lrAdjustment)
 	{
@@ -541,6 +557,19 @@ void TrpPlayer::Jump()
 	{
 		jump_power = P_jump_power;	
 		m_do_jump = false;
+		m_is_active = false;
+	}
+}
+
+void TrpPlayer::Attack()
+{
+	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Jump)
+	{
+		m_state = (int)P_State::Attack;
+	}
+	if (m_i >= MaxAnimationNum)
+	{
+		m_do_attack = false;
 		m_is_active = false;
 	}
 }
