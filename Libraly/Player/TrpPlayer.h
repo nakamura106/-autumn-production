@@ -37,12 +37,20 @@ private:
 	//!< 画像読込用関数(ゲームシーンにべた書き予定)
 	void Load()override;
 
+	void CreateBullets()override;
+
 
 	int atkjudge();
 
 	void Drawatk();
 
-	int timer;
+	int timer;				//音符生成用
+
+	int timer2;				//Releasenote()用
+
+	bool m_do_bullet_firing;
+
+	bool m_is_release;
 
 	 int notebox[3];
 };

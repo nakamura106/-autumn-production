@@ -52,7 +52,10 @@ enum GameCategoryTextureList
 	GamePlayer_Clear_Tp_LeftTex,			//!<クリア左
 	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
-	GamePlayerBullet_1Tex,					//!<プレイヤーの弾１
+	GamePlayerBullet_1Tex,					//!<プレイヤーの弾1
+	GamePlayerBullet_2Tex,					//!<プレイヤーの弾2
+	GamePlayerBullet_3Tex,					//!<プレイヤーの弾3
+	GamePlayerBullet_4Tex,					//!<プレイヤーの弾4
 
 	/*UI用*/
 	GamePlayerUi,							//!<プレイヤーHP

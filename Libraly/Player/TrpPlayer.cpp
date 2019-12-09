@@ -27,6 +27,8 @@ void TrpPlayer::Init()
 	m_is_invincible = false;
 	m_do_jump = false;
 	m_is_active = false;
+	m_is_release = false;
+	m_do_bullet_firing = false;
 	m_hp = P_MaxHP;
 	m_direction = RIGHT;
 	m_speed = P_speed;
@@ -37,6 +39,7 @@ void TrpPlayer::Init()
 	m_pos.x = P_posX;
 	m_pos.y = P_posYforest;
 	timer = 70;
+	timer2 = 0;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
 	for (int i = 0; i < 2; i++)
 	{
@@ -67,6 +70,11 @@ void TrpPlayer::Load()
 	LoadTexture("Res/Tex/Player/Player_JumpDamage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_RightTex);
 	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_RightTex);
+	LoadTexture("Res/Tex/Effect/attack1.png" ,TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
+	LoadTexture("Res/Tex/Effect/attack2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_2Tex);
+	LoadTexture("Res/Tex/Effect/attack3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_3Tex);
+	LoadTexture("Res/Tex/Effect/attack4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_4Tex);
+
 }
 
 
@@ -75,6 +83,8 @@ void TrpPlayer::Update()
 	P_Controll();
 	UpdateAnimation();
 	DrawAnimation();
+	BulletControl();
+	atkjudge();
 	/*if (ƒoƒŒƒbƒg‚ÌX‚ªplayer‚Ìrange’´‚¦‚½‚çˆ—‚ğs‚¤)
 	{
 		ReleaseNote();
@@ -125,7 +135,13 @@ void TrpPlayer::UpdateAnimation()
 void TrpPlayer::Draw()
 {
 	DrawUVTexture(m_pos.x, m_pos.y, Animation[m_i].m_Rect_Width, Animation[m_i].m_Rect_Height, GetTexture(TEXTURE_CATEGORY_GAME, m_List), Animation[m_i].m_RectX, Animation[m_i].m_RectY);
-	
+	for (const auto& i : bullet_list) {
+
+		if (i != nullptr) {
+			i->Draw();
+		}
+
+	}
 	Drawatk();
 }
 
@@ -141,25 +157,76 @@ int TrpPlayer::atkjudge()
 {
 	if (notebox[0] == A&&notebox[1]==A&& notebox[2]==A|| notebox[0] == A && notebox[1] == B && notebox[2] == A)
 	{
+		if (m_is_release == false)
+		{
+			timer2++;
+		}
+		
 		if (notebox[1] == A)
 		{
-			return 1;
+			if (!m_do_bullet_firing)
+			{
+				m_do_bullet_firing = true;
+				//’e”­Ë
+				CreateBullets();
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
+			}
 		}
 		else
 		{
-			return 2;
+			if (!m_do_bullet_firing)
+			{
+				m_do_bullet_firing = true;
+				//’e”­Ë
+				CreateBullets();
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
+			}
 		}
 	}
 	
 	if (notebox[0] == B && notebox[1] == B && notebox[2] == B || notebox[0] == B && notebox[1] == A && notebox[2] == B)
 	{
+		if (m_is_release == false)
+		{
+			timer2++;
+		}
 		if (notebox[1] == B)
 		{
-			return 3;
+			
+		
+			if (!m_do_bullet_firing)
+			{
+				m_do_bullet_firing = true;
+				//’e”­Ë
+				CreateBullets();
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
+			}
 		}
 		else
 		{
-			return 4;
+			if (!m_do_bullet_firing)
+			{
+				m_do_bullet_firing = true;
+				//’e”­Ë
+				CreateBullets();
+			}
+			if (timer2 >= 200)
+			{
+				m_is_release = true;
+				ReleaseNote();
+			}
 		}
 	}
 
@@ -169,6 +236,24 @@ int TrpPlayer::atkjudge()
 		return 5;
 	}
 	return 0;
+}
+
+void TrpPlayer::CreateBullets()
+{
+	Position b_pos;
+
+	
+
+	if (m_direction == Direction::LEFT) {
+		b_pos.x = m_pos.x;
+	}
+	else {
+		b_pos.x = m_pos.x + m_draw_param.tex_size_x;
+	}
+
+	//Bullet(’e)¶¬
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y+700, 5.f, (Direction)m_direction));
+
 }
 
 void TrpPlayer::Drawatk()
@@ -197,22 +282,7 @@ void TrpPlayer::Drawatk()
 	{
 		DrawFont(120, 200, "B", Large, Red);
 	}
-	if (atkjudge() == 1)
-	{
-		DrawFont(180, 200, "AAAUŒ‚¬Œ÷", Large, Red);
-	}
-	if (atkjudge() == 2)
-	{
-		DrawFont(180, 200, "ABAUŒ‚¬Œ÷", Large, Red);
-	}
-	if (atkjudge() == 3)
-	{
-		DrawFont(180, 200, "BBBUŒ‚¬Œ÷", Large, Red);
-	}
-	if (atkjudge() == 4)
-	{
-		DrawFont(180, 200, "BABUŒ‚¬Œ÷", Large, Red);
-	}
+	
 	if (atkjudge() == 5)
 	{
 		DrawFont(180, 200, "UŒ‚¸”s", Large, Red);
@@ -236,13 +306,7 @@ void TrpPlayer::P_Controll()
 	
 	// ¦‚Ü‚Åƒ{ƒ^ƒ“ˆ—
 	
-	if (GetKey(A_KEY) == true)
-	{
-		ReleaseNote();
-		 
-		 
-		//PlayerBullet(m_pos.x, m_pos.y, 10.0f, m_direction);
-	}
+	
 	
 	//‰EˆÚ“®
 	if (GetKey(RIGHT_KEY) == true)
@@ -363,16 +427,20 @@ void TrpPlayer::P_Controll()
 
 void TrpPlayer::ReleaseNote()
 {
+	timer2 = 0;
+
+	//‰¹•„‚Ì‰‰‘t(ƒXƒgƒbƒN)‚ğ‚·‚×‚Ä”jŠü‚·‚é
 	for (int i = 0; i < 3; i++)
 	{
 		notebox[i] = 0;
 	}
 	
-	//‰¹•„‚Ì‰‰‘t(ƒXƒgƒbƒN)‚ğ‚·‚×‚Ä”jŠü‚·‚é
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		m_play_note[i] = false;
 	}
+	m_do_bullet_firing = false;
+
 }
 
 void TrpPlayer::InitAnimation()
