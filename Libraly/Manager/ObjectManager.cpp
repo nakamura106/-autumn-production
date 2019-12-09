@@ -16,6 +16,20 @@ ObjectManager* ObjectManager::Instance()
 	return  p_instance;
 }
 
+ObjectBase* ObjectManager::GetCharaObject(int ravel)
+{
+	if (ravel == (int)ObjectRavel::Ravel_Player)
+	{
+		return chara_objects[1];
+	}
+	else if (ravel == (int)ObjectRavel::Ravel_Boss)
+	{
+		return chara_objects[2];
+	}
+
+	return false;
+}
+
 ObjectManager::ObjectManager()
 {
 	for (int i = 0; i < MAX_CHARA_OBJ; i++)
