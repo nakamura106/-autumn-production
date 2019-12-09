@@ -87,6 +87,16 @@ int ObjectBase::GetAnimationTexNum()
 	return ((m_draw_param.tv - 1) * m_anim_param.split_width + m_draw_param.tu);
 }
 
+ObjectRavel ObjectBase::GetRavel()
+{
+	return m_obj_ravel;
+}
+
+HitRectangle ObjectBase::GetRectParam()
+{
+	return m_rect_param;
+}
+
 void ObjectBase::SetRectangle()
 {
 	m_rect_param.shift_x = 0.0f;
