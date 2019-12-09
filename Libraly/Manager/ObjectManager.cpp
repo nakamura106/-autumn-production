@@ -83,7 +83,8 @@ void ObjectManager::Update()
 		}
 	}
 
-	IsHitTest(GetCharaObject((int)ObjectRavel::Ravel_Player),GetCharaObject((int)ObjectRavel::Ravel_Boss));
+	IsHitTest(GetCharaObject((int)ObjectRavel::Ravel_Player), GetCharaObject((int)ObjectRavel::Ravel_Boss));
+
 }
 
 void ObjectManager::Draw()

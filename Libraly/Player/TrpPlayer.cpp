@@ -75,10 +75,7 @@ void TrpPlayer::Update()
 	P_Controll();
 	UpdateAnimation();
 	DrawAnimation();
-	/*if (バレットのXがplayerのrange超えたら処理を行う)
-	{
-		ReleaseNote();
-	}*/
+	
 }
 
 void TrpPlayer::UpdateAnimation()
