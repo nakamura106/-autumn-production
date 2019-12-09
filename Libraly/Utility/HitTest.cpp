@@ -1,5 +1,4 @@
 #include "HitTest.h"
-#include "../Manager/ObjectManager.h"
 #include "../Object/Definition.h"
 #include <math.h>
 

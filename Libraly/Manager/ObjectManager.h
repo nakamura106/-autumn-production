@@ -2,6 +2,7 @@
 #define OBJECTMANAGER_H_
 
 #include "../Object/ObjectBase.h"
+#include "../Utility/HitTest.h"
 
 class ObjectManager
 {
@@ -15,7 +16,14 @@ public:
 	void Update();
 	void Draw();
 
-	ObjectBase* GetPlayerObject();
+	ObjectBase* GetPlayerObject()
+	{
+		for (int i = 0; i < MAX_CHARA_OBJ; ++i) {
+			if (chara_objects[i] == nullptr)continue;
+
+		}
+		return chara_objects[1];
+	}
 
 protected:
 	ObjectManager();
