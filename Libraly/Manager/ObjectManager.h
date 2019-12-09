@@ -15,6 +15,8 @@ public:
 	void Update();
 	void Draw();
 
+	ObjectBase* GetPlayerObject();
+
 protected:
 	ObjectManager();
 	~ObjectManager();

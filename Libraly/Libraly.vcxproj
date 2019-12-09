@@ -169,6 +169,7 @@
     <ClCompile Include="UI\UiManager.cpp" />
     <ClCompile Include="Utility\Circle\CollisionCircle.cpp" />
     <ClCompile Include="Utility\CollisionBase.cpp" />
+    <ClCompile Include="Utility\HitTest.cpp" />
     <ClCompile Include="Utility\Line\CollisionLine.cpp" />
     <ClCompile Include="Utility\Rectangle\CollisionRectangle.cpp" />
   </ItemGroup>
@@ -211,6 +212,7 @@
     <ClInclude Include="UI\UiManager.h" />
     <ClInclude Include="Utility\Circle\CollisionCircle.h" />
     <ClInclude Include="Utility\CollisionBase.h" />
+    <ClInclude Include="Utility\HitTest.h" />
     <ClInclude Include="Utility\Line\CollisionLine.h" />
     <ClInclude Include="Utility\Rectangle\CollisionRectangle.h" />
     <ClInclude Include="Utility\Size.h" />
