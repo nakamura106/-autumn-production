@@ -86,10 +86,6 @@ void TrpPlayer::Update()
 	DrawAnimation();
 	BulletControl();
 	atkjudge();
-	/*if (バレットのXがplayerのrange超えたら処理を行う)
-	{
-		ReleaseNote();
-	}*/
 }
 
 void TrpPlayer::UpdateAnimation()
