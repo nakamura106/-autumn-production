@@ -10,39 +10,34 @@
 class EnemyBase :public ObjectBase
 {
 public:
-	EnemyBase();
 	EnemyBase(float speed_, EnemyID enemy_id_);
 	virtual ~EnemyBase();
 
-	void Load(){}
+	/*Load用関数？：ObjectBaseから引き継いだ*/
+	void Load() {}
+	/*描画関数*/
 	void Draw();
-
 	/*初期化*/
 	virtual void Init();
 	/*更新*/
 	virtual void Update();
 
-	/*
-		ゲッター群
-	*/
-	/*状態取得*/
-	virtual EnemyStateType GetEnemyState();
 
-	/*
-		ゲージ処理
-	*/
-	/*眠気度の自動回復*/
-	virtual void CureSleepiness();
-	/*疲労度の自動回復*/
-	virtual void CureFatigue();
+	/*			ゲッター群			*/
+	/*状態取得*/
+	EnemyStateType	GetEnemyState() { return m_state; }
+	
+	/*			ゲージ処理			*/
+
 	/*眠気度の増加*/
 	virtual void DamageSleepness(int damage_sleep_);
 	/*疲労度の増加*/
 	virtual void DamageFatigue(int damage_fatigue_);
-	/*攻撃後の処理*/
-	virtual void BackBeforeAttackState();
 
 private:
+
+	using EnemyAIList = std::vector < EnemyAIParam* >;
+
 	/*初期化用初期値*/
 	const int	M_ANIM_FLAME		= 7;		//画像変更を行うフレーム周期
 	const int	M_ANIM_TEX_ALL		= 12;		//画像のアニメーション枚数
@@ -52,131 +47,140 @@ private:
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
 	const float M_INIT_POS_Y		= -100.f;	//初期y座標
 
-	bool m_can_state_transition;
+	/*生成している弾の管理をする関数：Updateで呼び出している*/
+	void BulletControl();		
 
-	void BulletControl();
-
+	/*デバッグ用関数：キー入力によってEnemyが変化*/
 	void DebugKeyAction();
+
+	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
+
+	//状態関係
+	EnemyStateType	m_state;					//敵の状態
+	int				m_state_saveflame;			//状態継続のフレーム数計測用
+	float			m_state_save_pos_x;			//移動距離測定用
+	Direction		m_player_pos_relationship;	//プレイヤーとの位置関係
+	EnemyAIType		m_now_ai;					//現在使用しているAI
+	int				m_now_ai_num;				//現在使用しているAIの進行度
+	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
+	bool			m_is_pos_end;				//マップの端まで来た時にtrue 12/10現在使用無し
+
+	EnemyID			m_enemy_id;//敵のID
+
+	//ゲージ関係
+	float			m_sleep_gauge;	//眠りゲージ
+	float			m_fatigue_gauge;//疲労ゲージ
+
+	//弾関係
+	std::vector<EnemyBullet*> bullet_list;//弾のリスト
 
 protected:
 
+	/*			新状態遷移			*/
 	/*
-		状態の処理
+		初期化：LoadAIState
+	　	毎フレーム：UpdateAIState・AITransitionUpdate
+			↓
+		遷移確定時：ChangeAIState
+			↓
+		状態遷移時：ChangeState
+		AI変更時：ChangeAIType
 	*/
-	
-	/*状態の更新*/
-	//将来的には廃止　AIのパターン分け仕様に変更
-	void UpdateState();
 
-	//新状態遷移:
+	/*状態更新関数:Csvを使用したAIシステム(以下、CsvAI)。12/10現在はこちらを使用*/
 	void UpdateAIState();
 
+	/*csv読込関数：引数にAI番号と.csvを除いたファイル名を入れる*/
+	//例：Res/Csv/Mouse/Enemy_AI1.csv→Res/Csv/Mouse/Enemy_AI
+	void LoadAIData(std::string file_name_);
+
+	/*AI・状態遷移関数：AI情報を元に状態の遷移かAIの変更を行う*/
+	void ChangeAIState();
+
+	/*大元の状態遷移関数：引数で渡した状態に遷移*/
+	void ChangeState(EnemyStateType next_state_);
+	
+	/*CsvAI状態遷移関数：内部でAITransition～関数を呼び出している*/
 	void AITransitionUpdate();
 
-	/*AIState遷移*/
-	bool AITransitionBase();
-	bool AITransitionStraight();
-	bool AITransitionPassPlayer();
-	bool AITransitionFrontPlayer();
-	bool AITransitionDistance();
-	bool AITransitionFlameTime();
+	/*CsvAI状態遷移条件管理関数：trueを返すと状態遷移という仕組み*/
+	bool AITransitionBase();		//共通する状態遷移条件
+	bool AITransitionStraight();	//直線移動によって状態遷移
+	bool AITransitionPassPlayer();	//プレイヤーを越えると状態遷移
+	bool AITransitionFrontPlayer();	//プレイヤーを前にすると状態遷移
+	bool AITransitionDistance();	//指定した距離によって状態遷移
+	bool AITransitionFlameTime();	//指定した時間によって状態遷移
 
-	/*AI状態遷移時、向き変更*/
+	/*CsvAI向き変更関数：状態遷移時、向き変更*/
 	void ChangeAIDirection();
-
-	/*待機*/
-	virtual void EnemyWait();
-	/*追跡*/
-	virtual void EnemyChase();
-	/*移動*/
-	virtual void EnemyMove();
-	/*逃走(疲労時)*/
-	virtual void EnemyRefuge();
-	/*攻撃*/
-	virtual void EnemyAttack1();
-	virtual void EnemyAttack2();
-	virtual void EnemyAttack3();
-	/*休憩*/
-	virtual void EnemyRest();
-
-	/*
-		状態遷移
-		デバッグ用として使用
-	*/
-
-	/*状態遷移関数②：AI情報を元に遷移*/
-	void ChangeAIState();
 
 	/*AI変更関数：戻り値で戻したAIに変更する*/
 	virtual EnemyAIType ChangeAIType() = 0;
 
-	/*状態遷移関数①：引数で渡した状態に遷移*/
-	void ChangeState(EnemyStateType next_state_);
 
-	/*待機状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromWait();
-	/*移動状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromWalk();
-	/*逃走状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromRefuge();
-	/*攻撃状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromAttack1();
-	/*追跡状態からの遷移*/
-	virtual EnemyStateType ChangeStateFromChase();
+	/*			状態更新			*///旧、新状態遷移どちらでも使用
 
-	/*
-		状態初期化
-	*/
-	/*全状態共通*/
-	virtual void InitAllState() {}
-	/*待機状態*/
-	virtual void InitWaitState();
-	/*移動状態*/
-	virtual void InitWalkState();
-	/*逃走状態*/
-	virtual void InitRefugeState();
-	/*攻撃状態*/
-	virtual void InitAttack1State();
-	virtual void InitAttack2State();
-	virtual void InitAttack3State();
-	
-	/*追跡状態*/
-	virtual void InitChaseState();
-	/*眠り状態(クリア？)*/
-	virtual void InitSleepState();
+	virtual void EnemyWait();	//待機状態
+	virtual void EnemyChase();	//追跡状態
+	virtual void EnemyMove();	//移動状態
+	virtual void EnemyRefuge();	//逃走状態
+	virtual void EnemyAttack1();//攻撃状態１
+	virtual void EnemyAttack2();//攻撃状態２
+	virtual void EnemyAttack3();//攻撃状態３
+	virtual void EnemyRest();	//休憩状態？
 
-	/*向き変更*/
+
+
+	/*			状態初期化			*/
+
+	virtual void InitAllState() {}	//全状態共通
+	virtual void InitWaitState();	//待機状態
+	virtual void InitWalkState();	//移動状態
+	virtual void InitRefugeState();	//逃走状態
+	virtual void InitAttack1State();//攻撃状態１
+	virtual void InitAttack2State();//攻撃状態２
+	virtual void InitAttack3State();//攻撃状態３
+	virtual void InitChaseState();	//追跡状態
+	virtual void InitSleepState();	//眠り状態
+
+
+
+	/*			旧状態遷移			*/
+
+	/*旧状態更新関数：システムは単純だが、拡張性が無いと判断*/
+	void UpdateState();
+
+	/*各状態からの遷移関数*/
+	virtual EnemyStateType ChangeStateFromWait();	//待機状態
+	virtual EnemyStateType ChangeStateFromWalk();	//移動状態
+	virtual EnemyStateType ChangeStateFromRefuge();	//逃走状態
+	virtual EnemyStateType ChangeStateFromAttack1();//攻撃状態１
+	virtual EnemyStateType ChangeStateFromChase();	//追跡状態
+
+	/*向き変更：m_Directionを変更する LEFT⇔RIGHT*/
 	void ChangeDirection();
 
-	/*攻撃レパートリーの初期化*/
-	//virtual void InitAttackRepertory() = 0;
 
-	/*csvファイル読み込み*/
-	//引数にAIの番号と.csvを除いた
-	//ファイル名を入れる
-	//例：Res/Csv/EnemyAI1.csv→Res/Csv/EnemyAI
-	void LoadAIData(std::string file_name_);
 
-	float	m_sleep_gauge;		//眠りゲージ
-	float	m_fatigue_gauge;	//疲労ゲージ
-	int		m_time_of_break;	//休憩時間
-	bool	m_is_break;			//休憩しているか
-	bool	m_is_hit_judge;		//当たり判定が存在するか
-	int		m_refuge_time;		//逃げ回る時間
-	int		m_atk_time_count;	//攻撃間隔カウンター
+	/*			ゲージ処理			*/
 
-	EnemyID					m_enemy_id;				//敵のID
-	EnemyStateType			m_state;				//敵の状態
-	int						m_attack_repertory;		//攻撃のバリエーション
+	/*眠気度の自動回復*/
+	virtual void CureSleepiness();
+	/*疲労度の自動回復*/
+	virtual void CureFatigue();
 
-	int		m_state_saveflame;	//状態継続のフレーム数計測用
-	float	m_state_save_pos_x;	//移動距離測定用
-	Direction m_player_direction_relationship;//プレイヤーとの位置関係
 
-	std::vector<EnemyBullet*> bullet_list;
-	std::vector<EnemyAIParam*> m_ai_list[(int)EnemyAIType::EnemyAIType_Max];		//AIのパターンが格納されたリスト
-	EnemyAIType m_now_ai;		//現在使用しているAI
-	int m_now_ai_num;	//現在使用しているAIの進行度
+
+	/*			ゲッター			*/
+	/*状態遷移してからの経過時間取得*/
+	int	GetStateSaveFlame();
+
+	//弾作成
+	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);
+
+	/*			全敵共通のパラメータ			*/
+
+	
 
 };
 

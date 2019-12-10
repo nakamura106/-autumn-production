@@ -13,18 +13,11 @@ public:
 	void Init();
 	//void Update();
 
-	void SetRectangle()override;
 	
+	void SetRectangle()override;
 
 private:
-	//ハリネズミの攻撃レパートリー
-	//enum class AttackRepertoryHedgeHog
-	//{
-	//	Rush,		//突進
-	//	HeadButt,	//頭突き
-	//	NeedleFire,	//トゲ発射
-	//	AttackRepertoryMax
-	//};
+	
 
 	//ハリ発射位置調整用
 	//note:Adjustは「調整」という意味
