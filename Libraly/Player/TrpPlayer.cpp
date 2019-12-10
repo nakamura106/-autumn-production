@@ -10,6 +10,8 @@
 
 
 
+#include<string>
+
 
 
 TrpPlayer::TrpPlayer()
@@ -72,10 +74,10 @@ void TrpPlayer::Load()
 	LoadTexture("Res/Tex/Player/Player_JumpDamage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_RightTex);
 	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_RightTex);
-	LoadTexture("Res/Tex/Effect/attack1.png" ,TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
-	LoadTexture("Res/Tex/Effect/attack2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_2Tex);
-	LoadTexture("Res/Tex/Effect/attack3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_3Tex);
-	LoadTexture("Res/Tex/Effect/attack4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_4Tex);
+	LoadTexture("Res/Tex/Effect/tyotyo01_E.png" ,TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
+	LoadTexture("Res/Tex/Effect/tyotyo02_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_2Tex);
+	LoadTexture("Res/Tex/Effect/tantyo01_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_3Tex);
+	LoadTexture("Res/Tex/Effect/tantyo02_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_4Tex);
 
 }
 
@@ -143,6 +145,7 @@ void TrpPlayer::Draw()
 
 	}
 	Drawatk();
+	DrawFont(500.0f, 500.0f, std::to_string(m_map_pos).c_str(), Large, Red);
 }
 
 void TrpPlayer::SetRectangle()
@@ -245,6 +248,15 @@ int TrpPlayer::atkjudge()
 	if (notebox[0] == A && notebox[1] == A && notebox[2] == B || notebox[0] == A && notebox[1] == B && notebox[2] == B ||
 		notebox[0] == B && notebox[1] == B && notebox[2] == A || notebox[0] == B && notebox[1] == A && notebox[2] == A)
 	{
+		if (m_is_release == false)
+		{
+			timer2++;
+		}
+		if (timer2 >= 140)
+		{
+			m_is_release = true;
+			ReleaseNote();
+		}
 		return 5;
 	}
 	return 0;

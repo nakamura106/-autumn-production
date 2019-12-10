@@ -7,10 +7,12 @@ public:
 	static DataBank* Instance();
 
 	void SetPlayerHp(int hp) { m_player_hp = hp; }
+	void SetPlayerMapPos(int mPos) { m_map_pos = mPos; }
 	void SetSleepGauge(float sleep_hp) { m_sleep_gauge = sleep_hp; }
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
 
 	int GetPlayerHp() { return m_player_hp; }
+	float GetPlayerMapPos() { return m_map_pos; }
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
 
@@ -20,6 +22,7 @@ protected:
 
 private:
 	int m_player_hp;
+	float m_map_pos;
 	float m_sleep_gauge, m_fatigue_gauge;
 
 private:
