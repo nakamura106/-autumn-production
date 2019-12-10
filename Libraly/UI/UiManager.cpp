@@ -5,7 +5,7 @@
 #include "EnemyBaseUi.h"
 #include "SleepGaugeUi.h"
 #include "FatigueGaugeUi.h"
-
+#include "EnemyAchieve.h"
 
 UiManager* UiManager::p_instance = 0;
 
@@ -55,6 +55,7 @@ void UiManager::Create()
 	ui_objects[3] = new FatigueGaugeUi();
 	ui_objects[4] = new SleepGaugeUi();
 	ui_objects[5] = new EnemyBaseUi();
+	ui_objects[6] = new EnemyAchieve();
 }
 
 void UiManager::Update()

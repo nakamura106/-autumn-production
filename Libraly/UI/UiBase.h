@@ -18,6 +18,8 @@ public:
 protected:
 	Position m_pos;
 	DrawParam m_param;
+
+
 };
 
 #endif
