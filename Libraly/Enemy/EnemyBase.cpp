@@ -3,6 +3,7 @@
 #include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
 #include"../Manager/ObjectManager.h"
+#include"../DataBank/DataBank.h"
 #include<stdlib.h>
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
@@ -117,6 +118,9 @@ void EnemyBase::Update()
 
 	//弾の制御
 	BulletControl();
+
+	//データバンクへの値受け渡し
+	DataSetUpdate();
 
 }
 
@@ -754,6 +758,15 @@ void EnemyBase::DebugKeyAction()
 	else {
 		s_is_key = false;
 	}
+}
+
+void EnemyBase::DataSetUpdate()
+{
+	DataBank* d_bank = DataBank::Instance();
+
+	d_bank->SetSleepGauge(m_sleep_gauge);
+	d_bank->SetFatigueGauge(m_fatigue_gauge);
+
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機
