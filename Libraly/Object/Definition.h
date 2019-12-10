@@ -193,8 +193,9 @@ enum Direction
 };
 
 // プレイヤーのHp状態　UIで使用
-enum PlayerHpState
+enum class PlayerHpState
 {
+	Hp4,
 	Hp3,	// 残りHP３の状態
 	Hp2,
 	Hp1,

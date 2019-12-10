@@ -66,10 +66,10 @@ enum GameCategoryTextureList
 	GameBulletUi_BlueRight,					//!<プレイヤー弾UI
 	GameBulletUi_GreenCenter,				//!<プレイヤー弾UI
 	GameBulletUi_YellowRight,				//!<プレイヤー弾UI
-	GamePlayerHp_3Tex,						//!<プレイヤー耐久残り3
-	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り2
-	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り1
-	GamePlayerHp_0Tex,						//!<プレイヤー耐久残り0
+	GamePlayerHp_4Tex,						//!<プレイヤー耐久残り3
+	GamePlayerHp_3Tex,						//!<プレイヤー耐久残り2
+	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り1
+	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り0
 	GameEnemyUi,							//!<エネミーUIの基盤
 	GameEnemySleepGauge,					//!<眠気ゲージ
 	GameEnemyFatigueGauge,					//!<疲労ゲージ

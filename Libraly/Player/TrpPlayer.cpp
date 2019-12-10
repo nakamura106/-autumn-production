@@ -76,6 +76,7 @@ void TrpPlayer::Update()
 	P_Controll();
 	UpdateAnimation();
 	DrawAnimation();
+	DataBank::Instance()->SetPlayerHp(m_hp);
 	
 }
 

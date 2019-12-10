@@ -10,6 +10,8 @@ public:
 	void SetSleepGauge(float sleep_hp)		{ m_sleep_gauge = sleep_hp; }
 	void SetFatigueGauge(float fatigue_hp)	{ m_fatigue_gauge = fatigue_hp; }
 
+	int GetPlayerHp()const { return m_player_hp; }
+
 protected:
 	DataBank();
 	~DataBank();
