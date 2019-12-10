@@ -68,6 +68,7 @@ void Map::Update()
 	}
 	HitJudgement();
 	DataBank::Instance()->SetfgPos(fg);
+	DataBank::Instance()->Setfloor1Pos(floor1);
 }
 
 void Map::MapScroll(int direction_)

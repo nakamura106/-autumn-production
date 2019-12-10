@@ -13,6 +13,7 @@ public:
 		note3 = note3_;
 	}
 	void SetfgPos(float fg_) { m_fg = fg_; }
+	void Setfloor1Pos(float floor1_) { m_floor1 = floor1_; }
 	void SetPlayerMapPos(int mPos) { m_map_pos = mPos; }
 	void SetSleepGauge(float sleep_hp) { m_sleep_gauge = sleep_hp; }
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
@@ -22,6 +23,7 @@ public:
 	int GetNote2() { return note2; }
 	int GetNote3() { return note3; }
 	float GetfgPos(){ return m_fg; }
+	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
@@ -39,6 +41,7 @@ private:
 	int note3;
 	float m_map_pos;
 	float m_fg;
+	float m_floor1;
 	
 	float m_sleep_gauge, m_fatigue_gauge;
 
