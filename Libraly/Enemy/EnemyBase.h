@@ -53,6 +53,9 @@ private:
 	/*デバッグ用関数：キー入力によってEnemyが変化*/
 	void DebugKeyAction();
 
+	/*データバンクへの値渡し*/
+	void DataSetUpdate();
+
 	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
 	//状態関係
