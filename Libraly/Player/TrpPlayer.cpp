@@ -340,10 +340,11 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Move;
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
+			m_map_pos += lrAdjustment;
 		}
 		if (m_map_pos <= 2500)
 		{
-			(m_map_pos += m_speed)+lrAdjustment;
+			m_map_pos += m_speed;
 		}
 		m_direction = RIGHT;
 		m_pos.x += m_speed;
@@ -356,10 +357,11 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Move;
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
+			m_map_pos -= lrAdjustment;
 		}
 		if (m_map_pos >= -130.0f)
 		{
-			(m_map_pos -= m_speed)-lrAdjustment;
+			m_map_pos -= m_speed;
 		}
 		if (m_map_pos <= m_pos.x)
 		{
