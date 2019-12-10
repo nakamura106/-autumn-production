@@ -15,7 +15,7 @@ public:
 	~PlayerBase();
 	//!< ‰Šú‰»ŠÖ”
 	virtual void Init() = 0;
-	virtual void CreateBullets() = 0;
+	virtual void CreateBullets(int bullettype) = 0;
 	void Create();
 	//!< ‰æ‘œ“Çž—pŠÖ”(ƒQ[ƒ€ƒV[ƒ“‚É‚×‚½‘‚«—\’è)
 	virtual void Load() = 0;

@@ -10,6 +10,8 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 
 	m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
 
+	player_bullet_type = p_bullet_type_;
+
 	SetTextureID();
 
 }
