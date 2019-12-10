@@ -40,6 +40,8 @@ public:
 
 	void BulletControl();
 
+	
+
 protected:
 	bool	m_do_jump;						//ジャンプ判定
 	bool	m_is_active;					//動いているかの判定
@@ -48,7 +50,7 @@ protected:
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
 	int     m_i;							//アニメーション切り替え用
-	float	m_map_pos;						//マップ中央固定用
+	
 
 	std::vector<PlayerBullet*> bullet_list;
 
