@@ -93,7 +93,8 @@ void TrpPlayer::Update()
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
-
+	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
+	
 }
 
 void TrpPlayer::UpdateAnimation()
@@ -343,9 +344,9 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Move;
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
-			m_map_pos += lrAdjustment;
+			//m_map_pos += lrAdjustment;
 		}
-		if (m_map_pos <= 3800)
+		if (m_map_pos <= 2500)
 		{
 			m_map_pos += m_speed;
 		}
@@ -360,13 +361,13 @@ void TrpPlayer::P_Controll()
 		m_state = (int)P_State::Move;
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
-			m_map_pos -= lrAdjustment;
+			//m_map_pos -= lrAdjustment;
 		}
 		if (m_map_pos >= -130.0f)
 		{
 			m_map_pos -= m_speed;
 		}
-		if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Map)->GetPos().x >= 0)
+		if (DataBank::Instance()->GetfgPos() >= 0)
 		{
 			m_pos.x -= m_speed;
 		}
@@ -404,7 +405,6 @@ void TrpPlayer::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = A;
-					DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 					break;
 				}
 			}
@@ -418,7 +418,6 @@ void TrpPlayer::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = B;
-					DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 					break;
 				}
 			}

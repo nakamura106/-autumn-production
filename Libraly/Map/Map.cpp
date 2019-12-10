@@ -67,6 +67,7 @@ void Map::Update()
 		MapScroll(LEFT);
 	}
 	HitJudgement();
+	DataBank::Instance()->SetfgPos(fg);
 }
 
 void Map::MapScroll(int direction_)
