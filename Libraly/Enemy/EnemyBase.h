@@ -195,7 +195,6 @@ protected:
 	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);
 
 	/*			全敵共通のパラメータ			*/
-	Position m_world_pos;		//ワールド座標
 	
 
 };

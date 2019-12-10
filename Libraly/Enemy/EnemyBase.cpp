@@ -29,8 +29,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_is_delete			= false;
 	m_pos.x				= M_INIT_POS_X;
 	m_pos.y				= M_INIT_POS_Y;
-	m_world_pos.x = M_INIT_POS_X;
-	m_world_pos.y = M_INIT_POS_Y;
+	m_map_pos = M_INIT_POS_X;
 
 	//ï`âÊèÓïÒäiî[
 	m_draw_param.tu				= 1;
@@ -719,10 +718,10 @@ void EnemyBase::EnemyMove()			//ÉGÉlÉ~Å[à⁄ìÆ
 	*/
 
 	if (m_direction == Direction::RIGHT) {
-		m_world_pos.x += m_speed;
+		m_map_pos += m_speed;
 	}
 	else if (m_direction == Direction::LEFT) {
-		m_world_pos.x -= m_speed;
+		m_map_pos -= m_speed;
 	}
 
 }
@@ -846,8 +845,7 @@ void EnemyBase::CalcDrawPosition()
 
 	if (p_map_pos == 0.f)return;
 
-	m_pos.x = m_world_pos.x - p_map_pos;
-	m_pos.y = m_world_pos.y;
+	m_pos.x = m_map_pos - p_map_pos;
 
 }
 
