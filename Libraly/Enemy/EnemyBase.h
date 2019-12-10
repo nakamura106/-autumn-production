@@ -40,7 +40,7 @@ private:
 	const int	M_ANIM_TEX_HEIGHT	= 4;		//縦の分割数
 	const float M_ENEMY_SYZE		= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
-	const float M_INIT_POS_Y		= -100.f;	//初期y座標
+	const float M_INIT_POS_Y		= -70.f;	//初期y座標
 	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;
 
@@ -58,6 +58,9 @@ private:
 
 	/*睡眠ゲージの自動回復*/
 	void AutoCureSleepGage();
+
+	/*マップスクロールに対応するための位置の調整*/
+	void CalcDrawPosition();
 
 	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
@@ -192,7 +195,7 @@ protected:
 	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);
 
 	/*			全敵共通のパラメータ			*/
-
+	Position m_world_pos;		//ワールド座標
 	
 
 };

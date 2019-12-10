@@ -29,6 +29,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_is_delete			= false;
 	m_pos.x				= M_INIT_POS_X;
 	m_pos.y				= M_INIT_POS_Y;
+	m_world_pos.x = M_INIT_POS_X;
+	m_world_pos.y = M_INIT_POS_Y;
 
 	//描画情報格納
 	m_draw_param.tu				= 1;
@@ -135,6 +137,9 @@ void EnemyBase::Update()
 
 	//ゲージ自動回復
 	AutoCureSleepGage();
+
+	//マップスクロールの位置計算
+	CalcDrawPosition();
 
 	//データバンクへの値受け渡し
 	DataSetUpdate();
@@ -714,10 +719,10 @@ void EnemyBase::EnemyMove()			//エネミー移動
 	*/
 
 	if (m_direction == Direction::RIGHT) {
-		m_pos.x += m_speed;
+		m_world_pos.x += m_speed;
 	}
 	else if (m_direction == Direction::LEFT) {
-		m_pos.x -= m_speed;
+		m_world_pos.x -= m_speed;
 	}
 
 }
@@ -832,6 +837,18 @@ void EnemyBase::AutoCureSleepGage()
 		m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
 
 	}
+}
+
+void EnemyBase::CalcDrawPosition()
+{
+	//プレイヤーのワールド座標
+	float p_map_pos = DataBank::Instance()->GetPlayerMapPos();
+
+	if (p_map_pos == 0.f)return;
+
+	m_pos.x = m_world_pos.x - p_map_pos;
+	m_pos.y = m_world_pos.y;
+
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機

@@ -72,10 +72,10 @@ void HedgeHog::EnemyAttack1()		//エネミー攻撃
 	*/
 
 	if (m_direction == Direction::LEFT) {
-		m_pos.x -= m_speed * 2;
+		m_world_pos.x -= m_speed * 2;
 	}
 	else {
-		m_pos.x += m_speed * 2;
+		m_world_pos.x += m_speed * 2;
 	}
 
 }
@@ -167,13 +167,13 @@ void HedgeHog::CreateNeedle()
 	Position b_pos;
 
 	//発射位置調整
-	b_pos.y = m_pos.y + M_NEEDLE_ADJUST_Y;
+	b_pos.y = m_world_pos.y + M_NEEDLE_ADJUST_Y;
 
 	if (m_direction == Direction::LEFT) {
-		b_pos.x = m_pos.x + M_NEEDLE_ADJUST_X;
+		b_pos.x = m_world_pos.x + M_NEEDLE_ADJUST_X;
 	}
 	else {
-		b_pos.x = m_pos.x - M_NEEDLE_ADJUST_X + m_draw_param.tex_size_x;
+		b_pos.x = m_world_pos.x - M_NEEDLE_ADJUST_X + m_draw_param.tex_size_x;
 	}
 
 	//Bullet(ハリ)生成
