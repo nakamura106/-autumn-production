@@ -70,6 +70,15 @@ enum class Key
 	Minor,
 };
 
+//Bullet‚ÌŽí—Þ
+enum class PlayerBulletType {
+	Chocho_1,
+	Chocho_2,
+	Tancho_1,
+	Tancho_2,
+	BulletType_Max
+};
+
 //AI‚ÌŽí—Þ
 enum class EnemyAIType {
 	AI1,
