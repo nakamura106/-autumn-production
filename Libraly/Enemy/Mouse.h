@@ -49,6 +49,10 @@ private:
 	/*AI変更関数*/
 	EnemyAIType ChangeAIType();
 
+	//void InitAttack1State();
+	void InitAttack2State();
+	//void InitAttack3State();
+
 	/*攻撃レパートリーの初期化*/
 	//void InitAttackRepertory();
 

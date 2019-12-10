@@ -68,9 +68,10 @@ void ObjectManager::Init()
 void ObjectManager::CreateObject()
 {
 	chara_objects[0] = new Map();
-	chara_objects[1] = new TrpPlayer();
-	chara_objects[2] = new HedgeHog();
 
+	chara_objects[1] = new HedgeHog();
+
+	chara_objects[2] = new TrpPlayer();
 }
 
 void ObjectManager::Update()

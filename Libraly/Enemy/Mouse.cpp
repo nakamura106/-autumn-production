@@ -161,6 +161,16 @@ EnemyAIType HedgeHog::ChangeAIType()
 	return EnemyAIType::AI1;
 }
 
+void HedgeHog::InitAttack2State()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
+	}
+}
+
 void HedgeHog::CreateNeedle()
 {
 	Position b_pos;
