@@ -1,4 +1,5 @@
 ﻿#include "ObjectBase.h"
+#include"../Manager/CollisionManager.h"
 
 ObjectBase::ObjectBase()
 	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, 5.f)
@@ -20,6 +21,12 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 
 ObjectBase::~ObjectBase()
 {
+}
+
+void ObjectBase::Update()
+{
+	//CollisionManagerにオブジェクトを入れる
+	CollisionManager::GetInstance().AddCollisionObject(this);
 }
 
 void ObjectBase::Draw()

@@ -20,6 +20,12 @@ BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction directio
 	m_anim_param.split_height	= 4;
 	m_anim_param.change_flame	= 10;
 
+	//“–‚½‚è”»’è—p
+	m_rect_param.shift_x = M_BULLET_SYZE / 2.f;
+	m_rect_param.shift_y = M_BULLET_SYZE / 2.f;
+	m_rect_param.width = M_BULLET_SYZE;
+	m_rect_param.height = M_BULLET_SYZE;
+
 	//ˆÚ“®‹——£”»’è—p
 	m_move_count		= 0.f;
 	m_move_limit		= M_MOVE_LIMIT_DEFAULT;
@@ -38,6 +44,8 @@ void BulletBase::Init()
 
 void BulletBase::Update()
 {
+	ObjectBase::Update();
+
 	MoveUpdate();
 
 	AnimationUpdate();

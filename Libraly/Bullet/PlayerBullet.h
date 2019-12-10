@@ -15,6 +15,9 @@ private:
 
 	void SetTextureID();
 
+	/*“–‚½‚è‚Ìˆ—*/
+	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
+
 };
 
 #endif
