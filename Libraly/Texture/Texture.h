@@ -8,6 +8,7 @@
 #include "../Scene/Scene.h"
 #include "../Engine/Graphics.h"
 
+
 /** @brief タイトル用テクスチャのリスト */
 enum TitleCategoryTextureList
 {

@@ -308,6 +308,31 @@ void DrawUVScrollTexture(float x, float y, Texture * texture_data, float tu, flo
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
+void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture_x, float texture_y, float rect_width, float rect_height)
+{
+	//DrawTexture(100.f, 100.f, texture_data);
+
+	float uv_left = texture_x / texture_data->Width;
+	float uv_right = (texture_x + rect_width) / texture_data->Width;
+	float uv_top = texture_y / texture_data->Height;
+	float uv_bottom = (texture_y + rect_height) / texture_data->Height;
+
+	CustomVertex v[4] =
+	{
+		{ x, y, 0.0f, 1.0f, uv_left, uv_top },
+		{ x + rect_width, y, 0.0f, 1.0f, uv_right, uv_top },
+		{ x + rect_width, y + rect_height, 0.0f, 1.0f, uv_right, uv_bottom },
+		{ x, y + rect_height, 0.0f, 1.0f, uv_left, uv_bottom },
+	};
+
+	// ’¸“_\‘¢‚ÌŽw’è
+	g_D3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+
+	g_D3DDevice->SetTexture(0, texture_data->TextureData);
+
+	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
+}
+
 void DrawEffect(EffectInfo effect)
 {
 	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);

@@ -38,6 +38,7 @@ struct Texture
 	int Height;						//!< 縦幅
 };
 
+
 /**
 * @brief Graphics機能初期化関数@n
 * 描画関連を使用可能にするための初期化を行う@n
@@ -93,6 +94,11 @@ void DrawTexture(float x, float y, Texture* texture_data);
 void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, bool is_turn = false);
 
 void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, float tv);
+
+
+// スライダーで使用する
+void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture_x, float texture_y, float rect_width, float rect_height);
+
 
 /**
 * @brief フォント描画関数@n

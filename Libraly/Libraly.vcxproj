@@ -144,6 +144,7 @@
     <ClCompile Include="Engine\FlameTimer.cpp" />
     <ClCompile Include="Engine\Graphics.cpp" />
     <ClCompile Include="Engine\Input.cpp" />
+    <ClCompile Include="Engine\Slider.cpp" />
     <ClCompile Include="Engine\Sound.cpp" />
     <ClCompile Include="Engine\Windows.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Engine\FlameTimer.h" />
     <ClInclude Include="Engine\Graphics.h" />
     <ClInclude Include="Engine\Input.h" />
+    <ClInclude Include="Engine\Slider.h" />
     <ClInclude Include="Engine\Sound.h" />
     <ClInclude Include="Engine\Vec.h" />
     <ClInclude Include="Engine\Windows.h" />
