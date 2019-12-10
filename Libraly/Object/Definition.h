@@ -284,13 +284,5 @@ struct EffectInfo
 	float m_tv;
 };
 
-// ゲージスライダー用構造体
-struct Slider
-{
-	float SlidNum;	// スライダー値
-	float SlidMax, SlidMin;	// スライダー値の最大最小値
-	float rate;
-};
-
 
 #endif

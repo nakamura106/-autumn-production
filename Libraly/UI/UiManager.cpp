@@ -1,4 +1,10 @@
 #include "UiManager.h"
+#include "PlayerBaseUi.h"
+#include "PlayerBulletUi.h"
+#include "PlayerHpUi.h"
+#include "EnemyBaseUi.h"
+#include "SleepGaugeUi.h"
+#include "FatigueGaugeUi.h"
 
 
 UiManager* UiManager::p_instance = 0;

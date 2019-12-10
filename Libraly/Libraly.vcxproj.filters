@@ -195,6 +195,9 @@
     <ClCompile Include="DataBank\DataBank.cpp">
       <Filter>DataBank</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Slider.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="DataBank\DataBank.h">
       <Filter>DataBank</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Slider.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
