@@ -17,6 +17,7 @@ public:
 
 private:
 	Slider sliders;
+	float m_fatigue_gauge;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "EnemyBaseUi.h"
 #include "FatigueGaugeUi.h"
+#include "../DataBank/DataBank.h"
 
 
 
@@ -21,15 +22,16 @@ void FatigueGaugeUi::Init()
 	m_pos.y = 30.0f;
 	m_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_param.texture_id = GameCategoryTextureList::GameEnemyFatigueGauge;
-
+	m_fatigue_gauge = DataBank::Instance()->GetFatigueGauge();
+	
 	sliders =
 	{
 		m_pos.x,							// X座標
 		m_pos.y,							// Y座標
 		0.0f,							// 最小値
 		100.0f,							// 最大値
-		0.0f,							// 現状の値
-		100.0f,							// 次の値
+		m_fatigue_gauge,				// 現状の値
+		m_fatigue_gauge,				// 次の値
 		0.0f,							// 速度 
 		SliderDirection::LeftToRight,	// 進行方向
 		m_param.category_id,
@@ -40,19 +42,11 @@ void FatigueGaugeUi::Init()
 
 void FatigueGaugeUi::Update()
 {
-	static int count = 0;
-	count++;
+	m_fatigue_gauge = DataBank::Instance()->GetFatigueGauge();
+
 	
 	UpdateSliderCurrentValue(sliders);
-
-	if (count % 120 == 0)
-	{
-		UpdateSliderNextValue(sliders.MaxValue, sliders);
-	}
-	else if (count % 60 == 0)
-	{
-		UpdateSliderNextValue(sliders.MinValue, sliders);
-	}
+	UpdateSliderNextValue(m_fatigue_gauge, sliders);
 
 }
 
@@ -61,4 +55,9 @@ void FatigueGaugeUi::Draw()
 	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyAutoHealGauge));
 	// DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, m_param.texture_id));
 	DrawSliderUVMappingVersion(sliders);
+
+	if (m_fatigue_gauge >= 100.0f)
+	{
+		DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyFatigueCircle));
+	}
 }

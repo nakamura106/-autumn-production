@@ -95,6 +95,8 @@ void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Te
 
 void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, float tv);
 
+
+// スライダーで使用する
 void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture_x, float texture_y, float rect_width, float rect_height);
 
 

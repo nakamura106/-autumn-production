@@ -59,11 +59,6 @@ void UpdateSliderCurrentValue(Slider& out_slider);
 */
 void ReverseMove(float rate, float size, float& out_pos, float& out_tex_pos, float& out_size);
 
-/**
-* @brief スライダー描画関数(矩形Version)@n
-* スライダー構造体の情報からスライダーを描画する
-* @param[in] slider 描画に使うスライダー情報
-*/
 
 /**
 * @brief スライダー描画関数(UVマッピングVersion)@n
