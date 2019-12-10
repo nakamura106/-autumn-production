@@ -14,6 +14,8 @@ public:
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
 
+	int GetPlayerHp()const { return m_player_hp; }
+
 protected:
 	DataBank();
 	~DataBank();

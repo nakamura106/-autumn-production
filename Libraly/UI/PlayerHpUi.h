@@ -11,6 +11,7 @@ public:
 
 	void Init()override;
 	void Update()override;
+	void Draw()override;
 
 protected:
 	// Player‚ÌHpó‘Ô‚ğæ“¾‚µ‘±‚¯‚éŠÖ”
