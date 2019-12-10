@@ -167,7 +167,7 @@ void HedgeHog::CreateNeedle()
 	Position b_pos;
 
 	//î≠éÀà íuí≤êÆ
-	b_pos.y = m_map_pos + M_NEEDLE_ADJUST_Y;
+	b_pos.y = m_pos.y + M_NEEDLE_ADJUST_Y;
 
 	if (m_direction == Direction::LEFT) {
 		b_pos.x = m_map_pos + M_NEEDLE_ADJUST_X;

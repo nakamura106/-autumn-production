@@ -1,5 +1,6 @@
 ﻿#include "ObjectBase.h"
 #include"../Manager/CollisionManager.h"
+#include"../DataBank/DataBank.h"
 
 ObjectBase::ObjectBase()
 	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, 5.f)
@@ -114,3 +115,13 @@ void ObjectBase::SetRectangle()
 	m_rect_param.width = 0.0f;
 }
  
+void ObjectBase::CalcDrawPosition()
+{
+	//プレイヤーのワールド座標
+	float p_map_pos = DataBank::Instance()->GetPlayerMapPos();
+
+	if (p_map_pos == 0.f)return;
+
+	m_pos.x = m_map_pos - p_map_pos;
+
+}

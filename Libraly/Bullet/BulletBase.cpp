@@ -4,6 +4,7 @@ BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction directio
 {
 	//オブジェクトからの情報を格納
 	m_pos.x = x_;
+	m_map_pos = x_;
 	m_pos.y = y_;
 	m_speed = move_speed_;
 	m_direction = direction_;
@@ -49,6 +50,8 @@ void BulletBase::Update()
 	MoveUpdate();
 
 	AnimationUpdate();
+
+	CalcDrawPosition();
 }
 
 void BulletBase::Load()
@@ -59,10 +62,10 @@ void BulletBase::MoveUpdate()
 {
 	//向きによって飛ぶ方向が変化
 	if (m_direction == Direction::RIGHT) {
-		m_pos.x += m_speed;
+		m_map_pos += m_speed;
 	}
 	else if(m_direction==Direction::LEFT){
-		m_pos.x -= m_speed;
+		m_map_pos -= m_speed;
 	}
 	
 	//有効距離をカウント

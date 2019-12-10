@@ -92,6 +92,7 @@ void TrpPlayer::Update()
 	atkjudge();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
+	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
 
 }
 

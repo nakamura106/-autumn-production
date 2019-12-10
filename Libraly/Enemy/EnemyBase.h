@@ -59,9 +59,6 @@ private:
 	/*睡眠ゲージの自動回復*/
 	void AutoCureSleepGage();
 
-	/*マップスクロールに対応するための位置の調整*/
-	void CalcDrawPosition();
-
 	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
 	//状態関係

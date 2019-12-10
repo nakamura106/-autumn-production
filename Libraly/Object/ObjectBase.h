@@ -39,6 +39,8 @@ protected:
 	void AnimationUpdate();
 	/*アニメーション進行ゲッター*/
 	int GetAnimationTexNum();
+	/*位置調整*/
+	void CalcDrawPosition();
 
 	ObjectRavel		m_obj_ravel;	//ラベル
 	Position		m_pos;			//座標

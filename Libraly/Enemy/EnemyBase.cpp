@@ -329,12 +329,12 @@ bool EnemyBase::AITransitionBase()
 	if (!m_animation_end)return false;
 
 	if (m_direction == Direction::LEFT) {
-		if (m_pos.x <= 0.f) {
+		if (m_map_pos <= 0.f) {
 			return true;
 		}
 	}
 	else {
-		if ((m_pos.x + m_draw_param.tex_size_x) > 1920.f) {
+		if ((m_map_pos + m_draw_param.tex_size_x) > 1920.f) {
 			return true;
 		}
 	}
@@ -836,17 +836,6 @@ void EnemyBase::AutoCureSleepGage()
 		m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
 
 	}
-}
-
-void EnemyBase::CalcDrawPosition()
-{
-	//プレイヤーのワールド座標
-	float p_map_pos = DataBank::Instance()->GetPlayerMapPos();
-
-	if (p_map_pos == 0.f)return;
-
-	m_pos.x = m_map_pos - p_map_pos;
-
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機
