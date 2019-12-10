@@ -16,18 +16,18 @@ ObjectManager* ObjectManager::Instance()
 	return  p_instance;
 }
 
-ObjectBase* ObjectManager::GetCharaObject(int ravel)
+ObjectBase* ObjectManager::GetCharaObject(ObjectRavel ravel_)
 {
-	if (ravel == (int)ObjectRavel::Ravel_Player)
-	{
-		return chara_objects[1];
-	}
-	else if (ravel == (int)ObjectRavel::Ravel_Boss)
-	{
-		return chara_objects[2];
-	}
+	for (int i = 0;i < MAX_CHARA_OBJ;++i) {
 
-	return false;
+		if (chara_objects[i]->GetRavel() == ravel_) {
+
+			return chara_objects[i];
+
+		}
+	}
+	
+	return nullptr;
 }
 
 ObjectManager::ObjectManager()
@@ -84,7 +84,7 @@ void ObjectManager::Update()
 		}
 	}
 
-	IsHitTest(GetCharaObject((int)ObjectRavel::Ravel_Player), GetCharaObject((int)ObjectRavel::Ravel_Boss));
+	IsHitTest(GetCharaObject(ObjectRavel::Ravel_Player), GetCharaObject(ObjectRavel::Ravel_Boss));
 
 }
 

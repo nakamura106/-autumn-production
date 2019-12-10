@@ -25,7 +25,7 @@ public:
 		return chara_objects[1];
 	}
 
-	ObjectBase* GetCharaObject(int ravel);
+	ObjectBase* GetCharaObject(ObjectRavel ravel);
 
 protected:
 	ObjectManager();

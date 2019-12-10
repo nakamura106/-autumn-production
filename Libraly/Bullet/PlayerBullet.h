@@ -6,10 +6,14 @@
 class PlayerBullet :public BulletBase
 {
 public:
-	PlayerBullet(float x_, float y_, float move_speed_, Direction direction_);
+	PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_=PlayerBulletType::Chocho_1);
 	~PlayerBullet();
+	void Load();
 
 private:
+	PlayerBulletType player_bullet_type;
+
+	void SetTextureID();
 
 };
 

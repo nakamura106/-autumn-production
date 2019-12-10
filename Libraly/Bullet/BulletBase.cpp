@@ -45,7 +45,6 @@ void BulletBase::Update()
 
 void BulletBase::Load()
 {
-	LoadTexture("Res/Tex/Effect/attack1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
 }
 
 void BulletBase::MoveUpdate()

@@ -348,7 +348,7 @@ bool EnemyBase::AITransitionPassPlayer()
 bool EnemyBase::AITransitionFrontPlayer()
 {
 
-	float p_pos_x = ObjectManager::Instance()->GetPlayerObject()->GetPos().x;
+	float p_pos_x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x;
 
 	//プレイヤーのx座標をゲット
 	
