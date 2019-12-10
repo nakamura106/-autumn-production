@@ -13,7 +13,7 @@ public:
 
 	virtual void Init() = 0;
 	virtual void Load() = 0;
-	virtual void Update() = 0;
+	virtual void Update();
 	virtual void Draw();
 
 	//座標ゲッター

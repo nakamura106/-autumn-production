@@ -43,7 +43,7 @@ void CollisionManager::Init()
 
 void CollisionManager::Update()
 {
-
+	AllHitTest();
 }
 
 void CollisionManager::ResetObject()

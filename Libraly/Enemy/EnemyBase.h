@@ -27,12 +27,7 @@ public:
 	/*状態取得*/
 	EnemyStateType	GetEnemyState() { return m_state; }
 	
-	/*			ゲージ処理			*/
-
-	/*眠気度の増加*/
-	virtual void DamageSleepness(int damage_sleep_);
-	/*疲労度の増加*/
-	virtual void DamageFatigue(int damage_fatigue_);
+	
 
 private:
 
@@ -46,6 +41,8 @@ private:
 	const float M_ENEMY_SYZE		= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
 	const float M_INIT_POS_Y		= -100.f;	//初期y座標
+	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;
+	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -55,6 +52,12 @@ private:
 
 	/*データバンクへの値渡し*/
 	void DataSetUpdate();
+
+	/*当たり時の処理*/
+	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
+
+	/*睡眠ゲージの自動回復*/
+	void AutoCureSleepGage();
 
 	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
@@ -73,6 +76,10 @@ private:
 	//ゲージ関係
 	float			m_sleep_gauge;	//眠りゲージ
 	float			m_fatigue_gauge;//疲労ゲージ
+
+	float m_auto_sleep_time;	//回復速度
+	int m_auto_sleep_saveflame;	//回復時に現在のフレーム数を格納
+	int m_stop_auto_sleep_time;	//自動回復を止める時間
 
 	//弾関係
 	std::vector<EnemyBullet*> bullet_list;//弾のリスト
@@ -168,10 +175,13 @@ protected:
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
-	virtual void CureSleepiness();
+	virtual void CureSleepiness(float cure_sleep_);
 	/*疲労度の自動回復*/
-	virtual void CureFatigue();
-
+	virtual void CureFatigue(float cure_fatigue_);
+	/*眠気度の増加*/
+	virtual void DamageSleepness(int damage_sleep_);
+	/*疲労度の増加*/
+	virtual void DamageFatigue(int damage_fatigue_);
 
 
 	/*			ゲッター			*/

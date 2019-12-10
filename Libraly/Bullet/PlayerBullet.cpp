@@ -29,21 +29,32 @@ void PlayerBullet::SetTextureID()
 	{
 	case PlayerBulletType::Chocho_1:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
+		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
 		break;
 
 	case PlayerBulletType::Chocho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_2Tex;
+		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet2;
 		break;
 
 	case PlayerBulletType::Tancho_1:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_3Tex;
+		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet3;
 		break;
 
 	case PlayerBulletType::Tancho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_4Tex;
+		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet4;
 		break;
 
 	default:
 		break;
+	}
+}
+
+void PlayerBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
+{
+	if (ravel_ == ObjectRavel::Ravel_Boss) {
+		m_is_delete = true;
 	}
 }

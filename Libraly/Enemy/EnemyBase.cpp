@@ -9,7 +9,7 @@
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
 #define Refuge_Time	100				//逃げ回る時間
 #define Limit_of_BreakTime 100		//MAXの休憩時間
-#define Cure_of_SleepinessPoint 1	//時間回復する眠気の値
+#define Cure_of_SleepinessPoint 0.1f	//時間回復する眠気の値
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
 
@@ -58,6 +58,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_can_state_transition	= true;
 	m_is_pos_end			= false;
 	m_hit_use_atk = 0.f;
+	m_auto_sleep_time = M_CURE_SLEEP_TIME_DEFAULT;
+	m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
+	m_stop_auto_sleep_time = 0;
 
 }
 
@@ -95,6 +98,15 @@ void EnemyBase::Draw()
 		}
 
 	}
+
+	//デバッグ描画
+	DrawFont(
+		m_pos.x+m_draw_param.tex_size_x/2.f, 
+		m_pos.y + m_draw_param.tex_size_y / 2.f,
+		std::to_string(m_sleep_gauge).c_str(), 
+		FontSize::Large, 
+		FontColor::Red
+	);
 }
 
 void EnemyBase::Init()
@@ -106,6 +118,7 @@ void EnemyBase::Update()
 {
 	//Stateの遷移
 	//ChangeState();
+	ObjectBase::Update();
 
 	//デバッグ用
 	DebugKeyAction();
@@ -119,6 +132,9 @@ void EnemyBase::Update()
 
 	//弾の制御
 	BulletControl();
+
+	//ゲージ自動回復
+	AutoCureSleepGage();
 
 	//データバンクへの値受け渡し
 	DataSetUpdate();
@@ -763,11 +779,59 @@ void EnemyBase::DebugKeyAction()
 
 void EnemyBase::DataSetUpdate()
 {
+	//データバンクに値を入れる
 	DataBank* d_bank = DataBank::Instance();
 
 	d_bank->SetSleepGauge(m_sleep_gauge);
 	d_bank->SetFatigueGauge(m_fatigue_gauge);
 
+}
+
+void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
+{
+	switch (ravel_)
+	{
+	case ObjectRavel::Ravel_Player:
+		break;
+	case ObjectRavel::Ravel_PlayerBullet:
+		//眠気増加
+		DamageSleepness(5.f);
+		break;
+
+	case ObjectRavel::Ravel_PlayerBullet2:
+		//疲労回復
+		CureFatigue(5.f);
+		break;
+
+	case ObjectRavel::Ravel_PlayerBullet3:
+		DamageFatigue(5.f);
+		break;
+
+	case ObjectRavel::Ravel_PlayerBullet4:
+		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_DEFAULT;
+		break;
+
+	default:
+		break;
+	}
+}
+
+void EnemyBase::AutoCureSleepGage()
+{
+	if (m_stop_auto_sleep_time >= 0) {
+		--m_stop_auto_sleep_time;
+		return;
+	}
+
+	if (FlameTimer::GetNowFlame(m_auto_sleep_saveflame)>=m_auto_sleep_time) {
+
+		//自動回復
+		CureSleepiness(Cure_of_SleepinessPoint);
+
+		//フレーム数をキープ
+		m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
+
+	}
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機
@@ -802,14 +866,22 @@ void EnemyBase::EnemyRest()		//エネミー休憩
 	}
 }
 
-void EnemyBase::CureSleepiness()
+void EnemyBase::CureSleepiness(float cure_sleep_)
 {
-	m_sleep_gauge -= Cure_of_SleepinessPoint;
+	m_sleep_gauge -= cure_sleep_;
+
+	if (m_sleep_gauge <= 0.f) {
+		m_sleep_gauge = 0.f;
+	}
 }
 
-void EnemyBase::CureFatigue()
+void EnemyBase::CureFatigue(float cure_fatigue_)
 {
-	m_fatigue_gauge -= Cure_of_FatiguePoint;
+	m_fatigue_gauge -= cure_fatigue_;
+
+	if (m_fatigue_gauge <= 0.f) {
+		m_fatigue_gauge = 0.f;
+	}
 }
 
 int EnemyBase::GetStateSaveFlame()
@@ -825,10 +897,20 @@ void EnemyBase::CreateBullet(float pos_x_,float pos_y_,float move_speed_)
 void EnemyBase::DamageSleepness(int damage_sleep_)
 {
 	m_sleep_gauge += damage_sleep_;
+
+	if (m_sleep_gauge >= Sleep_Gauge_Max) {
+		m_sleep_gauge = Sleep_Gauge_Max;
+	}
+
 }
 
 void EnemyBase::DamageFatigue(int damage_fatigue_)
 {
 	m_fatigue_gauge += damage_fatigue_;
+
+	if (m_fatigue_gauge >= Fatigue_Gauge_Max) {
+		m_fatigue_gauge = Fatigue_Gauge_Max;
+	}
+
 }
 
