@@ -87,6 +87,8 @@ void TrpPlayer::Update()
 	DrawAnimation();
 	BulletControl();
 	atkjudge();
+
+	DataBank::Instance()->SetPlayerHp(m_hp);
 }
 
 void TrpPlayer::UpdateAnimation()

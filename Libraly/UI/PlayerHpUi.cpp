@@ -1,5 +1,6 @@
 #include "PlayerHpUi.h"
 #include "../Object/Definition.h"
+#include "../DataBank/DataBank.h"
 
 
 PlayerHpUi::PlayerHpUi()
@@ -28,10 +29,31 @@ void PlayerHpUi::Init()
 
 void PlayerHpUi::Update()
 {
+	switch (DataBank::Instance()->GetPlayerHp())
+	{
+	case 4:
+		m_hp_state = PlayerHpState::Hp4;
+		break;
+	case 3:
+		m_hp_state = PlayerHpState::Hp3;
+		break;
+	case 2:
+		m_hp_state = PlayerHpState::Hp2;
+		break;
+	case 1:
+		m_hp_state = PlayerHpState::Hp1;
+		break;
+	case 0:
+		m_hp_state = PlayerHpState::Hp0;
+		break;
+	}
+
 	GetPlayerHpState();
 
 	switch(m_hp_state)
 	{
+	case PlayerHpState::Hp4:
+		m_param.texture_id = GameCategoryTextureList::GamePlayerHp_0Tex; // ‚É‚·‚é
 	case PlayerHpState::Hp3:
 		m_param.texture_id = GameCategoryTextureList::GamePlayerHp_3Tex;
 		break;

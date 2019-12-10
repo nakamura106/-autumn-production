@@ -193,7 +193,7 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="DataBank\DataBank.cpp">
-      <Filter>UI</Filter>
+      <Filter>DataBank</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
