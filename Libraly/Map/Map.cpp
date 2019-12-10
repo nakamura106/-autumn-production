@@ -72,7 +72,7 @@ void Map::Update()
 void Map::MapScroll(int direction_)
 {
 	//向きが右向きかつマップの端が-3800以上の時に右にスクロールする
-	if (ObjectManager::Instance()->GetCharaObject((int)ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen&& direction_==RIGHT && fg >= -3800.0f)
+	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetMapPos() >= Centerofscreen&& direction_==RIGHT && fg >= -3550.0f)
 	{
 		fg -= P_speed * 2;
 		floor1 -= P_speed;

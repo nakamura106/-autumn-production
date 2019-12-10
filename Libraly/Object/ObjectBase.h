@@ -21,6 +21,8 @@ public:
 	//削除判定ゲッター
 	bool GetIsDelete() { return m_is_delete; }
 
+	float GetMapPos() { return m_map_pos; };
+
 	ObjectRavel GetRavel();	// ラベル入手
 
 	HitRectangle GetRectParam();
@@ -42,7 +44,7 @@ protected:
 	bool m_is_invincible;	//無敵状態
 	int m_state;			//状態
 	float m_speed;			//移動速度
-
+	float	m_map_pos;						//マップ中央固定用
 
 	//デバッグ用変数(12/2田中追加)
 	int m_animation_timer;

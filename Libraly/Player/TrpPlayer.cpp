@@ -147,6 +147,7 @@ void TrpPlayer::Draw()
 	}
 	Drawatk();
 	DrawFont(500.0f, 500.0f, std::to_string(m_map_pos).c_str(), Large, Red);
+	DrawFont(900.0f, 500.0f, std::to_string(m_pos.x).c_str(), Large, Red);
 }
 
 void TrpPlayer::SetRectangle()
@@ -340,9 +341,9 @@ void TrpPlayer::P_Controll()
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
 		}
-		if (m_map_pos <= 3800)
+		if (m_map_pos <= 2500)
 		{
-			m_map_pos += m_speed;
+			(m_map_pos += m_speed)+lrAdjustment;
 		}
 		m_direction = RIGHT;
 		m_pos.x += m_speed;
@@ -356,9 +357,9 @@ void TrpPlayer::P_Controll()
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
 		}
-		if (m_map_pos >= -128.0f)
+		if (m_map_pos >= -130.0f)
 		{
-			m_map_pos -= m_speed;
+			(m_map_pos -= m_speed)-lrAdjustment;
 		}
 		if (m_map_pos <= m_pos.x)
 		{
@@ -437,7 +438,7 @@ void TrpPlayer::P_Controll()
 	}
 
 	//‰æ–Ê’[‚Æ‚Ì“–‚½‚è”»’è
-	if (m_pos.x <= -lrAdjustment)
+	if (m_pos.x <= -lrAdjustment-7)
 	{
 		m_pos.x += m_speed;
 	}
