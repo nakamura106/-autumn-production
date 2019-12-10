@@ -174,7 +174,7 @@ int TrpPlayer::atkjudge()
 			{
 				m_do_bullet_firing = true;
 				//íeî≠éÀ
-				CreateBullets(1);
+				CreateBullets(PlayerBulletType::Chocho_1);
 				m_do_attack = true;
 				m_is_active = true;
 			}
@@ -191,7 +191,7 @@ int TrpPlayer::atkjudge()
 			{
 				m_do_bullet_firing = true;
 				//íeî≠éÀ
-				CreateBullets(2);
+				CreateBullets(PlayerBulletType::Chocho_2);
 				m_do_attack = true;
 				m_is_active = true;
 			}
@@ -219,7 +219,7 @@ int TrpPlayer::atkjudge()
 			{
 				m_do_bullet_firing = true;
 				//íeî≠éÀ
-				CreateBullets(3);
+				CreateBullets(PlayerBulletType::Tancho_1);
 				m_do_attack = true;
 				m_is_active = true;
 			}
@@ -235,7 +235,7 @@ int TrpPlayer::atkjudge()
 			{
 				m_do_bullet_firing = true;
 				//íeî≠éÀ
-				CreateBullets(4);
+				CreateBullets(PlayerBulletType::Tancho_2);
 				m_do_attack = true;
 				m_is_active = true;
 			}
@@ -264,7 +264,7 @@ int TrpPlayer::atkjudge()
 	return 0;
 }
 
-void TrpPlayer::CreateBullets(int bullettype)
+void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 {
 	Position b_pos;
 
@@ -278,24 +278,8 @@ void TrpPlayer::CreateBullets(int bullettype)
 	}
 
 	//Bullet(íe)ê∂ê¨
-	switch (bullettype)
-	{
-	case 1:
-		bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Chocho_1));
-		break;
-	case 2:
-		bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Chocho_2));
-		break;
-	case 3:
-		bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Tancho_1));
-		break;
-	case 4:
-		bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Tancho_2));
-		break;
-	default:
-		break;
-	}
 	
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Tancho_1));
 
 }
 

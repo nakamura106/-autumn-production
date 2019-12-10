@@ -39,7 +39,7 @@ private:
 
 	void Attack();
 
-	void CreateBullets(int bullettype)override;
+	void CreateBullets(PlayerBulletType bullettype)override;
 
 
 	int atkjudge();
