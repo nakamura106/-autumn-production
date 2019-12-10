@@ -21,9 +21,14 @@ public:
 	//削除判定ゲッター
 	bool GetIsDelete() { return m_is_delete; }
 
+	float GetHitUseAtk() { return m_hit_use_atk; }
+
 	ObjectRavel GetRavel();	// ラベル入手
 
 	HitRectangle GetRectParam();
+
+	//12/10　即席当たり判定結果通知関数
+	virtual void HitAction(ObjectRavel ravel_,float hit_use_atk_){}
 
 protected:
 	/*統合画像のアニメーション用関数*/
@@ -43,6 +48,7 @@ protected:
 	int m_state;			//状態
 	float m_speed;			//移動速度
 
+	float m_hit_use_atk;	//当たり判定時に使用する攻撃力
 
 	//デバッグ用変数(12/2田中追加)
 	int m_animation_timer;

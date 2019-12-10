@@ -7,6 +7,8 @@ EnemyBullet::EnemyBullet(float x_, float y_, float move_speed_, Direction direct
 	m_anim_param.split_all = 1;
 	m_anim_param.split_width = 2;
 	m_anim_param.split_height = 1;
+
+	m_obj_ravel = ObjectRavel::Ravel_EnemyBullet;
 }
 
 EnemyBullet::~EnemyBullet()

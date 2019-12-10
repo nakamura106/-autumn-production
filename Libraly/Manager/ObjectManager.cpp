@@ -2,6 +2,7 @@
 #include "../Player/TrpPlayer.h"
 #include "../Map/Map.h"
 #include "../Enemy/Mouse.h"
+#include"CollisionManager.h"
 
 
 ObjectManager* ObjectManager::p_instance = 0;
@@ -84,7 +85,10 @@ void ObjectManager::Update()
 		}
 	}
 
-	IsHitTest(GetCharaObject(ObjectRavel::Ravel_Player), GetCharaObject(ObjectRavel::Ravel_Boss));
+	//IsHitTest(GetCharaObject(ObjectRavel::Ravel_Player), GetCharaObject(ObjectRavel::Ravel_Boss));
+
+	//“–‚½‚è”»’è
+	CollisionManager::GetInstance().Update();
 
 }
 

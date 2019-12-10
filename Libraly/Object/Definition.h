@@ -33,9 +33,11 @@
 //オブジェクトの役割を示す
 enum class ObjectRavel 
 {
-	Ravel_Player,	//プレイヤー
-	Ravel_Boss,		//BOSS(Enemy)
-	Ravel_MapObj,	//マップ上のオブジェクト
+	Ravel_Player,		//プレイヤー
+	Ravel_Boss,			//BOSS(Enemy)
+	Ravel_MapObj,		//マップ上のオブジェクト
+	Ravel_PlayerBullet,	//プレイヤーの弾
+	Ravel_EnemyBullet,	//エネミーの弾
 	ObjectRavel_Max
 };
 

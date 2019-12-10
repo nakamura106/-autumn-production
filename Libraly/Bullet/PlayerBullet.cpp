@@ -8,6 +8,8 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	m_anim_param.split_width = 4;
 	m_anim_param.split_height = 4;
 
+	m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
+
 	SetTextureID();
 
 }

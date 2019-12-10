@@ -97,6 +97,8 @@ HitRectangle ObjectBase::GetRectParam()
 	return m_rect_param;
 }
 
+
+
 void ObjectBase::SetRectangle()
 {
 	m_rect_param.shift_x = 0.0f;

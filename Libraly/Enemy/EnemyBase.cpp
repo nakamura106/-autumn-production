@@ -57,6 +57,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_now_ai_num			= 0;
 	m_can_state_transition	= true;
 	m_is_pos_end			= false;
+	m_hit_use_atk = 0.f;
 
 }
 
