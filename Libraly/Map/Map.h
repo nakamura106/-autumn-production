@@ -30,7 +30,6 @@ private:
 	//!< 当たり判定関数(プレイヤーがオブジェクトに当たっているか判定する関数)
 	void HitJudgement();
 
-	float m_map_pos;
 	
 	float floor1;
 	float floor2;

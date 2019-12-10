@@ -2,7 +2,9 @@
 #include"../Texture/Texture.h"
 #include"../Engine/Graphics.h"
 #include"../Engine/Input.h"
+#include"../DataBank/DataBank.h"
 #include"../Player/TrpPlayer.h"
+#include"../Manager/ObjectManager.h"
 
 
 
@@ -29,7 +31,7 @@ void Map::Init()
 	m_speed = P_speed;
 	m_pos.x = 0;
 	m_pos.y = 0;
-	m_map_pos = 0;
+	
 	Load();
 }
 
@@ -52,22 +54,15 @@ void Map::Update()
 	//右キーを押したときスクロール関数に右向き(スクロール方向)を送る
 	if (GetKey(RIGHT_KEY) == true)
 	{
-		if (m_map_pos <= 3800.0f)
-		{
-			m_map_pos += P_speed;
-		}
-		if (m_map_pos >= Centerofscreen-100)
-		{
+		
+		
 			MapScroll(RIGHT);
-		}
+		
 	}
 	//左キーを押したときスクロール関数に左向き(スクロール方向)を送る
 	if (GetKey(LEFT_KEY) == true)
 	{
-		if (m_map_pos >= 0)
-		{
-			m_map_pos -= P_speed;
-		}
+		
 		
 		MapScroll(LEFT);
 	}
@@ -76,8 +71,8 @@ void Map::Update()
 
 void Map::MapScroll(int direction_)
 {
-	//向きが右向きかつマップの端が-3800以上の時にスクロールする
-	if (direction_==RIGHT&&fg>= -3800.0f)
+	//向きが右向きかつマップの端が-3800以上の時に右にスクロールする
+	if (ObjectManager::Instance()->GetCharaObject((int)ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen&& direction_==RIGHT && fg >= -3800.0f)
 	{
 		fg -= P_speed * 2;
 		floor1 -= P_speed;
@@ -86,7 +81,7 @@ void Map::MapScroll(int direction_)
 		obj[2] -= P_speed;
 		floor2 -= floor2speed;
 	}
-	//向きが左向きかつマップの端が0以下の時にスクロールする
+	//向きが左向きかつマップの端が0以下の時に左にスクロールする
 	if (direction_==LEFT&&fg< 0.0f)
 	{
 		fg += P_speed * 2;
