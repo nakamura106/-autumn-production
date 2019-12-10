@@ -21,16 +21,7 @@ TrpPlayer* trpplayer;
 HedgeHog::HedgeHog()
 	:EnemyBase(3.f,	EnemyID::Hedgehog)
 {
-	m_fatigue_gauge	= NULL;
-	m_sleep_gauge	= NULL;
-	m_time_of_break = 0;
-
-	m_refuge_time = Refuge_Time;
-	m_is_break = false;
-	m_is_delete = true;
-	m_is_hit_judge = false;
 	m_is_speed_up = false;
-	//m_speed = 5.0f;
 	m_do_needle = false;
 	SetRectangle();
 
@@ -114,7 +105,7 @@ void HedgeHog::EnemyAttack3()
 
 EnemyStateType HedgeHog::ChangeStateFromWait()
 {
-	if (FlameTimer::GetNowFlame(m_state_saveflame) > 120 && m_animation_end) {
+	if (GetStateSaveFlame() > 120 && m_animation_end) {
 
 		ChangeDirection();
 
@@ -126,7 +117,7 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
-	if (FlameTimer::GetNowFlame(m_state_saveflame) > 60 && m_animation_end) {
+	if (GetStateSaveFlame() > 60 && m_animation_end) {
 		return EnemyStateType::Attack1;
 	}
 
@@ -186,8 +177,7 @@ void HedgeHog::CreateNeedle()
 	}
 
 	//Bullet(ÉnÉä)ê∂ê¨
-	bullet_list.push_back(new EnemyBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction));
-
+	CreateBullet(b_pos.x, b_pos.y, m_speed);
 }
 
 void HedgeHog::InitAllState()

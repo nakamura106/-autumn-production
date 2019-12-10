@@ -22,15 +22,10 @@
 EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_)
 {
-	m_enemy_id			= enemy_id_;
 	m_state				= EnemyStateType::Walk;
-	m_attack_repertory	= 0;
 	m_fatigue_gauge		= 0.f;
 	m_sleep_gauge		= 0.f;
-	m_time_of_break		= 0;
-	m_is_break			= false;
 	m_is_delete			= false;
-	m_is_hit_judge		= false;
 	m_pos.x				= M_INIT_POS_X;
 	m_pos.y				= M_INIT_POS_Y;
 
@@ -51,7 +46,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	//saveflame(フレーム数計測用変数)
 	m_state_saveflame = 0;
 	m_state_save_pos_x = 0;
-	m_player_direction_relationship = Direction::LEFT;
+	m_player_pos_relationship = Direction::LEFT;
 
 	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
 		m_ai_list[i].clear();
@@ -60,6 +55,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_now_ai				= EnemyAIType::AI1;
 	m_now_ai_num			= 0;
 	m_can_state_transition	= true;
+	m_is_pos_end			= false;
 
 }
 
@@ -124,15 +120,8 @@ void EnemyBase::Update()
 
 }
 
-
-EnemyStateType EnemyBase::GetEnemyState()	//エネミーの状態を取得
-{
-	return m_state;
-}
-
-//	～ここまで～
-
-void EnemyBase::UpdateState()		//エネミーの状態の更新
+//エネミーの状態の更新
+void EnemyBase::UpdateState()		
 {
 	//次の状態を示す変数
 	EnemyStateType next_state = m_state;
@@ -312,12 +301,19 @@ void EnemyBase::AITransitionUpdate()
 bool EnemyBase::AITransitionBase()
 {
 	//仮実装　画面は端まではいける
-	if ((m_pos.x <= 0.f || (m_pos.x + m_draw_param.tex_size_x) > 1920.f)
-		&& m_animation_end)
-	{
-		return true;
-	}
+	if (!m_animation_end)return false;
 
+	if (m_direction == Direction::LEFT) {
+		if (m_pos.x <= 0.f) {
+			return true;
+		}
+	}
+	else {
+		if ((m_pos.x + m_draw_param.tex_size_x) > 1920.f) {
+			return true;
+		}
+	}
+	
 	return false;
 }
 
@@ -329,7 +325,7 @@ bool EnemyBase::AITransitionStraight()
 bool EnemyBase::AITransitionPassPlayer()
 {
 	//プレイヤーのx座標をゲット
-	if (m_player_direction_relationship == Direction::LEFT) {
+	if (m_player_pos_relationship == Direction::LEFT) {
 
 		if (m_pos.x + m_draw_param.tex_size_x / 2.f <
 			ObjectManager::Instance()->GetPlayerObject()->GetPos().x)
@@ -358,7 +354,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
-		if (m_player_direction_relationship == Direction::LEFT) {
+		if (m_player_pos_relationship == Direction::LEFT) {
 			if (p_pos_x + 256.f >= m_pos.x) {
 				return true;
 			}
@@ -366,7 +362,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	}
 	else {
 		//E=R,P=L
-		if (m_player_direction_relationship == Direction::RIGHT) {
+		if (m_player_pos_relationship == Direction::RIGHT) {
 			if (p_pos_x <= (m_pos.x + m_draw_param.tex_size_x)) {
 				return true;
 			}
@@ -502,10 +498,10 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 
 	//プレイヤーがどちらの方向にいるのかを格納
 	if (m_pos.x < ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
-		m_player_direction_relationship = Direction::RIGHT;
+		m_player_pos_relationship = Direction::RIGHT;
 	}
 	else {
-		m_player_direction_relationship = Direction::LEFT;
+		m_player_pos_relationship = Direction::LEFT;
 	}
 
 }
@@ -605,7 +601,7 @@ void EnemyBase::InitAttack3State()
 void EnemyBase::InitChaseState()
 {
 	//方向をプレイヤーの側にする
-	m_direction = m_player_direction_relationship;
+	m_direction = m_player_pos_relationship;
 
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
@@ -711,22 +707,6 @@ void EnemyBase::EnemyRefuge()		//疲労状態の逃走
 		ピンチ状態のエネミー逃走
 	*/
 
-	m_refuge_time--;
-
-	if (m_refuge_time == 0)
-	{
-		m_is_break = true;
-		m_refuge_time = Refuge_Time;
-	}
-	else
-	{
-		/*
-			enemy逃げる処理
-		*/
-
-		//m_enemy_to_player_state = EnemytoPlayerState::Escape;
-
-	}
 }
 
 void EnemyBase::EnemyAttack1()		//エネミー攻撃
@@ -806,10 +786,6 @@ void EnemyBase::EnemyRest()		//エネミー休憩
 		m_fatigue_gauge -= Cure_of_FatiguePoint * 5;	//だいたい通常回復の五倍くらい？
 		cure_fatigue -= Cure_of_FatiguePoint * 5;
 	}
-	else
-	{
-		m_is_break = false;
-	}
 }
 
 void EnemyBase::CureSleepiness()
@@ -822,6 +798,16 @@ void EnemyBase::CureFatigue()
 	m_fatigue_gauge -= Cure_of_FatiguePoint;
 }
 
+int EnemyBase::GetStateSaveFlame()
+{
+	return FlameTimer::GetNowFlame(m_state_saveflame);
+}
+
+void EnemyBase::CreateBullet(float pos_x_,float pos_y_,float move_speed_)
+{
+	bullet_list.push_back(new EnemyBullet(pos_x_, pos_y_, move_speed_, (Direction)m_direction));
+}
+
 void EnemyBase::DamageSleepness(int damage_sleep_)
 {
 	m_sleep_gauge += damage_sleep_;
@@ -830,15 +816,5 @@ void EnemyBase::DamageSleepness(int damage_sleep_)
 void EnemyBase::DamageFatigue(int damage_fatigue_)
 {
 	m_fatigue_gauge += damage_fatigue_;
-}
-
-void EnemyBase::BackBeforeAttackState()
-{
-	EnemyStateType before_attack = GetEnemyState();
-
-	m_state = EnemyStateType::Attack1;
-	/*
-		各エネミー攻撃後にbefore_attackの中身をm_stateに反映する
-	*/
 }
 
