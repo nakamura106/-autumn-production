@@ -35,6 +35,7 @@ enum class ObjectRavel
 {
 	Ravel_Player,		//プレイヤー
 	Ravel_Boss,			//BOSS(Enemy)
+	Ravel_Map,
 	Ravel_MapObj,		//マップ上のオブジェクト
 	Ravel_PlayerBullet,	//プレイヤーの弾
 	Ravel_EnemyBullet,	//エネミーの弾

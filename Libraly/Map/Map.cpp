@@ -12,7 +12,7 @@
 
 Map::Map()
 {
-	
+	m_obj_ravel = ObjectRavel::Ravel_Map;
 }
 
 Map::~Map()

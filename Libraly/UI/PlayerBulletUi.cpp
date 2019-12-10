@@ -1,4 +1,5 @@
 #include "PlayerBulletUi.h"
+#include"../DataBank/DataBank.h"
 
 PlayerBulletUi::PlayerBulletUi()
 {
@@ -32,5 +33,9 @@ void PlayerBulletUi::Init()
 
 void PlayerBulletUi::Update()
 {
+	if (DataBank::Instance()->GetNote1() == A)
+	{
+		m_param.texture_id = 0;
+	}
 }
 

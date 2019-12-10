@@ -7,6 +7,7 @@
 #include"../Map/Map.h"
 #include"../Bullet/PlayerBullet.h"
 #include "../DataBank/DataBank.h"
+#include"../Manager/ObjectManager.h"
 
 
 
@@ -343,7 +344,7 @@ void TrpPlayer::P_Controll()
 			m_pos.x += lrAdjustment;
 			m_map_pos += lrAdjustment;
 		}
-		if (m_map_pos <= 2500)
+		if (m_map_pos <= 3800)
 		{
 			m_map_pos += m_speed;
 		}
@@ -364,7 +365,7 @@ void TrpPlayer::P_Controll()
 		{
 			m_map_pos -= m_speed;
 		}
-		if (m_map_pos <= m_pos.x)
+		if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Map)->GetPos().x >= 0)
 		{
 			m_pos.x -= m_speed;
 		}
@@ -402,6 +403,7 @@ void TrpPlayer::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = A;
+					DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 					break;
 				}
 			}
@@ -415,6 +417,7 @@ void TrpPlayer::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = B;
+					DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 					break;
 				}
 			}

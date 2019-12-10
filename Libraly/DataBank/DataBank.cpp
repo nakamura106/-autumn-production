@@ -13,6 +13,10 @@ DataBank* DataBank::Instance()
 
 DataBank::DataBank()
 {
+	m_fatigue_gauge = 0;
+	m_map_pos = 0;
+	m_player_hp = 0;
+	m_sleep_gauge = 0;
 }
 
 DataBank::~DataBank()
