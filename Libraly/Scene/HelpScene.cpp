@@ -5,7 +5,10 @@
 #include "../Engine/Anime.h"
 #include <stdio.h>
 #include "Scene.h"
+#include "SceneObject/HelpSceneObject.h"
 
+
+HelpSceneObject help_object;
 
 // タイトルシーンの初期化
 
@@ -36,30 +39,25 @@ SceneId UpdateHelpScene()
 
 void DrawHelpScene()
 {
-	DrawTexture(0.0f, 0.0f, GetTexture(TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::HelpBgTex));
-	DrawTexture(0.0f, 0.0f, GetTexture(TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help1Tex));
-
+	help_object.Draw();
 }
 
 void InitHelpScene()
 {
-	LoadTexture("Res/Tex/TitleScene/Title.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::HelpBgTex);
-	LoadTexture("Res/Tex/HelpScene/Help1.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help1Tex);
-	LoadTexture("Res/Tex/HelpScene/Help2.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help2Tex);
-	LoadTexture("Res/Tex/HelpScene/Help3.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help3Tex);
-
+	
+	help_object.Init();
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
 void MainHelpScene()
 {
-
+	help_object.Update();
 
 }
 
 SceneId FinishHelpScene()
 {
-
-	return SceneId::GameScene;
+	ReleaseCategoryTexture(TEXTURE_CATEGORY_HELP);
+	return SceneId::TitleScene;
 
 }

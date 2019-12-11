@@ -68,7 +68,7 @@ void InitGameScene()
 
 void MainGameScene()
 {
-	UpdateInput();
+	// UpdateInput();
 	
 	ObjectManager::Instance()->Update();
 

@@ -158,6 +158,7 @@
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\HelpScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneObject\HelpSceneObject.cpp" />
     <ClCompile Include="Scene\SceneObject\SceneBase.cpp" />
     <ClCompile Include="Scene\SceneObject\TitleSceneObject.cpp" />
     <ClCompile Include="Scene\SelectScene.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\HelpScene.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneObject\HelpSceneObject.h" />
     <ClInclude Include="Scene\SceneObject\SceneBase.h" />
     <ClInclude Include="Scene\SceneObject\TitleSceneObject.h" />
     <ClInclude Include="Scene\SelectScene.h" />

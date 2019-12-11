@@ -61,7 +61,7 @@ void PlayerBaseUi::ReleaseBulletType()
 {
 	static int count = 0;
 	count++;
-	if (count >= 70)
+	if (count >= 140)
 	{
 		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Default);
 		count = 0;

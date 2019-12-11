@@ -56,15 +56,13 @@ void TitleSceneObject::Init()
 
 void TitleSceneObject::Update()
 {
-	UpdateInput();
-
 	m_mouse_pos.x = GetMousePos().X;
 	m_mouse_pos.y = GetMousePos().Y;
 
 	if (m_draw_pos[2].x < m_mouse_pos.x && m_mouse_pos.x < m_draw_pos[2].x + 289.0f
 		&& m_draw_pos[2].y < m_mouse_pos.y && m_mouse_pos.y < m_draw_pos[2].y + 60.0f) {
 		m_param[2].texture_id = TitleCategoryTextureList::TitleStart1Tex;
-		if (OnMousePush(Left) == true){
+		if (OnMouseDown(Left) == true){
 			m_select_flag = true;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
@@ -76,7 +74,7 @@ void TitleSceneObject::Update()
 	if (m_draw_pos[3].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[3].x + 221.0f
 		&& m_draw_pos[3].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[3].y + 51.0f) {
 		m_param[3].texture_id = TitleCategoryTextureList::TitleContinue1Tex;
-		if (OnMousePush(Left) == true){
+		if (OnMouseDown(Left) == true){
 			m_select_flag = true;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
@@ -88,7 +86,7 @@ void TitleSceneObject::Update()
 	if (m_draw_pos[4].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[4].x + 142.0f
 		&& m_draw_pos[4].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[4].y + 50.0f) {
 		m_param[4].texture_id = TitleCategoryTextureList::TitleHelp1Tex;
-		if (OnMousePush(Left) == true){
+		if (OnMouseDown(Left) == true){
 			m_help_flag = true;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
