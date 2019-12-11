@@ -282,7 +282,7 @@ void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 
 	//Bullet(íe)ê∂ê¨
 	
-	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, PlayerBulletType::Tancho_1));
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, bullettype));
 
 }
 
