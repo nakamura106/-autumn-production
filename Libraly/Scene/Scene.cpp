@@ -8,7 +8,7 @@
 #include "SelectScene.h"
 
 
-static SceneId g_CurrentSceneId = SceneId::GameEndScene;		// 動作中シーンID
+static SceneId g_CurrentSceneId = SceneId::SelectScene;		// 動作中シーンID
 static SceneStep g_CurrentSceneStep = SceneStep::InitStep;	// 動作中シーンのステ
 
 SceneId GetCurrentSceneId()

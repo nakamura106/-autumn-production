@@ -1,0 +1,11 @@
+Select Screen　1920×1080
+Number Collected　566:308
+Time　378:197
+Clear　330:252
+Complete　455:218
+Boss Frame　349:349
+Brass Frame　328:336
+Spotlight　349:442
+Boss Select 585:77
+Brass Select 585:77
+Boss1 Image 793:571

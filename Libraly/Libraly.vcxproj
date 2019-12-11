@@ -161,6 +161,7 @@
     <ClCompile Include="Scene\SceneObject\EndSceneObject.cpp" />
     <ClCompile Include="Scene\SceneObject\HelpSceneObject.cpp" />
     <ClCompile Include="Scene\SceneObject\SceneBase.cpp" />
+    <ClCompile Include="Scene\SceneObject\SelectSceneObject.cpp" />
     <ClCompile Include="Scene\SceneObject\TitleSceneObject.cpp" />
     <ClCompile Include="Scene\SelectScene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Scene\SceneObject\EndSceneObject.h" />
     <ClInclude Include="Scene\SceneObject\HelpSceneObject.h" />
     <ClInclude Include="Scene\SceneObject\SceneBase.h" />
+    <ClInclude Include="Scene\SceneObject\SelectSceneObject.h" />
     <ClInclude Include="Scene\SceneObject\TitleSceneObject.h" />
     <ClInclude Include="Scene\SelectScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />

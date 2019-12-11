@@ -37,6 +37,32 @@ enum HelpCategoryTextureList
 enum SelectCategoryTextureList
 {
 	SelectBgTex,
+	BossSelectBottonTex,
+	BrassSelectBottonTex,
+	ClearSymbolTex,
+	CompleteSymbolTex,
+	BossMouseImageTex,
+	SpotlightTex,
+	TimeSymbolTex,
+	NumberCollectedTex,
+
+	BossMouseFrame1,
+	BossMouseFrame2,
+	BossBirdFrame1,
+	BossBirdFrame2,
+	BossBirdFrame3,
+	BossGorillaFrame1,
+	BossGorillaFrame2,
+	BossGorillaFrame3,
+
+	TrpFrame1,
+	TrpFrame2,
+	FluteFrame1,
+	FluteFrame2,
+	FluteFrame3,
+	TubaFrame1,
+	TubaFrame2,
+	TubaFrame3,
 
 	SelectTextureMax
 };

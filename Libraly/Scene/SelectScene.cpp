@@ -5,6 +5,9 @@
 #include "../Engine/Anime.h"
 #include <stdio.h>
 #include "Scene.h"
+#include "SceneObject/SelectSceneObject.h"
+
+SelectSceneObject select_object;
 
 
 // タイトルシーンの初期化
@@ -36,13 +39,13 @@ SceneId UpdateSelectScene()
 
 void DrawSelectScene()
 {
-
+	select_object.Draw();
 
 }
 
 void InitSelectScene()
 {
-
+	select_object.Init();
 
 
 
@@ -53,7 +56,7 @@ void InitSelectScene()
 
 void MainSelectScene()
 {
-
+	select_object.Update();
 
 }
 

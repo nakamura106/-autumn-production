@@ -219,6 +219,9 @@
     <ClCompile Include="Scene\SceneObject\EndSceneObject.cpp">
       <Filter>Scene\SceneObject</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\SceneObject\SelectSceneObject.cpp">
+      <Filter>Scene\SceneObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -372,6 +375,9 @@
       <Filter>Scene\SceneObject</Filter>
     </ClInclude>
     <ClInclude Include="Scene\SceneObject\EndSceneObject.h">
+      <Filter>Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneObject\SelectSceneObject.h">
       <Filter>Scene\SceneObject</Filter>
     </ClInclude>
   </ItemGroup>
