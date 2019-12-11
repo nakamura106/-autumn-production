@@ -4,6 +4,9 @@
 #include "../Scene/GameEndScene.h"
 #include "../Engine/Sound.h"
 #include "../Scene/Scene.h"
+#include "SceneObject/EndSceneObject.h"
+
+EndSceneObject end_object;
 
 // ƒwƒ‹ƒvƒV[ƒ“‚Ì‰Šú‰»
 void InitGameEndScene();
@@ -31,26 +34,22 @@ SceneId UpdateGameEndScene()
 }
 
 
-
-
-
-
 void DrawGameEndScene()
 {
-	
+	end_object.Draw();
 
 }
 
 void InitGameEndScene()
 {
-	
+	end_object.Init();
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
 void MainGameEndScene()
 {
 
-
+	end_object.Update();
 
 	if (OnMouseDown(Left) == true) {
 		ChangeSceneStep(SceneStep::EndStep);

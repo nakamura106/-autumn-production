@@ -127,9 +127,10 @@ enum GameCategoryTextureList
 /** @brief エンド用テクスチャリスト */
 enum GameEndCategoryTextureList
 {
-	GameEndBgTex,				//!< 背景
-	GameEndBlackTex,
-	GameEndBloodTex,
+	GameClearBgTex,				//!< 背景
+	GameOverBgTex,
+	GameOverRTex,
+	GameBuckTex,
 	GameEndTextureMax,			//!< リスト最大数
 };
 
