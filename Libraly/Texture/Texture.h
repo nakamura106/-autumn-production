@@ -26,6 +26,7 @@ enum TitleCategoryTextureList
 // ヘルプシーン用リスト
 enum HelpCategoryTextureList
 {
+	HelpBgTex,
 	Help1Tex,		//!< ヘルプ1枚目
 	Help2Tex,		//!< ヘルプ2枚目
 	Help3Tex,		//!< ヘルプ3枚目

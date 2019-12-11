@@ -2,6 +2,8 @@
 #define TITLESCENEOBJECT_H_
 
 #include "SceneBase.h"
+#include "../../Object/Definition.h"
+
 
 class TitleSceneObject :public SceneBase
 {
@@ -13,8 +15,12 @@ public:
 	void Update()override;
 	void Draw()override;
 
-private:
+	bool m_help_flag, m_select_flag;
 
+private:
+	Position m_mouse_pos;
+	Position m_draw_pos[5];
+	DrawParam m_param[5];
 
 };
 

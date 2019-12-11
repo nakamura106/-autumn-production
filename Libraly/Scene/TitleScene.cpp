@@ -50,16 +50,21 @@ void InitTitleScene()
 }
 
 
-
 void MainTitleScene()
 {
-	
-
+	title_obj.Update();
 }
 
 SceneId FinishTitleScene()
 {
-	
+	ReleaseCategoryTexture(TEXTURE_CATEGORY_TITLE);
+	if (title_obj.m_select_flag == true)
+	{
 		return SceneId::SelectScene;
+	}
+	else if (title_obj.m_help_flag == true)
+	{
+		return SceneId::HelpScene;
+	}
 	
 }
