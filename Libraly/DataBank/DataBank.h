@@ -12,6 +12,7 @@ public:
 		note2 = note2_;
 		note3 = note3_;
 	}
+	void SetBulletType(int bullet_type_) { m_bullet_type = bullet_type_; }
 	void SetfgPos(float fg_) { m_fg = fg_; }
 	void Setfloor1Pos(float floor1_) { m_floor1 = floor1_; }
 	void SetPlayerMapPos(int mPos) { m_map_pos = mPos; }
@@ -22,6 +23,7 @@ public:
 	int GetNote1() { return note1; }
 	int GetNote2() { return note2; }
 	int GetNote3() { return note3; }
+	int GetBulletType() { return m_bullet_type; }
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
@@ -39,6 +41,9 @@ private:
 	int note1;
 	int note2;
 	int note3;
+
+	int m_bullet_type;	// PlayerBulletTypeï€ë∂ïœêî
+
 	float m_map_pos;
 	float m_fg;
 	float m_floor1;

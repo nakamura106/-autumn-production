@@ -21,6 +21,7 @@ DataBank::DataBank()
 	note1 = 0;
 	note2 = 0;
 	note3 = 0;
+	m_bullet_type = 0;
 	m_floor1 = 0.0f;
 
 

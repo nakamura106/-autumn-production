@@ -11,7 +11,7 @@ public:
 	void Load();
 
 private:
-	PlayerBulletType player_bullet_type;
+	PlayerBulletType player_bullet_type;	
 
 	void SetTextureID();
 

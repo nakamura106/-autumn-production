@@ -78,6 +78,7 @@ enum class Key
 
 //Bullet‚ÌŽí—Þ
 enum class PlayerBulletType {
+	Default,
 	Chocho_1,
 	Chocho_2,
 	Tancho_1,

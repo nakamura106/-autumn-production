@@ -1,4 +1,5 @@
 #include "PlayerBullet.h"
+#include "../DataBank/DataBank.h"
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_)
@@ -32,21 +33,25 @@ void PlayerBullet::SetTextureID()
 	case PlayerBulletType::Chocho_1:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
+		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Chocho_1);	// UI—pBulletType“n‚µŠÖ”
 		break;
 
 	case PlayerBulletType::Chocho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_2Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet2;
+		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Chocho_2);
 		break;
 
 	case PlayerBulletType::Tancho_1:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_3Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet3;
+		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Tancho_1);
 		break;
 
 	case PlayerBulletType::Tancho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_4Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet4;
+		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Tancho_2);
 		break;
 
 	default:
@@ -60,3 +65,4 @@ void PlayerBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 		m_is_delete = true;
 	}
 }
+

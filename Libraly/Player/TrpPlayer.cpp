@@ -313,7 +313,7 @@ void TrpPlayer::Drawatk()
 		DrawFont(120, 200, "B", Large, Red);
 	}
 	
-	if (atkjudge() == 5)
+	if (atkjudge() == 5)	// Ç±Ç±Ç‚ÇŒÇ¢
 	{
 		DrawFont(180, 200, "çUåÇé∏îs", Large, Red);
 	}

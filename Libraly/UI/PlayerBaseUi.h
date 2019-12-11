@@ -15,6 +15,9 @@ public:
 
 
 private:
+	int m_bullet_type;
+
+	void ReleaseBulletType();
 
 };
 
