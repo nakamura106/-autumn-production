@@ -118,10 +118,10 @@ void ObjectBase::SetRectangle()
 void ObjectBase::CalcDrawPosition()
 {
 	//プレイヤーのワールド座標
-	float p_map_pos = DataBank::Instance()->GetPlayerMapPos();
+	float p_map_pos = DataBank::Instance()->Getfloor1Pos();
 
-	if (p_map_pos == 0.f)return;
+	//if (p_map_pos == 0.f)return;
 
-	m_pos.x = m_map_pos - p_map_pos;
+	m_pos.x = m_map_pos + p_map_pos;
 
 }

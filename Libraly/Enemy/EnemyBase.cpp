@@ -102,10 +102,10 @@ void EnemyBase::Draw()
 
 	//デバッグ描画
 	DrawFont(
-		m_pos.x+m_draw_param.tex_size_x/2.f, 
+		m_pos.x + m_draw_param.tex_size_x / 2.f,
 		m_pos.y + m_draw_param.tex_size_y / 2.f,
-		std::to_string(m_sleep_gauge).c_str(), 
-		FontSize::Large, 
+		std::to_string(m_sleep_gauge).c_str(),
+		FontSize::Large,
 		FontColor::Red
 	);
 }
@@ -352,16 +352,16 @@ bool EnemyBase::AITransitionPassPlayer()
 	//プレイヤーのx座標をゲット
 	if (m_player_pos_relationship == Direction::LEFT) {
 
-		if (m_pos.x + m_draw_param.tex_size_x / 2.f <
-			ObjectManager::Instance()->GetPlayerObject()->GetPos().x)
+		if (m_map_pos + m_draw_param.tex_size_x / 2.f <
+			DataBank::Instance()->GetPlayerMapPos())
 		{
 			return true;
 		}
 	}
 	else {
 
-		if ((m_pos.x + m_draw_param.tex_size_x / 2.f) >
-			ObjectManager::Instance()->GetPlayerObject()->GetPos().x)
+		if ((m_map_pos + m_draw_param.tex_size_x / 2.f) >
+			DataBank::Instance()->GetPlayerMapPos())
 		{
 			return true;
 		}
@@ -373,14 +373,14 @@ bool EnemyBase::AITransitionPassPlayer()
 bool EnemyBase::AITransitionFrontPlayer()
 {
 
-	float p_pos_x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x;
+	float p_pos_x = DataBank::Instance()->GetPlayerMapPos();
 
 	//プレイヤーのx座標をゲット
 	
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
 		if (m_player_pos_relationship == Direction::LEFT) {
-			if (p_pos_x + 256.f >= m_pos.x) {
+			if (p_pos_x + 256.f >= m_map_pos) {
 				return true;
 			}
 		}
@@ -388,7 +388,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	else {
 		//E=R,P=L
 		if (m_player_pos_relationship == Direction::RIGHT) {
-			if (p_pos_x <= (m_pos.x + m_draw_param.tex_size_x)) {
+			if (p_pos_x <= (m_map_pos + m_draw_param.tex_size_x)) {
 				return true;
 			}
 		}
@@ -399,7 +399,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 
 bool EnemyBase::AITransitionDistance()
 {
-	if (fabsf(m_state_save_pos_x - m_pos.x) >=
+	if (fabsf(m_state_save_pos_x - m_map_pos) >=
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
 		&& m_animation_end)
 	{
@@ -519,10 +519,10 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 
 	//現在の状態を格納
 	m_state_saveflame = FlameTimer::GetNowFlame();
-	m_state_save_pos_x = m_pos.x;
+	m_state_save_pos_x = m_map_pos;
 
 	//プレイヤーがどちらの方向にいるのかを格納
-	if (m_pos.x < ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
+	if (m_map_pos < ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
 		m_player_pos_relationship = Direction::RIGHT;
 	}
 	else {
