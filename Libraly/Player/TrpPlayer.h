@@ -44,7 +44,7 @@ private:
 
 	int atkjudge();
 
-	void Drawatk();
+	
 
 	int timer;				//‰¹•„¶¬—p
 

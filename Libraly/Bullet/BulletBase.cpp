@@ -1,5 +1,6 @@
 #include "BulletBase.h"
 
+
 BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction direction_)
 {
 	//オブジェクトからの情報を格納
@@ -60,6 +61,7 @@ void BulletBase::Load()
 
 void BulletBase::MoveUpdate()
 {
+	
 	//向きによって飛ぶ方向が変化
 	if (m_direction == Direction::RIGHT) {
 		m_map_pos += m_speed;

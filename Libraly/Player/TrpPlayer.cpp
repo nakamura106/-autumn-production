@@ -148,7 +148,7 @@ void TrpPlayer::Draw()
 		}
 
 	}
-	Drawatk();
+	
 	DrawFont(500.0f, 500.0f, std::to_string(m_map_pos).c_str(), Large, Red);
 	DrawFont(900.0f, 500.0f, std::to_string(m_pos.x).c_str(), Large, Red);
 }
@@ -274,10 +274,10 @@ void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 	
 
 	if (m_direction == Direction::LEFT) {
-		b_pos.x = m_pos.x;
+		b_pos.x = m_map_pos;
 	}
 	else {
-		b_pos.x = m_pos.x + m_draw_param.tex_size_x;
+		b_pos.x = m_map_pos;
 	}
 
 	//Bullet(íe)ê∂ê¨
@@ -286,38 +286,7 @@ void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 
 }
 
-void TrpPlayer::Drawatk()
-{
-	if (notebox[0] == A)
-	{
-		DrawFont(40, 200, "A", Large, Red);
-	}
-	if (notebox[0] == B)
-	{
-		DrawFont(40, 200, "B", Large, Red);
-	}
-	if (notebox[1] == A)
-	{
-		DrawFont(80, 200, "A", Large, Red);
-	}
-	if (notebox[1] == B)
-	{
-		DrawFont(80, 200, "B", Large, Red);
-	}
-	if (notebox[2] == A)
-	{
-		DrawFont(120, 200, "A", Large, Red);
-	}
-	if (notebox[2] == B)
-	{
-		DrawFont(120, 200, "B", Large, Red);
-	}
-	
-	if (atkjudge() == 5)	// Ç±Ç±Ç‚ÇŒÇ¢
-	{
-		DrawFont(180, 200, "çUåÇé∏îs", Large, Red);
-	}
-}
+
 
 void TrpPlayer::P_Controll()
 {
