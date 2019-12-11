@@ -198,6 +198,12 @@
     <ClCompile Include="Engine\Slider.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\HelpScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Slider.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\HelpScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SelectScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

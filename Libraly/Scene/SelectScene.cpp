@@ -1,47 +1,46 @@
+#include "SelectScene.h"
 #include "../Engine/Graphics.h"
 #include "../Engine/Input.h"
 #include "../Texture/Texture.h"
-#include "../Scene/TitleScene.h"
 #include "../Engine/Anime.h"
 #include <stdio.h>
-#include "../Scene/Scene.h"
+#include "Scene.h"
 
 
 // タイトルシーンの初期化
 
-void InitTitleScene();
+void InitSelectScene();
 // タイトルシーンのメイン処理
-void MainTitleScene();
+void MainSelectScene();
 // タイトルシーンの終了
-SceneId FinishTitleScene();
+SceneId FinishSelectScene();
 
-Vec2 test;
 
-SceneId UpdateTitleScene()
+SceneId UpdateSelectScene()
 {
 	switch (GetCurrentSceneStep())
 	{
 	case SceneStep::InitStep:
-		InitTitleScene();
+		InitSelectScene();
 		break;
 	case SceneStep::MainStep:
-		MainTitleScene();
+		MainSelectScene();
 		break;
 	case SceneStep::EndStep:
-		return FinishTitleScene();
+		return FinishSelectScene();
 		break;
 	}
 
-	return SceneId::TitleScene;
+	return SceneId::SelectScene;
 }
 
-void DrawTitleScene()
+void DrawSelectScene()
 {
 
-	
+
 }
 
-void InitTitleScene()
+void InitSelectScene()
 {
 
 
@@ -52,15 +51,15 @@ void InitTitleScene()
 
 
 
-void MainTitleScene()
+void MainSelectScene()
 {
-	
+
 
 }
 
-SceneId FinishTitleScene()
+SceneId FinishSelectScene()
 {
-	
-		return SceneId::SelectScene;
-	
+
+	return SceneId::GameScene;
+
 }

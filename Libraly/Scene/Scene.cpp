@@ -4,6 +4,8 @@
 #include "../Scene/TitleScene.h"
 #include "../Scene/GameScene.h"
 #include "../Scene/GameEndScene.h"
+#include "HelpScene.h"
+#include "SelectScene.h"
 
 
 static SceneId g_CurrentSceneId = SceneId::GameScene;		// ìÆçÏíÜÉVÅ[ÉìID
@@ -34,6 +36,12 @@ void UpdateScene()
 	case SceneId::TitleScene:
 		scene_id = UpdateTitleScene();
 		break;
+	case SceneId::HelpScene:
+		scene_id = UpdateHelpScene();
+		break;
+	case SceneId::SelectScene:
+		scene_id = UpdateSelectScene();
+		break;
 	case SceneId::GameEndScene:
 		scene_id = UpdateGameEndScene();
 		break;
@@ -63,6 +71,12 @@ void DrawScene()
 		{
 		case SceneId::TitleScene:
 			DrawTitleScene();
+			break;
+		case SceneId::HelpScene:
+			DrawHelpScene();
+			break;
+		case SceneId::SelectScene:
+			DrawSelectScene();
 			break;
 		case SceneId::GameScene:
 			DrawGameScene();

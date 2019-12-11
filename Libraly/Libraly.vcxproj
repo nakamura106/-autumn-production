@@ -156,7 +156,9 @@
     <ClCompile Include="Player\TrpPlayer.cpp" />
     <ClCompile Include="Scene\GameEndScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\HelpScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SelectScene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
@@ -202,7 +204,9 @@
     <ClInclude Include="Player\TrpPlayer.h" />
     <ClInclude Include="Scene\GameEndScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\HelpScene.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SelectScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />

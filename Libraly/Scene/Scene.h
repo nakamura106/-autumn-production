@@ -9,6 +9,8 @@
 enum SceneId
 {
 	TitleScene,			//!< タイトルシーン
+	HelpScene,			//!< ヘルプシーン
+	SelectScene,		//!< セレクトシーン
 	GameScene,			//!< ゲーム本編シーン	
 	GameEndScene,		//!< ゲームエンドシーン
 	SceneIdMax,			//!< シーンID最大
