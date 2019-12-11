@@ -15,7 +15,6 @@ void MainTitleScene();
 // タイトルシーンの終了
 SceneId FinishTitleScene();
 
-Vec2 test;
 
 SceneId UpdateTitleScene()
 {
@@ -43,8 +42,6 @@ void DrawTitleScene()
 
 void InitTitleScene()
 {
-
-
 
 
 	ChangeSceneStep(SceneStep::MainStep);

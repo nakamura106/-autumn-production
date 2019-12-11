@@ -13,13 +13,31 @@
 enum TitleCategoryTextureList
 {
 	TitleBgTex,				//!< 背景
-	TitleMenuGoGameTex,		//!< ゲーム遷移
-	TitleMenuGoHelpTex,		//!< ヘルプ遷移
-	TitleMenuGoGameOnTex,	//!< ゲーム遷移（OnMouse.Ver）	
-	TitleBombTex,			//!< ボム兵サンプル
-	TitleMenuGoBackTex,
-	TitleMenuGoBackOnTex,
+	TitleLogoTex,			//!< タイトルロゴ
+	TitleStart1Tex,			//!< スタートボタンOn
+	TitleStart2Tex,			//!< スタートボタンOff
+	TitleContinue1Tex,		//!< 続きボタンOn
+	TitleContinue2Tex,		//!< 続きボタンOff
+	TitleHelp1Tex,			//!< ヘルプボタンOn
+	TitleHelp2Tex,			//!< ヘルプボタンOff
 	TitleTextureMax			//!< リスト最大数
+};
+
+// ヘルプシーン用リスト
+enum HelpCategoryTextureList
+{
+	Help1Tex,		//!< ヘルプ1枚目
+	Help2Tex,		//!< ヘルプ2枚目
+	Help3Tex,		//!< ヘルプ3枚目
+	HelpTextureMax
+};
+
+// セレクトシーン用リスト
+enum SelectCategoryTextureList
+{
+	SelectBgTex,
+
+	SelectTextureMax
 };
 
 /** @brief ゲーム本編用テクスチャのリスト */
@@ -105,9 +123,7 @@ enum GameCategoryTextureList
 };
 
 
-
-
-/** @brief ヘルプ用テクスチャリスト */
+/** @brief エンド用テクスチャリスト */
 enum GameEndCategoryTextureList
 {
 	GameEndBgTex,				//!< 背景
@@ -117,6 +133,8 @@ enum GameEndCategoryTextureList
 };
 
 #define TEXTURE_CATEGORY_TITLE (SceneId::TitleScene)			//!< タイトルカテゴリー
+#define TEXTURE_CATEGORY_HELP (SceneId::HelpScene)				//!< ヘルプシーン
+#define TEXTURE_CATEGORY_SELECT (SceneId::SelectScene)			//!< セレクトシーン
 #define TEXTURE_CATEGORY_GAME (SceneId::GameScene)				//!< ゲーム本編カテゴリー
 #define TEXTURE_CATEGORY_GAMEEND (SceneId::GameEndScene)				//!< エンドカテゴリー
 #define MAX_TEXTURE_CATEGORY (SceneId::SceneIdMax)				//!< カテゴリー最大

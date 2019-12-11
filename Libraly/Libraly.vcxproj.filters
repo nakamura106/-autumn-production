@@ -67,6 +67,9 @@
     <Filter Include="DataBank">
       <UniqueIdentifier>{3b071d3f-50e0-4c69-bf6e-8dc29020ef6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\SceneObject">
+      <UniqueIdentifier>{7297b6ba-0f4e-4f37-84fe-47cd703baad4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

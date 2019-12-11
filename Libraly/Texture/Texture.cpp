@@ -9,6 +9,8 @@ static Texture** g_TextureList[MAX_TEXTURE_CATEGORY] = { nullptr };
 // ƒV[ƒ“’Ç‰Á‚É‹L“ü‚ğ–Y‚ê‚È‚¢‚æ‚¤‚É
 int TextureCaterogySize[] = {
 	TitleCategoryTextureList::TitleTextureMax,
+	HelpCategoryTextureList::HelpTextureMax,
+	SelectCategoryTextureList::SelectTextureMax,
 	GameCategoryTextureList::GameTextureMax,
 	GameEndCategoryTextureList::GameEndTextureMax,
 	
