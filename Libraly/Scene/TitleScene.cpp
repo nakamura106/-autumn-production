@@ -5,7 +5,9 @@
 #include "../Engine/Anime.h"
 #include <stdio.h>
 #include "../Scene/Scene.h"
+#include "SceneObject/TitleSceneObject.h"
 
+TitleSceneObject title_obj;
 
 // タイトルシーンの初期化
 
@@ -37,12 +39,12 @@ SceneId UpdateTitleScene()
 void DrawTitleScene()
 {
 
-	
+	title_obj.Draw();
 }
 
 void InitTitleScene()
 {
-
+	title_obj.Init();
 
 	ChangeSceneStep(SceneStep::MainStep);
 }
