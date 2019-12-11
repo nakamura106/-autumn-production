@@ -18,6 +18,12 @@ DataBank::DataBank()
 	m_player_hp = 0;
 	m_sleep_gauge = 0;
 	m_fg = 0;
+	note1 = 0;
+	note2 = 0;
+	note3 = 0;
+	m_floor1 = 0.0f;
+
+
 }
 
 DataBank::~DataBank()

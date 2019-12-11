@@ -15,6 +15,9 @@ public:
 
 private:
 
+	int m_notes_box[3];
+	int m_draw_texid1, m_draw_texid2, m_draw_texid3;
+
 };
 
 #endif

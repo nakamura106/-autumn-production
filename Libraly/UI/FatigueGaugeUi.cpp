@@ -43,7 +43,7 @@ void FatigueGaugeUi::Init()
 void FatigueGaugeUi::Update()
 {
 	m_fatigue_gauge = DataBank::Instance()->GetFatigueGauge();
-
+	
 	
 	UpdateSliderCurrentValue(sliders);
 	UpdateSliderNextValue(m_fatigue_gauge, sliders);
@@ -53,7 +53,7 @@ void FatigueGaugeUi::Update()
 void FatigueGaugeUi::Draw()
 {
 	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyAutoHealGauge));
-	// DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, m_param.texture_id));
+
 	DrawSliderUVMappingVersion(sliders);
 
 	if (m_fatigue_gauge >= 100.0f)
