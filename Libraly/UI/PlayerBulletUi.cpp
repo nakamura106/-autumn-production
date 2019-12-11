@@ -27,7 +27,7 @@ void PlayerBulletUi::Init()
 	m_pos.x = 20.0f;
 	m_pos.y = 20.0f;
 	m_param.category_id = TEXTURE_CATEGORY_GAME;
-	m_param.texture_id = GameCategoryTextureList::GameBulletUi_RedLeft;
+	m_param.texture_id = GameCategoryTextureList::GameBulletUi_BlueLeft;
 
 }
 
@@ -35,7 +35,12 @@ void PlayerBulletUi::Update()
 {
 	if (DataBank::Instance()->GetNote1() == A)
 	{
-		m_param.texture_id = 0;
+		m_param.texture_id = GameCategoryTextureList::GameBulletUi_BlueLeft;
 	}
+}
+
+void PlayerBulletUi::Draw()
+{
+	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, m_param.texture_id));
 }
 
