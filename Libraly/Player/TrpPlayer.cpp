@@ -43,6 +43,7 @@ void TrpPlayer::Init()
 	m_map_pos = P_posX;
 	m_pos.x = P_posX;
 	m_pos.y = P_posYforest;
+	m_draw_param.tex_size_x = 128.0f;
 	timer = 70;
 	timer2 = 0;
 	m_List = GamePlayer_Taiki_Tp_RightTex;
@@ -69,11 +70,11 @@ void TrpPlayer::Load()
 	LoadTexture("Res/Tex/Player/Player_Damage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_Tp_RightTex);
 	LoadTexture("Res/Tex/Player/Player_Jump_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_Jump_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_Tp_RightTex);
-	LoadTexture("Res/Tex/Player/Player_JumpAttack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_Tp_LeftTex);
+	/*LoadTexture("Res/Tex/Player/Player_JumpAttack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_JumpAttack_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_Tp_RightTex);
 	LoadTexture("Res/Tex/Player/Player_JumpDamage_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_JumpDamage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_Tp_RightTex);
-	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
+	*/LoadTexture("Res/Tex/Player/Player_Walk_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_LeftTex);
 	LoadTexture("Res/Tex/Player/Player_Walk_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_Tp_RightTex);
 	LoadTexture("Res/Tex/Effect/tyotyo01_E.png" ,TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
 	LoadTexture("Res/Tex/Effect/tyotyo02_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_2Tex);
@@ -274,15 +275,17 @@ void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 	
 
 	if (m_direction == Direction::LEFT) {
-		b_pos.x = m_map_pos;
+		b_pos.x = m_map_pos-m_draw_param.tex_size_x;
+		b_pos.y = m_pos.y;
 	}
 	else {
-		b_pos.x = m_map_pos;
+		b_pos.x = m_map_pos+m_draw_param.tex_size_x;
+		b_pos.y = m_pos.y;
 	}
 
 	//Bullet(弾)生成
 	
-	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y + 700, 5.f, (Direction)m_direction, bullettype));
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction, bullettype));
 
 }
 
@@ -311,16 +314,20 @@ void TrpPlayer::P_Controll()
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		if (DataBank::Instance()->GetfgPos() >= 0 || DataBank::Instance()->GetfgPos() <= -3550.0f)
+		{
+			m_pos.x += m_speed;
+		}
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
 			//m_map_pos += lrAdjustment;
 		}
-		if (m_map_pos <= 2500)
+		if (m_map_pos < 3550.0f)
 		{
 			m_map_pos += m_speed;
 		}
 		m_direction = RIGHT;
-		m_pos.x += m_speed;
+		
 		m_is_active = true;
 	}
 
@@ -328,22 +335,23 @@ void TrpPlayer::P_Controll()
 	if (GetKey(LEFT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		if (DataBank::Instance()->GetfgPos() <= -3550.0f || DataBank::Instance()->GetfgPos() >= 0)
+		{
+			m_pos.x -= m_speed;
+		}
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
 			//m_map_pos -= lrAdjustment;
 		}
-		if (m_map_pos >= -130.0f)
+		if (m_map_pos > -120.0f)
 		{
 			m_map_pos -= m_speed;
 		}
-		if (DataBank::Instance()->GetfgPos() >= 0)
-		{
-			m_pos.x -= m_speed;
-		}
 		m_direction = LEFT;
+		
 		m_is_active = true;
 	}
-
+		
 	//ジャンプ処理
 	if (GetKey(SPACE_KEY) == true)
 	{
@@ -418,8 +426,8 @@ void TrpPlayer::P_Controll()
 		m_pos.x += m_speed;
 	}
 
-	//プレイヤーを画面中央に止めるの処理
-	if (m_pos.x >= Centerofscreen)
+	
+	if (m_pos.x >= 1700.0f)
 	{
 		m_pos.x -= m_speed;
 	}

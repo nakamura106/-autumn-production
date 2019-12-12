@@ -73,6 +73,9 @@ void ObjectManager::CreateObject()
 	chara_objects[1] = new HedgeHog();
 
 	chara_objects[2] = new TrpPlayer();
+
+	chara_objects[3] = new Fg();
+
 }
 
 void ObjectManager::Update()
