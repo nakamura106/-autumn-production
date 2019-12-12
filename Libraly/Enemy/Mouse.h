@@ -23,6 +23,9 @@ private:
 	//note:Adjustは「調整」という意味
 	const float M_NEEDLE_ADJUST_X = 180.f;
 	const float M_NEEDLE_ADJUST_Y = 630.f;
+
+	const float M_DASHATTACK_SPEED_CHANGE_NUM = 1.02f;
+
 	
 	std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
 	bool m_is_speed_up;		//加速するか	
@@ -41,10 +44,6 @@ private:
 
 	/*AI変更関数*/
 	EnemyAIType ChangeAIType();
-
-	//void InitAttack1State();
-	void InitAttack2State();
-	//void InitAttack3State();
 
 	/*攻撃レパートリーの初期化*/
 	//void InitAttackRepertory();

@@ -66,3 +66,15 @@ void PlayerBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	}
 }
 
+void PlayerBullet::Draw()
+{
+	DrawInversion(
+		m_pos.x,					//x座標
+		m_pos.y,					//y座標
+		m_draw_param.tex_size_x,	//テクスチャの横サイズ
+		m_draw_param.tex_size_y,	//テクスチャの縦サイズ		
+		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
+		(m_draw_param.tu - 1) / m_anim_param.split_width,
+		(m_draw_param.tv - 1) / m_anim_param.split_height,
+	m_direction);
+}

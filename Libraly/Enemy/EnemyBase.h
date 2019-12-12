@@ -43,6 +43,7 @@ private:
 	const float M_INIT_POS_Y		= -70.f;	//初期y座標
 	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;	//ゲージ自動回復を止めるフレーム時間
+	const float M_MOVE_LIMIT_X = 2500.f;
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -62,6 +63,7 @@ private:
 	/*移動範囲制限*/
 	bool IsMoveLimitLeft();
 	bool IsMoveLimitRight();
+	void MoveLimitUpdate();
 
 	/*眠り判定*/
 	bool CheckSleepState();
@@ -194,6 +196,7 @@ protected:
 	/*			ゲッター			*/
 	/*状態遷移してからの経過時間取得*/
 	int	GetStateSaveFlame();
+	EnemyAIType GetNowAI() { return m_now_ai; }
 
 	//弾作成
 	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);

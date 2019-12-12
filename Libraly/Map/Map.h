@@ -35,7 +35,6 @@ private:
 	
 	float floor1;
 	float floor2;
-	float fg;
 	float obj[3];
 
 
@@ -46,4 +45,22 @@ private:
 
 };
 
+class Fg :public Map
+{
+public:
+	//!< 初期化関数(座標など)
+	void Init()override;
+	//!< 画像読込関数関数
+	void Load()override;
+	//!< 更新関数(毎フレーム更新が必要なもの等)
+	void Update()override;
+	//!< 描画用関数(背景やオブジェクトを描画する)
+	void Draw()override;
+	//!< 未使用
+	void Create() {}
+
+private:
+	void MapScroll(int direction_);
+	float fg;
+};
 

@@ -10,6 +10,8 @@ public:
 	~PlayerBullet();
 	void Load();
 
+	virtual void Draw();
+
 private:
 	PlayerBulletType player_bullet_type;	
 

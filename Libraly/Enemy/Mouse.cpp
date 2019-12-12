@@ -19,7 +19,7 @@
 TrpPlayer* trpplayer;
 
 HedgeHog::HedgeHog()
-	:EnemyBase(3.f,	EnemyID::Hedgehog)
+	:EnemyBase(2.f,	EnemyID::Hedgehog)
 {
 	m_is_speed_up = false;
 	m_do_needle = false;
@@ -39,19 +39,21 @@ void HedgeHog::Init()
 	/*11/26 注!!仮実装のコード*/
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Walk_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WalkLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Walk_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WalkRight);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueRight);
+	//LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueLeft);
+	//LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_TaikiLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_TaikiRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepRight);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_DashAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DashAttackLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_DashAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DashAttackRight);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_DashAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack1Left);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_DashAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack1Right);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Down_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Down_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownRight);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_NeedleAttackLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_NeedleAttackRight);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Left);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Right);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Needle);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_HeadAttack_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Left);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_HeadAttack_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Right);
 
 }
 
@@ -71,12 +73,14 @@ void HedgeHog::EnemyAttack1()		//エネミー攻撃
 		一定加速後同じ速度で減速
 	*/
 
-	if (m_direction == Direction::LEFT) {
-		m_map_pos -= m_speed * 2;
+	if (GetAnimationTexNum() > 9) {
+		m_speed /= M_DASHATTACK_SPEED_CHANGE_NUM;
 	}
 	else {
-		m_map_pos += m_speed * 2;
+		m_speed *= M_DASHATTACK_SPEED_CHANGE_NUM;
 	}
+
+	EnemyBase::EnemyMove();
 
 }
 
@@ -100,7 +104,11 @@ void HedgeHog::EnemyAttack2()
 
 void HedgeHog::EnemyAttack3()
 {
-	
+	int num = GetAnimationTexNum();
+
+	if (num == 9) {
+		EnemyMove();
+	}
 }
 
 EnemyStateType HedgeHog::ChangeStateFromWait()
@@ -149,17 +157,17 @@ EnemyAIType HedgeHog::ChangeAIType()
 	//Enemyの位置や向き、プレイヤーとの関係によって
 	//次に使用するAIが変化する
 
-	return EnemyAIType::AI1;
-}
-
-void HedgeHog::InitAttack2State()
-{
-	if (m_direction == Direction::LEFT) {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
+	if (GetNowAI() == EnemyAIType::AI1) {
+		return EnemyAIType::AI2;
+	}
+	else if (GetNowAI() == EnemyAIType::AI2) {
+		return EnemyAIType::AI3;
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
+		return EnemyAIType::AI1;
 	}
+
+	return EnemyAIType::AI1;
 }
 
 void HedgeHog::CreateNeedle()
