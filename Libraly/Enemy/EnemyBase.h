@@ -41,7 +41,7 @@ private:
 	const float M_ENEMY_SYZE		= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
 	const float M_INIT_POS_Y		= -70.f;	//初期y座標
-	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;		//ゲージ自動回復のフレーム周期
+	const int	M_CURE_SLEEP_TIME_DEFAULT = 120;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;	//ゲージ自動回復を止めるフレーム時間
 	const float M_MOVE_LIMIT_X = 2500.f;
 	const int	M_GAMECLEAR_FLAME = 180;		//眠りモーション遷移後、ゲームクリア
