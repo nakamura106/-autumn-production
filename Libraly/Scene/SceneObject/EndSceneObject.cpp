@@ -11,6 +11,8 @@ EndSceneObject::EndSceneObject()
 		m_draw_pos[i].y = 0.0f;
 		m_param[i].category_id = TEXTURE_CATEGORY_GAMEEND;
 	}
+
+	is_clear = true;
 }
 
 EndSceneObject::~EndSceneObject()
@@ -24,9 +26,15 @@ void EndSceneObject::Init()
 	LoadTexture("Res/Tex/EndScene/GameOverR.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameOverRTex);
 	LoadTexture("Res/Tex/EndScene/Back.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameBuckTex);
 	
+	if (is_clear == false)
+	{
+		m_param[0].texture_id = GameEndCategoryTextureList::GameClearBgTex;
+	}
+	else {
+		m_param[0].texture_id = GameEndCategoryTextureList::GameOverBgTex;
+	}
 	m_draw_pos[0].x = 0.0f;
 	m_draw_pos[0].y = 0.0f;
-	m_param[0].texture_id = GameEndCategoryTextureList::GameOverBgTex;
 	m_draw_pos[1].x = 230.0f;
 	m_draw_pos[1].y = 180.0f;
 	m_param[1].texture_id = GameEndCategoryTextureList::GameOverRTex;
@@ -42,7 +50,14 @@ void EndSceneObject::Update()
 
 void EndSceneObject::Draw()
 {
-	DrawTexture(m_draw_pos[0].x, m_draw_pos[0].y, GetTexture(m_param[0].category_id, m_param[0].texture_id));
-	DrawTexture(m_draw_pos[1].x, m_draw_pos[1].y, GetTexture(m_param[1].category_id, m_param[1].texture_id));
-	DrawTexture(m_draw_pos[2].x, m_draw_pos[2].y, GetTexture(m_param[2].category_id, m_param[2].texture_id));
+	if (is_clear == false)
+	{
+		DrawTexture(m_draw_pos[0].x, m_draw_pos[0].y, GetTexture(m_param[0].category_id, m_param[0].texture_id));
+	}
+	else {
+		DrawTexture(m_draw_pos[0].x, m_draw_pos[0].y, GetTexture(m_param[0].category_id, m_param[0].texture_id));
+		DrawTexture(m_draw_pos[1].x, m_draw_pos[1].y, GetTexture(m_param[1].category_id, m_param[1].texture_id));
+		DrawTexture(m_draw_pos[2].x, m_draw_pos[2].y, GetTexture(m_param[2].category_id, m_param[2].texture_id));
+	}
+	
 }

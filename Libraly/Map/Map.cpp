@@ -38,10 +38,10 @@ void Map::Init()
 void Map::Load()
 {
 	//É}ÉbÉv
-	LoadTexture("Res/Tex/Map/êX/Woods1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//ëê
-	LoadTexture("Res/Tex/Map/êX/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	    //éËÇ∑ÇË
-	LoadTexture("Res/Tex/Map/êX/Woods3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//ïlï”
-	LoadTexture("Res/Tex/Map/êX/Woods4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		    //äC
+	LoadTexture("Res/Tex/Map/êX/Woods1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//Stage1Bg1
+	LoadTexture("Res/Tex/Map/êX/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	    //Stage1Bg2
+	LoadTexture("Res/Tex/Map/êX/Woods3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//Stage1Bg3
+	LoadTexture("Res/Tex/Map/êX/Woods4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		    //Stage1Bg4
 	
 	
 	LoadTexture("Res/Tex/Map/êX/Grass Small.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);

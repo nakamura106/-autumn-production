@@ -17,6 +17,7 @@ public:
 private:
 	Position m_draw_pos[3];
 	DrawParam m_param[3];
+	bool is_clear;
 };
 
 #endif
