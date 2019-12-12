@@ -45,8 +45,6 @@ void DrawGameScene()
 
 	UiManager::Instance()->Draw();
 
-	FlameTimer::Debug::DrawTimer();
-
 }
 
 

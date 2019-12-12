@@ -13,7 +13,7 @@
 #define Distance_of_Maintain 100	//維持する適切な距離
 
 #define Fatigue_Gauge_Max 100		//疲労ゲージ上限
-#define Sleep_Gauge_Max	100			//睡眠ゲージ上限
+#define Sleep_Gauge_Max	75			//睡眠ゲージ上限
 
 #define Attack_Interval 100			//攻撃感覚
 
@@ -61,6 +61,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_auto_sleep_time = M_CURE_SLEEP_TIME_DEFAULT;
 	m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time = 0;
+	m_game_clear_saveflame = 0;
+
+	DataBank::Instance()->SetIsGameClear(false);
 
 }
 
@@ -99,14 +102,6 @@ void EnemyBase::Draw()
 
 	}
 
-	//デバッグ描画
-	DrawFont(
-		m_pos.x + m_draw_param.tex_size_x / 2.f,
-		m_pos.y + m_draw_param.tex_size_y / 2.f,
-		std::to_string(m_sleep_gauge).c_str(),
-		FontSize::Large,
-		FontColor::Red
-	);
 }
 
 void EnemyBase::Init()
@@ -256,6 +251,7 @@ void EnemyBase::UpdateAIState()
 
 		//睡眠状態(眠気度MAX)
 	case EnemyStateType::Sleep:
+		EnemySleep();
 		return;
 
 	default:
@@ -655,6 +651,8 @@ void EnemyBase::InitChaseState()
 
 void EnemyBase::InitSleepState()
 {
+	m_game_clear_saveflame = FlameTimer::GetNowFlame();
+
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepLeft;
 	}
@@ -914,6 +912,15 @@ void EnemyBase::EnemyRest()		//エネミー休憩
 	{
 		m_fatigue_gauge -= Cure_of_FatiguePoint * 5;	//だいたい通常回復の五倍くらい？
 		cure_fatigue -= Cure_of_FatiguePoint * 5;
+	}
+}
+
+void EnemyBase::EnemySleep()
+{
+	//ゲームクリアフラグ多い
+	if (FlameTimer::GetNowFlame(m_game_clear_saveflame) >= M_GAMECLEAR_FLAME) {
+		DataBank::Instance()->SetIsGameClear(true);
+
 	}
 }
 
