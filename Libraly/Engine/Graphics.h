@@ -99,6 +99,9 @@ void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, floa
 // スライダーで使用する
 void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture_x, float texture_y, float rect_width, float rect_height);
 
+//左右反転用
+void DrawInversion(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int direction);
+
 
 /**
 * @brief フォント描画関数@n

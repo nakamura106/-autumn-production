@@ -61,6 +61,8 @@ void BulletBase::Load()
 {
 }
 
+
+
 void BulletBase::MoveUpdate()
 {
 	
