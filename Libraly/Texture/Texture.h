@@ -133,10 +133,12 @@ enum GameCategoryTextureList
 	GameEnemy_TaikiRight,
 	GameEnemy_WalkLeft,						//!<“G•às
 	GameEnemy_WalkRight,
-	GameEnemy_NeedleAttackLeft,				//!<ƒnƒŠƒlƒYƒ~UŒ‚
-	GameEnemy_NeedleAttackRight,
-	GameEnemy_DashAttackLeft,				//!<ƒ_ƒbƒVƒ…UŒ‚
-	GameEnemy_DashAttackRight,
+	GameEnemy_Attack2Left,				//!<UŒ‚1
+	GameEnemy_Attack2Right,
+	GameEnemy_Attack1Left,				//!<UŒ‚2
+	GameEnemy_Attack1Right,
+	GameEnemy_Attack3Left,				//!<UŒ‚3
+	GameEnemy_Attack3Right,
 	GameEnemy_SleepLeft,					//!<“G‡–°
 	GameEnemy_SleepRight,
 	GameEnemy_FatigueLeft,					//!<“G”æ˜J
