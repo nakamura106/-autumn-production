@@ -1,6 +1,7 @@
 #include "EndSceneObject.h"
 #include "../../Engine/Graphics.h"
 #include "../../Texture/Texture.h"
+#include "../../DataBank/DataBank.h"
 
 
 EndSceneObject::EndSceneObject()
@@ -12,7 +13,7 @@ EndSceneObject::EndSceneObject()
 		m_param[i].category_id = TEXTURE_CATEGORY_GAMEEND;
 	}
 
-	is_clear = true;
+	is_clear = false;
 }
 
 EndSceneObject::~EndSceneObject()
@@ -26,7 +27,9 @@ void EndSceneObject::Init()
 	LoadTexture("Res/Tex/EndScene/GameOverR.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameOverRTex);
 	LoadTexture("Res/Tex/EndScene/Back.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameBuckTex);
 	
-	if (is_clear == false)
+	is_clear = DataBank::Instance()->GetIsGameClear();
+
+	if (is_clear == true)
 	{
 		m_param[0].texture_id = GameEndCategoryTextureList::GameClearBgTex;
 	}

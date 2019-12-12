@@ -10,6 +10,7 @@
 #include "../Manager/ObjectManager.h"
 #include"../Bullet/PlayerBullet.h"
 #include"../Engine/FlameTimer.h"
+#include "../DataBank/DataBank.h"
 
 
 // ゲーム本編シーンの初期化
@@ -71,6 +72,11 @@ void MainGameScene()
 	ObjectManager::Instance()->Update();
 
 	UiManager::Instance()->Update();
+
+	if (DataBank::Instance()->GetIsGameClear() == true)
+	{
+		ChangeSceneStep(SceneStep::EndStep);
+	}
 
 }
 
