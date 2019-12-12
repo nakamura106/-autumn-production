@@ -127,6 +127,9 @@ void EnemyBase::Update()
 	//UpdateState();
 	UpdateAIState();
 
+	/*位置調整の更新*/
+	MoveLimitUpdate();
+
 	//アニメーション(パラパラ画像)値の更新
 	AnimationUpdate();
 
@@ -608,10 +611,10 @@ void EnemyBase::InitRefugeState()
 void EnemyBase::InitAttack1State()
 {
 	if (m_direction == Direction::LEFT) {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack1Left;
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack1Right;
 	}
 }
 
@@ -619,20 +622,20 @@ void EnemyBase::InitAttack2State()
 {
 
 	if (m_direction == Direction::LEFT) {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack2Left;
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackRight;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack2Right;
 	}
 }
 
 void EnemyBase::InitAttack3State()
 {
 	if (m_direction == Direction::LEFT) {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackLeft;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack3Left;
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DashAttackRight;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack3Right;
 	}
 }
 
@@ -861,10 +864,20 @@ bool EnemyBase::IsMoveLimitLeft()
 
 bool EnemyBase::IsMoveLimitRight()
 {
-	if ((m_map_pos + m_draw_param.tex_size_x) > 2500.f) {
+	if ((m_map_pos + m_draw_param.tex_size_x) > M_MOVE_LIMIT_X) {
 		return true;
 	}
 	return false;
+}
+
+void EnemyBase::MoveLimitUpdate()
+{
+	if (IsMoveLimitLeft()) {
+		m_map_pos = 0.f;
+	}
+	if (IsMoveLimitRight()) {
+		m_map_pos = M_MOVE_LIMIT_X - m_draw_param.tex_size_x;
+	}
 }
 
 bool EnemyBase::CheckSleepState()
