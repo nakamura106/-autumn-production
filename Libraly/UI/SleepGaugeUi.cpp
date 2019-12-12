@@ -38,7 +38,7 @@ void SleepGaugeUi::Init()
 
 void SleepGaugeUi::Update()
 {
-	m_sleep_gauge = DataBank::Instance()->GetFatigueGauge();
+	m_sleep_gauge = DataBank::Instance()->GetSleepGauge();
 
 
 	UpdateSliderCurrentValue(sliders);
@@ -49,7 +49,7 @@ void SleepGaugeUi::Draw()
 {
 	DrawSliderUVMappingVersion(sliders);
 
-	if (m_sleep_gauge >= 100.0f)
+	if (m_sleep_gauge >= 99.0f)
 	{
 		DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemySleepCircle));
 	}
