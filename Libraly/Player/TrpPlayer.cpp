@@ -555,15 +555,15 @@ void TrpPlayer::Jump()
 
 void TrpPlayer::Attack()
 {
-
+	if (m_i > 10)
+	{
+		m_do_attack = false;
+		m_is_active = false;
+	}
 	
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Jump)
 	{
 		m_state = (int)P_State::Attack;
 	}
-	if (m_i > 11)
-	{
-		m_do_attack = false;
-		m_is_active = false;
-	}
+	
 }

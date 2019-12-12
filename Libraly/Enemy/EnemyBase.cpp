@@ -2,7 +2,6 @@
 #include "../Player/TrpPlayer.h"
 #include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
-#include"../Manager/ObjectManager.h"
 #include"../DataBank/DataBank.h"
 #include<stdlib.h>
 
@@ -56,7 +55,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 
 	m_now_ai				= EnemyAIType::AI1;
 	m_now_ai_num			= 0;
-	m_can_state_transition	= true;
+	m_stop_state_transition	= false;
 	m_is_pos_end			= false;
 	m_hit_use_atk = 0.f;
 	m_auto_sleep_time = M_CURE_SLEEP_TIME_DEFAULT;
@@ -194,8 +193,7 @@ void EnemyBase::UpdateState()
 
 	//睡眠状態(眠気度MAX)
 	case EnemyStateType::Sleep:
-
-		break;
+		return;
 
 	default:
 		/*
@@ -206,7 +204,7 @@ void EnemyBase::UpdateState()
 
 	
 	//状態の変更
-	if (m_state != next_state && m_can_state_transition) {
+	if (m_state != next_state && m_stop_state_transition) {
 		//next_sceneを専用の変数に渡し、状態遷移
 		ChangeState(next_state);
 	}
@@ -255,8 +253,7 @@ void EnemyBase::UpdateAIState()
 
 		//睡眠状態(眠気度MAX)
 	case EnemyStateType::Sleep:
-
-		break;
+		return;
 
 	default:
 		/*
@@ -307,7 +304,8 @@ void EnemyBase::AITransitionUpdate()
 
 
 	//状態遷移・AI変更を行う
-	if (can_change_ai_state) {
+	if (can_change_ai_state && !m_stop_state_transition) {
+
 		//次の状態に行くための値を設定
 		ChangeAIState();
 
@@ -317,10 +315,16 @@ void EnemyBase::AITransitionUpdate()
 		//AIに合わせて向き変更
 		ChangeAIDirection();
 
-		//値に沿って状態遷移
-		ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
-
+		if (!CheckSleepState()) {
+			//値に沿って状態遷移
+			ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
+		}
+		else {
+			ChangeState(EnemyStateType::Sleep);
+		}
 	}
+
+	
 }
 
 bool EnemyBase::AITransitionBase()
@@ -329,14 +333,10 @@ bool EnemyBase::AITransitionBase()
 	if (!m_animation_end)return false;
 
 	if (m_direction == Direction::LEFT) {
-		if (m_map_pos <= 0.f) {
-			return true;
-		}
+		return IsMoveLimitLeft();
 	}
 	else {
-		if ((m_map_pos + m_draw_param.tex_size_x) > 1920.f) {
-			return true;
-		}
+		return IsMoveLimitRight();
 	}
 	
 	return false;
@@ -440,6 +440,18 @@ void EnemyBase::ChangeAIDirection()
 	default:
 		break;
 	}
+
+	if (m_direction == Direction::LEFT) {
+		if (IsMoveLimitLeft()) {
+			m_direction = Direction::RIGHT;
+		}
+	}
+	else {
+		if (IsMoveLimitRight()) {
+			m_direction = Direction::LEFT;
+		}
+	}
+
 }
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
@@ -522,7 +534,7 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 	m_state_save_pos_x = m_map_pos;
 
 	//プレイヤーがどちらの方向にいるのかを格納
-	if (m_map_pos < ObjectManager::Instance()->GetPlayerObject()->GetPos().x) {
+	if (m_map_pos < DataBank::Instance()->GetPlayerMapPos()) {
 		m_player_pos_relationship = Direction::RIGHT;
 	}
 	else {
@@ -605,6 +617,7 @@ void EnemyBase::InitAttack1State()
 
 void EnemyBase::InitAttack2State()
 {
+
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_NeedleAttackLeft;
 	}
@@ -772,7 +785,7 @@ void EnemyBase::DebugKeyAction()
 		if (!s_is_key) {
 			//待ち状態に遷移
 			ChangeState(EnemyStateType::Wait);
-			m_can_state_transition = !m_can_state_transition;
+			m_stop_state_transition = !m_stop_state_transition;
 		}
 		s_is_key = true;
 	}
@@ -822,7 +835,7 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 
 void EnemyBase::AutoCureSleepGage()
 {
-	if (m_stop_auto_sleep_time >= 0) {
+	if (m_stop_auto_sleep_time > 0) {
 		--m_stop_auto_sleep_time;
 		return;
 	}
@@ -836,6 +849,27 @@ void EnemyBase::AutoCureSleepGage()
 		m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
 
 	}
+}
+
+bool EnemyBase::IsMoveLimitLeft()
+{
+	if (m_map_pos <= 0.f) {
+		return true;
+	}
+	return false;
+}
+
+bool EnemyBase::IsMoveLimitRight()
+{
+	if ((m_map_pos + m_draw_param.tex_size_x) > 2500.f) {
+		return true;
+	}
+	return false;
+}
+
+bool EnemyBase::CheckSleepState()
+{
+	return m_sleep_gauge >= Sleep_Gauge_Max;
 }
 
 void EnemyBase::EnemyWait()			//エネミー待機
@@ -904,6 +938,10 @@ void EnemyBase::DamageSleepness(int damage_sleep_)
 
 	if (m_sleep_gauge >= Sleep_Gauge_Max) {
 		m_sleep_gauge = Sleep_Gauge_Max;
+
+		//1分間の自動回復停止
+		m_stop_auto_sleep_time = 3600;
+
 	}
 
 }

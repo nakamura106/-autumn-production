@@ -31,6 +31,8 @@ BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction directio
 	//ˆÚ“®‹——£”»’è—p
 	m_move_count		= 0.f;
 	m_move_limit		= M_MOVE_LIMIT_DEFAULT;
+
+	CalcDrawPosition();
 }
 
 BulletBase::~BulletBase()

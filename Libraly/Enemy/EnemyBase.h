@@ -41,8 +41,8 @@ private:
 	const float M_ENEMY_SYZE		= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
 	const float	M_INIT_POS_X		= 700.f;	//初期x座標
 	const float M_INIT_POS_Y		= -70.f;	//初期y座標
-	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;
-	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;
+	const float M_CURE_SLEEP_TIME_DEFAULT = 30.f;		//ゲージ自動回復のフレーム周期
+	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT = 300;	//ゲージ自動回復を止めるフレーム時間
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -59,7 +59,14 @@ private:
 	/*睡眠ゲージの自動回復*/
 	void AutoCureSleepGage();
 
-	bool m_can_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
+	/*移動範囲制限*/
+	bool IsMoveLimitLeft();
+	bool IsMoveLimitRight();
+
+	/*眠り判定*/
+	bool CheckSleepState();
+
+	bool m_stop_state_transition;//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
 	//状態関係
 	EnemyStateType	m_state;					//敵の状態
