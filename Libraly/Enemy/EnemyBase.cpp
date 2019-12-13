@@ -8,7 +8,7 @@
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
 #define Refuge_Time	100				//逃げ回る時間
 #define Limit_of_BreakTime 100		//MAXの休憩時間
-#define Cure_of_SleepinessPoint 0.1f	//時間回復する眠気の値
+#define Cure_of_SleepinessPoint 0.5f	//時間回復する眠気の値
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
 
@@ -102,6 +102,14 @@ void EnemyBase::Draw()
 
 	}
 
+	/*DrawFont(
+		m_pos.x + m_draw_param.tex_size_x / 2,
+		m_pos.y + m_draw_param.tex_size_y / 2,
+		std::to_string(m_fatigue_gauge).c_str(),
+		FontSize::Large,
+		FontColor::Red
+	);
+*/
 }
 
 void EnemyBase::Init()
@@ -393,7 +401,13 @@ bool EnemyBase::AITransitionFrontPlayer()
 		}
 	}
 
-	return AITransitionBase();
+	//状態遷移条件値は移動距離でも判定するために存在(値0の場合は判定無し)
+	if (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num != 0) {
+
+		return AITransitionDistance();
+
+	}
+
 }
 
 bool EnemyBase::AITransitionDistance()
@@ -818,7 +832,7 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//疲労回復
-		CureFatigue(5.f);
+		CureFatigue(3.f);
 		break;
 
 	case ObjectRavel::Ravel_PlayerBullet3:
@@ -836,6 +850,9 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 
 void EnemyBase::AutoCureSleepGage()
 {
+	//疲労ゲージが一定以上の場合自動回復なし
+	if (m_fatigue_gauge > M_FATIGUE)return;
+
 	if (m_stop_auto_sleep_time > 0) {
 		--m_stop_auto_sleep_time;
 		return;
