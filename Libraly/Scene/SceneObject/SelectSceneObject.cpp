@@ -117,6 +117,7 @@ void SelectSceneObject::Draw()
 
 void SelectSceneObject::BossSelectUpdate()
 {
+	m_param[1].texture_id = SelectCategoryTextureList::BossSelectBottonTex;
 	m_param[4].texture_id = SelectCategoryTextureList::NumberCollectedTex;
 	m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame3;
 
@@ -151,6 +152,7 @@ void SelectSceneObject::BossSelectUpdate()
 
 void SelectSceneObject::BrassSelectUpdate()
 {
+	m_param[1].texture_id = SelectCategoryTextureList::BrassSelectBottonTex;
 	m_param[4].texture_id = SelectCategoryTextureList::TimeSymbolTex;
 	m_param[6].texture_id = SelectCategoryTextureList::FluteFrame3;
 	m_param[7].texture_id = SelectCategoryTextureList::TubaFrame3;
