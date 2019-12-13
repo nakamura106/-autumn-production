@@ -20,6 +20,8 @@ public:
 	 void SetRectangle()override;
 
 private:
+	const float M_BULLET_SPEED = 7.f;
+
 	//!< プレイヤーのジャンプ処理関数
 	void Jump()override;
 	//!< 画像を呼び出して変数(Drawで使う)に格納する関数

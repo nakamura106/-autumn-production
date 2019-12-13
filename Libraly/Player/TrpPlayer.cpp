@@ -285,7 +285,7 @@ void TrpPlayer::CreateBullets(PlayerBulletType bullettype)
 
 	//Bullet(íe)ê∂ê¨
 	
-	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y, 5.f, (Direction)m_direction, bullettype));
+	bullet_list.push_back(new PlayerBullet(b_pos.x, b_pos.y, M_BULLET_SPEED, (Direction)m_direction, bullettype));
 
 }
 
