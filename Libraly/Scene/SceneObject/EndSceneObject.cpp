@@ -53,7 +53,7 @@ void EndSceneObject::Update()
 
 void EndSceneObject::Draw()
 {
-	if (is_clear == false)
+	if (is_clear == true)
 	{
 		DrawTexture(m_draw_pos[0].x, m_draw_pos[0].y, GetTexture(m_param[0].category_id, m_param[0].texture_id));
 	}
