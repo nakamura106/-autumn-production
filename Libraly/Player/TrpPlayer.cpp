@@ -150,8 +150,6 @@ void TrpPlayer::Draw()
 
 	}
 	
-	DrawFont(500.0f, 500.0f, std::to_string(m_map_pos).c_str(), Large, Red);
-	DrawFont(900.0f, 500.0f, std::to_string(m_pos.x).c_str(), Large, Red);
 }
 
 void TrpPlayer::SetRectangle()
@@ -332,7 +330,7 @@ void TrpPlayer::P_Controll()
 	}
 
 	//¶ˆÚ“®
-	if (GetKey(LEFT_KEY) == true)
+	else if (GetKey(LEFT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
 		if (DataBank::Instance()->GetfgPos() <= -3550.0f || DataBank::Instance()->GetfgPos() >= 0)
@@ -343,7 +341,7 @@ void TrpPlayer::P_Controll()
 			m_pos.x -= lrAdjustment;
 			//m_map_pos -= lrAdjustment;
 		}
-		if (m_map_pos > -120.0f)
+		if (m_map_pos > 0.0f)
 		{
 			m_map_pos -= m_speed;
 		}
@@ -427,7 +425,7 @@ void TrpPlayer::P_Controll()
 	}
 
 	
-	if (m_pos.x >= 1700.0f)
+	if (m_pos.x >= 1800.0f)
 	{
 		m_pos.x -= m_speed;
 	}
