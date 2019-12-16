@@ -31,8 +31,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_map_pos = M_INIT_POS_X;
 
 	//•`‰æî•ñŠi”[
-	m_draw_param.tu				= 1;
-	m_draw_param.tv				= 1;
+	m_draw_param.tu				= 1.f;
+	m_draw_param.tv				= 1.f;
 	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
 	m_draw_param.tex_size_x		= M_ENEMY_SYZE;
@@ -57,11 +57,11 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_now_ai_num			= 0;
 	m_stop_state_transition	= false;
 	m_is_pos_end			= false;
-	m_hit_use_atk = 0.f;
-	m_auto_sleep_time = M_CURE_SLEEP_TIME_DEFAULT;
-	m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
-	m_stop_auto_sleep_time = 0;
-	m_game_clear_saveflame = 0;
+	m_hit_use_atk			= 0.f;
+	m_auto_sleep_time		= M_CURE_SLEEP_TIME_DEFAULT;
+	m_auto_sleep_saveflame	= FlameTimer::GetNowFlame();
+	m_stop_auto_sleep_time	= 0;
+	m_game_clear_saveflame	= 0;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -584,6 +584,12 @@ EnemyStateType EnemyBase::ChangeStateFromChase()
 }
 
 
+
+void EnemyBase::InitAllState()
+{
+	m_draw_param.tu = 1.f;
+	m_draw_param.tv = 1.f;
+}
 
 void EnemyBase::InitWaitState()
 {
