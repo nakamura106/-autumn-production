@@ -40,8 +40,8 @@ void ObjectBase::Draw()
 		m_draw_param.tex_size_x,	//テクスチャの横サイズ
 		m_draw_param.tex_size_y,	//テクスチャの縦サイズ
 		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
-		(m_draw_param.tu - 1) / m_anim_param.split_width,
-		(m_draw_param.tv - 1) / m_anim_param.split_height
+		(m_draw_param.tu - 1.f) / (float)m_anim_param.split_width,
+		(m_draw_param.tv - 1.f) / (float)m_anim_param.split_height
 	);
 }
 
@@ -58,20 +58,20 @@ void ObjectBase::AnimationUpdate()
 		m_animation_timer = 0;
 
 		//横分割枚目を加算
-		++m_draw_param.tu;
+		m_draw_param.tu += 1.f;
 
 		//横分割枚目が画像の分割数以上の場合
 		if (m_draw_param.tu > m_anim_param.split_width) {
 
-			m_draw_param.tu = 1;
+			m_draw_param.tu = 1.f;
 
 			//縦分割枚目を加算
-			++m_draw_param.tv;
+			m_draw_param.tv += 1.f;
 
 			//縦分割枚目が画像の分割数以上の場合
 			if (m_draw_param.tv > m_anim_param.split_height) {
 
-				m_draw_param.tv = 1;
+				m_draw_param.tv = 1.f;
 
 			}
 		}
@@ -80,7 +80,7 @@ void ObjectBase::AnimationUpdate()
 		//tuとtvをリセット
 		if (GetAnimationTexNum() > m_anim_param.split_all) {
 
-			m_draw_param.tu = m_draw_param.tv = 1;
+			m_draw_param.tu = m_draw_param.tv = 1.f;
 
 			//アニメーションの終わりであるフラグをオン
 			m_animation_end = true;

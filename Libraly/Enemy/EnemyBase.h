@@ -156,7 +156,7 @@ protected:
 
 	/*			ó‘Ô‰Šú‰»			*/
 
-	virtual void InitAllState() {}	//‘Só‘Ô‹¤’Ê
+	virtual void InitAllState();	//‘Só‘Ô‹¤’Ê
 	virtual void InitWaitState();	//‘Ò‹@ó‘Ô
 	virtual void InitWalkState();	//ˆÚ“®ó‘Ô
 	virtual void InitRefugeState();	//“¦‘–ó‘Ô
