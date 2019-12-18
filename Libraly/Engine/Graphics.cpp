@@ -576,7 +576,7 @@ bool CreateFontDevice()
 			OUT_DEFAULT_PRECIS,
 			PROOF_QUALITY,
 			FIXED_PITCH | FF_SCRIPT,
-			TEXT("ÇlÇrÅ@ÇoÉSÉVÉbÉN"),
+			TEXT("SimSun"),
 			&g_FontList[i])))
 		{
 			return false;

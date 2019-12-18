@@ -79,24 +79,24 @@ enum GameCategoryTextureList
 	GameObject3,							//!< 草３
 	GameObject4,							//!< フリー
 	GameObject5,							//!< フリー
-	GamePlayer_Taiki_Tp_LeftTex,			//!<プレイヤー待機左
-	GamePlayer_Taiki_Tp_RightTex,			//!<プレイヤー待機右
-	GamePlayer_Jump_Tp_LeftTex,				//!<ジャンプ左
-	GamePlayer_Jump_Tp_RightTex,			//!<ジャンプ右
-	GamePlayer_Walk_Tp_LeftTex,				//!<歩行左
-	GamePlayer_Walk_Tp_RightTex,			//!<歩行右
-	GamePlayer_Attack_Tp_LeftTex,			//!<攻撃左
-	GamePlayer_Attack_Tp_RightTex,			//!<攻撃右
-	GamePlayer_WalkAttack_Tp_LeftTex,		//!<歩行攻撃左
-	GamePlayer_WalkAttack_Tp_RightTex,		//!<歩行攻撃右
-	GamePlayer_JumpAttack_Tp_LeftTex,		//!<ジャンプ攻撃左
-	GamePlayer_JumpAttack_Tp_RightTex,		//!<ジャンプ攻撃右
-	GamePlayer_Damage_Tp_LeftTex,			//!<ダメージ左
-	GamePlayer_Damage_Tp_RightTex,			//!<ダメージ右
-	GamePlayer_JumpDamage_Tp_LeftTex,		//!<ジャンプダメージ左
-	GamePlayer_JumpDamage_Tp_RightTex,		//!<ジャンプダメージ右
-	GamePlayer_Clear_Tp_LeftTex,			//!<クリア左
-	GamePlayer_Clear_Tp_RightTex,			//!<クリア右
+	GamePlayer_Taiki_LeftTex,			//!<プレイヤー待機左
+	GamePlayer_Taiki_RightTex,			//!<プレイヤー待機右
+	GamePlayer_Jump_LeftTex,				//!<ジャンプ左
+	GamePlayer_Jump_RightTex,			//!<ジャンプ右
+	GamePlayer_Walk_LeftTex,				//!<歩行左
+	GamePlayer_Walk_RightTex,			//!<歩行右
+	GamePlayer_Attack_LeftTex,			//!<攻撃左
+	GamePlayer_Attack_RightTex,			//!<攻撃右
+	GamePlayer_WalkAttack_LeftTex,		//!<歩行攻撃左
+	GamePlayer_WalkAttack_RightTex,		//!<歩行攻撃右
+	GamePlayer_JumpAttack_LeftTex,		//!<ジャンプ攻撃左
+	GamePlayer_JumpAttack_RightTex,		//!<ジャンプ攻撃右
+	GamePlayer_Damage_LeftTex,			//!<ダメージ左
+	GamePlayer_Damage_RightTex,			//!<ダメージ右
+	GamePlayer_JumpDamage_LeftTex,		//!<ジャンプダメージ左
+	GamePlayer_JumpDamage_RightTex,		//!<ジャンプダメージ右
+	GamePlayer_Clear_LeftTex,			//!<クリア左
+	GamePlayer_Clear_RightTex,			//!<クリア右
 	GamePlayer_OpeningTex,					//!<オープニング
 	GamePlayerBullet_1Tex,					//!<プレイヤーの弾1
 	GamePlayerBullet_2Tex,					//!<プレイヤーの弾2

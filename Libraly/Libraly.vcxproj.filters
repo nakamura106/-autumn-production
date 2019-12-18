@@ -70,6 +70,12 @@
     <Filter Include="Scene\SceneObject">
       <UniqueIdentifier>{7297b6ba-0f4e-4f37-84fe-47cd703baad4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\FlutePlayer">
+      <UniqueIdentifier>{fb5afde8-741e-450d-bb68-a5ff6da594fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\TubaPlayer">
+      <UniqueIdentifier>{7eb365f5-6978-4d40-a906-cb1fcd01b939}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
