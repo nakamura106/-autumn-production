@@ -1,5 +1,6 @@
 #ifndef DATABANK_H_
 #define DATABANK_H_
+#include "../Object/Definition.h"
 
 class DataBank
 {
@@ -19,12 +20,14 @@ public:
 	void SetSleepGauge(float sleep_hp) { m_sleep_gauge = sleep_hp; }
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
 	void SetIsGameClear(bool is_game_clear_) { m_is_game_clear = is_game_clear_; }
+	void SetPlayerType(int Which_type_of_player) { m_PlayerType = Which_type_of_player; };
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
 	int GetNote2() { return note2; }
 	int GetNote3() { return note3; }
 	int GetBulletType() { return m_bullet_type; }
+	int GetPlayerType() { return m_PlayerType; }
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
@@ -53,6 +56,8 @@ private:
 	float m_sleep_gauge, m_fatigue_gauge;
 
 	bool m_is_game_clear;
+
+	int m_PlayerType;
 
 private:
 	static DataBank* p_instance;
