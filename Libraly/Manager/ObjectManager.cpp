@@ -1,8 +1,10 @@
 #include "ObjectManager.h"
 #include "../Player/TrpPlayer.h"
+#include"../Player/TubaPlayer/TubaPlayer.h"
 #include "../Map/Map.h"
 #include "../Enemy/Mouse.h"
 #include"CollisionManager.h"
+#include"../DataBank/DataBank.h"
 
 
 ObjectManager* ObjectManager::p_instance = 0;
@@ -72,7 +74,20 @@ void ObjectManager::CreateObject()
 
 	chara_objects[1] = new HedgeHog();
 
-	chara_objects[2] = new TrpPlayer();
+	switch (DataBank::Instance()->GetPlayerType())
+	{
+	case (int)Player::PlayerTypeTrumpet:
+		chara_objects[2] = new TrpPlayer;
+		break;
+	case (int)Player::PlayerTypeTuba:
+		chara_objects[2] = new TubaPlayer;
+		break;
+	default:
+		break;
+	}
+		
+	
+	
 
 	chara_objects[3] = new Fg();
 

@@ -228,6 +228,9 @@
     <ClCompile Include="Scene\SceneObject\SelectSceneObject.cpp">
       <Filter>Scene\SceneObject</Filter>
     </ClCompile>
+    <ClCompile Include="Player\TubaPlayer\TubaPlayer.cpp">
+      <Filter>Player\TubaPlayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneObject\SelectSceneObject.h">
       <Filter>Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\TubaPlayer\TubaPlayer.h">
+      <Filter>Player\TubaPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

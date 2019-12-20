@@ -164,6 +164,7 @@
     <ClCompile Include="Object\ObjectBace.cpp" />
     <ClCompile Include="Player\PlayerBase.cpp" />
     <ClCompile Include="Player\TrpPlayer.cpp" />
+    <ClCompile Include="Player\TubaPlayer\TubaPlayer.cpp" />
     <ClCompile Include="Scene\GameEndScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\HelpScene.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Object\ObjectBase.h" />
     <ClInclude Include="Player\PlayerBase.h" />
     <ClInclude Include="Player\TrpPlayer.h" />
+    <ClInclude Include="Player\TubaPlayer\TubaPlayer.h" />
     <ClInclude Include="Scene\GameEndScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\HelpScene.h" />

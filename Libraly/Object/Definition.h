@@ -234,8 +234,8 @@ struct Position
 struct DrawParam
 {
 	DrawParam() {
-		tu = 1.0f;
-		tv = 1.0f;
+		tu = 0.0f;
+		tv = 0.0f;
 		tex_size_x = 0.0f;
 		tex_size_y = 0.0f;
 		category_id = 0;
