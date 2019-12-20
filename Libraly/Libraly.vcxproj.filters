@@ -52,18 +52,6 @@
     <Filter Include="Player\TrpPlayer">
       <UniqueIdentifier>{d47ac46f-cfd6-4be8-8ba4-039fab2dea04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utility\Collision">
-      <UniqueIdentifier>{841a3b8a-bcd1-4851-9d56-53c0027c41c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utility\Collision\Circle">
-      <UniqueIdentifier>{da847ba8-d894-4e34-8022-2d49910c1c1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utility\Collision\Rectangle">
-      <UniqueIdentifier>{04ddb2bc-0685-42c5-bcb0-3bff2cdeeab3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utility\Collision\Line">
-      <UniqueIdentifier>{8f071b62-4344-41cd-8263-924a6f91d5dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DataBank">
       <UniqueIdentifier>{3b071d3f-50e0-4c69-bf6e-8dc29020ef6e}</UniqueIdentifier>
     </Filter>
@@ -168,18 +156,6 @@
     <ClCompile Include="Manager\CollisionManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Utility\CollisionBase.cpp">
-      <Filter>Utility\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Circle\CollisionCircle.cpp">
-      <Filter>Utility\Collision\Circle</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Line\CollisionLine.cpp">
-      <Filter>Utility\Collision\Line</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Rectangle\CollisionRectangle.cpp">
-      <Filter>Utility\Collision\Rectangle</Filter>
-    </ClCompile>
     <ClCompile Include="UI\PlayerHpUi.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -194,9 +170,6 @@
     </ClCompile>
     <ClCompile Include="UI\FatigueGaugeUi.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\HitTest.cpp">
-      <Filter>Utility\Collision</Filter>
     </ClCompile>
     <ClCompile Include="UI\EnemyAchieve.cpp">
       <Filter>UI</Filter>
@@ -227,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="Scene\SceneObject\SelectSceneObject.cpp">
       <Filter>Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\HitTest.cpp">
+      <Filter>Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,18 +302,6 @@
     <ClInclude Include="Manager\CollisionManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Utility\CollisionBase.h">
-      <Filter>Utility\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Circle\CollisionCircle.h">
-      <Filter>Utility\Collision\Circle</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Line\CollisionLine.h">
-      <Filter>Utility\Collision\Line</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Rectangle\CollisionRectangle.h">
-      <Filter>Utility\Collision\Rectangle</Filter>
-    </ClInclude>
     <ClInclude Include="UI\PlayerHpUi.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -352,9 +316,6 @@
     </ClInclude>
     <ClInclude Include="UI\FatigueGaugeUi.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\HitTest.h">
-      <Filter>Utility\Collision</Filter>
     </ClInclude>
     <ClInclude Include="UI\EnemyAchieve.h">
       <Filter>UI</Filter>
@@ -385,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneObject\SelectSceneObject.h">
       <Filter>Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\HitTest.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
