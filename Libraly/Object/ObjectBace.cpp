@@ -2,8 +2,10 @@
 #include"../Manager/CollisionManager.h"
 #include"../DataBank/DataBank.h"
 
+const float G_OBJECT_DEFAULT_SPEED = 5.f;
+
 ObjectBase::ObjectBase()
-	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, 5.f)
+	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, G_OBJECT_DEFAULT_SPEED)
 {
 
 }
@@ -18,6 +20,8 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 	m_state				= 0;
 	m_animation_timer	= 0;
 	m_animation_end		= false;
+	m_hit_use_atk		= 0.f;
+	m_map_pos			= 0.f;
 }
 
 ObjectBase::~ObjectBase()
@@ -95,17 +99,6 @@ int ObjectBase::GetAnimationTexNum()
 	return (((int)m_draw_param.tv - 1) * m_anim_param.split_width + (int)m_draw_param.tu);
 }
 
-ObjectRavel ObjectBase::GetRavel()
-{
-	return m_obj_ravel;
-}
-
-HitRectangle ObjectBase::GetRectParam()
-{
-	return m_rect_param;
-}
-
-
 
 void ObjectBase::SetRectangle()
 {
@@ -119,8 +112,6 @@ void ObjectBase::CalcDrawPosition()
 {
 	//プレイヤーのワールド座標
 	float p_map_pos = DataBank::Instance()->Getfloor1Pos();
-
-	//if (p_map_pos == 0.f)return;
 
 	m_pos.x = m_map_pos + p_map_pos;
 

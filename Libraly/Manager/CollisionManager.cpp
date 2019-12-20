@@ -16,9 +16,9 @@ CollisionManager::~CollisionManager()
 void CollisionManager::AllHitTest()
 {
 
-	for (int i = 0;i < m_collision_obj_list.size();++i) {
+	for (int i = 0;i < static_cast<int>(m_collision_obj_list.size());++i) {
 
-		for (int j = 0;j < m_collision_obj_list.size();++j) {
+		for (int j = 0;j < static_cast<int>(m_collision_obj_list.size());++j) {
 
 			if (i == j)continue;
 
