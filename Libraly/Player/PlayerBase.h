@@ -77,7 +77,7 @@ protected:
 	UVANIMATION clear_animation_Left[12];	//“¯•¶
 
 private:
-	const float M_PLAYER_ANIMATION=256.0f;
+	const float M_PLAYER_SIZE=256.0f;
 
 	const float M_BULLET_SPEED = 7.f;
 };
