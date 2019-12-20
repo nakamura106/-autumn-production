@@ -6,17 +6,19 @@ PlayerBase::PlayerBase()
 	:ObjectBase(ObjectRavel::Ravel_Player,Direction::RIGHT,P_speed)
 {
 	//使用画像設定
+	m_draw_param.tu = 1.0f;
+	m_draw_param.tv = 1.0f;
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id = GameCategoryTextureList::GamePlayer_Taiki_RightTex;
-	m_draw_param.tex_size_x = M_PLAYER_ANIMATION;
-	m_draw_param.tex_size_y = M_PLAYER_ANIMATION;
+	m_draw_param.tex_size_x = M_PLAYER_SIZE;
+	m_draw_param.tex_size_y = M_PLAYER_SIZE;
 
 	//アニメーション用仮メンバ初期化
 	m_anim_param.split_all = 12;
 	m_anim_param.split_width = 4;
 	m_anim_param.split_height = 4;
 	m_anim_param.change_flame = Dispflame;
-	InitAllState();
+	
 }
 
 PlayerBase::~PlayerBase()
@@ -40,6 +42,7 @@ void PlayerBase::Update()
 	P_Controll();
 	AnimationUpdate();
 	ChangeState();
+	Atkjudge();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
@@ -109,7 +112,6 @@ void PlayerBase::P_Controll()
 		}
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
-			//m_map_pos += lrAdjustment;
 		}
 		if (m_map_pos < 3550.0f)
 		{
@@ -130,7 +132,6 @@ void PlayerBase::P_Controll()
 		}
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
-			//m_map_pos -= lrAdjustment;
 		}
 		if (m_map_pos > 0.0f)
 		{
@@ -394,7 +395,7 @@ void PlayerBase::Jump()
 
 void PlayerBase::Attack()
 {
-	if (m_i > 10)
+	if (m_i > 5)
 	{
 		m_do_attack = false;
 		m_is_active = false;
