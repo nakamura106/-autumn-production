@@ -11,6 +11,9 @@ public:
 	void Init();
 
 private:
+	const int M_EBULLET_ANIM_SPLIT_ALL	= 1;
+	const int M_EBULLET_ANIM_SPLIT_W	= 2;
+	const int M_EBULLET_ANIM_SPLIT_H	= 1;
 
 };
 

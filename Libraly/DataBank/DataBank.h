@@ -21,6 +21,7 @@ public:
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
 	void SetIsGameClear(bool is_game_clear_) { m_is_game_clear = is_game_clear_; }
 	void SetPlayerType(int Which_type_of_player) { m_PlayerType = Which_type_of_player; };
+	void SetIsGameOver(bool is_game_over_) { m_is_game_over = is_game_over_; }
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -34,6 +35,7 @@ public:
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
 	bool GetIsGameClear() { return m_is_game_clear; }
+	bool GetIsGameOver() { return m_is_game_over; }
 
 	int GetPlayerHp()const { return m_player_hp; }
 
@@ -56,6 +58,7 @@ private:
 	float m_sleep_gauge, m_fatigue_gauge;
 
 	bool m_is_game_clear;
+	bool m_is_game_over;
 
 	int m_PlayerType;
 

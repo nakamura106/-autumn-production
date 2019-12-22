@@ -11,9 +11,7 @@ public:
 	~HedgeHog();
 	
 	void Init();
-	//void Update();
 
-	
 	void SetRectangle()override;
 
 private:
@@ -25,6 +23,11 @@ private:
 	const float M_NEEDLE_ADJUST_Y = 630.f;
 
 	const float M_DASHATTACK_SPEED_CHANGE_NUM = 1.02f;
+
+	//攻撃時動作のタイミング定数
+	const int	M_ATTACK1_ANIM_TEX_NUM = 9;
+	const int	M_ATTACK2_ANIM_TEX_NUM = 7;
+	const int	M_ATTACK3_ANIM_TEX_NUM = 5;
 
 	
 	std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
