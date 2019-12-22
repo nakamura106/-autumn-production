@@ -51,6 +51,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time		= 0;
 	m_savetime_sleep			= 0;
+	m_auto_sleep_down			= 0.f;
+	m_auto_fatigue_up			= 0.f;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -116,6 +118,11 @@ void EnemyBase::Update()
 
 	//デバッグ用
 	DebugKeyAction();
+
+	//疲労ゲージ量によってゲージ自動回復量変化
+	AutoGageProcess();
+
+	//自動回復関数を呼び出す
 
 	//現在の状態における動作の更新
 	//UpdateState();
@@ -378,7 +385,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
 		if (m_p_pos_relation == Direction::LEFT) {
-			if (p_pos_x + 256.f >= m_map_pos) {
+			if (p_pos_x + M_PLAYER_SIZE_X >= m_map_pos) {
 				return true;
 			}
 		}
@@ -457,6 +464,33 @@ void EnemyBase::ChangeAIDirection()
 		}
 	}
 
+}
+
+void EnemyBase::AutoGageProcess()
+{
+	m_auto_fatigue_up	= 0.f;
+	m_auto_sleep_down	= 0.f;
+
+	//疲労ゲージ1/4未満
+	if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f/4.f)) {
+		//眠気減少：高速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
+	}
+	//疲労ゲージ1/2未満
+	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f / 2.f)) {
+		//眠気減少：中速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
+	}
+	//疲労ゲージ3/4未満
+	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (3.f / 4.f)) {
+		//眠気減少：低速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
+	}
+	//疲労ゲージ3/4以上
+	else {
+		//眠気減少：停止、疲労増加：低速
+		m_auto_fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+	}
 }
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
@@ -586,6 +620,7 @@ void EnemyBase::InitAllState()
 void EnemyBase::InitWaitState()
 {
 	if (m_direction == Direction::LEFT) {
+		//使用する画像の変更(以下同じ)
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
 	}
 	else {
@@ -684,6 +719,7 @@ void EnemyBase::ChangeDirection()
 	}
 }
 
+//Csv読み込み関数
 void EnemyBase::LoadAIData(std::string file_name_)
 {
 	//１～１０の基本配列
@@ -737,7 +773,8 @@ void EnemyBase::LoadAIData(std::string file_name_)
 
 
 
-void EnemyBase::EnemyMove()			//エネミー移動
+//エネミー移動
+void EnemyBase::EnemyMove()			
 {
 	/*
 		通常状態のエネミー移動（適切な距離まで距離を詰める）
@@ -809,23 +846,23 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	//プレイヤー弾①
 	case ObjectRavel::Ravel_PlayerBullet:
 		//眠気増加
-		DamageSleepness(5.f);
+		DamageSleepness(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾②
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//疲労回復
-		CureFatigue(3.f);
+		CureFatigue(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾③
 	case ObjectRavel::Ravel_PlayerBullet3:
-		DamageFatigue(5.f);
+		DamageFatigue(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾④
 	case ObjectRavel::Ravel_PlayerBullet4:
-		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_DEFAULT;
+		m_stop_auto_sleep_time = static_cast<int>(hit_use_atk_);
 		break;
 
 	default:
