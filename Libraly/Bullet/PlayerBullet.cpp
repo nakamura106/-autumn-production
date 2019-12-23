@@ -4,16 +4,15 @@
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_)
 {
-	m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
-	m_anim_param.split_all = 16;
-	m_anim_param.split_width = 4;
-	m_anim_param.split_height = 4;
+	m_draw_param.texture_id		= GameCategoryTextureList::GamePlayerBullet_1Tex;
+	m_anim_param.split_all		= M_PBULLET_ANIM_SPLIT_ALL;
+	m_anim_param.split_width	= M_PBULLET_ANIM_SPLIT_W;
+	m_anim_param.split_height	= M_PBULLET_ANIM_SPLIT_H;
+	m_obj_ravel					= ObjectRavel::Ravel_PlayerBullet;
+	player_bullet_type			= p_bullet_type_;
 
-	m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
-
-	player_bullet_type = p_bullet_type_;
-
-	SetTextureID();
+	//プレイヤーの弾の情報を格納
+	SetPlayerBulletInfo();
 
 }
 
@@ -26,32 +25,44 @@ void PlayerBullet::Load()
 	//LoadTexture("Res/Tex/Effect/tyotyo01_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
 }
 
-void PlayerBullet::SetTextureID()
+void PlayerBullet::SetPlayerBulletInfo()
 {
 	switch (player_bullet_type)
 	{
 	case PlayerBulletType::Chocho_1:
+		//使用するテクスチャを設定
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
+
+		//オブジェクトの種類(ラベル)設定
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet;
-		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Chocho_1);	// UI用BulletType渡し関数
+
+		// UI用BulletType渡し関数
+		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Chocho_1);
+
+		//この弾が持つ当たり判定時の情報を設定
+		m_hit_use_atk = M_CHOCHO_1_NUM;
+
 		break;
 
 	case PlayerBulletType::Chocho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_2Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet2;
 		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Chocho_2);
+		m_hit_use_atk = M_CHOCHO_2_NUM;
 		break;
 
 	case PlayerBulletType::Tancho_1:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_3Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet3;
 		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Tancho_1);
+		m_hit_use_atk = M_TANCHO_1_NUM;
 		break;
 
 	case PlayerBulletType::Tancho_2:
 		m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_4Tex;
 		m_obj_ravel = ObjectRavel::Ravel_PlayerBullet4;
 		DataBank::Instance()->SetBulletType((int)PlayerBulletType::Tancho_2);
+		m_hit_use_atk = M_TANCHO_2_NUM;
 		break;
 
 	default:

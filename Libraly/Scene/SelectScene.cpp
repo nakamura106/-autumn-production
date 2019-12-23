@@ -62,7 +62,7 @@ void MainSelectScene()
 
 SceneId FinishSelectScene()
 {
-
+	ReleaseCategoryTexture(TEXTURE_CATEGORY_SELECT);
 	return SceneId::GameScene;
 
 }

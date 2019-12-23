@@ -42,6 +42,9 @@ private:
 	using EnemyAIList = std::vector < EnemyAIParam* >;
 	using EnemyBulletList = std::vector<EnemyBullet*>;
 
+	/*仮実装用定数*/
+	const float	M_PLAYER_SIZE_X = 256.f;	//プレイヤーのx方向の画像サイズ(プレイヤーとの位置関係で使用)
+
 	/*初期化用初期値*/
 	const int	M_ANIM_FLAME					= 7;		//画像変更を行うフレーム周期
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
@@ -55,6 +58,10 @@ private:
 	const float M_MOVE_LIMIT_X					= 3500.f;	
 	const int	M_GAMECLEAR_FLAME				= 180;		//眠りモーション遷移後、ゲームクリア
 	const float M_FATIGUE						= 46.f;		
+	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 0.f;		//眠気自動減少速度値
+	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.f;
+	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.f;
+	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.f;		//疲労度自動増加速度値
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -104,6 +111,9 @@ private:
 	/*CsvAI向き変更関数：状態遷移時、向き変更*/
 	void ChangeAIDirection();
 
+	/*疲労ゲージの量によってゲージ自動回復量を変化させる関数*/
+	void AutoGageProcess();
+
 	bool m_stop_state_transition;	//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
 	EnemyStateType	m_state;					//敵の状態
@@ -119,6 +129,8 @@ private:
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
 	int				m_savetime_sleep;			//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
+	float			m_auto_sleep_down;			//眠気自動回復値
+	float			m_auto_fatigue_up;			//疲労度自動回復値
 
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 	EnemyBulletList bullet_list;		//弾のリスト
