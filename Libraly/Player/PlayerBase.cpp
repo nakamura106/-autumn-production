@@ -19,6 +19,8 @@ PlayerBase::PlayerBase()
 	m_anim_param.split_height = 4;
 	m_anim_param.change_flame = Dispflame;
 	
+
+	m_animtimer = 0;
 }
 
 PlayerBase::~PlayerBase()
@@ -207,6 +209,7 @@ void PlayerBase::P_Controll()
 
 	if (m_do_attack == true)
 	{
+		m_animtimer++;
 		Attack();
 	}
 
@@ -233,11 +236,11 @@ void PlayerBase::CreateBullets(PlayerBulletType bullettype)
 {
 	Position b_pos;
 	if (m_direction == Direction::LEFT) {
-		b_pos.x = m_map_pos - m_draw_param.tex_size_x;
+		b_pos.x = m_map_pos - m_draw_param.tex_size_x/2.0f;
 		b_pos.y = m_pos.y;
 	}
 	else {
-		b_pos.x = m_map_pos + m_draw_param.tex_size_x;
+		b_pos.x = m_map_pos + m_draw_param.tex_size_x/2.0f;
 		b_pos.y = m_pos.y;
 	}
 
@@ -395,15 +398,21 @@ void PlayerBase::Jump()
 
 void PlayerBase::Attack()
 {
-	if (m_i > 5)
+	if (m_animtimer >= 72)
 	{
 		m_do_attack = false;
 		m_is_active = false;
+		m_animtimer = 0;
 	}
 
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Jump)
 	{
 		m_state = (int)P_State::Attack;
+	}
+
+	if (GetKey(LEFT_KEY) == true || GetKey(RIGHT_KEY) == true)
+	{
+
 	}
 }
 

@@ -64,18 +64,15 @@ protected:
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
 	int     m_i;							//アニメーション切り替え用
-	int		m_play_note_timer;					//音符生成用タイマー
+	int		m_play_note_timer;				//音符生成用タイマー
 	int		m_release_timer;				//音符開解放用タイマー
+	int		m_animtimer;
 
 	int notebox[3];
 
 	std::vector<PlayerBullet*> bullet_list;
 
-	UVANIMATION Animation[MaxAnimationNum];	//アニメーションのスプリット保存用
-
-	UVANIMATION clear_animation_Right[12];	//アニメーションの枚数が違うので放置
-	UVANIMATION clear_animation_Left[12];	//同文
-
+	
 private:
 	const float M_PLAYER_SIZE=256.0f;
 
