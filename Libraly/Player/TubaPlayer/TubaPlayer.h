@@ -12,6 +12,8 @@ public:
 
 	void SetRectangle();
 
+	void Jump();
+
 	void Load()override;
 private:
 

@@ -26,10 +26,10 @@ public:
 	//!< プレイヤーコントロール関数(プレイヤーの操作)
 	void P_Controll();
 	//!< プレイヤーのジャンプ処理関数
-	void Jump();
+	virtual void Jump();
 	//!< 弾が射程距離を超えたら音符ストックを消す関数
 	void ReleaseNote();
-	
+
 	//状態遷移
 	void ChangeState();
 	

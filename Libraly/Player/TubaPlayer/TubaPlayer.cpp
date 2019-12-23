@@ -31,7 +31,7 @@ void TubaPlayer::Init()
 	m_map_pos = P_posX;
 	m_pos.x = P_posX;
 	m_pos.y = P_posYforest;
-	m_draw_param.tex_size_x = 128.0f;
+	m_draw_param.tex_size_x = 256.0f;
 	m_List = GamePlayer_Taiki_RightTex;
 	for (int i = 0; i < 2; i++)
 	{
@@ -74,4 +74,31 @@ void TubaPlayer::SetRectangle()
 	m_rect_param.shift_y = 9.0f;
 	m_rect_param.width = 114.0f;
 	m_rect_param.height = 245.0f;
+}
+
+void TubaPlayer::Jump()
+{
+	static float jump_power = P_jump_power;
+
+	m_anim_param.split_all = 20;
+	m_anim_param.split_height = 5;
+
+	//プレイヤーがDamage状態、Attack状態でなければジャンプ状態にする
+	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)
+	{
+		m_state = (int)P_State::Jump;
+	}
+
+	m_pos.y -= jump_power;
+	jump_power -= Gravity;
+
+	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
+	if (m_pos.y >= P_posYforest)
+	{
+		jump_power = P_jump_power;
+		m_do_jump = false;
+		m_is_active = false;
+		m_anim_param.split_all = 12;
+		m_anim_param.split_height = 4;
+	}
 }

@@ -43,7 +43,7 @@ void TrpPlayer::Init()
 	m_map_pos = P_posX;
 	m_pos.x = P_posX;
 	m_pos.y = P_posYforest;
-	m_draw_param.tex_size_x = 128.0f;
+	m_draw_param.tex_size_x = 256.0f;
 	m_List = GamePlayer_Taiki_RightTex;
 	for (int i = 0; i < 2; i++)
 	{
