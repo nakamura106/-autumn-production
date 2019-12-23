@@ -30,6 +30,20 @@ public:
 	//!< 弾が射程距離を超えたら音符ストックを消す関数
 	void ReleaseNote();
 	
+	//状態遷移
+	void ChangeState();
+	
+	virtual void InitWaitState();		//待機状態
+	virtual void InitMoveState();		//移動状態
+	virtual void InitJumpState();		//逃走状態
+	virtual void InitJumpAttackState();	
+	virtual void InitJumpDamageState();	
+	virtual void InitDamageState();		
+	virtual void InitAttackState();		//追跡状態
+	virtual void InitThinkState();		//眠り状態
+	virtual void InitDeathState();		//死亡状態
+	virtual void InitClearState();		//クリア状態
+	virtual void InitAllState();
 
 	void Atkjudge();
 
@@ -50,7 +64,7 @@ protected:
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
 	int     m_i;							//アニメーション切り替え用
-	int		m_note_timer;					//音符生成用タイマー
+	int		m_play_note_timer;					//音符生成用タイマー
 	int		m_release_timer;				//音符開解放用タイマー
 
 	int notebox[3];
@@ -63,7 +77,7 @@ protected:
 	UVANIMATION clear_animation_Left[12];	//同文
 
 private:
-	const float M_PLAYER_ANIMATION=256.0f;
+	const float M_PLAYER_SIZE=256.0f;
 
 	const float M_BULLET_SPEED = 7.f;
 };

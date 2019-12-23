@@ -22,46 +22,37 @@
 EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_)
 {
-	m_state				= EnemyStateType::Walk;
-	m_fatigue_gauge		= 0.f;
-	m_sleep_gauge		= 0.f;
-	m_is_delete			= false;
-	m_pos.x				= M_INIT_POS_X;
-	m_pos.y				= M_INIT_POS_Y;
-	m_map_pos = M_INIT_POS_X;
-
-	//描画情報格納
+	m_enemy_id					= enemy_id_;
+	m_state						= EnemyStateType::Walk;
+	m_fatigue_gauge				= 0.f;
+	m_sleep_gauge				= 0.f;
+	m_is_delete					= false;
+	m_pos.x						= M_INIT_POS_X;
+	m_pos.y						= M_INIT_POS_Y;
+	m_map_pos					= M_INIT_POS_X;
 	m_draw_param.tu				= 1.f;
 	m_draw_param.tv				= 1.f;
 	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
 	m_draw_param.tex_size_x		= M_ENEMY_SYZE;
 	m_draw_param.tex_size_y		= M_ENEMY_SYZE;
-
-	//アニメーション情報格納
 	m_anim_param.change_flame	= M_ANIM_FLAME;
 	m_anim_param.split_all		= M_ANIM_TEX_ALL;
 	m_anim_param.split_width	= M_ANIM_TEX_WIDTH;
 	m_anim_param.split_height	= M_ANIM_TEX_HEIGHT;
-
-	//saveflame(フレーム数計測用変数)
-	m_state_saveflame = 0;
-	m_state_save_pos_x = 0;
-	m_player_pos_relationship = Direction::LEFT;
-
-	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
-		m_ai_list[i].clear();
-	}
-
-	m_now_ai				= EnemyAIType::AI1;
-	m_now_ai_num			= 0;
-	m_stop_state_transition	= false;
-	m_is_pos_end			= false;
-	m_hit_use_atk			= 0.f;
-	m_auto_sleep_time		= M_CURE_SLEEP_TIME_DEFAULT;
-	m_auto_sleep_saveflame	= FlameTimer::GetNowFlame();
-	m_stop_auto_sleep_time	= 0;
-	m_game_clear_saveflame	= 0;
+	m_savetime_state			= 0;
+	m_state_save_pos_x			= 0;
+	m_p_pos_relation			= Direction::LEFT;
+	m_now_ai					= EnemyAIType::AI1;
+	m_now_ai_num				= 0;
+	m_stop_state_transition		= false;
+	m_hit_use_atk				= 0.f;
+	m_auto_sleep_time			= M_CURE_SLEEP_TIME_DEFAULT;
+	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
+	m_stop_auto_sleep_time		= 0;
+	m_savetime_sleep			= 0;
+	m_auto_sleep_down			= 0.f;
+	m_auto_fatigue_up			= 0.f;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -102,14 +93,16 @@ void EnemyBase::Draw()
 
 	}
 
-	/*DrawFont(
+	//デバッグ描画
+	/*
+	DrawFont(
 		m_pos.x + m_draw_param.tex_size_x / 2,
 		m_pos.y + m_draw_param.tex_size_y / 2,
 		std::to_string(m_fatigue_gauge).c_str(),
 		FontSize::Large,
 		FontColor::Red
 	);
-*/
+	*/
 }
 
 void EnemyBase::Init()
@@ -125,6 +118,11 @@ void EnemyBase::Update()
 
 	//デバッグ用
 	DebugKeyAction();
+
+	//疲労ゲージ量によってゲージ自動回復量変化
+	AutoGageProcess();
+
+	//自動回復関数を呼び出す
 
 	//現在の状態における動作の更新
 	//UpdateState();
@@ -317,7 +315,7 @@ void EnemyBase::AITransitionUpdate()
 		ChangeAIState();
 
 		//敵のゲージ量によってスピードが変化
-		m_speed = m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
 
 		//AIに合わせて向き変更
 		ChangeAIDirection();
@@ -357,7 +355,7 @@ bool EnemyBase::AITransitionStraight()
 bool EnemyBase::AITransitionPassPlayer()
 {
 	//プレイヤーのx座標をゲット
-	if (m_player_pos_relationship == Direction::LEFT) {
+	if (m_p_pos_relation == Direction::LEFT) {
 
 		if (m_map_pos + m_draw_param.tex_size_x / 2.f <
 			DataBank::Instance()->GetPlayerMapPos())
@@ -386,15 +384,15 @@ bool EnemyBase::AITransitionFrontPlayer()
 	
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
-		if (m_player_pos_relationship == Direction::LEFT) {
-			if (p_pos_x + 256.f >= m_map_pos) {
+		if (m_p_pos_relation == Direction::LEFT) {
+			if (p_pos_x + M_PLAYER_SIZE_X >= m_map_pos) {
 				return true;
 			}
 		}
 	}
 	else {
 		//E=R,P=L
-		if (m_player_pos_relationship == Direction::RIGHT) {
+		if (m_p_pos_relation == Direction::RIGHT) {
 			if (p_pos_x <= (m_map_pos + m_draw_param.tex_size_x)) {
 				return true;
 			}
@@ -408,6 +406,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 
 	}
 
+	return false;
 }
 
 bool EnemyBase::AITransitionDistance()
@@ -424,7 +423,7 @@ bool EnemyBase::AITransitionDistance()
 
 bool EnemyBase::AITransitionFlameTime()
 {
-	if (FlameTimer::GetNowFlame(m_state_saveflame) >= 
+	if (FlameTimer::GetNowFlame(m_savetime_state) >= 
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
 		&& m_animation_end)
 	{
@@ -465,6 +464,33 @@ void EnemyBase::ChangeAIDirection()
 		}
 	}
 
+}
+
+void EnemyBase::AutoGageProcess()
+{
+	m_auto_fatigue_up	= 0.f;
+	m_auto_sleep_down	= 0.f;
+
+	//疲労ゲージ1/4未満
+	if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f/4.f)) {
+		//眠気減少：高速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
+	}
+	//疲労ゲージ1/2未満
+	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f / 2.f)) {
+		//眠気減少：中速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
+	}
+	//疲労ゲージ3/4未満
+	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (3.f / 4.f)) {
+		//眠気減少：低速
+		m_auto_sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
+	}
+	//疲労ゲージ3/4以上
+	else {
+		//眠気減少：停止、疲労増加：低速
+		m_auto_fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+	}
 }
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
@@ -543,15 +569,15 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 	InitAllState();
 
 	//現在の状態を格納
-	m_state_saveflame = FlameTimer::GetNowFlame();
+	m_savetime_state = FlameTimer::GetNowFlame();
 	m_state_save_pos_x = m_map_pos;
 
 	//プレイヤーがどちらの方向にいるのかを格納
 	if (m_map_pos < DataBank::Instance()->GetPlayerMapPos()) {
-		m_player_pos_relationship = Direction::RIGHT;
+		m_p_pos_relation = Direction::RIGHT;
 	}
 	else {
-		m_player_pos_relationship = Direction::LEFT;
+		m_p_pos_relation = Direction::LEFT;
 	}
 
 }
@@ -594,6 +620,7 @@ void EnemyBase::InitAllState()
 void EnemyBase::InitWaitState()
 {
 	if (m_direction == Direction::LEFT) {
+		//使用する画像の変更(以下同じ)
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
 	}
 	else {
@@ -658,7 +685,7 @@ void EnemyBase::InitAttack3State()
 void EnemyBase::InitChaseState()
 {
 	//方向をプレイヤーの側にする
-	m_direction = m_player_pos_relationship;
+	m_direction = m_p_pos_relation;
 
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
@@ -671,7 +698,7 @@ void EnemyBase::InitChaseState()
 
 void EnemyBase::InitSleepState()
 {
-	m_game_clear_saveflame = FlameTimer::GetNowFlame();
+	m_savetime_sleep = FlameTimer::GetNowFlame();
 
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepLeft;
@@ -692,6 +719,7 @@ void EnemyBase::ChangeDirection()
 	}
 }
 
+//Csv読み込み関数
 void EnemyBase::LoadAIData(std::string file_name_)
 {
 	//１～１０の基本配列
@@ -745,7 +773,8 @@ void EnemyBase::LoadAIData(std::string file_name_)
 
 
 
-void EnemyBase::EnemyMove()			//エネミー移動
+//エネミー移動
+void EnemyBase::EnemyMove()			
 {
 	/*
 		通常状態のエネミー移動（適切な距離まで距離を詰める）
@@ -758,26 +787,6 @@ void EnemyBase::EnemyMove()			//エネミー移動
 		m_map_pos -= m_speed;
 	}
 
-}
-
-void EnemyBase::EnemyRefuge()		//疲労状態の逃走
-{
-	/*
-		ピンチ状態のエネミー逃走
-	*/
-
-}
-
-void EnemyBase::EnemyAttack1()		//エネミー攻撃
-{
-}
-
-void EnemyBase::EnemyAttack2()
-{
-}
-
-void EnemyBase::EnemyAttack3()
-{
 }
 
 void EnemyBase::BulletControl()
@@ -827,26 +836,33 @@ void EnemyBase::DataSetUpdate()
 
 void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
+	//当たり判定
 	switch (ravel_)
 	{
+	//プレイヤー
 	case ObjectRavel::Ravel_Player:
 		break;
+
+	//プレイヤー弾①
 	case ObjectRavel::Ravel_PlayerBullet:
 		//眠気増加
-		DamageSleepness(5.f);
+		DamageSleepness(hit_use_atk_ / 2.f);
 		break;
 
+	//プレイヤー弾②
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//疲労回復
-		CureFatigue(3.f);
+		CureFatigue(hit_use_atk_ / 2.f);
 		break;
 
+	//プレイヤー弾③
 	case ObjectRavel::Ravel_PlayerBullet3:
-		DamageFatigue(5.f);
+		DamageFatigue(hit_use_atk_ / 2.f);
 		break;
 
+	//プレイヤー弾④
 	case ObjectRavel::Ravel_PlayerBullet4:
-		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_DEFAULT;
+		m_stop_auto_sleep_time = static_cast<int>(hit_use_atk_);
 		break;
 
 	default:
@@ -864,27 +880,30 @@ void EnemyBase::AutoCureSleepGage()
 		return;
 	}
 
-	if (FlameTimer::GetNowFlame(m_auto_sleep_saveflame)>=m_auto_sleep_time) {
+	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) >= m_auto_sleep_time) {
 
 		//自動回復
 		CureSleepiness(Cure_of_SleepinessPoint);
 
 		//フレーム数をキープ
-		m_auto_sleep_saveflame = FlameTimer::GetNowFlame();
+		m_savetime_auto_slpgauge = FlameTimer::GetNowFlame();
 
 	}
 }
 
 bool EnemyBase::IsMoveLimitLeft()
 {
+	//位置調整左
 	if (m_map_pos <= 0.f) {
 		return true;
 	}
+
 	return false;
 }
 
 bool EnemyBase::IsMoveLimitRight()
 {
+	//位置調整右
 	if ((m_map_pos + m_draw_param.tex_size_x) > M_MOVE_LIMIT_X) {
 		return true;
 	}
@@ -906,42 +925,12 @@ bool EnemyBase::CheckSleepState()
 	return m_sleep_gauge >= Sleep_Gauge_Max;
 }
 
-void EnemyBase::EnemyWait()			//エネミー待機
-{
-	/*
-		エネミーの待機（その場で待機アニメーション）
-	*/
-
-
-
-}
-
-void EnemyBase::EnemyChase()
-{
-
-
-
-}
-
-void EnemyBase::EnemyRest()		//エネミー休憩
-{
-	/*
-		エネミーの疲労待機（その場で疲労待機アニメーション）
-	*/
-
-	int cure_fatigue = (int)(Fatigue_Gauge_Max - m_fatigue_gauge);
-
-	if (cure_fatigue > 0)
-	{
-		m_fatigue_gauge -= Cure_of_FatiguePoint * 5;	//だいたい通常回復の五倍くらい？
-		cure_fatigue -= Cure_of_FatiguePoint * 5;
-	}
-}
 
 void EnemyBase::EnemySleep()
 {
-	//ゲームクリアフラグ多い
-	if (FlameTimer::GetNowFlame(m_game_clear_saveflame) >= M_GAMECLEAR_FLAME) {
+	//ゲームクリアフラグをDataBankにセット
+	if (FlameTimer::GetNowFlame(m_savetime_sleep) >= M_GAMECLEAR_FLAME) {
+
 		DataBank::Instance()->SetIsGameClear(true);
 
 	}
@@ -951,6 +940,7 @@ void EnemyBase::CureSleepiness(float cure_sleep_)
 {
 	m_sleep_gauge -= cure_sleep_;
 
+	//最小値で止める
 	if (m_sleep_gauge <= 0.f) {
 		m_sleep_gauge = 0.f;
 	}
@@ -960,6 +950,7 @@ void EnemyBase::CureFatigue(float cure_fatigue_)
 {
 	m_fatigue_gauge -= cure_fatigue_;
 
+	//最小値で止める
 	if (m_fatigue_gauge <= 0.f) {
 		m_fatigue_gauge = 0.f;
 	}
@@ -967,19 +958,29 @@ void EnemyBase::CureFatigue(float cure_fatigue_)
 
 int EnemyBase::GetStateSaveFlame()
 {
-	return FlameTimer::GetNowFlame(m_state_saveflame);
+	return FlameTimer::GetNowFlame(m_savetime_state);
 }
 
 void EnemyBase::CreateBullet(float pos_x_,float pos_y_,float move_speed_)
 {
-	bullet_list.push_back(new EnemyBullet(pos_x_, pos_y_, move_speed_, (Direction)m_direction));
+	//弾生成
+	bullet_list.push_back(
+		new EnemyBullet(
+			pos_x_,
+			pos_y_,
+			move_speed_,
+			(Direction)m_direction
+		)
+	);
 }
 
-void EnemyBase::DamageSleepness(int damage_sleep_)
+void EnemyBase::DamageSleepness(float damage_sleep_)
 {
 	m_sleep_gauge += damage_sleep_;
 
+	//最大値で止める
 	if (m_sleep_gauge >= Sleep_Gauge_Max) {
+
 		m_sleep_gauge = Sleep_Gauge_Max;
 
 		//1分間の自動回復停止
@@ -989,13 +990,15 @@ void EnemyBase::DamageSleepness(int damage_sleep_)
 
 }
 
-void EnemyBase::DamageFatigue(int damage_fatigue_)
+void EnemyBase::DamageFatigue(float damage_fatigue_)
 {
 	m_fatigue_gauge += damage_fatigue_;
 
+	//最大値で止める
 	if (m_fatigue_gauge >= Fatigue_Gauge_Max) {
-		m_fatigue_gauge = Fatigue_Gauge_Max;
-	}
 
+		m_fatigue_gauge = Fatigue_Gauge_Max;
+
+	}
 }
 

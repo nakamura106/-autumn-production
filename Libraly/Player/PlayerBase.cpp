@@ -6,16 +6,19 @@ PlayerBase::PlayerBase()
 	:ObjectBase(ObjectRavel::Ravel_Player,Direction::RIGHT,P_speed)
 {
 	//使用画像設定
+	m_draw_param.tu = 1.0f;
+	m_draw_param.tv = 1.0f;
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id = GameCategoryTextureList::GamePlayer_Taiki_RightTex;
-	m_draw_param.tex_size_x = M_PLAYER_ANIMATION;
-	m_draw_param.tex_size_y = M_PLAYER_ANIMATION;
+	m_draw_param.tex_size_x = M_PLAYER_SIZE;
+	m_draw_param.tex_size_y = M_PLAYER_SIZE;
 
 	//アニメーション用仮メンバ初期化
 	m_anim_param.split_all = 12;
 	m_anim_param.split_width = 4;
 	m_anim_param.split_height = 4;
 	m_anim_param.change_flame = Dispflame;
+	
 }
 
 PlayerBase::~PlayerBase()
@@ -38,7 +41,8 @@ void PlayerBase::Update()
 	BulletControl();
 	P_Controll();
 	AnimationUpdate();
-	
+	ChangeState();
+	Atkjudge();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
@@ -81,9 +85,9 @@ void PlayerBase::Draw()
 
 void PlayerBase::P_Controll()
 {
-	if (m_note_timer <= 70)
+	if (m_play_note_timer <= 70)
 	{
-		m_note_timer++;
+		m_play_note_timer++;
 	}
 
 
@@ -108,7 +112,6 @@ void PlayerBase::P_Controll()
 		}
 		if (m_direction == LEFT) {
 			m_pos.x += lrAdjustment;
-			//m_map_pos += lrAdjustment;
 		}
 		if (m_map_pos < 3550.0f)
 		{
@@ -129,7 +132,6 @@ void PlayerBase::P_Controll()
 		}
 		if (m_direction == RIGHT) {
 			m_pos.x -= lrAdjustment;
-			//m_map_pos -= lrAdjustment;
 		}
 		if (m_map_pos > 0.0f)
 		{
@@ -161,10 +163,10 @@ void PlayerBase::P_Controll()
 	//音符生成
 	if (GetKey(ONE_KEY) == true)
 	{
-		if (m_note_timer >= 70 && m_Key == (int)Key::Major)
+		if (m_play_note_timer >= 70 && m_Key == (int)Key::Major)
 		{
 			m_play_note[0] = true;
-			m_note_timer = 0;
+			m_play_note_timer = 0;
 			for (int i = 0; i < 3; i++)
 			{
 				if (notebox[i] == 0)
@@ -174,10 +176,10 @@ void PlayerBase::P_Controll()
 				}
 			}
 		}
-		if (m_note_timer >= 70 && m_Key == (int)Key::Minor)
+		if (m_play_note_timer >= 70 && m_Key == (int)Key::Minor)
 		{
 			m_play_note[1] = true;
-			m_note_timer = 0;
+			m_play_note_timer = 0;
 			for (int i = 0; i < 3; i++)
 			{
 				if (notebox[i] == 0)
@@ -393,7 +395,7 @@ void PlayerBase::Jump()
 
 void PlayerBase::Attack()
 {
-	if (m_i > 10)
+	if (m_i > 5)
 	{
 		m_do_attack = false;
 		m_is_active = false;
@@ -403,4 +405,169 @@ void PlayerBase::Attack()
 	{
 		m_state = (int)P_State::Attack;
 	}
+}
+
+void PlayerBase::InitWaitState() 
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Taiki_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Taiki_RightTex;
+	}
+}
+
+void PlayerBase::InitMoveState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Walk_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Walk_RightTex;
+	}
+
+}
+
+void PlayerBase::InitJumpState() 
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Jump_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Jump_RightTex;
+	}
+}
+
+void PlayerBase::InitJumpAttackState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_JumpAttack_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_JumpAttack_RightTex;
+	}
+}
+
+void PlayerBase::InitJumpDamageState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_JumpDamage_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_JumpDamage_RightTex;
+	}
+}
+
+void PlayerBase::InitDamageState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Damage_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Damage_RightTex;
+	}
+}
+
+void PlayerBase::InitAttackState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Attack_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Attack_RightTex;
+	}
+}
+
+void PlayerBase::InitThinkState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+
+	}
+}
+
+void PlayerBase::InitDeathState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+	
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+
+	}
+}
+
+void PlayerBase::InitClearState()
+{
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_Clear_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_Clear_RightTex;
+	}
+}
+
+void PlayerBase::ChangeState()
+{
+	switch (m_state)
+	{
+	case (int)P_State::Wait:
+		InitWaitState();
+		break;
+	case (int)P_State::Move:
+		InitMoveState();
+		break;
+	case (int)P_State::Jump:
+		InitJumpState();
+		break;
+	case (int)P_State::Attack:
+		InitAttackState();
+		break;
+	case (int)P_State::Damage:
+		InitDamageState();
+		break;
+	case (int)P_State::Jump_Damage:
+		InitJumpDamageState();
+		break;
+	case (int)P_State::Jump_Attack:
+		InitJumpAttackState();
+		break;
+	case (int)P_State::Clear:
+		InitClearState();
+		break;
+	case (int)P_State::Death:
+		InitDeathState();
+		break;	
+	default:
+		break;
+	}
+
+	
+}
+
+void PlayerBase::InitAllState()
+{
+	m_draw_param.tu = 1.0f;
+	m_draw_param.tv = 1.0f;
 }

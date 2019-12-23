@@ -3,6 +3,8 @@
 #include "../../Texture/Texture.h"
 #include "../../Engine/Input.h"
 #include "../Scene.h"
+#include"../../DataBank/DataBank.h"
+#include"../../Object/Definition.h"
 
 SelectSceneObject::SelectSceneObject()
 {
@@ -162,8 +164,19 @@ void SelectSceneObject::BrassSelectUpdate()
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame1;
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (GetKey(ONE_KEY)==true&&OnMouseDown(Left) == true)
 		{
+			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
+			ChangeSceneStep(SceneStep::EndStep);
+		}
+		if (GetKey(TWO_KEY) == true && OnMouseDown(Left) == true)
+		{
+			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeFlute);
+			ChangeSceneStep(SceneStep::EndStep);
+		}
+		if (GetKey(THREE_KEY) == true && OnMouseDown(Left) == true)
+		{
+			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTuba);
 			ChangeSceneStep(SceneStep::EndStep);
 		}
 	}

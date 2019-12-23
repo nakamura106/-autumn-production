@@ -73,7 +73,7 @@ void HedgeHog::EnemyAttack1()		//エネミー攻撃
 		一定加速後同じ速度で減速
 	*/
 
-	if (GetAnimationTexNum() > 9) {
+	if (GetAnimationTexNum() > M_ATTACK1_ANIM_TEX_NUM) {
 		m_speed /= M_DASHATTACK_SPEED_CHANGE_NUM;
 	}
 	else {
@@ -92,7 +92,7 @@ void HedgeHog::EnemyAttack2()
 		追尾　なし
 		発射　3way 2回くらい？
 	*/
-	if (GetAnimationTexNum() > 7 && !m_do_needle) {
+	if (GetAnimationTexNum() > M_ATTACK2_ANIM_TEX_NUM && !m_do_needle) {
 		//発射したかどうかのフラグをON
 		m_do_needle = true;
 
@@ -106,13 +106,14 @@ void HedgeHog::EnemyAttack3()
 {
 	int num = GetAnimationTexNum();
 
-	if (num == 5) {
+	if (num == M_ATTACK3_ANIM_TEX_NUM) {
 		EnemyMove();
 	}
 }
 
 EnemyStateType HedgeHog::ChangeStateFromWait()
 {
+	//使用していない関数であり、将来的に消去するためマジックナンバーのまま
 	if (GetStateSaveFlame() > 120 && m_animation_end) {
 
 		ChangeDirection();
@@ -125,6 +126,7 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
+	//使用していない関数であり、将来的に消去するためマジックナンバーのまま
 	if (GetStateSaveFlame() > 60 && m_animation_end) {
 		return EnemyStateType::Attack1;
 	}

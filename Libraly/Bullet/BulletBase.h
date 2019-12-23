@@ -1,4 +1,4 @@
-#ifndef BULLETBASE_H_
+ï»¿#ifndef BULLETBASE_H_
 #define BULLETBASE_H_
 
 #include "../Object/ObjectBase.h"
@@ -6,6 +6,7 @@
 class BulletBase :public ObjectBase
 {
 public:
+	//æ³¨â€¼ï¼šæœ¬æ¥ã¯å¼•æ•°ã«ObjectRavelã‚‚å…¥ã‚Œã‚‹ã¹ãã§ã‚ã‚‹ã€‚æ”¹å–„ãŒå¿…è¦(ãƒ¡ãƒ¢æ—¥ï¼š12/22)
 	BulletBase(float x_, float y_, float move_speed_, Direction direction_);
 	~BulletBase();
 	virtual void Init();
@@ -14,19 +15,19 @@ public:
 			void Create() {}
 
 private:
-	/*“®ìXV*/
+	/*å‹•ä½œæ›´æ–°*/
 	void MoveUpdate();
 
 	const float M_BULLET_SYZE = 128.f;
 	const float M_MOVE_LIMIT_DEFAULT = 1000.f;
 	
-	/*ƒAƒjƒ[ƒVƒ‡ƒ“—p(‰¼ƒƒ“ƒo)*/
+	/*ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨(ä»®ãƒ¡ãƒ³ãƒ)*/
 	int m_anim_timer;
 	
 
 protected:
-	float	m_move_count;		//ˆÚ“®—Ê
-	float	m_move_limit;		//ˆÚ“®§ŒÀ
+	float	m_move_count;		//ç§»å‹•é‡
+	float	m_move_limit;		//ç§»å‹•åˆ¶é™
 
 };
 

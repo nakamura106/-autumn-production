@@ -24,8 +24,13 @@ DataBank::DataBank()
 	m_bullet_type = 0;
 	m_floor1 = 0.0f;
 	m_is_game_clear = false;
-
+	m_is_game_over = false;
+	
+	m_PlayerType = (int)Player::PlayerTypeTrumpet;
+	
 }
+
+
 
 DataBank::~DataBank()
 {

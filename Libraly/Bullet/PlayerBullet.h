@@ -13,9 +13,18 @@ public:
 	virtual void Draw();
 
 private:
+	const int	M_PBULLET_ANIM_SPLIT_ALL	= 16;
+	const int	M_PBULLET_ANIM_SPLIT_W		= 4;
+	const int	M_PBULLET_ANIM_SPLIT_H		= 4;
+	const float M_CHOCHO_1_NUM				= 10.f;
+	const float M_CHOCHO_2_NUM				= 10.f;
+	const float M_TANCHO_1_NUM				= 6.f;
+	const float M_TANCHO_2_NUM				= 10.f;
+
 	PlayerBulletType player_bullet_type;	
 
-	void SetTextureID();
+	/*’e‚Ìí—Ş‚É‚æ‚Á‚Äî•ñ‚ğİ’è*/
+	void SetPlayerBulletInfo();
 
 	/*“–‚½‚è‚Ìˆ—*/
 	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
