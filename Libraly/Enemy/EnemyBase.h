@@ -56,12 +56,12 @@ private:
 	const int	M_CURE_SLEEP_TIME_DEFAULT		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 300;		//ゲージ自動回復を止めるフレーム時間
 	const float M_MOVE_LIMIT_X					= 3500.f;	
-	const int	M_GAMECLEAR_FLAME				= 180;		//眠りモーション遷移後、ゲームクリア
 	const float M_FATIGUE						= 46.f;		
 	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 0.f;		//眠気自動減少速度値
 	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.f;
 	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.f;
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.f;		//疲労度自動増加速度値
+	const float M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -75,16 +75,14 @@ private:
 	/*当たり時の処理*/
 	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
 
-	/*睡眠ゲージの自動回復*/
-	void AutoCureSleepGage();
-
 	/*移動範囲制限*/
 	bool IsMoveLimitLeft();
 	bool IsMoveLimitRight();
 	void MoveLimitUpdate();
 
-	/*眠り判定*/
-	bool CheckSleepState();
+	/*ゲージ最大判定*/
+	bool CheckSleepGageMax();
+	bool CheckFatigueGageMax();
 
 	/*			新状態遷移			*/
 
@@ -112,7 +110,8 @@ private:
 	void ChangeAIDirection();
 
 	/*疲労ゲージの量によってゲージ自動回復量を変化させる関数*/
-	void AutoGageProcess();
+	void AutoChangeGageUpdate();
+	int GageStageCalc(float now_gage_, float max_gage_, int gage_stage_num_);
 
 	bool m_stop_state_transition;	//CsvAI状態遷移が可能かフラグ：DebugKeyActionで使用
 
@@ -127,10 +126,8 @@ private:
 	float			m_state_save_pos_x;			//移動距離測定用
 	Direction		m_p_pos_relation;			//プレイヤーとの位置関係
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
-	int				m_savetime_sleep;			//フレーム数格納：眠ってからゲームクリアまでで使用
+	int				m_savetime_end;			//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
-	float			m_auto_sleep_down;			//眠気自動回復値
-	float			m_auto_fatigue_up;			//疲労度自動回復値
 
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 	EnemyBulletList bullet_list;		//弾のリスト
@@ -152,6 +149,7 @@ protected:
 	virtual void EnemyAttack3() {}	//攻撃状態３
 	virtual void EnemyRest() {}		//休憩状態？
 	void		 EnemySleep();		//眠り状態
+	void		 EnemyDead();		//死亡状態
 
 
 	/*			状態初期化			*/
@@ -165,6 +163,7 @@ protected:
 	virtual void InitAttack3State();//攻撃状態３
 	virtual void InitChaseState();	//追跡状態
 	virtual void InitSleepState();	//眠り状態
+	void		 InitDeadState();	//死亡状態
 
 	/*csv読込関数：引数にAI番号と.csvを除いたファイル名を入れる*/
 	//例：Res/Csv/Mouse/Enemy_AI1.csv→Res/Csv/Mouse/Enemy_AI
@@ -188,13 +187,13 @@ protected:
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
-	virtual void CureSleepiness(float cure_sleep_);
+	virtual void DownSleepGage(float down_num_);
 	/*疲労度の自動回復*/
-	virtual void CureFatigue(float cure_fatigue_);
+	virtual void DownFatigueGage(float down_num_);
 	/*眠気度の増加*/
-	virtual void DamageSleepness(float damage_sleep_);
+	virtual void UpSleepGage(float up_num_);
 	/*疲労度の増加*/
-	virtual void DamageFatigue(float damage_fatigue_);
+	virtual void UpFatigueGage(float up_num_);
 
 
 	/*			ゲッター			*/
