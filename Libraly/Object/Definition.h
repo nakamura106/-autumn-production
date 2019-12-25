@@ -30,6 +30,9 @@
 #define B				2		//B
 #define floor2speed		3		//
 
+const int GAMECLEAR_FLAME = 180;	//敵の眠りモーション遷移後、このフレーム数経過でゲームクリア
+const int GAMEOVER_FLAME = 180;		//敵の死亡モーション遷移後、このフレーム数経過でゲームオーバー
+
 //オブジェクトの役割を示す
 enum class ObjectRavel 
 {
@@ -121,7 +124,7 @@ enum class EnemyStateType
 	Attack1,//5:攻撃
 	Attack2,//6:攻撃2
 	Attack3,//7:攻撃3
-	//Dead,	//8:死亡
+	Dead,	//8:死亡
 	EnemyStateTypeMax,
 };
 
@@ -193,6 +196,17 @@ enum class MapObjId
 	obj2,
 	obj3,
 	MaxObj,
+};
+
+//疲労・眠気ゲージの段階を示す
+enum class GageStage {
+	Zero,	//ゲージ段階0
+	Few,	//ゲージ段階0～1/4
+	Quarter,//ゲージ段階1/4～1/2
+	Half,	//ゲージ段階1/2～3/4
+	Three_Quarter,//ゲージ段階3/4～Max
+	Max,	//ゲージ段階Max(1)
+	GageStage_Total
 };
 
 enum class Mapvar

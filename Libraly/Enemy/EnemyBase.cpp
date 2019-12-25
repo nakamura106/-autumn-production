@@ -50,9 +50,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_auto_sleep_time			= M_CURE_SLEEP_TIME_DEFAULT;
 	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time		= 0;
-	m_savetime_sleep			= 0;
-	m_auto_sleep_down			= 0.f;
-	m_auto_fatigue_up			= 0.f;
+	m_savetime_end			= 0;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -119,10 +117,8 @@ void EnemyBase::Update()
 	//デバッグ用
 	DebugKeyAction();
 
-	//疲労ゲージ量によってゲージ自動回復量変化
-	AutoGageProcess();
-
-	//自動回復関数を呼び出す
+	//疲労ゲージ量によって自動でゲージ変動
+	AutoChangeGageUpdate();
 
 	//現在の状態における動作の更新
 	//UpdateState();
@@ -136,9 +132,6 @@ void EnemyBase::Update()
 
 	//弾の制御
 	BulletControl();
-
-	//ゲージ自動回復
-	AutoCureSleepGage();
 
 	//マップスクロールの位置計算
 	CalcDrawPosition();
@@ -260,6 +253,11 @@ void EnemyBase::UpdateAIState()
 		EnemySleep();
 		return;
 
+		//死亡状態(疲労度MAX)
+	case EnemyStateType::Dead:
+		EnemyDead();
+		return;
+
 	default:
 		/*
 			!!
@@ -320,12 +318,17 @@ void EnemyBase::AITransitionUpdate()
 		//AIに合わせて向き変更
 		ChangeAIDirection();
 
-		if (!CheckSleepState()) {
-			//値に沿って状態遷移
-			ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
+		if (CheckSleepGageMax()) {
+			//眠気ゲージが最大の場合、眠り状態へ遷移
+			ChangeState(EnemyStateType::Sleep);
+		}
+		else if (CheckFatigueGageMax()) {
+			//疲労ゲージが最大の場合、死亡状態へ遷移
+			ChangeState(EnemyStateType::Dead);
 		}
 		else {
-			ChangeState(EnemyStateType::Sleep);
+			//値に沿って状態遷移
+			ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
 		}
 	}
 
@@ -466,32 +469,70 @@ void EnemyBase::ChangeAIDirection()
 
 }
 
-void EnemyBase::AutoGageProcess()
+void EnemyBase::AutoChangeGageUpdate()
 {
-	m_auto_fatigue_up	= 0.f;
-	m_auto_sleep_down	= 0.f;
+	//疲労度ゲージの進行度を格納
+	int fatigue_gage_stage 
+		= GageStageCalc(m_fatigue_gauge, Fatigue_Gauge_Max, M_FATIGUE_GAGE_STAGE_NUM);
 
-	//疲労ゲージ1/4未満
-	if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f/4.f)) {
+	float fatigue_up	= 0.f;
+	float sleep_down	= 0.f;
+
+	//疲労ゲージの段階
+	switch (fatigue_gage_stage)
+	{
+	//0(最小)
+	case 0:
+		break;
+
+	//1段階目　～1/4
+	case 1:
 		//眠気減少：高速
-		m_auto_sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
-	}
-	//疲労ゲージ1/2未満
-	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (1.f / 2.f)) {
+		sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
+
+	//2段階目　～1/2
+	case 2:
 		//眠気減少：中速
-		m_auto_sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
-	}
-	//疲労ゲージ3/4未満
-	else if (m_fatigue_gauge < Fatigue_Gauge_Max * (3.f / 4.f)) {
+		sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
+
+	//3段階目　～3/4
+	case 3:
 		//眠気減少：低速
-		m_auto_sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
-	}
-	//疲労ゲージ3/4以上
-	else {
+		sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
+
+	//4段階目　～最大
+	case 4:
 		//眠気減少：停止、疲労増加：低速
-		m_auto_fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+		fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+
+	default:
+		break;
 	}
+
+	//ゲージ変動
+	m_fatigue_gauge += fatigue_up;
+
+	m_sleep_gauge -= sleep_down;
+
 }
+
+int EnemyBase::GageStageCalc(float now_gage_, float max_gage_, int gage_stage_num_)
+{
+	//ゲージが最大の場合、段階数+1の値を返す
+	if (now_gage_ == max_gage_) {
+		++gage_stage_num_;
+		return gage_stage_num_;
+	}
+
+	//ゲージが0(最小)の場合、0を返す
+	if (now_gage_ == 0.f) {
+		return 0;
+	}
+
+	//ゲージの段階数に応じた現在の進行段階を返す
+	return static_cast<int>(now_gage_ / (max_gage_ / static_cast<float>(gage_stage_num_)));
+}
+
 
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 {
@@ -559,6 +600,10 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 
 	case EnemyStateType::Sleep:
 		InitSleepState();
+		break;
+
+	case EnemyStateType::Dead:
+		InitDeadState();
 		break;
 
 	default:
@@ -698,7 +743,7 @@ void EnemyBase::InitChaseState()
 
 void EnemyBase::InitSleepState()
 {
-	m_savetime_sleep = FlameTimer::GetNowFlame();
+	m_savetime_end = FlameTimer::GetNowFlame();
 
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepLeft;
@@ -707,6 +752,16 @@ void EnemyBase::InitSleepState()
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepRight;
 	}
 
+}
+
+void EnemyBase::InitDeadState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DownLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DownRight;
+	}
 }
 
 void EnemyBase::ChangeDirection()
@@ -846,18 +901,18 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	//プレイヤー弾①
 	case ObjectRavel::Ravel_PlayerBullet:
 		//眠気増加
-		DamageSleepness(hit_use_atk_ / 2.f);
+		UpSleepGage(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾②
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//疲労回復
-		CureFatigue(hit_use_atk_ / 2.f);
+		DownFatigueGage(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾③
 	case ObjectRavel::Ravel_PlayerBullet3:
-		DamageFatigue(hit_use_atk_ / 2.f);
+		UpFatigueGage(hit_use_atk_ / 2.f);
 		break;
 
 	//プレイヤー弾④
@@ -867,27 +922,6 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 
 	default:
 		break;
-	}
-}
-
-void EnemyBase::AutoCureSleepGage()
-{
-	//疲労ゲージが一定以上の場合自動回復なし
-	if (m_fatigue_gauge > M_FATIGUE)return;
-
-	if (m_stop_auto_sleep_time > 0) {
-		--m_stop_auto_sleep_time;
-		return;
-	}
-
-	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) >= m_auto_sleep_time) {
-
-		//自動回復
-		CureSleepiness(Cure_of_SleepinessPoint);
-
-		//フレーム数をキープ
-		m_savetime_auto_slpgauge = FlameTimer::GetNowFlame();
-
 	}
 }
 
@@ -920,25 +954,40 @@ void EnemyBase::MoveLimitUpdate()
 	}
 }
 
-bool EnemyBase::CheckSleepState()
+bool EnemyBase::CheckSleepGageMax()
 {
-	return m_sleep_gauge >= Sleep_Gauge_Max;
+	return (m_sleep_gauge >= Sleep_Gauge_Max);
+}
+
+bool EnemyBase::CheckFatigueGageMax()
+{
+	return (m_fatigue_gauge >= Fatigue_Gauge_Max);
 }
 
 
 void EnemyBase::EnemySleep()
 {
 	//ゲームクリアフラグをDataBankにセット
-	if (FlameTimer::GetNowFlame(m_savetime_sleep) >= M_GAMECLEAR_FLAME) {
+	if (FlameTimer::GetNowFlame(m_savetime_end) >= GAMECLEAR_FLAME) {
 
 		DataBank::Instance()->SetIsGameClear(true);
 
 	}
 }
 
-void EnemyBase::CureSleepiness(float cure_sleep_)
+void EnemyBase::EnemyDead()
 {
-	m_sleep_gauge -= cure_sleep_;
+	//ゲームオーバーフラグをDataBankにセット
+	if (FlameTimer::GetNowFlame(m_savetime_end) >= GAMEOVER_FLAME) {
+
+		DataBank::Instance()->SetIsGameOver(true);
+
+	}
+}
+
+void EnemyBase::DownSleepGage(float down_num_)
+{
+	m_sleep_gauge -= down_num_;
 
 	//最小値で止める
 	if (m_sleep_gauge <= 0.f) {
@@ -946,9 +995,9 @@ void EnemyBase::CureSleepiness(float cure_sleep_)
 	}
 }
 
-void EnemyBase::CureFatigue(float cure_fatigue_)
+void EnemyBase::DownFatigueGage(float down_num_)
 {
-	m_fatigue_gauge -= cure_fatigue_;
+	m_fatigue_gauge -= down_num_;
 
 	//最小値で止める
 	if (m_fatigue_gauge <= 0.f) {
@@ -974,9 +1023,9 @@ void EnemyBase::CreateBullet(float pos_x_,float pos_y_,float move_speed_)
 	);
 }
 
-void EnemyBase::DamageSleepness(float damage_sleep_)
+void EnemyBase::UpSleepGage(float up_num_)
 {
-	m_sleep_gauge += damage_sleep_;
+	m_sleep_gauge += up_num_;
 
 	//最大値で止める
 	if (m_sleep_gauge >= Sleep_Gauge_Max) {
@@ -990,9 +1039,9 @@ void EnemyBase::DamageSleepness(float damage_sleep_)
 
 }
 
-void EnemyBase::DamageFatigue(float damage_fatigue_)
+void EnemyBase::UpFatigueGage(float up_num_)
 {
-	m_fatigue_gauge += damage_fatigue_;
+	m_fatigue_gauge += up_num_;
 
 	//最大値で止める
 	if (m_fatigue_gauge >= Fatigue_Gauge_Max) {
