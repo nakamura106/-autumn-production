@@ -62,6 +62,7 @@ private:
 	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.f;
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.f;		//疲労度自動増加速度値
 	const float M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
+	const float M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -83,6 +84,9 @@ private:
 	/*ゲージ最大判定*/
 	bool CheckSleepGageMax();
 	bool CheckFatigueGageMax();
+
+	/*疲労状態・眠気(イライラ)状態の取得*/
+	GageState CheckGageState();
 
 	/*			新状態遷移			*/
 
@@ -109,6 +113,9 @@ private:
 	/*CsvAI向き変更関数：状態遷移時、向き変更*/
 	void ChangeAIDirection();
 
+	/*CsvAI速度設定関数*/
+	void SetGageStateSpeed();
+
 	/*疲労ゲージの量によってゲージ自動回復量を変化させる関数*/
 	void AutoChangeGageUpdate();
 	int GageStageCalc(float now_gage_, float max_gage_, int gage_stage_num_);
@@ -126,8 +133,10 @@ private:
 	float			m_state_save_pos_x;			//移動距離測定用
 	Direction		m_p_pos_relation;			//プレイヤーとの位置関係
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
-	int				m_savetime_end;			//フレーム数格納：眠ってからゲームクリアまでで使用
+	int				m_savetime_end;				//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
+	int				m_fatigue_gage_stage;		//疲労ゲージの段階を示す
+	int				m_sleep_gage_stage;			//眠気ゲージの段階を示す
 
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 	EnemyBulletList bullet_list;		//弾のリスト

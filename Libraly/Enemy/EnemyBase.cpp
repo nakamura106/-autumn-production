@@ -50,7 +50,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_auto_sleep_time			= M_CURE_SLEEP_TIME_DEFAULT;
 	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time		= 0;
-	m_savetime_end			= 0;
+	m_savetime_end				= 0;
+	m_fatigue_gage_stage		= 0;
+	m_sleep_gage_stage			= 0;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -117,7 +119,7 @@ void EnemyBase::Update()
 	//デバッグ用
 	DebugKeyAction();
 
-	//疲労ゲージ量によって自動でゲージ変動
+	//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
 	AutoChangeGageUpdate();
 
 	//現在の状態における動作の更新
@@ -142,7 +144,7 @@ void EnemyBase::Update()
 }
 
 //エネミーの状態の更新
-void EnemyBase::UpdateState()		
+void EnemyBase::UpdateState()
 {
 	//次の状態を示す変数
 	EnemyStateType next_state = m_state;
@@ -312,8 +314,8 @@ void EnemyBase::AITransitionUpdate()
 		//次の状態に行くための値を設定
 		ChangeAIState();
 
-		//敵のゲージ量によってスピードが変化
-		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+		//ゲージ状態に合わせて速度を設定
+		SetGageStateSpeed();
 
 		//AIに合わせて向き変更
 		ChangeAIDirection();
@@ -469,17 +471,44 @@ void EnemyBase::ChangeAIDirection()
 
 }
 
+void EnemyBase::SetGageStateSpeed()
+{
+
+	switch (CheckGageState())
+	{
+	case GageState::Normal_State:
+		//敵のゲージ量によってスピードが変化
+		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+		break;
+
+	case GageState::Fatigue_State:
+		//敵のゲージ量によってスピードが変化
+		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_fatigue;
+		break;
+
+	case GageState::Sleep_State:
+		//敵のゲージ量によってスピードが変化
+		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_sleep;
+		break;
+
+	default:
+		m_speed = (float)m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_speed_default;
+		break;
+	}
+
+}
+
 void EnemyBase::AutoChangeGageUpdate()
 {
-	//疲労度ゲージの進行度を格納
-	int fatigue_gage_stage 
-		= GageStageCalc(m_fatigue_gauge, Fatigue_Gauge_Max, M_FATIGUE_GAGE_STAGE_NUM);
+	//ゲージの進行度を格納
+	m_fatigue_gage_stage	= GageStageCalc(m_fatigue_gauge, Fatigue_Gauge_Max, M_FATIGUE_GAGE_STAGE_NUM);
+	m_sleep_gage_stage		= GageStageCalc(m_sleep_gauge, Sleep_Gauge_Max, M_SLEEP_GAGE_STAGE_NUM);
 
 	float fatigue_up	= 0.f;
 	float sleep_down	= 0.f;
 
 	//疲労ゲージの段階
-	switch (fatigue_gage_stage)
+	switch (m_fatigue_gage_stage)
 	{
 	//0(最小)
 	case 0:
@@ -489,21 +518,30 @@ void EnemyBase::AutoChangeGageUpdate()
 	case 1:
 		//眠気減少：高速
 		sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
+		break;
 
 	//2段階目　～1/2
 	case 2:
 		//眠気減少：中速
 		sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
+		break;
 
 	//3段階目　～3/4
 	case 3:
 		//眠気減少：低速
 		sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
+		break;
 
 	//4段階目　～最大
 	case 4:
 		//眠気減少：停止、疲労増加：低速
 		fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+		break;
+
+	//Max(最大)
+	case 5:
+		//敵死亡
+		break;
 
 	default:
 		break;
@@ -519,7 +557,7 @@ void EnemyBase::AutoChangeGageUpdate()
 int EnemyBase::GageStageCalc(float now_gage_, float max_gage_, int gage_stage_num_)
 {
 	//ゲージが最大の場合、段階数+1の値を返す
-	if (now_gage_ == max_gage_) {
+	if (now_gage_ >= max_gage_) {
 		++gage_stage_num_;
 		return gage_stage_num_;
 	}
@@ -530,7 +568,7 @@ int EnemyBase::GageStageCalc(float now_gage_, float max_gage_, int gage_stage_nu
 	}
 
 	//ゲージの段階数に応じた現在の進行段階を返す
-	return static_cast<int>(now_gage_ / (max_gage_ / static_cast<float>(gage_stage_num_)));
+	return static_cast<int>(now_gage_ / (max_gage_ / static_cast<float>(gage_stage_num_))) + 1;
 }
 
 
@@ -792,7 +830,7 @@ void EnemyBase::LoadAIData(std::string file_name_)
 
 
 			//状態を格納
-			if (*file[j][static_cast<int>(EnemyAIArrayNum::State)] < static_cast<int>(EnemyStateType::EnemyStateTypeMax)) {
+			if (*file[j][static_cast<int>(EnemyAIArrayNum::State)] < static_cast<int>(EnemyStateType::EnemyStateType_Max)) {
 				m_ai_list[i][j - 1]->e_state = (EnemyStateType)* file[j][static_cast<int>(EnemyAIArrayNum::State)];
 			}
 			else {
@@ -810,7 +848,7 @@ void EnemyBase::LoadAIData(std::string file_name_)
 			//行動速度値を格納
 			m_ai_list[i][j - 1]->e_speed_default = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Default)];
 			m_ai_list[i][j - 1]->e_speed_sleep = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Sleep)];
-			m_ai_list[i][j - 1]->e_speed_tired = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Tired)];
+			m_ai_list[i][j - 1]->e_speed_fatigue = *file[j][static_cast<int>(EnemyAIArrayNum::Speed_Tired)];
 
 			//状態継続条件で使用する値を格納
 			m_ai_list[i][j - 1]->e_transition_num = *file[j][static_cast<int>(EnemyAIArrayNum::Transition_Num)];
@@ -962,6 +1000,23 @@ bool EnemyBase::CheckSleepGageMax()
 bool EnemyBase::CheckFatigueGageMax()
 {
 	return (m_fatigue_gauge >= Fatigue_Gauge_Max);
+}
+
+
+GageState EnemyBase::CheckGageState()
+{
+	//疲労状態
+	if (m_fatigue_gage_stage > m_sleep_gage_stage) {
+		return GageState::Fatigue_State;
+	}
+	
+	//眠気(イライラ)状態
+	if (m_sleep_gage_stage > m_fatigue_gage_stage) {
+		return GageState::Sleep_State;
+	}
+
+	return GageState::Normal_State;
+
 }
 
 

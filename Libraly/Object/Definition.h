@@ -125,7 +125,7 @@ enum class EnemyStateType
 	Attack2,//6:攻撃2
 	Attack3,//7:攻撃3
 	Dead,	//8:死亡
-	EnemyStateTypeMax,
+	EnemyStateType_Max,
 };
 
 //Enemyのcsvからの値を判定するため
@@ -144,7 +144,7 @@ struct EnemyAIParam {
 		e_state = EnemyStateType::Wait;
 		e_speed_default = 0;
 		e_speed_sleep = 0;
-		e_speed_tired = 0;
+		e_speed_fatigue = 0;
 		e_transition_term = EnemyTransitionTerm::FlameTime;
 		e_transition_num = 0;
 		e_direction = EnemyDirection::Same;
@@ -153,7 +153,7 @@ struct EnemyAIParam {
 	EnemyStateType		e_state;			//遷移する状態
 	int					e_speed_default;	//通常のスピード
 	int					e_speed_sleep;		//眠気時のスピード
-	int					e_speed_tired;		//疲労時のスピード
+	int					e_speed_fatigue;		//疲労時のスピード
 	EnemyTransitionTerm e_transition_term;	//状態持続条件
 	int					e_transition_num;	//状態持続条件に対応する値
 	EnemyDirection		e_direction;		//向き
@@ -198,15 +198,12 @@ enum class MapObjId
 	MaxObj,
 };
 
-//疲労・眠気ゲージの段階を示す
-enum class GageStage {
-	Zero,	//ゲージ段階0
-	Few,	//ゲージ段階0～1/4
-	Quarter,//ゲージ段階1/4～1/2
-	Half,	//ゲージ段階1/2～3/4
-	Three_Quarter,//ゲージ段階3/4～Max
-	Max,	//ゲージ段階Max(1)
-	GageStage_Total
+//敵のゲージを元にした状態を示す
+enum class GageState {
+	Normal_State,
+	Fatigue_State,
+	Sleep_State,
+	GageState_Max
 };
 
 enum class Mapvar
