@@ -146,6 +146,7 @@
     <ClCompile Include="Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
     <ClCompile Include="DataBank\DataBank.cpp" />
+    <ClCompile Include="Enemy\Bird.cpp" />
     <ClCompile Include="Enemy\EnemyBase.cpp" />
     <ClCompile Include="Enemy\Mouse.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Bullet\EnemyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
     <ClInclude Include="DataBank\DataBank.h" />
+    <ClInclude Include="Enemy\Bird.h" />
     <ClInclude Include="Enemy\EnemyBase.h" />
     <ClInclude Include="Enemy\Mouse.h" />
     <ClInclude Include="Engine\Anime.h" />

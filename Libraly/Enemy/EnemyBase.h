@@ -54,15 +54,17 @@ private:
 	const float	M_INIT_POS_X					= 700.f;	//初期x座標
 	const float M_INIT_POS_Y					= -70.f;	//初期y座標
 	const int	M_CURE_SLEEP_TIME_DEFAULT		= 60;		//ゲージ自動回復のフレーム周期
-	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 300;		//ゲージ自動回復を止めるフレーム時間
+	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
+	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
 	const float M_MOVE_LIMIT_X					= 3500.f;	
-	const float M_FATIGUE						= 46.f;		
-	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 0.f;		//眠気自動減少速度値
-	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.f;
-	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.f;
-	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.f;		//疲労度自動増加速度値
-	const float M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
-	const float M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
+	const float M_FATIGUE						= 46.f;
+	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 2.f;
+	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 1.2f;		//眠気自動減少速度値
+	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.7f;
+	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.3f;
+	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.3f;		//疲労度自動増加速度値
+	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
+	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -86,7 +88,10 @@ private:
 	bool CheckFatigueGageMax();
 
 	/*疲労状態・眠気(イライラ)状態の取得*/
-	GageState CheckGageState();
+	GageState CheckGaugeState();
+
+	/*ゲージ量の最大最低管理*/
+	void GaugeLimitControl();
 
 	/*			新状態遷移			*/
 

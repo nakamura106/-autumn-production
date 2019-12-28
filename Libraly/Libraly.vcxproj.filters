@@ -207,6 +207,9 @@
     <ClCompile Include="Player\TubaPlayer\TubaPlayer.cpp">
       <Filter>Player\TubaPlayer</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\Bird.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="Player\TubaPlayer\TubaPlayer.h">
       <Filter>Player\TubaPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Bird.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -474,7 +474,7 @@ void EnemyBase::ChangeAIDirection()
 void EnemyBase::SetGageStateSpeed()
 {
 
-	switch (CheckGageState())
+	switch (CheckGaugeState())
 	{
 	case GageState::Normal_State:
 		//“G‚ÌƒQ[ƒW—Ê‚É‚æ‚Á‚ÄƒXƒs[ƒh‚ª•Ï‰»
@@ -507,11 +507,24 @@ void EnemyBase::AutoChangeGageUpdate()
 	float fatigue_up	= 0.f;
 	float sleep_down	= 0.f;
 
+	//ƒQ[ƒWŽ©“®•Ï“®’âŽ~
+	if (m_stop_auto_sleep_time > 0) {
+		--m_stop_auto_sleep_time;
+		return;
+	}
+	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) < M_CURE_SLEEP_TIME_DEFAULT) {
+		return;
+	}
+	else {
+		m_savetime_auto_slpgauge = FlameTimer::GetNowFlame();
+	}
+
 	//”æ˜JƒQ[ƒW‚Ì’iŠK
 	switch (m_fatigue_gage_stage)
 	{
 	//0(Å¬)
 	case 0:
+		sleep_down = M_AUTO_SLEEP_UP_MAX_SPEED;
 		break;
 
 	//1’iŠK–Ú@`1/4
@@ -551,6 +564,9 @@ void EnemyBase::AutoChangeGageUpdate()
 	m_fatigue_gauge += fatigue_up;
 
 	m_sleep_gauge -= sleep_down;
+
+	//ƒQ[ƒW‚ÌƒRƒ“ƒgƒ[ƒ‹
+	GaugeLimitControl();
 
 }
 
@@ -702,12 +718,25 @@ void EnemyBase::InitAllState()
 
 void EnemyBase::InitWaitState()
 {
+
 	if (m_direction == Direction::LEFT) {
 		//Žg—p‚·‚é‰æ‘œ‚Ì•ÏX(ˆÈ‰º“¯‚¶)
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
+		if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+			//”æ˜Jó‘Ô
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueLeft;
+		}
+		else {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
+		}
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiRight;
+		if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+			//”æ˜Jó‘Ô
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueRight;
+		}
+		else {
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiRight;
+		}
 	}
 
 }
@@ -940,17 +969,20 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	case ObjectRavel::Ravel_PlayerBullet:
 		//–°‹C‘‰Á
 		UpSleepGage(hit_use_atk_ / 2.f);
+		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//ƒvƒŒƒCƒ„[’e‡A
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//”æ˜J‰ñ•œ
 		DownFatigueGage(hit_use_atk_ / 2.f);
+		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//ƒvƒŒƒCƒ„[’e‡B
 	case ObjectRavel::Ravel_PlayerBullet3:
 		UpFatigueGage(hit_use_atk_ / 2.f);
+		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//ƒvƒŒƒCƒ„[’e‡C
@@ -1003,7 +1035,7 @@ bool EnemyBase::CheckFatigueGageMax()
 }
 
 
-GageState EnemyBase::CheckGageState()
+GageState EnemyBase::CheckGaugeState()
 {
 	//”æ˜Jó‘Ô
 	if (m_fatigue_gage_stage > m_sleep_gage_stage) {
@@ -1017,6 +1049,27 @@ GageState EnemyBase::CheckGageState()
 
 	return GageState::Normal_State;
 
+}
+
+void EnemyBase::GaugeLimitControl()
+{
+	if (m_fatigue_gauge < 0.f) {
+		m_fatigue_gauge = 0.f;
+	}
+	else {
+		if (m_fatigue_gauge > Fatigue_Gauge_Max) {
+			m_fatigue_gauge = Fatigue_Gauge_Max;
+		}
+	}
+
+	if (m_sleep_gauge < 0.f) {
+		m_sleep_gauge = 0.f;
+	}
+	else {
+		if (m_sleep_gauge > Sleep_Gauge_Max) {
+			m_sleep_gauge = Sleep_Gauge_Max;
+		}
+	}
 }
 
 

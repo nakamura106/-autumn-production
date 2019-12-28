@@ -164,7 +164,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame1;
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
-		if (GetKey(ONE_KEY)==true&&OnMouseDown(Left) == true)
+		if (/*GetKey(ONE_KEY)==true&&*/OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
 			ChangeSceneStep(SceneStep::EndStep);
