@@ -104,47 +104,50 @@ enum GameCategoryTextureList
 	GamePlayerBullet_4Tex,					//!<プレイヤーの弾4
 
 	/*UI用*/
-	GamePlayerUi,							//!<プレイヤーHP
-	GameBulletUi_RedLeft,					//!<プレイヤー弾UI
-	GameBulletUi_RedCenter,					//!<プレイヤー弾UI 				
-	GameBulletUi_RedRight,					//!<プレイヤー弾UI
-	GameBulletUi_PinkCenter,				//!<プレイヤー弾UI
-	GameBulletUi_PurpleRight,				//!<プレイヤー弾UI
-	GameBulletUi_BlueLeft,					//!<プレイヤー弾UI
-	GameBulletUi_BlueCenter,				//!<プレイヤー弾UI
-	GameBulletUi_BlueRight,					//!<プレイヤー弾UI
-	GameBulletUi_GreenCenter,				//!<プレイヤー弾UI
-	GameBulletUi_YellowRight,				//!<プレイヤー弾UI
-	GamePlayerHp_4Tex,						//!<プレイヤー耐久残り3
-	GamePlayerHp_3Tex,						//!<プレイヤー耐久残り2
-	GamePlayerHp_2Tex,						//!<プレイヤー耐久残り1
-	GamePlayerHp_1Tex,						//!<プレイヤー耐久残り0
-	GameEnemyUi,							//!<エネミーUIの基盤
-	GameEnemySleepGauge,					//!<眠気ゲージ
-	GameEnemyFatigueGauge,					//!<疲労ゲージ
-	GameEnemyAutoHealGauge,					//!<自動回復ライン
-	GameEnemySleepCircle,					//!<眠気円
-	GameEnemyFatigueCircle,					//!<疲労円
-	GameEnemyAchieveUi,						//!<敵ドロップアイテム
+	GamePlayerUi,					//!<プレイヤーHP
+	GameBulletUi_RedLeft,			//!<プレイヤー弾UI
+	GameBulletUi_RedCenter,			//!<プレイヤー弾UI 				
+	GameBulletUi_RedRight,			//!<プレイヤー弾UI
+	GameBulletUi_PinkCenter,		//!<プレイヤー弾UI
+	GameBulletUi_PurpleRight,		//!<プレイヤー弾UI
+	GameBulletUi_BlueLeft,			//!<プレイヤー弾UI
+	GameBulletUi_BlueCenter,		//!<プレイヤー弾UI
+	GameBulletUi_BlueRight,			//!<プレイヤー弾UI
+	GameBulletUi_GreenCenter,		//!<プレイヤー弾UI
+	GameBulletUi_YellowRight,		//!<プレイヤー弾UI
+	GamePlayerHp_4Tex,				//!<プレイヤー耐久残り3
+	GamePlayerHp_3Tex,				//!<プレイヤー耐久残り2
+	GamePlayerHp_2Tex,				//!<プレイヤー耐久残り1
+	GamePlayerHp_1Tex,				//!<プレイヤー耐久残り0
+	GameEnemyUi,					//!<エネミーUIの基盤
+	GameEnemySleepGauge,			//!<眠気ゲージ
+	GameEnemyFatigueGauge,			//!<疲労ゲージ
+	GameEnemyAutoHealGauge,			//!<自動回復ライン
+	GameEnemySleepCircle,			//!<眠気円
+	GameEnemyFatigueCircle,			//!<疲労円
+	GameEnemyAchieveUi,				//!<敵ドロップアイテム
 
 
 	/*Enemy用*/
-	GameEnemy_TaikiLeft,					//!<敵待機
+	GameEnemy_TaikiLeft,			//!<敵待機
 	GameEnemy_TaikiRight,
-	GameEnemy_WalkLeft,						//!<敵歩行
+	GameEnemy_WalkLeft,				//!<敵歩行
 	GameEnemy_WalkRight,
-	GameEnemy_Attack2Left,				//!<攻撃1
+	GameEnemy_Attack2Left,			//!<攻撃1
 	GameEnemy_Attack2Right,
-	GameEnemy_Attack1Left,				//!<攻撃2
+	GameEnemy_Attack1Left,			//!<攻撃2
 	GameEnemy_Attack1Right,
-	GameEnemy_Attack3Left,				//!<攻撃3
+	GameEnemy_Attack3Left,			//!<攻撃3
 	GameEnemy_Attack3Right,
-	GameEnemy_SleepLeft,					//!<敵睡眠
+	GameEnemy_SleepLeft,			//!<敵睡眠
 	GameEnemy_SleepRight,
-	GameEnemy_FatigueLeft,					//!<敵疲労
+	GameEnemy_FatigueLeft,			//!<敵疲労
 	GameEnemy_FatigueRight,
-	GameEnemy_DownLeft,						//!<敵死亡
+	GameEnemy_DownLeft,				//!<敵死亡
 	GameEnemy_DownRight,
+	GameEnemy_SkyLeft,				//!<敵飛行
+	GameEnemy_SkyRight,
+
 	GameEnemy_Bullet_Needle,				//!<敵の弾(ハリ)
 
 	GamePointerTex,			//!< ポインタ

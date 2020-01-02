@@ -155,7 +155,7 @@ protected:
 	/*			状態更新			*///旧、新状態遷移どちらでも使用
 
 	virtual void EnemyWait() {}		//待機状態
-	virtual void EnemyChase() {}	//追跡状態
+	//virtual void EnemyChase() {}	//追跡状態
 	virtual void EnemyMove();		//移動状態
 	virtual void EnemyRefuge() {}	//逃走状態
 	virtual void EnemyAttack1() {}	//攻撃状態１
@@ -163,6 +163,7 @@ protected:
 	virtual void EnemyAttack3() {}	//攻撃状態３
 	virtual void EnemyRest() {}		//休憩状態？
 	void		 EnemySleep();		//眠り状態
+	virtual void EnemySky();		//飛行状態
 	void		 EnemyDead();		//死亡状態
 
 
@@ -177,6 +178,7 @@ protected:
 	virtual void InitAttack3State();//攻撃状態３
 	virtual void InitChaseState();	//追跡状態
 	virtual void InitSleepState();	//眠り状態
+	virtual void InitSkyState();	//飛行状態(鳥で使用)
 	void		 InitDeadState();	//死亡状態
 
 	/*csv読込関数：引数にAI番号と.csvを除いたファイル名を入れる*/

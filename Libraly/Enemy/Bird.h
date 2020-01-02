@@ -17,5 +17,8 @@ private:
 	void EnemyAttack2();
 	void EnemyAttack3();
 
+	/*EnemyBaseで呼び出す状態初期化処理*/
+	void InitAttack3State();//攻撃状態３
+
 };
 

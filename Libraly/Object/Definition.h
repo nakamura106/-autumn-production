@@ -125,6 +125,7 @@ enum class EnemyStateType
 	Attack2,//6:UŒ‚2
 	Attack3,//7:UŒ‚3
 	Dead,	//8:€–S
+	Sky,	//9:”òs
 	EnemyStateType_Max,
 };
 

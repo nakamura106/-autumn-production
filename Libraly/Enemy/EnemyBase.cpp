@@ -194,6 +194,11 @@ void EnemyBase::UpdateState()
 	case EnemyStateType::Sleep:
 		return;
 
+	//”òsó‘Ô
+	case EnemyStateType::Sky:
+		EnemySky();
+		break;
+
 	default:
 		/*
 			!!
@@ -259,6 +264,10 @@ void EnemyBase::UpdateAIState()
 	case EnemyStateType::Dead:
 		EnemyDead();
 		return;
+
+	case EnemyStateType::Sky:
+		EnemySky();
+		break;
 
 	default:
 		/*
@@ -660,6 +669,9 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 		InitDeadState();
 		break;
 
+	case EnemyStateType::Sky:
+		InitSkyState();
+
 	default:
 		return;
 	}
@@ -817,6 +829,17 @@ void EnemyBase::InitSleepState()
 	}
 	else {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SleepRight;
+	}
+
+}
+
+void EnemyBase::InitSkyState()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyLeft;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyRight;
 	}
 
 }
@@ -1081,6 +1104,13 @@ void EnemyBase::EnemySleep()
 		DataBank::Instance()->SetIsGameClear(true);
 
 	}
+}
+
+void EnemyBase::EnemySky()
+{
+
+
+
 }
 
 void EnemyBase::EnemyDead()
