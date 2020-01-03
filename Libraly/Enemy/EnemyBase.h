@@ -65,6 +65,7 @@ private:
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.3f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
+	const float M_SKY_HEIGHT					= -500.f;	//飛行高度
 
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -163,7 +164,7 @@ protected:
 	virtual void EnemyAttack3() {}	//攻撃状態３
 	virtual void EnemyRest() {}		//休憩状態？
 	void		 EnemySleep();		//眠り状態
-	virtual void EnemySky();		//飛行状態
+	virtual void EnemyFly();		//飛行状態
 	void		 EnemyDead();		//死亡状態
 
 
@@ -178,7 +179,7 @@ protected:
 	virtual void InitAttack3State();//攻撃状態３
 	virtual void InitChaseState();	//追跡状態
 	virtual void InitSleepState();	//眠り状態
-	virtual void InitSkyState();	//飛行状態(鳥で使用)
+	virtual void InitFlyState();	//飛行状態(鳥で使用)
 	void		 InitDeadState();	//死亡状態
 
 	/*csv読込関数：引数にAI番号と.csvを除いたファイル名を入れる*/
@@ -221,7 +222,7 @@ protected:
 	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);
 
 	/*			全敵共通のパラメータ			*/
-	
+	bool m_is_flying;	//飛んでいるかどうか
 
 };
 

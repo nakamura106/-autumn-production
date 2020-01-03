@@ -9,6 +9,8 @@ public:
 	void SetRectangle();
 
 private:
+	const std::string M_AIDataFileName = "Res/Csv/Bird/Enemy_AI";
+
 	/*AI変更関数*/
 	EnemyAIType ChangeAIType();
 

@@ -3,6 +3,7 @@
 #include"../Player/TubaPlayer/TubaPlayer.h"
 #include "../Map/Map.h"
 #include "../Enemy/Mouse.h"
+#include"../Enemy/Bird.h"
 #include"CollisionManager.h"
 #include"../DataBank/DataBank.h"
 
@@ -72,7 +73,7 @@ void ObjectManager::CreateObject()
 {
 	chara_objects[0] = new Map();
 
-	chara_objects[1] = new HedgeHog();
+	chara_objects[1] = new Bird();
 
 	switch (DataBank::Instance()->GetPlayerType())
 	{

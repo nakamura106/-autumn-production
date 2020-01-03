@@ -41,8 +41,8 @@ void HedgeHog::Init()
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Walk_Right.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WalkRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Left.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Tukare_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueRight);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_TaikiLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_TaikiRight);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WaitLeft);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Taiki_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WaitRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepLeft);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Sleep_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_DashAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack1Left);

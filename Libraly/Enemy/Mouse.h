@@ -30,7 +30,7 @@ private:
 	const int	M_ATTACK3_ANIM_TEX_NUM = 5;
 
 	
-	std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
+	const std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
 	bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©	
 	//AttackRepertoryHedgeHog m_attack_repertory;
 

@@ -53,6 +53,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_savetime_end				= 0;
 	m_fatigue_gage_stage		= 0;
 	m_sleep_gage_stage			= 0;
+	m_is_flying = false;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -195,8 +196,8 @@ void EnemyBase::UpdateState()
 		return;
 
 	//飛行状態
-	case EnemyStateType::Sky:
-		EnemySky();
+	case EnemyStateType::Fly:
+		EnemyFly();
 		break;
 
 	default:
@@ -265,8 +266,8 @@ void EnemyBase::UpdateAIState()
 		EnemyDead();
 		return;
 
-	case EnemyStateType::Sky:
-		EnemySky();
+	case EnemyStateType::Fly:
+		EnemyFly();
 		break;
 
 	default:
@@ -283,6 +284,9 @@ void EnemyBase::UpdateAIState()
 
 void EnemyBase::AITransitionUpdate()
 {
+	//飛行状態の場合、状態遷移無し
+	if (m_state == EnemyStateType::Fly)return;
+
 	bool can_change_ai_state = false;
 
 	switch (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_term)
@@ -343,7 +347,6 @@ void EnemyBase::AITransitionUpdate()
 		}
 	}
 
-	
 }
 
 bool EnemyBase::AITransitionBase()
@@ -597,6 +600,7 @@ int EnemyBase::GageStageCalc(float now_gage_, float max_gage_, int gage_stage_nu
 }
 
 
+
 void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 {
 	if (static_cast<int>(m_now_ai) >= static_cast<int>(EnemyAIType::EnemyAIType_Max)) {
@@ -608,6 +612,7 @@ void EnemyBase::ChangeAIState()		//エネミーが行動する条件
 	++m_now_ai_num;
 	
 	if (m_now_ai_num >= static_cast<int>(m_ai_list[static_cast<int>(m_now_ai)].size())) {
+
 		//aiの変更
 		//ここで、AI条件分岐関数を呼び出す
 		EnemyAIType next_ai = ChangeAIType();
@@ -669,8 +674,8 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 		InitDeadState();
 		break;
 
-	case EnemyStateType::Sky:
-		InitSkyState();
+	case EnemyStateType::Fly:
+		InitFlyState();
 
 	default:
 		return;
@@ -733,21 +738,29 @@ void EnemyBase::InitWaitState()
 
 	if (m_direction == Direction::LEFT) {
 		//使用する画像の変更(以下同じ)
-		if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+		if (m_is_flying == true) {
+			//飛行時
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitLeft;
+		}
+		else if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
 			//疲労状態
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueLeft;
 		}
 		else {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiLeft;
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WaitLeft;
 		}
 	}
 	else {
-		if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+		if (m_is_flying == true) {
+			//飛行時
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitRight;
+		}
+		else if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
 			//疲労状態
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueRight;
 		}
 		else {
-			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_TaikiRight;
+			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WaitRight;
 		}
 	}
 
@@ -833,13 +846,13 @@ void EnemyBase::InitSleepState()
 
 }
 
-void EnemyBase::InitSkyState()
+void EnemyBase::InitFlyState()
 {
 	if (m_direction == Direction::LEFT) {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyLeft;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitLeft;
 	}
 	else {
-		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyRight;
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitRight;
 	}
 
 }
@@ -1106,10 +1119,39 @@ void EnemyBase::EnemySleep()
 	}
 }
 
-void EnemyBase::EnemySky()
+void EnemyBase::EnemyFly()
 {
 
+	if (m_is_flying == true) {
+		//地上に降りてくる
+		m_pos.y += m_speed;
 
+		//降りてきた
+		if (m_pos.y >= M_INIT_POS_Y) {
+
+			m_pos.y = M_INIT_POS_Y;
+
+			m_is_flying = false;
+
+			ChangeState(EnemyStateType::Wait);
+
+		}
+	}
+	else {
+		//上空に飛んでいく
+		m_pos.y -= m_speed;
+
+		//上空まで飛んだ
+		if (m_pos.y <= M_SKY_HEIGHT) {
+
+			m_pos.y = M_SKY_HEIGHT;
+
+			m_is_flying = true;
+
+			ChangeState(EnemyStateType::Wait);
+
+		}
+	}
 
 }
 
