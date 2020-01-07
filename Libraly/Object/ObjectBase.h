@@ -65,7 +65,7 @@ protected:
 	float		m_hit_use_atk;		//当たり判定時に使用する攻撃力
 	float		m_map_pos;			//マップ中央固定用
 	int			m_animation_timer;	//アニメーションタイマー
-	bool		m_animation_end;	//アニメーションの最後かどうか
+	bool		m_is_animation_end;	//アニメーションの最後かどうか
 	
 };
 

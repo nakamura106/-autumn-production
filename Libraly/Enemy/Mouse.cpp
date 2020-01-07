@@ -21,11 +21,13 @@ TrpPlayer* trpplayer;
 HedgeHog::HedgeHog()
 	:EnemyBase(2.f,	EnemyID::Hedgehog)
 {
+
+	LoadAIData(M_AIDataFileName);
+	CompleteChangeState();
+
 	m_is_speed_up = false;
 	m_do_needle = false;
 	SetRectangle();
-
-	LoadAIData(M_AIDataFileName);
 	
 }
 
@@ -114,7 +116,7 @@ void HedgeHog::EnemyAttack3()
 EnemyStateType HedgeHog::ChangeStateFromWait()
 {
 	//使用していない関数であり、将来的に消去するためマジックナンバーのまま
-	if (GetStateSaveFlame() > 120 && m_animation_end) {
+	if (GetStateSaveFlame() > 120 && m_is_animation_end) {
 
 		ChangeDirection();
 
@@ -127,7 +129,7 @@ EnemyStateType HedgeHog::ChangeStateFromWait()
 EnemyStateType HedgeHog::ChangeStateFromWalk()
 {
 	//使用していない関数であり、将来的に消去するためマジックナンバーのまま
-	if (GetStateSaveFlame() > 60 && m_animation_end) {
+	if (GetStateSaveFlame() > 60 && m_is_animation_end) {
 		return EnemyStateType::Attack1;
 	}
 
@@ -141,7 +143,7 @@ EnemyStateType HedgeHog::ChangeStateFromRefuge()
 
 EnemyStateType HedgeHog::ChangeStateFromAttack1()
 {
-	if (m_animation_end) {
+	if (m_is_animation_end) {
 		m_do_needle = false;
 		return EnemyStateType::Wait;
 	}

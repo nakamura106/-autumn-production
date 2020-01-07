@@ -19,7 +19,7 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 	m_is_invincible		= false;
 	m_state				= 0;
 	m_animation_timer	= 0;
-	m_animation_end		= false;
+	m_is_animation_end		= false;
 	m_hit_use_atk		= 0.f;
 	m_map_pos			= 0.f;
 }
@@ -53,7 +53,7 @@ void ObjectBase::AnimationUpdate()
 {
 	++m_animation_timer;
 	
-	m_animation_end = false;
+	m_is_animation_end = false;
 
 	if (m_anim_param.split_all == 1)return;
 
@@ -87,7 +87,7 @@ void ObjectBase::AnimationUpdate()
 			m_draw_param.tu = m_draw_param.tv = 1.f;
 
 			//アニメーションの終わりであるフラグをオン
-			m_animation_end = true;
+			m_is_animation_end = true;
 
 		}
 

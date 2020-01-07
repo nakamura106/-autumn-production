@@ -6,8 +6,10 @@ Bird::Bird()
 {
 
 	LoadAIData(M_AIDataFileName);
+	CompleteChangeState();
 
 	m_savetime_shit_cycle = FlameTimer::GetNowFlame();
+	m_is_move_start = false;
 	m_shot_adjust.x = m_draw_param.tex_size_x / 2.f;
 	m_shot_adjust.y = m_draw_param.tex_size_y - 200.f;
 	
@@ -86,6 +88,30 @@ void Bird::EnemyAttack3()
 	}
 }
 
+void Bird::EnemyMove()
+{
+
+	if (m_is_move_start == true) {
+		//移動処理
+		EnemyBase::EnemyMove();
+
+	}
+	else {
+
+		if (m_is_animation_end == true) {
+
+			//最初のモーションのアニメーションが終わり次第、
+			//待機モーションへ
+			InitWaitState();
+
+			//移動開始
+			m_is_move_start = true;
+
+		}
+	}
+
+}
+
 void Bird::InitAttack3State()
 {
 	InitWalkState();
@@ -114,5 +140,7 @@ void Bird::InitAllState()
 
 	//現在のフレームを取得
 	m_savetime_shit_cycle = FlameTimer::GetNowFlame();
+
+	m_is_move_start = false;
 
 }

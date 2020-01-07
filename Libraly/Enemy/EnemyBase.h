@@ -149,6 +149,9 @@ private:
 
 protected:
 
+	/*状態遷移・AI変更集約関数：これを呼び出せばOK!(状態遷移する)*/
+	void CompleteChangeState();
+
 	/*AI変更関数：戻り値で戻したAIに変更する*/
 	virtual EnemyAIType ChangeAIType() = 0;
 

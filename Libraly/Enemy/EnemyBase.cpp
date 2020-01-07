@@ -44,7 +44,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_state_save_pos_x			= 0;
 	m_p_pos_relation			= Direction::LEFT;
 	m_now_ai					= EnemyAIType::AI1;
-	m_now_ai_num				= 0;
+	m_now_ai_num				= -1;
 	m_stop_state_transition		= false;
 	m_hit_use_atk				= 0.f;
 	m_auto_sleep_time			= M_CURE_SLEEP_TIME_DEFAULT;
@@ -115,6 +115,9 @@ void EnemyBase::Init()
 
 void EnemyBase::Update()
 {
+	//アニメーション(パラパラ画像)値の更新
+	AnimationUpdate();
+
 	//Stateの遷移
 	//ChangeState();
 	ObjectBase::Update();
@@ -131,9 +134,6 @@ void EnemyBase::Update()
 
 	/*位置調整の更新*/
 	MoveLimitUpdate();
-
-	//アニメーション(パラパラ画像)値の更新
-	AnimationUpdate();
 
 	//弾の制御
 	BulletControl();
@@ -326,27 +326,8 @@ void EnemyBase::AITransitionUpdate()
 	//状態遷移・AI変更を行う
 	if (can_change_ai_state && !m_stop_state_transition) {
 
-		//次の状態に行くための値を設定
-		ChangeAIState();
+		CompleteChangeState();
 
-		//ゲージ状態に合わせて速度を設定
-		SetGageStateSpeed();
-
-		//AIに合わせて向き変更
-		ChangeAIDirection();
-
-		if (CheckSleepGageMax()) {
-			//眠気ゲージが最大の場合、眠り状態へ遷移
-			ChangeState(EnemyStateType::Sleep);
-		}
-		else if (CheckFatigueGageMax()) {
-			//疲労ゲージが最大の場合、死亡状態へ遷移
-			ChangeState(EnemyStateType::Dead);
-		}
-		else {
-			//値に沿って状態遷移
-			ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
-		}
 	}
 
 }
@@ -354,7 +335,7 @@ void EnemyBase::AITransitionUpdate()
 bool EnemyBase::AITransitionBase()
 {
 	//仮実装　画面は端まではいける
-	if (!m_animation_end)return false;
+	if (!m_is_animation_end)return false;
 
 	if (m_direction == Direction::LEFT) {
 		return IsMoveLimitLeft();
@@ -432,7 +413,7 @@ bool EnemyBase::AITransitionDistance()
 {
 	if (fabsf(m_state_save_pos_x - m_map_pos) >=
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
-		&& m_animation_end)
+		&& m_is_animation_end)
 	{
 		return true;
 	}
@@ -444,7 +425,7 @@ bool EnemyBase::AITransitionFlameTime()
 {
 	if (FlameTimer::GetNowFlame(m_savetime_state) >= 
 		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
-		&& m_animation_end)
+		&& m_is_animation_end)
 	{
 		return true;
 	}
@@ -510,6 +491,31 @@ void EnemyBase::SetGageStateSpeed()
 		break;
 	}
 
+}
+
+void EnemyBase::CompleteChangeState()
+{
+	//次の状態に行くための値を設定
+	ChangeAIState();
+
+	//ゲージ状態に合わせて速度を設定
+	SetGageStateSpeed();
+
+	//AIに合わせて向き変更
+	ChangeAIDirection();
+
+	if (CheckSleepGageMax()) {
+		//眠気ゲージが最大の場合、眠り状態へ遷移
+		ChangeState(EnemyStateType::Sleep);
+	}
+	else if (CheckFatigueGageMax()) {
+		//疲労ゲージが最大の場合、死亡状態へ遷移
+		ChangeState(EnemyStateType::Dead);
+	}
+	else {
+		//値に沿って状態遷移
+		ChangeState(m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_state);
+	}
 }
 
 void EnemyBase::AutoChangeGageUpdate()
