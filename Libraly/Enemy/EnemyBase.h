@@ -94,6 +94,7 @@ private:
 	/*ゲージ量の最大最低管理*/
 	void GaugeLimitControl();
 
+
 	/*			新状態遷移			*/
 
 	/*状態更新関数:Csvを使用したAIシステム(以下、CsvAI)。12/10現在はこちらを使用*/
@@ -143,9 +144,8 @@ private:
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
 	int				m_fatigue_gage_stage;		//疲労ゲージの段階を示す
 	int				m_sleep_gage_stage;			//眠気ゲージの段階を示す
-
+	
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
-	EnemyBulletList bullet_list;		//弾のリスト
 
 protected:
 
@@ -186,6 +186,7 @@ protected:
 	//例：Res/Csv/Mouse/Enemy_AI1.csv→Res/Csv/Mouse/Enemy_AI
 	void LoadAIData(std::string file_name_);
 
+
 	/*			旧状態遷移			*/
 
 	/*旧状態更新関数：システムは単純だが、拡張性が無いと判断*/
@@ -201,6 +202,7 @@ protected:
 	/*向き変更：m_Directionを変更する LEFT⇔RIGHT*/
 	void ChangeDirection();
 
+
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
@@ -214,15 +216,21 @@ protected:
 
 
 	/*			ゲッター			*/
+
 	/*状態遷移してからの経過時間取得*/
 	int	GetStateSaveFlame();
 	EnemyAIType GetNowAI() { return m_now_ai; }
 
 	//弾作成
-	void CreateBullet(float pos_x_, float pos_y_, float move_speed_);
+	Position GetShotPos();
+	void CreateBullet();
+
 
 	/*			全敵共通のパラメータ			*/
+
 	bool m_is_flying;	//飛んでいるかどうか
+	EnemyBulletList bullet_list;		//弾のリスト
+	Position		m_shot_adjust;				//弾発射時の位置調整用(座標からどれくらいずれているか)
 
 };
 

@@ -4,7 +4,7 @@
 BulletBase::BulletBase(float x_, float y_, float move_speed_, Direction direction_)
 {
 	//オブジェクトからの情報を格納
-	m_pos.x = x_;
+	m_pos.x	= x_;
 	m_map_pos = x_;
 	m_pos.y = y_;
 	m_speed = move_speed_;

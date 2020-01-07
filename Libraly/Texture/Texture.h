@@ -150,7 +150,8 @@ enum GameCategoryTextureList
 	//GameEnemy_FlyLeft,				//!<“G”òs
 	//GameEnemy_FlyRight,
 
-	GameEnemy_Bullet_Needle,				//!<“G‚Ì’e(ƒnƒŠ)
+	GameEnemy_Bullet_Normal,		//!<“G‚Ì’e(ƒnƒŠ)
+	GameEnemy_Bullet_Shit,			//!<“G‚Ì’e(ƒtƒ“)
 
 	GamePointerTex,			//!< ƒ|ƒCƒ“ƒ^
 	GameTextureMax,			//!< ƒŠƒXƒgÅ‘å”

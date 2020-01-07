@@ -53,7 +53,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_savetime_end				= 0;
 	m_fatigue_gage_stage		= 0;
 	m_sleep_gage_stage			= 0;
-	m_is_flying = false;
+	m_is_flying					= false;
+	m_shot_adjust.x				= 0.f;
+	m_shot_adjust.y				= 0.f;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -1190,17 +1192,40 @@ int EnemyBase::GetStateSaveFlame()
 	return FlameTimer::GetNowFlame(m_savetime_state);
 }
 
-void EnemyBase::CreateBullet(float pos_x_,float pos_y_,float move_speed_)
+
+Position EnemyBase::GetShotPos()
 {
-	//’e¶¬
+	Position b_pos;
+
+	//”­ËˆÊ’u’²®
+	b_pos.y = m_pos.y + m_shot_adjust.y;
+
+	if (m_direction == Direction::LEFT) {
+		b_pos.x = m_map_pos + m_shot_adjust.x;
+	}
+	else {
+		b_pos.x = m_map_pos - m_shot_adjust.x + m_draw_param.tex_size_x;
+	}
+
+	return b_pos;
+}
+
+void EnemyBase::CreateBullet()
+{
+
+	//’e‚Ì”­ËˆÊ’u‚ğæ“¾
+	Position b_pos = GetShotPos();
+
+	//’Êí’e¶¬
 	bullet_list.push_back(
 		new EnemyBullet(
-			pos_x_,
-			pos_y_,
-			move_speed_,
+			b_pos.x,
+			b_pos.y,
+			m_speed,
 			(Direction)m_direction
 		)
 	);
+
 }
 
 void EnemyBase::UpSleepGage(float up_num_)

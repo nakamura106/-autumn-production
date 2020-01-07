@@ -16,9 +16,8 @@ public:
 
 private:
 	/*動作更新*/
-	void MoveUpdate();
-
-	const float M_BULLET_SYZE = 128.f;
+	virtual void MoveUpdate();
+	
 	const float M_MOVE_LIMIT_DEFAULT = 1000.f;
 	
 	/*アニメーション用(仮メンバ)*/
@@ -28,7 +27,7 @@ private:
 protected:
 	float	m_move_count;		//移動量
 	float	m_move_limit;		//移動制限
-
+	const float M_BULLET_SYZE = 128.f;
 };
 
 

@@ -51,7 +51,7 @@ void HedgeHog::Init()
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_Down_Right.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownRight);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Left);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_TogeAttack_Right.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Right);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Needle);
+	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Normal);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_HeadAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Left);
 	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_HeadAttack_Right.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Right);
 
@@ -97,7 +97,7 @@ void HedgeHog::EnemyAttack2()
 		m_do_needle = true;
 
 		//íeî≠éÀ
-		CreateNeedle();
+		CreateBullet();
 
 	}
 }
@@ -172,23 +172,6 @@ EnemyAIType HedgeHog::ChangeAIType()
 	return EnemyAIType::AI1;
 }
 
-void HedgeHog::CreateNeedle()
-{
-	Position b_pos;
-
-	//î≠éÀà íuí≤êÆ
-	b_pos.y = m_pos.y + M_NEEDLE_ADJUST_Y;
-
-	if (m_direction == Direction::LEFT) {
-		b_pos.x = m_map_pos + M_NEEDLE_ADJUST_X;
-	}
-	else {
-		b_pos.x = m_map_pos - M_NEEDLE_ADJUST_X + m_draw_param.tex_size_x;
-	}
-
-	//Bullet(ÉnÉä)ê∂ê¨
-	CreateBullet(b_pos.x, b_pos.y, m_speed);
-}
 
 void HedgeHog::InitAllState()
 {

@@ -32,6 +32,7 @@
 
 const int GAMECLEAR_FLAME = 180;	//敵の眠りモーション遷移後、このフレーム数経過でゲームクリア
 const int GAMEOVER_FLAME = 180;		//敵の死亡モーション遷移後、このフレーム数経過でゲームオーバー
+const float G_GROUND_POS_Y = 950.f;//地面の位置
 
 //オブジェクトの役割を示す
 enum class ObjectRavel 

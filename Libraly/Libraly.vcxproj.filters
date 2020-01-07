@@ -210,6 +210,9 @@
     <ClCompile Include="Enemy\Bird.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet\ShitBullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\Bird.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\ShitBullet.h">
+      <Filter>Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

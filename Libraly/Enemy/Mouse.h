@@ -55,9 +55,6 @@ private:
 	void EnemyAttack1();
 	void EnemyAttack2();
 	void EnemyAttack3();
-	
-	/*ƒnƒŠ”­ŽË*/
-	void CreateNeedle();
 
 	void InitAllState();
 

@@ -6,7 +6,17 @@
 class EnemyBullet :public BulletBase
 {
 public:
-	EnemyBullet(float x_, float y_, float move_speed_, Direction direction_);
+	EnemyBullet(
+		float x_,
+		float y_,
+		float move_speed_,
+		Direction direction_,
+		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
+		int tex_split_w_ = 2,
+		int tex_split_h_ = 1,
+		int tex_split_all = 1
+	);
+
 	~EnemyBullet();
 	void Init();
 
