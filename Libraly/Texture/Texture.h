@@ -147,8 +147,10 @@ enum GameCategoryTextureList
 	GameEnemy_FatigueRight,
 	GameEnemy_DownLeft,				//!<“GŽ€–S
 	GameEnemy_DownRight,
-	//GameEnemy_FlyLeft,				//!<“G”òs
+	//GameEnemy_FlyLeft,			//!<“G”òs
 	//GameEnemy_FlyRight,
+	GameEnemy_FlappingLeft,			//!<“G‰H‚Î‚½‚«
+	GameEnemy_FlappingRight,
 
 	GameEnemy_Bullet_Normal,		//!<“G‚Ì’e(ƒnƒŠ)
 	GameEnemy_Bullet_Shit,			//!<“G‚Ì’e(ƒtƒ“)

@@ -51,8 +51,6 @@ private:
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
 	const int	M_ANIM_TEX_HEIGHT				= 4;		//縦の分割数
 	const float M_ENEMY_SYZE					= 1024.f;	//テクスチャのサイズ(本来は縦横がある)
-	const float	M_INIT_POS_X					= 700.f;	//初期x座標
-	const float M_INIT_POS_Y					= -70.f;	//初期y座標
 	const int	M_CURE_SLEEP_TIME_DEFAULT		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
@@ -65,8 +63,7 @@ private:
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.3f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
-	const float M_SKY_HEIGHT					= -500.f;	//飛行高度
-
+	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
 
@@ -102,9 +99,6 @@ private:
 
 	/*AI・状態遷移関数：AI情報を元に状態の遷移かAIの変更を行う*/
 	void ChangeAIState();
-
-	/*大元の状態遷移関数：引数で渡した状態に遷移*/
-	void ChangeState(EnemyStateType next_state_);
 
 	/*CsvAI状態遷移関数：内部でAITransition～関数を呼び出している*/
 	void AITransitionUpdate();
@@ -148,9 +142,15 @@ private:
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 
 protected:
+	const float	M_INIT_POS_X = 700.f;	//初期x座標
+	const float M_INIT_POS_Y = -70.f;	//初期y座標
+	const float M_SKY_HEIGHT = -500.f;	//飛行高度
 
 	/*状態遷移・AI変更集約関数：これを呼び出せばOK!(状態遷移する)*/
 	void CompleteChangeState();
+
+	/*大元の状態遷移関数：引数で渡した状態に遷移*/
+	void ChangeState(EnemyStateType next_state_);
 
 	/*AI変更関数：戻り値で戻したAIに変更する*/
 	virtual EnemyAIType ChangeAIType() = 0;
@@ -234,6 +234,7 @@ protected:
 	bool m_is_flying;	//飛んでいるかどうか
 	EnemyBulletList bullet_list;		//弾のリスト
 	Position		m_shot_adjust;				//弾発射時の位置調整用(座標からどれくらいずれているか)
+	bool m_animation_stop;	//trueの場合、アニメーションしない
 
 };
 

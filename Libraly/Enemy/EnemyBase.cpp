@@ -56,6 +56,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_is_flying					= false;
 	m_shot_adjust.x				= 0.f;
 	m_shot_adjust.y				= 0.f;
+	m_animation_stop			= false;
 
 	DataBank::Instance()->SetIsGameClear(false);
 
@@ -116,7 +117,7 @@ void EnemyBase::Init()
 void EnemyBase::Update()
 {
 	//アニメーション(パラパラ画像)値の更新
-	AnimationUpdate();
+	if (m_animation_stop != true)AnimationUpdate();
 
 	//Stateの遷移
 	//ChangeState();
@@ -739,6 +740,8 @@ void EnemyBase::InitAllState()
 {
 	m_draw_param.tu = 1.f;
 	m_draw_param.tv = 1.f;
+
+	m_animation_stop = false;
 }
 
 void EnemyBase::InitWaitState()
@@ -1129,38 +1132,6 @@ void EnemyBase::EnemySleep()
 
 void EnemyBase::EnemyFly()
 {
-
-	if (m_is_flying == true) {
-		//地上に降りてくる
-		m_pos.y += m_speed;
-
-		//降りてきた
-		if (m_pos.y >= M_INIT_POS_Y) {
-
-			m_pos.y = M_INIT_POS_Y;
-
-			m_is_flying = false;
-
-			ChangeState(EnemyStateType::Wait);
-
-		}
-	}
-	else {
-		//上空に飛んでいく
-		m_pos.y -= m_speed;
-
-		//上空まで飛んだ
-		if (m_pos.y <= M_SKY_HEIGHT) {
-
-			m_pos.y = M_SKY_HEIGHT;
-
-			m_is_flying = true;
-
-			ChangeState(EnemyStateType::Wait);
-
-		}
-	}
-
 }
 
 void EnemyBase::EnemyDead()
