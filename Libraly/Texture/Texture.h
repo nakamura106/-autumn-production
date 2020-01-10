@@ -155,6 +155,11 @@ enum GameCategoryTextureList
 	GameEnemy_Bullet_Normal,		//!<敵の弾(ハリ)
 	GameEnemy_Bullet_Shit,			//!<敵の弾(フン)
 
+
+	/* エフェクト用 */
+	GameDebuffEfect,
+	GameDieEffect,
+
 	GamePointerTex,			//!< ポインタ
 	GameTextureMax,			//!< リスト最大数
 };

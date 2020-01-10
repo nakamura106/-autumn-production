@@ -232,6 +232,22 @@ enum class PlayerHpState
 	Hp0,
 };
 
+// エフェクトの種類判定用
+enum class EffectID 
+{
+	DebuffEffect,
+	DieEffect,
+	FailureEffect,
+	HitEffect,
+	ItemDropEffect,
+	LandingEffect,
+	ShotEffect,
+	SleepEffect,
+	SweatEffect,
+
+	MAXEffectID,
+};
+
 struct Position
 {
 	Position() {
@@ -299,19 +315,6 @@ struct UVANIMATION
 	float m_Rect_Height;	// 矩形の高さ
 	int m_Display_Flame;	// 表示フレーム数
 		
-};
-
-struct EffectInfo
-{
-	float m_x;			//エフェクトのx座標
-	float m_y;			//エフェクトのy座標
-	int m_timer;		//描画時間タイマー
-	int m_tex_id;		//テクスチャーid保存用
-	bool m_is_active;	//描画判断用
-	float m_width;		//横幅
-	float m_height;		//高さ
-	float m_tu;
-	float m_tv;
 };
 
 

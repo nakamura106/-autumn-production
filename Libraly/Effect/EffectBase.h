@@ -1,6 +1,19 @@
 #ifndef EFFECTBASE_H_
 #define EFFECTBASE_H_
 
+#include "../Object/Definition.h"
+#include "../Object/ObjectBase.h"
+#include "../Texture/Texture.h"
+
+// エフェクトの情報
+struct EffectParam
+{
+	float m_X, m_Y;
+	float m_offsetX, m_offsetY;
+	bool IsLoop;
+	GameCategoryTextureList m_tex_id;
+};
+
 class EffectBase
 {
 public:
@@ -19,8 +32,9 @@ public:
 	// エフェクト終了関数
 	void Sleep();
 
-private:
-
+protected:
+	EffectParam m_param;
+	EffectID m_id;
 
 };
 
