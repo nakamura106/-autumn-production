@@ -64,6 +64,12 @@
     <Filter Include="Player\TubaPlayer">
       <UniqueIdentifier>{7eb365f5-6978-4d40-a906-cb1fcd01b939}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{aef9ed81-f44c-4b91-a377-43a82c792221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect\Effects">
+      <UniqueIdentifier>{60de4c52-005f-4181-a3a7-1c5fab205d9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -212,6 +218,36 @@
     </ClCompile>
     <ClCompile Include="Bullet\ShitBullet.cpp">
       <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectBase.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\SleepEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\DieEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\DebuffEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\FailureEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\HitEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\LandingEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\ItemDropEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\ShotEffect.cpp">
+      <Filter>Effect\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\SweatEffect.cpp">
+      <Filter>Effect\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +403,36 @@
     </ClInclude>
     <ClInclude Include="Bullet\ShitBullet.h">
       <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectBase.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\SleepEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\DieEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\DebuffEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\FailureEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\HitEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\LandingEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\ItemDropEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\ShotEffect.h">
+      <Filter>Effect\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effects\SweatEffect.h">
+      <Filter>Effect\Effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

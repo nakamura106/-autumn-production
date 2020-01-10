@@ -1,0 +1,21 @@
+#ifndef SWEATEFFECT_H_
+#define SWEATEFFECT_H_
+
+#include "../EffectBase.h"
+
+class SweatEffect :public EffectBase
+{
+public:
+	SweatEffect();
+	~SweatEffect();
+
+	void Init()override;
+	void Update()override;
+	void Draw()override;
+
+private:
+
+};
+
+#endif
+
