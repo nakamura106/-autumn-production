@@ -91,7 +91,10 @@ void DrawTexture(float x, float y, Texture* texture_data);
 * @param[in] tv テクスチャV座標
 */
 
-void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, bool is_turn = false);
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int rotate_angle = 0, bool is_turn = false);
+float GetRotateX(float x_, float y_, float sin_ ,float cos_);
+float GetRotateY(float x_, float y_, float sin_ ,float cos_);
+
 
 void DrawUVScrollTexture(float x, float y, Texture* texture_data, float tu, float tv);
 

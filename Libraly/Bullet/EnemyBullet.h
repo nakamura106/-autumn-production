@@ -11,6 +11,8 @@ public:
 		float y_,
 		float move_speed_,
 		Direction direction_,
+		int draw_angle_ = 0,
+		float move_speed_y_ = 0.f,
 		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
 		int tex_split_w_ = 2,
 		int tex_split_h_ = 1,

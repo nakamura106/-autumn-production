@@ -8,7 +8,7 @@
 class ObjectBase {
 public:
 	ObjectBase();
-	ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_);
+	ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_, int draw_angle_);
 	~ObjectBase();
 
 	virtual void Init() = 0;
@@ -66,6 +66,7 @@ protected:
 	float		m_map_pos;			//マップ中央固定用
 	int			m_animation_timer;	//アニメーションタイマー
 	bool		m_is_animation_end;	//アニメーションの最後かどうか
+	int			m_draw_angle;		//描画する角度
 	
 };
 
