@@ -20,7 +20,7 @@
 //‚±‚±‚Ü‚Å
 
 EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
-	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_)
+	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_, 0)
 {
 	m_enemy_id					= enemy_id_;
 	m_state						= EnemyStateType::Walk;

@@ -3,7 +3,7 @@
 #include"../DataBank/DataBank.h"
 
 PlayerBase::PlayerBase()
-	:ObjectBase(ObjectRavel::Ravel_Player,Direction::RIGHT,P_speed)
+	:ObjectBase(ObjectRavel::Ravel_Player, Direction::RIGHT, P_speed, 0)
 {
 	//g—p‰æ‘œİ’è
 	m_draw_param.tu = 1.0f;
@@ -18,7 +18,7 @@ PlayerBase::PlayerBase()
 	m_anim_param.split_width = 4;
 	m_anim_param.split_height = 4;
 	m_anim_param.change_flame = Dispflame;
-	
+
 
 	m_animtimer = 0;
 }
