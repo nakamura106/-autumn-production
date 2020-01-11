@@ -23,6 +23,8 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 	m_hit_use_atk		= 0.f;
 	m_map_pos			= 0.f;
 	m_draw_angle		= draw_angle_;
+	m_draw_param.tu		= 1.f;
+	m_draw_param.tv		= 1.f;
 }
 
 ObjectBase::~ObjectBase()

@@ -403,10 +403,10 @@ void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
-void DrawEffect(EffectInfo effect)
-{
-	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
-}
+//void DrawEffect(EffectInfo effect)
+//{
+//	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
+//}
 
 //！！！テスト中！！！
 float center_x, center_y;

@@ -42,8 +42,19 @@ BulletBase::BulletBase(
 	//ˆÚ“®‹——£”»’è—p
 	m_move_count		= 0.f;
 	m_move_limit		= M_MOVE_LIMIT_DEFAULT;
+	m_speed_y			= speed_y_;
 
 	CalcDrawPosition();
+
+	if (m_anim_param.split_all >= 2) {
+
+		if (m_direction == Direction::LEFT) {
+			m_draw_param.tu = 1.f;
+		}
+		else {
+			m_draw_param.tu = 2.f;
+		}
+	}
 }
 
 BulletBase::~BulletBase()
@@ -54,7 +65,9 @@ BulletBase::~BulletBase()
 void BulletBase::Init()
 {
 	//‰æ‘œî•ñ“Ç‚İ‚İ
-	Load();
+	//Load();
+
+
 }
 
 void BulletBase::Update()

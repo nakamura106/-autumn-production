@@ -156,7 +156,7 @@ void DrawIntegratedTexture(float x, float y, Texture* texture_data, float tu, fl
 
 void DrawObjIntegratedTexture(float x, float y, Texture* texture_data, float tu, float tv, float spriteX, float spriteY, int spriteNumX, int spriteNumY, float z);
 
-void DrawEffect(EffectInfo effect);
+//void DrawEffect(EffectInfo effect);
 
 #endif
 

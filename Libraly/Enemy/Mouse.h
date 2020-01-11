@@ -59,5 +59,5 @@ private:
 	void InitAllState();
 
 	//bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©
-	bool m_do_needle;		//ƒnƒŠ”­Ë‚ğs‚Á‚½‚©‚Ç‚¤‚©
+	
 };

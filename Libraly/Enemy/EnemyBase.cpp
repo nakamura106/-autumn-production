@@ -742,6 +742,8 @@ void EnemyBase::InitAllState()
 	m_draw_param.tv = 1.f;
 
 	m_animation_stop = false;
+	m_do_bullet = false;
+
 }
 
 void EnemyBase::InitWaitState()
@@ -1187,19 +1189,38 @@ Position EnemyBase::GetShotPos()
 	return b_pos;
 }
 
-void EnemyBase::CreateBullet()
+void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, int init_angle_)
 {
 
 	//’e‚Ì”­ËˆÊ’u‚ğæ“¾
 	Position b_pos = GetShotPos();
+
+	int draw_angle = 0;
+
+	if (is_rotate_ == true) {
+
+		float hypotenuse = pow((speed_x_ * speed_x_) + (speed_y_ * speed_y_), 0.5f);
+
+		draw_angle = static_cast<int>(acosf(((fabsf(speed_x_)) / hypotenuse)));
+
+		if (m_direction == Direction::LEFT) {
+			draw_angle = init_angle_ - draw_angle;
+		}
+		else {
+			draw_angle = init_angle_ + draw_angle;
+		}
+
+	}
 
 	//’Êí’e¶¬
 	bullet_list.push_back(
 		new EnemyBullet(
 			b_pos.x,
 			b_pos.y,
-			m_speed,
-			(Direction)m_direction
+			speed_x_,
+			(Direction)m_direction,
+			init_angle_ - draw_angle,
+			speed_y_
 		)
 	);
 

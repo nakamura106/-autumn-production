@@ -26,7 +26,7 @@ HedgeHog::HedgeHog()
 	CompleteChangeState();
 
 	m_is_speed_up = false;
-	m_do_needle = false;
+	m_do_bullet = false;
 	SetRectangle();
 	
 }
@@ -94,12 +94,12 @@ void HedgeHog::EnemyAttack2()
 		追尾　なし
 		発射　3way 2回くらい？
 	*/
-	if (GetAnimationTexNum() > M_ATTACK2_ANIM_TEX_NUM && !m_do_needle) {
+	if (GetAnimationTexNum() > M_ATTACK2_ANIM_TEX_NUM && !m_do_bullet) {
 		//発射したかどうかのフラグをON
-		m_do_needle = true;
+		m_do_bullet = true;
 
 		//弾発射
-		CreateBullet();
+		CreateBullet(m_speed);
 
 	}
 }
@@ -144,7 +144,7 @@ EnemyStateType HedgeHog::ChangeStateFromRefuge()
 EnemyStateType HedgeHog::ChangeStateFromAttack1()
 {
 	if (m_is_animation_end) {
-		m_do_needle = false;
+		m_do_bullet = false;
 		return EnemyStateType::Wait;
 	}
 
@@ -178,7 +178,5 @@ EnemyAIType HedgeHog::ChangeAIType()
 void HedgeHog::InitAllState()
 {
 	EnemyBase::InitAllState();
-	//ニードルリセット
-	m_do_needle = false;
 }
 

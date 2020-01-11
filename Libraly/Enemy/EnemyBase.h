@@ -226,15 +226,26 @@ protected:
 
 	//弾作成
 	Position GetShotPos();
-	void CreateBullet();
+	
+	/*
+			弾作成関数
+		<引数>
+		1 speed_x_		:x軸方向の移動量
+		2 speed_y_		:y軸方向の移動量
+		3 is_rotate_	:移動量に応じて画像の回転を行うかどうか
+		4 init_angle_	:画像の元の回転度数(元が何度か)
+
+	*/
+	void CreateBullet(float speed_x_, float speed_y_ = 0.f, bool is_rotate_ = false, int init_angle_ = 0);
 
 
 	/*			全敵共通のパラメータ			*/
 
-	bool m_is_flying;	//飛んでいるかどうか
+	bool			m_is_flying;		//飛んでいるかどうか
 	EnemyBulletList bullet_list;		//弾のリスト
-	Position		m_shot_adjust;				//弾発射時の位置調整用(座標からどれくらいずれているか)
-	bool m_animation_stop;	//trueの場合、アニメーションしない
+	Position		m_shot_adjust;		//弾発射時の位置調整用(座標からどれくらいずれているか)
+	bool			m_animation_stop;	//trueの場合、アニメーションしない
+	bool			m_do_bullet;		//ハリ発射を行ったかどうか
 
 };
 
