@@ -73,7 +73,7 @@ void ObjectManager::CreateObject()
 {
 	chara_objects[0] = new Map();
 
-	chara_objects[1] = new Bird();
+	chara_objects[1] = new HedgeHog();
 
 	switch (DataBank::Instance()->GetPlayerType())
 	{
