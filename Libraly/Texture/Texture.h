@@ -157,8 +157,15 @@ enum GameCategoryTextureList
 
 
 	/* エフェクト用 */
-	GameDebuffEfect,
-	GameDieEffect,
+	GameDebuffEfect,		//!< デバフエフェクト
+	GameDieEffect,			//!< 死亡エフェクト
+	GameFailureEffect,		//!< 演奏失敗エフェクト
+	GameHitEffect,			//!< 攻撃ヒットエフェクト
+	GameItemDropEffect,		//!< アイテムドロップエフェクト
+	GameLandingEffect,		//!< 着地エフェクト
+	GameShotEffect,			//!< 被弾エフェクト
+	GameSleepEffect,		//!< 睡眠時エフェクト
+	GameSweatEffect,		//!< 残りHP１時エフェクト
 
 	GamePointerTex,			//!< ポインタ
 	GameTextureMax,			//!< リスト最大数
