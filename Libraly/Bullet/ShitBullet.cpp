@@ -8,11 +8,11 @@ ShitBullet::ShitBullet(
 	float acceleration_,
 	Direction direction_,
 	GameCategoryTextureList use_tex_,
-	int tex_split_w_	,
-	int tex_split_h_	,
-	int tex_split_all	
+	int tex_split_w_,
+	int tex_split_h_,
+	int tex_split_all
 )
-	:EnemyBullet(x_, y_, move_speed_, direction_, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
+	:EnemyBullet(x_, y_, move_speed_, direction_, 0, 0.f, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
 {
 
 	m_is_dropdown		= false;

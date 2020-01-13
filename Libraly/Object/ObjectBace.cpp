@@ -5,12 +5,12 @@
 const float G_OBJECT_DEFAULT_SPEED = 5.f;
 
 ObjectBase::ObjectBase()
-	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, G_OBJECT_DEFAULT_SPEED)
+	:ObjectBase(ObjectRavel::Ravel_MapObj, Direction::RIGHT, G_OBJECT_DEFAULT_SPEED, 0)
 {
 
 }
 
-ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_)
+ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_, int draw_angle_)
 {
 	m_obj_ravel			= obj_ravel_;
 	m_direction			= direction_;
@@ -19,9 +19,12 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 	m_is_invincible		= false;
 	m_state				= 0;
 	m_animation_timer	= 0;
-	m_is_animation_end		= false;
+	m_is_animation_end	= false;
 	m_hit_use_atk		= 0.f;
 	m_map_pos			= 0.f;
+	m_draw_angle		= draw_angle_;
+	m_draw_param.tu		= 1.f;
+	m_draw_param.tv		= 1.f;
 }
 
 ObjectBase::~ObjectBase()
@@ -45,7 +48,8 @@ void ObjectBase::Draw()
 		m_draw_param.tex_size_y,	//テクスチャの縦サイズ
 		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
 		(m_draw_param.tu - 1.f) / (float)m_anim_param.split_width,
-		(m_draw_param.tv - 1.f) / (float)m_anim_param.split_height
+		(m_draw_param.tv - 1.f) / (float)m_anim_param.split_height,
+		m_draw_angle
 	);
 }
 

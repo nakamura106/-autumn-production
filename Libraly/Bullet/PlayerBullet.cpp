@@ -2,13 +2,12 @@
 #include "../DataBank/DataBank.h"
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
-	:BulletBase(x_, y_, move_speed_, direction_)
+	:BulletBase(x_, y_, move_speed_, direction_,ObjectRavel::Ravel_PlayerBullet)
 {
 	m_draw_param.texture_id		= GameCategoryTextureList::GamePlayerBullet_1Tex;
 	m_anim_param.split_all		= M_PBULLET_ANIM_SPLIT_ALL;
 	m_anim_param.split_width	= M_PBULLET_ANIM_SPLIT_W;
 	m_anim_param.split_height	= M_PBULLET_ANIM_SPLIT_H;
-	m_obj_ravel					= ObjectRavel::Ravel_PlayerBullet;
 	player_bullet_type			= p_bullet_type_;
 
 	//ƒvƒŒƒCƒ„[‚Ì’e‚Ìî•ñ‚ğŠi”[

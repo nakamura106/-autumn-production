@@ -1,5 +1,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
+#include<math.h>
 
 #include "../Engine/Graphics.h"
 #include "../Engine/Windows.h"
@@ -11,6 +12,8 @@
 // 静的ライブラリ
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
+
+const float PI = 3.14159265f;
 
 struct CustomVertex
 {
@@ -129,7 +132,7 @@ void DrawTexture(float x, float y, Texture* texture_data)
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
-void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, bool is_turn)
+void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int rotate_angle_, bool is_turn)
 {
 	float ttu = sprite_width / texture_data->Width;
 	float ttv = sprite_height / texture_data->Height;
@@ -137,6 +140,9 @@ void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Te
 	//計算用変数
 	float calc_tu1 = tu;
 	float calc_tu2 = tu + ttu;
+
+	float sine = sinf((float)rotate_angle_ / 180.f * PI);
+	float cosn = cosf((float)rotate_angle_ / 180.f * PI);
 
 	if (is_turn) {
 		float tmp = calc_tu1;
@@ -147,13 +153,13 @@ void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Te
 	CustomVertex v[4] =
 	{
 		// 左上
-		{ x	, y, 0.0f, 1.0f, calc_tu1, tv },
+		{ GetRotateX(-sprite_width / 2.f,-sprite_height / 2.f,sine,cosn) + (x + sprite_width / 2.f)	,	GetRotateY(-sprite_width / 2.f,-sprite_height / 2.f,sine,cosn) + (y + sprite_height / 2.f), 0.0f, 1.0f, calc_tu1, tv },
 		// 右上
-		{ x + sprite_width, y, 0.0f, 1.0f, calc_tu2, tv },
+		{ GetRotateX(sprite_width / 2.f,-sprite_height / 2.f,sine,cosn) + (x + sprite_width / 2.f),		GetRotateY(sprite_width / 2.f,-sprite_height / 2.f,sine,cosn) + (y + sprite_height / 2.f), 0.0f, 1.0f, calc_tu2, tv },
 		// 右下
-		{ x + sprite_width, y + sprite_height, 0.0f, 1.0f, calc_tu2, tv + ttv },
+		{ GetRotateX(sprite_width / 2.f,sprite_height / 2.f,sine,cosn) + (x + sprite_width / 2.f),		GetRotateY(sprite_width / 2.f,sprite_height / 2.f,sine,cosn) + (y + sprite_height / 2.f), 0.0f, 1.0f, calc_tu2, tv + ttv },
 		// 左下 
-		{ x, y + sprite_height, 0.0f, 1.0f, calc_tu1, tv + ttv },
+		{ GetRotateX(-sprite_width / 2.f,sprite_height / 2.f,sine,cosn) + (x + sprite_width / 2.f),		GetRotateY(-sprite_width / 2.f,sprite_height / 2.f,sine,cosn) + (y + sprite_height / 2.f), 0.0f, 1.0f, calc_tu1, tv + ttv },
 	};
 
 	// 頂点構造の指定
@@ -163,6 +169,20 @@ void DrawUVTexture(float x, float y, float sprite_width, float sprite_height, Te
 
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 
+}
+
+float GetRotateX(float x_, float y_, float sin_, float cos_)
+{
+	float draw_x = x_ * cos_ + y_ * (-sin_);
+
+	return draw_x;
+}
+
+float GetRotateY(float x_, float y_, float sin_, float cos_)
+{
+	float draw_y = x_ * sin_ + y_ * cos_;
+
+	return draw_y;
 }
 
 void DrawInversion(float x, float y, float sprite_width, float sprite_height, Texture* texture_data, float tu, float tv, int direction)
@@ -383,10 +403,10 @@ void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture
 	g_D3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, v, sizeof(CustomVertex));
 }
 
-void DrawEffect(EffectInfo effect)
-{
-	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
-}
+//void DrawEffect(EffectInfo effect)
+//{
+//	DrawUVTexture(effect.m_x, effect.m_y, effect.m_width, effect.m_height, GetTexture(TEXTURE_CATEGORY_GAME, effect.m_tex_id), effect.m_tu, effect.m_tv);
+//}
 
 //！！！テスト中！！！
 float center_x, center_y;
