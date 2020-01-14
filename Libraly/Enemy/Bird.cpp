@@ -229,6 +229,7 @@ void Bird::CreateShitBullet()
 		new ShitBullet(
 			b_pos.x,
 			b_pos.y,
+			0.f,
 			m_speed,
 			0.05f,		//加速度
 			(Direction)m_direction

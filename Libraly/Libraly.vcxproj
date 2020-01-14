@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet\BananaBullet.cpp" />
     <ClCompile Include="Bullet\BulletBase.cpp" />
     <ClCompile Include="Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Effect\Effects\SweatEffect.cpp" />
     <ClCompile Include="Enemy\Bird.cpp" />
     <ClCompile Include="Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Enemy\Gorilla.cpp" />
     <ClCompile Include="Enemy\Mouse.cpp" />
     <ClCompile Include="Engine\Anime.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
@@ -202,6 +204,7 @@
     <ClCompile Include="Utility\HitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet\BananaBullet.h" />
     <ClInclude Include="Bullet\BulletBase.h" />
     <ClInclude Include="Bullet\EnemyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
@@ -218,6 +221,7 @@
     <ClInclude Include="Effect\Effects\SweatEffect.h" />
     <ClInclude Include="Enemy\Bird.h" />
     <ClInclude Include="Enemy\EnemyBase.h" />
+    <ClInclude Include="Enemy\Gorilla.h" />
     <ClInclude Include="Enemy\Mouse.h" />
     <ClInclude Include="Engine\Anime.h" />
     <ClInclude Include="Engine\Engine.h" />
