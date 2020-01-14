@@ -16,7 +16,7 @@ BananaBullet::BananaBullet(
 void BananaBullet::MoveUpdate()
 {
 	//最初は親であるオブジェクトに従って動く
-	
+	//m_parent->GetAnimationTexNum();
 
 	ShitBullet::MoveUpdate();
 }
