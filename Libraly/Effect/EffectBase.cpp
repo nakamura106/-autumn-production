@@ -2,15 +2,23 @@
 
 EffectBase::EffectBase()
 {
+
+}
+
+EffectBase::EffectBase(ObjectBase* parent_)
+{
+	m_parent = parent_;
+	Init();
 }
 
 EffectBase::~EffectBase()
 {
 }
 
-int EffectBase::GetEffectID()
+void EffectBase::Init()
 {
-	return 0;
+	m_param.m_X = m_parent->GetPos().x;
+	m_param.m_Y = m_parent->GetPos().y;
 }
 
 void EffectBase::WakeUp()

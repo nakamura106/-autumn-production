@@ -8,6 +8,16 @@
 // エフェクトの情報
 struct EffectParam
 {
+	EffectParam()
+	{
+		m_X = 0.f;
+		m_Y = 0.f;
+		m_offsetX = 0.f;
+		m_offsetY = 0.f;
+		IsLoop = false;
+		m_tex_id = GameCategoryTextureList::GameTextureNone;
+	}
+
 	float m_X, m_Y;
 	float m_offsetX, m_offsetY;
 	bool IsLoop;
@@ -18,14 +28,15 @@ class EffectBase
 {
 public:
 	EffectBase();
+	EffectBase(ObjectBase* parent_);
 	virtual ~EffectBase();
 
-	virtual void Init() = 0;
+	virtual void Init();
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 	// どのエフェクトを使うのか取得するのに使う
-	int GetEffectID();
+	virtual EffectID GetEffectID() = 0;
 
 	// エフェクト起動関数
 	void WakeUp();
@@ -34,7 +45,7 @@ public:
 
 protected:
 	EffectParam m_param;
-	EffectID m_id;
+	ObjectBase* m_parent = nullptr;
 
 };
 

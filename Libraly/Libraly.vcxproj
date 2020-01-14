@@ -152,7 +152,6 @@
     <ClCompile Include="Effect\Effects\DieEffect.cpp" />
     <ClCompile Include="Effect\Effects\FailureEffect.cpp" />
     <ClCompile Include="Effect\Effects\HitEffect.cpp" />
-    <ClCompile Include="Effect\Effects\ItemDropEffect.cpp" />
     <ClCompile Include="Effect\Effects\LandingEffect.cpp" />
     <ClCompile Include="Effect\Effects\ShotEffect.cpp" />
     <ClCompile Include="Effect\Effects\SleepEffect.cpp" />
@@ -213,7 +212,6 @@
     <ClInclude Include="Effect\Effects\DieEffect.h" />
     <ClInclude Include="Effect\Effects\FailureEffect.h" />
     <ClInclude Include="Effect\Effects\HitEffect.h" />
-    <ClInclude Include="Effect\Effects\ItemDropEffect.h" />
     <ClInclude Include="Effect\Effects\LandingEffect.h" />
     <ClInclude Include="Effect\Effects\ShotEffect.h" />
     <ClInclude Include="Effect\Effects\SleepEffect.h" />

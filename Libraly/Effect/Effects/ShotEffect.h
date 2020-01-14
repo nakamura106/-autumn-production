@@ -13,6 +13,8 @@ public:
 	void Update()override;
 	void Draw()override;
 
+	EffectID GetEffectID()override;
+
 private:
 
 

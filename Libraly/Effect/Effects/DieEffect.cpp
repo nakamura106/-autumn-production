@@ -2,6 +2,7 @@
 
 DieEffect::DieEffect()
 {
+	EffectBase::Init();
 	Init();
 }
 
@@ -11,10 +12,6 @@ DieEffect::~DieEffect()
 
 void DieEffect::Init()
 {
-	m_id = EffectID::DieEffect;
-
-	m_param.m_X = 0.0f;
-	m_param.m_Y = 0.0f;
 	m_param.m_offsetX = 0.0f;
 	m_param.m_offsetY = 0.0f;
 	m_param.IsLoop = true;
@@ -27,4 +24,9 @@ void DieEffect::Update()
 
 void DieEffect::Draw()
 {
+}
+
+EffectID DieEffect::GetEffectID()
+{
+	return EffectID::DieEffect;
 }

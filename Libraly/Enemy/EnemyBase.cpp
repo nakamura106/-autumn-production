@@ -28,8 +28,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_sleep_gauge				= 0.f;
 	m_is_delete					= false;
 	m_pos.x						= M_INIT_POS_X;
-	m_pos.y						= M_INIT_P
-		OS_Y;
+	m_pos.y						= M_INIT_POS_Y;
 	m_map_pos					= M_INIT_POS_X;
 	m_draw_param.tu				= 1.f;
 	m_draw_param.tv				= 1.f;

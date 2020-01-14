@@ -239,7 +239,6 @@ enum class EffectID
 	DieEffect,
 	FailureEffect,
 	HitEffect,
-	ItemDropEffect,
 	LandingEffect,
 	ShotEffect,
 	SleepEffect,

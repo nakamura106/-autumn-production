@@ -240,9 +240,6 @@
     <ClCompile Include="Effect\Effects\LandingEffect.cpp">
       <Filter>Effect\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="Effect\Effects\ItemDropEffect.cpp">
-      <Filter>Effect\Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Effect\Effects\ShotEffect.cpp">
       <Filter>Effect\Effects</Filter>
     </ClCompile>
@@ -423,9 +420,6 @@
       <Filter>Effect\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Effect\Effects\LandingEffect.h">
-      <Filter>Effect\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect\Effects\ItemDropEffect.h">
       <Filter>Effect\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Effect\Effects\ShotEffect.h">

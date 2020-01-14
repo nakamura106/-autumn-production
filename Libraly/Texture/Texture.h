@@ -70,105 +70,106 @@ enum SelectCategoryTextureList
 /** @brief ゲーム本編用テクスチャのリスト */
 enum GameCategoryTextureList
 {
-	GameBgTex,								//!<背景
-	GamefloorTex,							//!<床
-	Gamefloor2Tex,							//!<床2
-	GameFgTex,								//!<近景
-	GameObject,								//!< 草1
-	GameObject2,							//!< 草２
-	GameObject3,							//!< 草３
-	GameObject4,							//!< フリー
-	GameObject5,							//!< フリー
-	GamePlayer_Taiki_LeftTex,			//!<プレイヤー待機左
-	GamePlayer_Taiki_RightTex,			//!<プレイヤー待機右
-	GamePlayer_Jump_LeftTex,				//!<ジャンプ左
-	GamePlayer_Jump_RightTex,			//!<ジャンプ右
-	GamePlayer_Walk_LeftTex,				//!<歩行左
-	GamePlayer_Walk_RightTex,			//!<歩行右
-	GamePlayer_Attack_LeftTex,			//!<攻撃左
-	GamePlayer_Attack_RightTex,			//!<攻撃右
-	GamePlayer_WalkAttack_LeftTex,		//!<歩行攻撃左
-	GamePlayer_WalkAttack_RightTex,		//!<歩行攻撃右
-	GamePlayer_JumpAttack_LeftTex,		//!<ジャンプ攻撃左
-	GamePlayer_JumpAttack_RightTex,		//!<ジャンプ攻撃右
-	GamePlayer_Damage_LeftTex,			//!<ダメージ左
-	GamePlayer_Damage_RightTex,			//!<ダメージ右
-	GamePlayer_JumpDamage_LeftTex,		//!<ジャンプダメージ左
-	GamePlayer_JumpDamage_RightTex,		//!<ジャンプダメージ右
-	GamePlayer_Clear_LeftTex,			//!<クリア左
-	GamePlayer_Clear_RightTex,			//!<クリア右
-	GamePlayer_OpeningTex,					//!<オープニング
-	GamePlayerBullet_1Tex,					//!<プレイヤーの弾1
-	GamePlayerBullet_2Tex,					//!<プレイヤーの弾2
-	GamePlayerBullet_3Tex,					//!<プレイヤーの弾3
-	GamePlayerBullet_4Tex,					//!<プレイヤーの弾4
+GameBgTex,								//!<背景
+GamefloorTex,							//!<床
+Gamefloor2Tex,							//!<床2
+GameFgTex,								//!<近景
+GameObject,								//!< 草1
+GameObject2,							//!< 草２
+GameObject3,							//!< 草３
+GameObject4,							//!< フリー
+GameObject5,							//!< フリー
+GamePlayer_Taiki_LeftTex,			//!<プレイヤー待機左
+GamePlayer_Taiki_RightTex,			//!<プレイヤー待機右
+GamePlayer_Jump_LeftTex,				//!<ジャンプ左
+GamePlayer_Jump_RightTex,			//!<ジャンプ右
+GamePlayer_Walk_LeftTex,				//!<歩行左
+GamePlayer_Walk_RightTex,			//!<歩行右
+GamePlayer_Attack_LeftTex,			//!<攻撃左
+GamePlayer_Attack_RightTex,			//!<攻撃右
+GamePlayer_WalkAttack_LeftTex,		//!<歩行攻撃左
+GamePlayer_WalkAttack_RightTex,		//!<歩行攻撃右
+GamePlayer_JumpAttack_LeftTex,		//!<ジャンプ攻撃左
+GamePlayer_JumpAttack_RightTex,		//!<ジャンプ攻撃右
+GamePlayer_Damage_LeftTex,			//!<ダメージ左
+GamePlayer_Damage_RightTex,			//!<ダメージ右
+GamePlayer_JumpDamage_LeftTex,		//!<ジャンプダメージ左
+GamePlayer_JumpDamage_RightTex,		//!<ジャンプダメージ右
+GamePlayer_Clear_LeftTex,			//!<クリア左
+GamePlayer_Clear_RightTex,			//!<クリア右
+GamePlayer_OpeningTex,					//!<オープニング
+GamePlayerBullet_1Tex,					//!<プレイヤーの弾1
+GamePlayerBullet_2Tex,					//!<プレイヤーの弾2
+GamePlayerBullet_3Tex,					//!<プレイヤーの弾3
+GamePlayerBullet_4Tex,					//!<プレイヤーの弾4
 
-	/*UI用*/
-	GamePlayerUi,					//!<プレイヤーHP
-	GameBulletUi_RedLeft,			//!<プレイヤー弾UI
-	GameBulletUi_RedCenter,			//!<プレイヤー弾UI 				
-	GameBulletUi_RedRight,			//!<プレイヤー弾UI
-	GameBulletUi_PinkCenter,		//!<プレイヤー弾UI
-	GameBulletUi_PurpleRight,		//!<プレイヤー弾UI
-	GameBulletUi_BlueLeft,			//!<プレイヤー弾UI
-	GameBulletUi_BlueCenter,		//!<プレイヤー弾UI
-	GameBulletUi_BlueRight,			//!<プレイヤー弾UI
-	GameBulletUi_GreenCenter,		//!<プレイヤー弾UI
-	GameBulletUi_YellowRight,		//!<プレイヤー弾UI
-	GamePlayerHp_4Tex,				//!<プレイヤー耐久残り3
-	GamePlayerHp_3Tex,				//!<プレイヤー耐久残り2
-	GamePlayerHp_2Tex,				//!<プレイヤー耐久残り1
-	GamePlayerHp_1Tex,				//!<プレイヤー耐久残り0
-	GameEnemyUi,					//!<エネミーUIの基盤
-	GameEnemySleepGauge,			//!<眠気ゲージ
-	GameEnemyFatigueGauge,			//!<疲労ゲージ
-	GameEnemyAutoHealGauge,			//!<自動回復ライン
-	GameEnemySleepCircle,			//!<眠気円
-	GameEnemyFatigueCircle,			//!<疲労円
-	GameEnemyAchieveUi,				//!<敵ドロップアイテム
-
-
-	/*Enemy用*/
-	GameEnemy_WaitLeft,			//!<敵待機
-	GameEnemy_WaitRight,
-	GameEnemy_SkyWaitLeft,
-	GameEnemy_SkyWaitRight,
-	GameEnemy_WalkLeft,				//!<敵歩行
-	GameEnemy_WalkRight,
-	GameEnemy_Attack2Left,			//!<攻撃1
-	GameEnemy_Attack2Right,
-	GameEnemy_Attack1Left,			//!<攻撃2
-	GameEnemy_Attack1Right,
-	GameEnemy_Attack3Left,			//!<攻撃3
-	GameEnemy_Attack3Right,
-	GameEnemy_SleepLeft,			//!<敵睡眠
-	GameEnemy_SleepRight,
-	GameEnemy_FatigueLeft,			//!<敵疲労
-	GameEnemy_FatigueRight,
-	GameEnemy_DownLeft,				//!<敵死亡
-	GameEnemy_DownRight,
-	//GameEnemy_FlyLeft,			//!<敵飛行
-	//GameEnemy_FlyRight,
-	GameEnemy_FlappingLeft,			//!<敵羽ばたき
-	GameEnemy_FlappingRight,
-
-	GameEnemy_Bullet_Normal,		//!<敵の弾(ハリ)
-	GameEnemy_Bullet_Shit,			//!<敵の弾(フン)
+/*UI用*/
+GamePlayerUi,					//!<プレイヤーHP
+GameBulletUi_RedLeft,			//!<プレイヤー弾UI
+GameBulletUi_RedCenter,			//!<プレイヤー弾UI 				
+GameBulletUi_RedRight,			//!<プレイヤー弾UI
+GameBulletUi_PinkCenter,		//!<プレイヤー弾UI
+GameBulletUi_PurpleRight,		//!<プレイヤー弾UI
+GameBulletUi_BlueLeft,			//!<プレイヤー弾UI
+GameBulletUi_BlueCenter,		//!<プレイヤー弾UI
+GameBulletUi_BlueRight,			//!<プレイヤー弾UI
+GameBulletUi_GreenCenter,		//!<プレイヤー弾UI
+GameBulletUi_YellowRight,		//!<プレイヤー弾UI
+GamePlayerHp_4Tex,				//!<プレイヤー耐久残り3
+GamePlayerHp_3Tex,				//!<プレイヤー耐久残り2
+GamePlayerHp_2Tex,				//!<プレイヤー耐久残り1
+GamePlayerHp_1Tex,				//!<プレイヤー耐久残り0
+GameEnemyUi,					//!<エネミーUIの基盤
+GameEnemySleepGauge,			//!<眠気ゲージ
+GameEnemyFatigueGauge,			//!<疲労ゲージ
+GameEnemyAutoHealGauge,			//!<自動回復ライン
+GameEnemySleepCircle,			//!<眠気円
+GameEnemyFatigueCircle,			//!<疲労円
+GameEnemyAchieveUi,				//!<敵ドロップアイテム
 
 
-	/* エフェクト用 */
-	GameDebuffEfect,		//!< デバフエフェクト
-	GameDieEffect,			//!< 死亡エフェクト
-	GameFailureEffect,		//!< 演奏失敗エフェクト
-	GameHitEffect,			//!< 攻撃ヒットエフェクト
-	GameItemDropEffect,		//!< アイテムドロップエフェクト
-	GameLandingEffect,		//!< 着地エフェクト
-	GameShotEffect,			//!< 被弾エフェクト
-	GameSleepEffect,		//!< 睡眠時エフェクト
-	GameSweatEffect,		//!< 残りHP１時エフェクト
+/*Enemy用*/
+GameEnemy_WaitLeft,			//!<敵待機
+GameEnemy_WaitRight,
+GameEnemy_SkyWaitLeft,
+GameEnemy_SkyWaitRight,
+GameEnemy_WalkLeft,				//!<敵歩行
+GameEnemy_WalkRight,
+GameEnemy_Attack2Left,			//!<攻撃1
+GameEnemy_Attack2Right,
+GameEnemy_Attack1Left,			//!<攻撃2
+GameEnemy_Attack1Right,
+GameEnemy_Attack3Left,			//!<攻撃3
+GameEnemy_Attack3Right,
+GameEnemy_SleepLeft,			//!<敵睡眠
+GameEnemy_SleepRight,
+GameEnemy_FatigueLeft,			//!<敵疲労
+GameEnemy_FatigueRight,
+GameEnemy_DownLeft,				//!<敵死亡
+GameEnemy_DownRight,
+//GameEnemy_FlyLeft,			//!<敵飛行
+//GameEnemy_FlyRight,
+GameEnemy_FlappingLeft,			//!<敵羽ばたき
+GameEnemy_FlappingRight,
 
-	GamePointerTex,			//!< ポインタ
-	GameTextureMax,			//!< リスト最大数
+GameEnemy_Bullet_Normal,		//!<敵の弾(ハリ)
+GameEnemy_Bullet_Shit,			//!<敵の弾(フン)
+
+
+/* エフェクト用 */
+GameDebuffEfect,		//!< デバフエフェクト
+GameDieEffect,			//!< 死亡エフェクト
+GameFailureEffect,		//!< 演奏失敗エフェクト
+GameHitEffect,			//!< 攻撃ヒットエフェクト
+GameItemDropEffect,		//!< アイテムドロップエフェクト
+GameLandingEffect,		//!< 着地エフェクト
+GameShotEffect,			//!< 被弾エフェクト
+GameSleepEffect,		//!< 睡眠時エフェクト
+GameSweatEffect,		//!< 残りHP１時エフェクト
+
+GamePointerTex,			//!< ポインタ
+GameTextureMax,			//!< リスト最大数
+GameTextureNone = GameTextureMax,
 };
 
 
