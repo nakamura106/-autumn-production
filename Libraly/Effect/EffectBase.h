@@ -27,7 +27,7 @@ struct EffectParam
 class EffectBase
 {
 public:
-	EffectBase();
+	// EffectBase();
 	EffectBase(ObjectBase* parent_);
 	virtual ~EffectBase();
 
@@ -38,12 +38,12 @@ public:
 	// どのエフェクトを使うのか取得するのに使う
 	virtual EffectID GetEffectID() = 0;
 
-	// エフェクト起動関数
 	void WakeUp();
-	// エフェクト終了関数
+
 	void Sleep();
 
 protected:
+	bool m_IsActive = false;
 	EffectParam m_param;
 	ObjectBase* m_parent = nullptr;
 

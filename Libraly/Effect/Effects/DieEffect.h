@@ -6,7 +6,7 @@
 class DieEffect :public EffectBase
 {
 public:
-	DieEffect();
+	DieEffect(ObjectBase* parent_);
 	~DieEffect();
 
 	void Init()override;

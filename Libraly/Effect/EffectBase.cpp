@@ -1,10 +1,5 @@
 #include "EffectBase.h"
 
-EffectBase::EffectBase()
-{
-
-}
-
 EffectBase::EffectBase(ObjectBase* parent_)
 {
 	m_parent = parent_;
@@ -23,8 +18,11 @@ void EffectBase::Init()
 
 void EffectBase::WakeUp()
 {
+	m_IsActive = true;
 }
 
 void EffectBase::Sleep()
 {
+	m_IsActive = false;
 }
+

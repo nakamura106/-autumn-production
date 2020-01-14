@@ -1,8 +1,8 @@
 #include "SweatEffect.h"
 
-SweatEffect::SweatEffect()
+SweatEffect::SweatEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

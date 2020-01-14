@@ -1,8 +1,8 @@
 #include "ShotEffect.h"
 
-ShotEffect::ShotEffect()
+ShotEffect::ShotEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

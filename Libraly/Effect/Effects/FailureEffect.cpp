@@ -1,8 +1,8 @@
 #include "FailureEffect.h"
 
-FailureEffect::FailureEffect()
+FailureEffect::FailureEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

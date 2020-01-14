@@ -6,7 +6,7 @@
 class SweatEffect :public EffectBase
 {
 public:
-	SweatEffect();
+	SweatEffect(ObjectBase* parent_);
 	~SweatEffect();
 
 	void Init()override;

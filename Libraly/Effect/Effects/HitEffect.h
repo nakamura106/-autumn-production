@@ -6,7 +6,7 @@
 class HitEffect :public EffectBase
 {
 public:
-	HitEffect();
+	HitEffect(ObjectBase* parent_);
 	~HitEffect();
 
 	void Init()override;

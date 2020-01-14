@@ -6,7 +6,7 @@
 class FailureEffect :public EffectBase
 {
 public:
-	FailureEffect();
+	FailureEffect(ObjectBase* parent_);
 	~FailureEffect();
 
 	void Init()override;

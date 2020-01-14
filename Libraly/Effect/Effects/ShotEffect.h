@@ -6,7 +6,7 @@
 class ShotEffect :public EffectBase
 {
 public:
-	ShotEffect();
+	ShotEffect(ObjectBase* parent_);
 	~ShotEffect();
 
 	void Init()override;

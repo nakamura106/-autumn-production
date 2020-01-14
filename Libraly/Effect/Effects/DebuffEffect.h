@@ -6,7 +6,7 @@
 class DebuffEffect :public EffectBase
 {
 public:
-	DebuffEffect();
+	DebuffEffect(ObjectBase* parent_);
 	~DebuffEffect();
 
 	void Init()override;

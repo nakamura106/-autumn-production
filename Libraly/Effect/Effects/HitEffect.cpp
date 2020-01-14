@@ -1,8 +1,8 @@
 #include "HitEffect.h"
 
-HitEffect::HitEffect()
+HitEffect::HitEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

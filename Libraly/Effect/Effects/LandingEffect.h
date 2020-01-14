@@ -6,7 +6,7 @@
 class LandingEffect :public EffectBase
 {
 public:
-	LandingEffect();
+	LandingEffect(ObjectBase* parent_);
 	~LandingEffect();
 
 	void Init()override;

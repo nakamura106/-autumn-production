@@ -1,8 +1,8 @@
 #include "LandingEffect.h"
 
-LandingEffect::LandingEffect()
+LandingEffect::LandingEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

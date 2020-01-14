@@ -1,8 +1,8 @@
 #include "DebuffEffect.h"
 
-DebuffEffect::DebuffEffect()
+DebuffEffect::DebuffEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 
@@ -12,8 +12,6 @@ DebuffEffect::~DebuffEffect()
 
 void DebuffEffect::Init()
 {
-	EffectBase::Init();
-
 	// オフセットは後で確認後に正しい値に修正
 	m_param.m_offsetX = 0.0f;
 	m_param.m_offsetY = 0.0f;

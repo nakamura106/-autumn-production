@@ -6,7 +6,7 @@
 class SleepEffect :public EffectBase
 {
 public:
-	SleepEffect();
+	SleepEffect(ObjectBase* parent_);
 	~SleepEffect();
 
 	void Init()override;

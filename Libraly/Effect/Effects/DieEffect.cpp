@@ -1,8 +1,8 @@
 #include "DieEffect.h"
 
-DieEffect::DieEffect()
+DieEffect::DieEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 

@@ -1,8 +1,8 @@
 #include "SleepEffect.h"
 
-SleepEffect::SleepEffect()
+SleepEffect::SleepEffect(ObjectBase* parent_):
+	EffectBase(parent_)
 {
-	EffectBase::Init();
 	Init();
 }
 
