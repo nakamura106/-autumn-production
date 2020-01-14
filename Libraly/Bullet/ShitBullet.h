@@ -20,8 +20,10 @@ public:
 
 private:
 	const int	M_DELETE_TIME		= 300;		//消滅するまでの時間
-	bool	m_is_dropdown;		//地面に落ちている状態の場合、trueになる
 	int		m_savetime_delete;	//フレーム数格納：消滅するまでの時間を測定
 	float	m_acceleration;		//加速度
+
+protected:
+	bool	m_is_dropdown;		//地面に落ちている状態の場合、trueになる
 
 };

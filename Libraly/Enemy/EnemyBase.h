@@ -36,6 +36,8 @@ public:
 	/*			ゲッター群			*/
 	/*状態取得*/
 	EnemyStateType	GetEnemyState() { return m_state; }
+	/*テクスチャの手の位置を返す*/
+	Position GetHandPos();
 
 private:
 
@@ -238,7 +240,6 @@ protected:
 	*/
 	void CreateBullet(float speed_x_, float speed_y_ = 0.f, bool is_rotate_ = false, int init_angle_ = 0);
 
-
 	/*			全敵共通のパラメータ			*/
 
 	bool			m_is_flying;		//飛んでいるかどうか
@@ -246,6 +247,7 @@ protected:
 	Position		m_shot_adjust;		//弾発射時の位置調整用(座標からどれくらいずれているか)
 	bool			m_animation_stop;	//trueの場合、アニメーションしない
 	bool			m_do_bullet;		//ハリ発射を行ったかどうか
+	Position		m_hand_pos;			//手の位置(バナナ弾で使用)
 
 };
 

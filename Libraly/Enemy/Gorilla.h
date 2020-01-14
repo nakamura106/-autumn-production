@@ -19,4 +19,6 @@ private:
 	void EnemyAttack3();	//バナナ投げ
 	void EnemyFly();		//ジャンプ動作
 
+	void CreateBanana();
+
 };
