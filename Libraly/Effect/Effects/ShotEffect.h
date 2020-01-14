@@ -11,8 +11,7 @@ public:
 
 	void Init()override;
 	void Update()override;
-	void Draw()override;
-
+	
 	EffectID GetEffectID()override;
 
 private:

@@ -12,17 +12,15 @@ DieEffect::~DieEffect()
 
 void DieEffect::Init()
 {
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = true;
-	m_param.m_tex_id = GameCategoryTextureList::GameDieEffect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = true;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameDieEffect;
+	LoadTexture("Res/Tex/Effect/die_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void DieEffect::Update()
-{
-}
-
-void DieEffect::Draw()
 {
 }
 

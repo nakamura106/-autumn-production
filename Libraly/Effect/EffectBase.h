@@ -1,9 +1,11 @@
 #ifndef EFFECTBASE_H_
 #define EFFECTBASE_H_
 
-#include "../Object/Definition.h"
 #include "../Object/ObjectBase.h"
+#include "../Object/Definition.h"
 #include "../Texture/Texture.h"
+
+class ObjectBase;
 
 // エフェクトの情報
 struct EffectParam
@@ -15,13 +17,11 @@ struct EffectParam
 		m_offsetX = 0.f;
 		m_offsetY = 0.f;
 		IsLoop = false;
-		m_tex_id = GameCategoryTextureList::GameTextureNone;
 	}
 
 	float m_X, m_Y;
 	float m_offsetX, m_offsetY;
 	bool IsLoop;
-	GameCategoryTextureList m_tex_id;
 };
 
 class EffectBase
@@ -32,11 +32,16 @@ public:
 	virtual ~EffectBase();
 
 	virtual void Init();
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
+	virtual void Update();
+	void Draw();
 
 	// どのエフェクトを使うのか取得するのに使う
 	virtual EffectID GetEffectID() = 0;
+
+	bool GetIsActive()
+	{
+		return m_IsActive;
+	}
 
 	void WakeUp();
 
@@ -44,7 +49,9 @@ public:
 
 protected:
 	bool m_IsActive = false;
-	EffectParam m_param;
+	EffectParam m_effect_param;
+	DrawParam m_draw_param;
+	AnimationParam m_anime_param;
 	ObjectBase* m_parent = nullptr;
 
 };

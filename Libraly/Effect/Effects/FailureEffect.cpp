@@ -12,17 +12,15 @@ FailureEffect::~FailureEffect()
 
 void FailureEffect::Init()
 {
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = false;
-	m_param.m_tex_id = GameCategoryTextureList::GameFailureEffect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = false;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameFailureEffect;
+	LoadTexture("Res/Tex/Effect/failure_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void FailureEffect::Update()
-{
-}
-
-void FailureEffect::Draw()
 {
 }
 

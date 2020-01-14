@@ -35,6 +35,13 @@ void ObjectBase::Update()
 {
 	//CollisionManagerにオブジェクトを入れる
 	CollisionManager::GetInstance().AddCollisionObject(this);
+
+	for (int i = 0; i < m_effect_list.size(); ++i) {
+		if (m_effect_list[i]->GetIsActive() == true)
+		{
+			m_effect_list[i]->Update();
+		}
+	}
 }
 
 void ObjectBase::Draw()
@@ -51,6 +58,13 @@ void ObjectBase::Draw()
 		(m_draw_param.tv - 1.f) / (float)m_anim_param.split_height,
 		m_draw_angle
 	);
+
+	for (int i = 0; i < m_effect_list.size(); ++i) {
+		if (m_effect_list[i]->GetIsActive() == true)
+		{
+			m_effect_list[i]->Draw();
+		}
+	}
 }
 
 void ObjectBase::AnimationUpdate() 

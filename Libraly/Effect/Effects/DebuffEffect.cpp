@@ -13,17 +13,15 @@ DebuffEffect::~DebuffEffect()
 void DebuffEffect::Init()
 {
 	// オフセットは後で確認後に正しい値に修正
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = false;
-	m_param.m_tex_id = GameCategoryTextureList::GameDebuffEfect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = false;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameDebuffEfect;
+	LoadTexture("Res/Tex/Effect/debuff_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void DebuffEffect::Update()
-{
-}
-
-void DebuffEffect::Draw()
 {
 }
 

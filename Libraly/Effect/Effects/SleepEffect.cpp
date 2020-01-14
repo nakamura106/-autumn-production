@@ -12,17 +12,15 @@ SleepEffect::~SleepEffect()
 
 void SleepEffect::Init()
 {
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = true;
-	m_param.m_tex_id = GameCategoryTextureList::GameSleepEffect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = true;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameSleepEffect;
+	LoadTexture("Res/Tex/Effect/sleep_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void SleepEffect::Update()
-{
-}
-
-void SleepEffect::Draw()
 {
 }
 

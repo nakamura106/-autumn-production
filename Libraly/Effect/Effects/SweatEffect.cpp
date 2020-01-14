@@ -12,17 +12,15 @@ SweatEffect::~SweatEffect()
 
 void SweatEffect::Init()
 {
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = true;
-	m_param.m_tex_id = GameCategoryTextureList::GameSweatEffect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = true;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameSweatEffect;
+	LoadTexture("Res/Tex/Effect/sweat_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void SweatEffect::Update()
-{
-}
-
-void SweatEffect::Draw()
 {
 }
 
