@@ -6,7 +6,8 @@ public:
 	ShitBullet(
 		float x_,
 		float y_,
-		float move_speed_,
+		float move_speed_x_,
+		float move_speed_y_,
 		float acceleration,
 		Direction direction_,
 		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Shit,
@@ -15,7 +16,7 @@ public:
 		int tex_split_all = 1
 	);
 
-	void MoveUpdate();
+	virtual void MoveUpdate();
 
 private:
 	const int	M_DELETE_TIME		= 300;		//è¡ñ≈Ç∑ÇÈÇ‹Ç≈ÇÃéûä‘

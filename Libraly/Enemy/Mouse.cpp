@@ -29,9 +29,9 @@ HedgeHog::HedgeHog()
 	m_do_bullet = false;
 	SetRectangle();
 
+	//”¼•ª‚Ì‘å‚«‚³‚Å‚·Û‚Ìƒpƒ‰ƒ[ƒ^•Ï“®
 	m_draw_param.tex_size_x /= 2.f;
 	m_draw_param.tex_size_y /= 2.f;
-
 	m_pos.y += m_draw_param.tex_size_y;
 	
 }
