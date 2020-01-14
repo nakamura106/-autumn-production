@@ -2,8 +2,13 @@
 #define OBJECTBASE_H_
 #include"../Engine/Graphics.h"
 
+#include "../Effect/EffectBase.h"
 #include "Definition.h"
 #include "../Texture/Texture.h"
+
+#include <vector>
+
+class EffectBase;
 
 class ObjectBase {
 public:
@@ -67,7 +72,8 @@ protected:
 	int			m_animation_timer;	//アニメーションタイマー
 	bool		m_is_animation_end;	//アニメーションの最後かどうか
 	int			m_draw_angle;		//描画する角度
-	
+
+	std::vector<EffectBase*> m_effect_list;	// エフェクト保存用配列
 };
 
 #endif

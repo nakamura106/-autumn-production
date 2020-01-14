@@ -12,17 +12,15 @@ LandingEffect::~LandingEffect()
 
 void LandingEffect::Init()
 {
-	m_param.m_offsetX = 0.0f;
-	m_param.m_offsetY = 0.0f;
-	m_param.IsLoop = false;
-	m_param.m_tex_id = GameCategoryTextureList::GameLandingEffect;
+	m_effect_param.m_offsetX = 0.0f;
+	m_effect_param.m_offsetY = 0.0f;
+	m_effect_param.IsLoop = false;
+
+	m_draw_param.texture_id = GameCategoryTextureList::GameLandingEffect;
+	LoadTexture("Res/Tex/Effect/Landing_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void LandingEffect::Update()
-{
-}
-
-void LandingEffect::Draw()
 {
 }
 
