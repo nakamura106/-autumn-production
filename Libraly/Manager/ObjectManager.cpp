@@ -2,8 +2,12 @@
 #include "../Player/TrpPlayer.h"
 #include"../Player/TubaPlayer/TubaPlayer.h"
 #include "../Map/Map.h"
+#include"../Map/WoodsMap/WoodsMap.h"
+#include"../Map/SeaMap/SeaMap.h"
+#include"../Map/CityMap/CityMap.h"
 #include "../Enemy/Mouse.h"
 #include"../Enemy/Bird.h"
+#include"../Enemy/Gorilla.h"
 #include"CollisionManager.h"
 #include"../DataBank/DataBank.h"
 
@@ -71,9 +75,37 @@ void ObjectManager::Init()
 
 void ObjectManager::CreateObject()
 {
-	chara_objects[0] = new Map();
-
-	chara_objects[1] = new HedgeHog();
+	switch (DataBank::Instance()->GetMapType())
+	{
+	case (int)MapType::WoodsMap:
+		chara_objects[0] = new WoodsMap();
+		break;
+	case (int)MapType::SeaMap:
+		chara_objects[0] = new SeaMap();
+		break;
+	case (int)MapType::CityMap:
+		chara_objects[0] = new CityMap();
+		break;
+	default:
+		chara_objects[0] = new WoodsMap();
+		break;
+	}
+	
+	switch (DataBank::Instance()->GetMapType())
+	{
+	case (int)MapType::WoodsMap:
+		chara_objects[1] = new HedgeHog();
+		break;
+	case (int)MapType::SeaMap:
+		chara_objects[1] = new Bird();
+		break;
+	case (int)MapType::CityMap:
+		chara_objects[1] = new Gorilla();
+		break;
+	default:
+		break;
+	}
+	
 
 	switch (DataBank::Instance()->GetPlayerType())
 	{
@@ -87,10 +119,24 @@ void ObjectManager::CreateObject()
 		break;
 	}
 		
-	
+	switch (DataBank::Instance()->GetMapType())
+	{
+	case (int)MapType::WoodsMap:
+		chara_objects[3] = new WoodsFg();
+		break;
+	case (int)MapType::SeaMap:
+		chara_objects[3] = new SeaFg();
+		break;
+	case (int)MapType::CityMap:
+		chara_objects[3] = new CityFg();
+		break;
+	default:
+		chara_objects[3] = new WoodsFg();
+		break;
+	}
 	
 
-	chara_objects[3] = new Fg();
+	
 
 }
 

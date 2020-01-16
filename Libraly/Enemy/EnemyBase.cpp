@@ -147,6 +147,16 @@ void EnemyBase::Update()
 
 }
 
+Position EnemyBase::GetHandPos()
+{
+	Position pos;
+
+	pos.x = m_map_pos + m_hand_pos.x;
+	pos.y = m_pos.y + m_hand_pos.y;
+
+	return pos;
+}
+
 //エネミーの状態の更新
 void EnemyBase::UpdateState()
 {
@@ -1225,6 +1235,7 @@ void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, in
 	);
 
 }
+
 
 void EnemyBase::UpSleepGage(float up_num_)
 {

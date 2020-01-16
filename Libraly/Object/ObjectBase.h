@@ -38,15 +38,15 @@ public:
 	//12/10　即席当たり判定結果通知関数
 	virtual void HitAction(ObjectRavel ravel_,float hit_use_atk_){}
 
+	/*アニメーション進行ゲッター*/
+	int GetAnimationTexNum();
+
 private:
 
 protected:
 
 	/*統合画像のアニメーション用関数*/
 	void AnimationUpdate();
-
-	/*アニメーション進行ゲッター*/
-	int GetAnimationTexNum();
 
 	/*マップの動きに合わせて位置調整*/
 	void CalcDrawPosition();

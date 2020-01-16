@@ -5,6 +5,7 @@ ShitBullet::ShitBullet(
 	float x_,
 	float y_,
 	float move_speed_,
+	float move_speed_y_,
 	float acceleration_,
 	Direction direction_,
 	GameCategoryTextureList use_tex_,
@@ -12,7 +13,7 @@ ShitBullet::ShitBullet(
 	int tex_split_h_,
 	int tex_split_all
 )
-	:EnemyBullet(x_, y_, move_speed_, direction_, 0, 0.f, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
+	:EnemyBullet(x_, y_, move_speed_, direction_, 0, move_speed_y_, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
 {
 
 	m_is_dropdown		= false;
@@ -51,10 +52,17 @@ void ShitBullet::MoveUpdate()
 	else {
 
 		//’n–Ê‚ÉŒü‚©‚Á‚Ä—Ž‚¿‚Ä‚¢‚­
-		m_pos.y += m_speed;
+		m_pos.y += m_speed_y;
+
+		if (m_direction == Direction::LEFT) {
+			m_map_pos -= m_speed;
+		}
+		else {
+			m_map_pos += m_speed;
+		}
 
 		//‰Á‘¬
-		m_speed += m_acceleration;
+		m_speed_y += m_acceleration;
 
 	}
 

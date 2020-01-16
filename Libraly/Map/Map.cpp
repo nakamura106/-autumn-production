@@ -60,7 +60,7 @@ void Map::Update()
 	{
 		MapScroll(LEFT);
 	}
-	HitJudgement();
+	//HitJudgement();
 	
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
@@ -101,8 +101,6 @@ void Map::Draw()
 	DrawTexture(obj[0], P_posYforest, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
 	DrawTexture(obj[1], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject2));
 	DrawTexture(obj[2], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject3));
-	
-	
 }
 
 void Fg::Init()

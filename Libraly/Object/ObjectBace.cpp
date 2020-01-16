@@ -90,12 +90,6 @@ void ObjectBase::AnimationUpdate()
 			//縦分割枚目を加算
 			m_draw_param.tv += 1.f;
 
-			//縦分割枚目が画像の分割数以上の場合
-			if (m_draw_param.tv > m_anim_param.split_height) {
-
-				m_draw_param.tv = 1.f;
-
-			}
 		}
 
 		//tuとtvから計算した現在何枚目のアニメーションかが総枚数を超えていた場合、
@@ -106,6 +100,13 @@ void ObjectBase::AnimationUpdate()
 
 			//アニメーションの終わりであるフラグをオン
 			m_is_animation_end = true;
+
+		}
+
+		//縦分割枚目が画像の分割数以上の場合
+		if (m_draw_param.tv > m_anim_param.split_height) {
+
+			m_draw_param.tv = 1.f;
 
 		}
 
