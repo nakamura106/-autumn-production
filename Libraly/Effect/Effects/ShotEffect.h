@@ -10,7 +10,7 @@ public:
 	~ShotEffect();
 
 	void Init()override;
-	void Update()override;
+
 	
 	EffectID GetEffectID()override;
 

@@ -10,7 +10,6 @@ public:
 	~DebuffEffect();
 
 	void Init()override;
-	void Update()override;
 
 	EffectID GetEffectID()override;
 

@@ -10,7 +10,6 @@ public:
 	~LandingEffect();
 
 	void Init()override;
-	void Update()override;
 	
 	EffectID GetEffectID()override;
 

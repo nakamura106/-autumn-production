@@ -43,9 +43,14 @@ public:
 		return m_IsActive;
 	}
 
+	// 起動関数
 	void WakeUp();
-
+	// 終了関数
 	void Sleep();
+
+	// アニメーションに必要な関数
+	void AnimationUpdate();
+	int GetAnimationTexNum();
 
 protected:
 	bool m_IsActive = false;
@@ -54,6 +59,9 @@ protected:
 	AnimationParam m_anime_param;
 	ObjectBase* m_parent = nullptr;
 
+	// アニメーション用メンバ変数
+	int m_animation_timer;
+	bool m_is_animation_end;
 };
 
 #endif

@@ -2,7 +2,11 @@
 #include"../Engine/Input.h"
 #include"../DataBank/DataBank.h"
 #include "../Effect/Effects/SweatEffect.h"
-#include "../Manager/ObjectManager.h"
+#include "../Effect/Effects/DebuffEffect.h"
+#include "../Effect/Effects/FailureEffect.h"
+#include "../Effect/Effects/LandingEffect.h"
+#include "../Effect/Effects/ShotEffect.h"
+
 
 PlayerBase::PlayerBase()
 	:ObjectBase(ObjectRavel::Ravel_Player, Direction::RIGHT, P_speed, 0)
@@ -24,8 +28,16 @@ PlayerBase::PlayerBase()
 
 	m_animtimer = 0;
 
-	m_effect_list.push_back(new SweatEffect(ObjectManager::Instance()->GetPlayerObject()));
+	m_effect_list.push_back(new SweatEffect(this));
+	m_effect_list.push_back(new DebuffEffect(this));
+	m_effect_list.push_back(new FailureEffect(this));
+	m_effect_list.push_back(new LandingEffect(this));
+	m_effect_list.push_back(new ShotEffect(this));
 	m_effect_list.at(0)->WakeUp();
+	m_effect_list.at(1)->WakeUp();
+	m_effect_list.at(2)->WakeUp();
+	m_effect_list.at(3)->WakeUp();
+	m_effect_list.at(4)->WakeUp();
 }
 
 PlayerBase::~PlayerBase()
@@ -52,6 +64,10 @@ void PlayerBase::Update()
 	Atkjudge();
 
 	m_effect_list.at(0)->Update();
+	m_effect_list.at(1)->Update();
+	m_effect_list.at(2)->Update();
+	m_effect_list.at(3)->Update();
+	m_effect_list.at(4)->Update();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
@@ -92,6 +108,11 @@ void PlayerBase::Draw()
 	}
 
 	m_effect_list.at(0)->Draw();
+	m_effect_list.at(1)->Draw();
+	m_effect_list.at(2)->Draw();
+	m_effect_list.at(3)->Draw();
+	m_effect_list.at(4)->Draw();
+
 }
 
 void PlayerBase::P_Controll()
