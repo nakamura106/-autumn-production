@@ -1,5 +1,7 @@
 #include"TubaPlayer.h"
 #include"../../Engine/Texture.h"
+#include "../../Effect/Effects/SweatEffect.h"
+#include "../../Manager/ObjectManager.h"
 
 
 
@@ -44,6 +46,8 @@ void TubaPlayer::Init()
 	Load();
 
 	SetRectangle();
+
+	
 }
 
 void TubaPlayer::Load()

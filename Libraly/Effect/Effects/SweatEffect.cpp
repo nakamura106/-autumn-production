@@ -3,7 +3,7 @@
 SweatEffect::SweatEffect(ObjectBase* parent_):
 	EffectBase(parent_)
 {
-	Init();
+	this->Init();
 }
 
 SweatEffect::~SweatEffect()
@@ -20,9 +20,6 @@ void SweatEffect::Init()
 	LoadTexture("Res/Tex/Effect/sweat_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
-void SweatEffect::Update()
-{
-}
 
 EffectID SweatEffect::GetEffectID()
 {

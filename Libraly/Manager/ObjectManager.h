@@ -18,11 +18,10 @@ public:
 
 	ObjectBase* GetPlayerObject()
 	{
-		for (int i = 0; i < MAX_CHARA_OBJ; ++i) {
-			if (chara_objects[i] == nullptr)continue;
-
+		if (chara_objects[2] != nullptr)
+		{
+			return chara_objects[2];
 		}
-		return chara_objects[1];
 	}
 
 	ObjectBase* GetCharaObject(ObjectRavel ravel);

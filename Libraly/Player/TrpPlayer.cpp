@@ -10,7 +10,6 @@
 #include"../Manager/ObjectManager.h"
 
 
-
 #include<string>
 
 
@@ -56,6 +55,7 @@ void TrpPlayer::Init()
 	Load();
 
 	SetRectangle();
+
 }
 
 void TrpPlayer::Load()

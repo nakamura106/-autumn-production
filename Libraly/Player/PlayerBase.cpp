@@ -1,6 +1,8 @@
 #include"PlayerBase.h"
 #include"../Engine/Input.h"
 #include"../DataBank/DataBank.h"
+#include "../Effect/Effects/SweatEffect.h"
+#include "../Manager/ObjectManager.h"
 
 PlayerBase::PlayerBase()
 	:ObjectBase(ObjectRavel::Ravel_Player, Direction::RIGHT, P_speed, 0)
@@ -21,6 +23,9 @@ PlayerBase::PlayerBase()
 
 
 	m_animtimer = 0;
+
+	m_effect_list.push_back(new SweatEffect(ObjectManager::Instance()->GetPlayerObject()));
+	m_effect_list.at(0)->WakeUp();
 }
 
 PlayerBase::~PlayerBase()
@@ -45,6 +50,8 @@ void PlayerBase::Update()
 	AnimationUpdate();
 	ChangeState();
 	Atkjudge();
+
+	m_effect_list.at(0)->Update();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
@@ -83,6 +90,8 @@ void PlayerBase::Draw()
 		}
 
 	}
+
+	m_effect_list.at(0)->Draw();
 }
 
 void PlayerBase::P_Controll()
