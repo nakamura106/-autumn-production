@@ -11,9 +11,9 @@
 void CityMap::Load()
 {
 
-	LoadTexture("Res/Tex/Map/ŠX/Town2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	    //Stage1Bg2
-	LoadTexture("Res/Tex/Map/ŠX/Town3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//Stage1Bg3
-	LoadTexture("Res/Tex/Map/ŠX/Town4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBgTex);		    //Stage1Bg4
+	LoadTexture("Res/Tex/Map/ŠX/Town2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	
+	LoadTexture("Res/Tex/Map/ŠX/Town3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	
+	LoadTexture("Res/Tex/Map/ŠX/Town4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBgTex);		
 
 }
 
