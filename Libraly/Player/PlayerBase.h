@@ -51,6 +51,11 @@ public:
 
 	void Attack();
 
+	// エフェクト関係関数まとめただけの関数
+	void AllInitEffect();
+	void AllUpdateEffect();
+	void AllDrawEffect();
+
 	
 
 protected:

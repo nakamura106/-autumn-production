@@ -28,16 +28,11 @@ PlayerBase::PlayerBase()
 
 	m_animtimer = 0;
 
-	m_effect_list.push_back(new SweatEffect(this));
-	m_effect_list.push_back(new DebuffEffect(this));
-	m_effect_list.push_back(new FailureEffect(this));
-	m_effect_list.push_back(new LandingEffect(this));
-	m_effect_list.push_back(new ShotEffect(this));
-	m_effect_list.at(0)->WakeUp();
-	m_effect_list.at(1)->WakeUp();
-	m_effect_list.at(2)->WakeUp();
-	m_effect_list.at(3)->WakeUp();
-	m_effect_list.at(4)->WakeUp();
+	AllInitEffect();
+
+	// m_effect_list.at(1)->WakeUp();
+	// m_effect_list.at(2)->WakeUp();
+	// m_effect_list.at(3)->WakeUp();	
 }
 
 PlayerBase::~PlayerBase()
@@ -63,11 +58,24 @@ void PlayerBase::Update()
 	ChangeState();
 	Atkjudge();
 
-	m_effect_list.at(0)->Update();
-	m_effect_list.at(1)->Update();
-	m_effect_list.at(2)->Update();
-	m_effect_list.at(3)->Update();
-	m_effect_list.at(4)->Update();
+	// エフェクト条件
+	// HP１の時のエフェクト条件
+	if (m_hp == 1){
+		m_effect_list.at(0)->WakeUp();
+	}
+	else {
+		m_effect_list.at(0)->Sleep();
+	}
+	// 被弾時エフェクト条件
+	if (m_state == (int)P_State::Damage)
+	{
+		m_effect_list.at(4)->WakeUp();
+	}
+	else {
+		m_effect_list.at(4)->Sleep();
+	}
+
+	AllUpdateEffect();
 
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
@@ -107,11 +115,7 @@ void PlayerBase::Draw()
 
 	}
 
-	m_effect_list.at(0)->Draw();
-	m_effect_list.at(1)->Draw();
-	m_effect_list.at(2)->Draw();
-	m_effect_list.at(3)->Draw();
-	m_effect_list.at(4)->Draw();
+	AllDrawEffect();
 
 }
 
@@ -446,6 +450,33 @@ void PlayerBase::Attack()
 	}
 }
 
+void PlayerBase::AllInitEffect()
+{
+	m_effect_list.push_back(new SweatEffect(this));
+	m_effect_list.push_back(new DebuffEffect(this));
+	m_effect_list.push_back(new FailureEffect(this));
+	m_effect_list.push_back(new LandingEffect(this));
+	m_effect_list.push_back(new ShotEffect(this));
+}
+
+void PlayerBase::AllUpdateEffect()
+{
+	m_effect_list.at(0)->Update();
+	m_effect_list.at(1)->Update();
+	m_effect_list.at(2)->Update();
+	m_effect_list.at(3)->Update();
+	m_effect_list.at(4)->Update();
+}
+
+void PlayerBase::AllDrawEffect()
+{
+	m_effect_list.at(0)->Draw();
+	m_effect_list.at(1)->Draw();
+	m_effect_list.at(2)->Draw();
+	m_effect_list.at(3)->Draw();
+	m_effect_list.at(4)->Draw();
+}
+
 void PlayerBase::InitWaitState() 
 {
 	if (m_direction == Direction::LEFT)
@@ -610,3 +641,4 @@ void PlayerBase::InitAllState()
 	m_draw_param.tu = 1.0f;
 	m_draw_param.tv = 1.0f;
 }
+

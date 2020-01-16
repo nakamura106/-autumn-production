@@ -10,7 +10,6 @@ public:
 	~DieEffect();
 
 	void Init()override;
-	void Update()override;
 
 	EffectID GetEffectID()override;
 

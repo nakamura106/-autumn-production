@@ -3,6 +3,8 @@
 #include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
 #include"../DataBank/DataBank.h"
+#include "../Effect/Effects/DieEffect.h"
+#include "../Effect/Effects/SleepEffect.h"
 #include<stdlib.h>
 
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
@@ -58,6 +60,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_shot_adjust.y				= 0.f;
 	m_animation_stop			= false;
 
+	AllInitEffect();
+
 	DataBank::Instance()->SetIsGameClear(false);
 
 }
@@ -107,6 +111,8 @@ void EnemyBase::Draw()
 		FontColor::Red
 	);
 	*/
+	AllDrawEffect();
+	
 }
 
 void EnemyBase::Init()
@@ -144,6 +150,8 @@ void EnemyBase::Update()
 
 	//データバンクへの値受け渡し
 	DataSetUpdate();
+
+	AllUpdateEffect();
 
 }
 
@@ -1234,6 +1242,38 @@ void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, in
 		)
 	);
 
+}
+
+void EnemyBase::AllInitEffect()
+{
+	m_effect_list.push_back(new DieEffect(this));
+	m_effect_list.push_back(new SleepEffect(this));
+}
+
+void EnemyBase::AllUpdateEffect()
+{
+	if (m_state == EnemyStateType::Dead) {
+		m_effect_list.at(0)->WakeUp();
+	}
+	else {
+		m_effect_list.at(0)->Sleep();
+	}
+
+	if (m_state == EnemyStateType::Sleep) {
+		m_effect_list.at(1)->WakeUp();
+	}
+	else {
+		m_effect_list.at(1)->Sleep();
+	}
+
+	m_effect_list.at(0)->Update();
+	m_effect_list.at(1)->Update();
+}
+
+void EnemyBase::AllDrawEffect()
+{
+	m_effect_list.at(0)->Draw();
+	m_effect_list.at(1)->Draw();
 }
 
 

@@ -249,6 +249,12 @@ protected:
 	bool			m_do_bullet;		//ハリ発射を行ったかどうか
 	Position		m_hand_pos;			//手の位置(バナナ弾で使用)
 
+private:
+	// エフェクト関係関数まとめた関数
+	void AllInitEffect();
+	void AllUpdateEffect();
+	void AllDrawEffect();
+
 };
 
 
