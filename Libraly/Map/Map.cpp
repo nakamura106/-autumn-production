@@ -38,7 +38,7 @@ void Map::Init()
 void Map::Load()
 {
 	//ƒ}ƒbƒv
-	LoadTexture("Res/Tex/Map/X/Woods1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		//Stage1Bg1
+	
 	LoadTexture("Res/Tex/Map/X/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	    //Stage1Bg2
 	LoadTexture("Res/Tex/Map/X/Woods3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	//Stage1Bg3
 	LoadTexture("Res/Tex/Map/X/Woods4.png",TEXTURE_CATEGORY_GAME,GameCategoryTextureList::GameBgTex);		    //Stage1Bg4
@@ -61,7 +61,7 @@ void Map::Update()
 	{
 		MapScroll(LEFT);
 	}
-	HitJudgement();
+	//HitJudgement();
 	
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
@@ -102,8 +102,6 @@ void Map::Draw()
 	DrawTexture(obj[0], P_posYforest, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
 	DrawTexture(obj[1], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject2));
 	DrawTexture(obj[2], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject3));
-	
-	
 }
 
 void Fg::Init()

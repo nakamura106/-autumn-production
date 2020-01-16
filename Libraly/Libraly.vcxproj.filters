@@ -34,9 +34,6 @@
     <Filter Include="Bullet">
       <UniqueIdentifier>{b4da0ac4-7ea4-4f25-9852-17aae52e256d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{0d508f98-e79d-4049-983e-6a607579c3e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{cb681894-14d9-4196-b8e3-0d16aac142ab}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,18 @@
     </Filter>
     <Filter Include="Effect\Effects">
       <UniqueIdentifier>{60de4c52-005f-4181-a3a7-1c5fab205d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapBase">
+      <UniqueIdentifier>{0d508f98-e79d-4049-983e-6a607579c3e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapBase\SeaMap">
+      <UniqueIdentifier>{ff4cd1bb-b73e-4169-a777-f83d5670ddcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapBase\CityMap">
+      <UniqueIdentifier>{bbdc78af-63f7-4be8-97a7-1869b34dacc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapBase\WoodsMap">
+      <UniqueIdentifier>{4eaf0490-a24a-4ed6-97c4-38c42ce1081e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +139,7 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map.cpp">
-      <Filter>Map</Filter>
+      <Filter>MapBase</Filter>
     </ClCompile>
     <ClCompile Include="Sound\DirectSound.cpp">
       <Filter>Sound</Filter>
@@ -252,6 +261,15 @@
     <ClCompile Include="Bullet\BananaBullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Map\SeaMap\SeaMap.cpp">
+      <Filter>MapBase\SeaMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\CityMap\CityMap.cpp">
+      <Filter>MapBase\CityMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\WoodsMap\WoodsMap.cpp">
+      <Filter>MapBase\WoodsMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -318,7 +336,7 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="Map\Map.h">
-      <Filter>Map</Filter>
+      <Filter>MapBase</Filter>
     </ClInclude>
     <ClInclude Include="Sound\DirectSound.h">
       <Filter>Sound</Filter>
@@ -439,6 +457,15 @@
     </ClInclude>
     <ClInclude Include="Bullet\BananaBullet.h">
       <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\SeaMap\SeaMap.h">
+      <Filter>MapBase\SeaMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\CityMap\CityMap.h">
+      <Filter>MapBase\CityMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\WoodsMap\WoodsMap.h">
+      <Filter>MapBase\WoodsMap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

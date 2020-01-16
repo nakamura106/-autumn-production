@@ -173,7 +173,10 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager\CollisionManager.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
+    <ClCompile Include="Map\CityMap\CityMap.cpp" />
     <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\SeaMap\SeaMap.cpp" />
+    <ClCompile Include="Map\WoodsMap\WoodsMap.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
     <ClCompile Include="Player\PlayerBase.cpp" />
     <ClCompile Include="Player\TrpPlayer.cpp" />
@@ -235,7 +238,10 @@
     <ClInclude Include="Engine\Windows.h" />
     <ClInclude Include="Manager\CollisionManager.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
+    <ClInclude Include="Map\CityMap\CityMap.h" />
     <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Map\SeaMap\SeaMap.h" />
+    <ClInclude Include="Map\WoodsMap\WoodsMap.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Object\ObjectBase.h" />
     <ClInclude Include="Player\PlayerBase.h" />

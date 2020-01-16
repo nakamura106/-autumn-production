@@ -21,6 +21,7 @@ public:
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
 	void SetIsGameClear(bool is_game_clear_) { m_is_game_clear = is_game_clear_; }
 	void SetPlayerType(int Which_type_of_player) { m_PlayerType = Which_type_of_player; };
+	void SetMapType(int Which_type_of_map) { m_MapType = Which_type_of_map; };
 	void SetIsGameOver(bool is_game_over_) { m_is_game_over = is_game_over_; }
 
 	int GetPlayerHp() { return m_player_hp; }
@@ -29,6 +30,7 @@ public:
 	int GetNote3() { return note3; }
 	int GetBulletType() { return m_bullet_type; }
 	int GetPlayerType() { return m_PlayerType; }
+	int GetMapType() { return m_MapType; }
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
@@ -61,6 +63,8 @@ private:
 	bool m_is_game_over;
 
 	int m_PlayerType;
+
+	int m_MapType;
 
 private:
 	static DataBank* p_instance;

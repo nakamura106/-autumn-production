@@ -121,16 +121,19 @@ void SelectSceneObject::BossSelectUpdate()
 {
 	m_param[1].texture_id = SelectCategoryTextureList::BossSelectBottonTex;
 	m_param[4].texture_id = SelectCategoryTextureList::NumberCollectedTex;
-	m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame3;
+	m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
 
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
 		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame1;
+		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
+
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			DataBank::Instance()->SetMapType((int)MapType::WoodsMap);
 			is_brass_scene = true;
 		}
 	}
@@ -138,16 +141,33 @@ void SelectSceneObject::BossSelectUpdate()
 		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame1;
+		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
 		m_pos[8].x = m_pos[6].x;
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			DataBank::Instance()->SetMapType((int)MapType::SeaMap);
+			is_brass_scene = true;
+		}
+	}
+	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+	{
+		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
+		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
+		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame1;
+		m_pos[8].x = m_pos[7].x;
+		is_hit_mouse = true;
+		if (OnMouseDown(Left) == true)
+		{
+			DataBank::Instance()->SetMapType((int)MapType::CityMap);
 			is_brass_scene = true;
 		}
 	}
 	else {
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
+		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
 		is_hit_mouse = false;
 	}
 }
@@ -162,19 +182,38 @@ void SelectSceneObject::BrassSelectUpdate()
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
 		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame1;
+		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame2;
+		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
-		if (/*GetKey(ONE_KEY)==true&&*/OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
 			ChangeSceneStep(SceneStep::EndStep);
 		}
-		if (GetKey(TWO_KEY) == true && OnMouseDown(Left) == true)
+	}
+	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
+		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame2;
+		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame1;
+		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
+		m_pos[8].x = m_pos[6].x;
+		is_hit_mouse = true;
+		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeFlute);
 			ChangeSceneStep(SceneStep::EndStep);
 		}
-		if (GetKey(THREE_KEY) == true && OnMouseDown(Left) == true)
+	}
+	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+	{
+		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame2;
+		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame2;
+		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame1;
+		m_pos[8].x = m_pos[7].x;
+		is_hit_mouse = true;
+		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTuba);
 			ChangeSceneStep(SceneStep::EndStep);
@@ -182,6 +221,8 @@ void SelectSceneObject::BrassSelectUpdate()
 	}
 	else {
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame2;
+		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame2;
+		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
 		is_hit_mouse = false;
 	}
 }

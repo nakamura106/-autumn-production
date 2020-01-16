@@ -58,6 +58,15 @@ enum class Player
 	PlayerTypeMax,
 };
 
+enum class MapType
+{
+	WoodsMap,
+	SeaMap,
+	CityMap,
+
+	MapTypeMax,
+};
+
 enum class P_State
 {
 	Wait,
