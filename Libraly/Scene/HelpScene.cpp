@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "Scene.h"
 #include "SceneObject/HelpSceneObject.h"
+#include"../SceneLoader/HelpSceneLoad/HelpSceneLoad.h"
 
 
 HelpSceneObject help_object;
@@ -46,6 +47,7 @@ void InitHelpScene()
 {
 	
 	help_object.Init();
+	HelpSceneLoad();
 	ChangeSceneStep(SceneStep::MainStep);
 }
 

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "../Scene/Scene.h"
 #include "SceneObject/TitleSceneObject.h"
+#include"../SceneLoader/TitleSceneLoad/TitleSceneLoad.h"
 
 TitleSceneObject title_obj;
 
@@ -45,7 +46,7 @@ void DrawTitleScene()
 void InitTitleScene()
 {
 	title_obj.Init();
-
+	TitleSceneLoad();
 	ChangeSceneStep(SceneStep::MainStep);
 }
 

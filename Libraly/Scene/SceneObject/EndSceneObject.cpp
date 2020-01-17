@@ -22,10 +22,10 @@ EndSceneObject::~EndSceneObject()
 
 void EndSceneObject::Init()
 {
-	LoadTexture("Res/Tex/EndScene/GameClear.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameClearBgTex);
+	
 	LoadTexture("Res/Tex/EndScene/GameOver.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameOverBgTex);
 	LoadTexture("Res/Tex/EndScene/GameOverR.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameOverRTex);
-	LoadTexture("Res/Tex/EndScene/Back.png", TEXTURE_CATEGORY_GAMEEND, GameEndCategoryTextureList::GameBuckTex);
+	
 	
 	is_clear = DataBank::Instance()->GetIsGameClear();
 

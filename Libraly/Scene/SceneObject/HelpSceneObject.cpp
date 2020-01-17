@@ -21,10 +21,7 @@ HelpSceneObject::~HelpSceneObject()
 
 void HelpSceneObject::Init()
 {
-	LoadTexture("Res/Tex/TitleScene/Title.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::HelpBgTex);
-	LoadTexture("Res/Tex/HelpScene/Help1.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help1Tex);
-	LoadTexture("Res/Tex/HelpScene/Help2.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help2Tex);
-	LoadTexture("Res/Tex/HelpScene/Help3.png", TEXTURE_CATEGORY_HELP, HelpCategoryTextureList::Help3Tex);
+	
 
 	m_param[0].texture_id = HelpCategoryTextureList::HelpBgTex;
 	m_param[1].texture_id = HelpCategoryTextureList::Help1Tex;

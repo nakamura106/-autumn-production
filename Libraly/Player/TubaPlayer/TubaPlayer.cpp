@@ -1,5 +1,5 @@
 #include"TubaPlayer.h"
-#include"../../Engine/Texture.h"
+#include"../../Texture/Texture.h"
 #include "../../Effect/Effects/SweatEffect.h"
 #include "../../Manager/ObjectManager.h"
 

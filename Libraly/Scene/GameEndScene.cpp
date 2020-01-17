@@ -5,6 +5,7 @@
 #include "../Engine/Sound.h"
 #include "../Scene/Scene.h"
 #include "SceneObject/EndSceneObject.h"
+#include"../SceneLoader/GameEndSceneLoad/GameEndSceneLoad.h"
 
 EndSceneObject end_object;
 
@@ -43,6 +44,7 @@ void DrawGameEndScene()
 void InitGameEndScene()
 {
 	end_object.Init();
+	GameEndSceneLoad();
 	ChangeSceneStep(SceneStep::MainStep);
 }
 

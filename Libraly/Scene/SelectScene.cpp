@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "Scene.h"
 #include "SceneObject/SelectSceneObject.h"
+#include"../SceneLoader/SelectSceneLoad/SelectSceneLoad.h"
 
 SelectSceneObject select_object;
 
@@ -47,7 +48,7 @@ void InitSelectScene()
 {
 	select_object.Init();
 
-
+	SelectSceneLoad();
 
 	ChangeSceneStep(SceneStep::MainStep);
 }

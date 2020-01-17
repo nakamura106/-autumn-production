@@ -4,7 +4,7 @@
 
 #include"../Object/Definition.h"
 #include"../Object/ObjectBase.h"
-#include"../Engine/Texture.h"
+#include"../Texture/Texture.h"
 #include"../Bullet/PlayerBullet.h"
 #include<vector>
 

@@ -294,6 +294,18 @@
     <ClCompile Include="SceneLoader\GameSceneLoad\GameSceneLoad.cpp">
       <Filter>SceneLoader\GameSceneLoad</Filter>
     </ClCompile>
+    <ClCompile Include="SceneLoader\GameEndSceneLoad\GameEndSceneLoad.cpp">
+      <Filter>SceneLoader\GameEndSceneLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoader\HelpSceneLoad\HelpSceneLoad.cpp">
+      <Filter>SceneLoader\HelpSceneLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoader\SelectSceneLoad\SelectSceneLoad.cpp">
+      <Filter>SceneLoader\SelectSceneLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.cpp">
+      <Filter>SceneLoader\TitleSceneLoad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -496,6 +508,18 @@
     </ClInclude>
     <ClInclude Include="SceneLoader\GameSceneLoad\GameSceneLoad.h">
       <Filter>SceneLoader\GameSceneLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoader\GameEndSceneLoad\GameEndSceneLoad.h">
+      <Filter>SceneLoader\GameEndSceneLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoader\HelpSceneLoad\HelpSceneLoad.h">
+      <Filter>SceneLoader\HelpSceneLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoader\SelectSceneLoad\SelectSceneLoad.h">
+      <Filter>SceneLoader\SelectSceneLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.h">
+      <Filter>SceneLoader\TitleSceneLoad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

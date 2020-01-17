@@ -1,6 +1,9 @@
 #include"GameSceneLoad.h"
+#include"../../Texture/Texture.h"
 #include"../../DataBank/DataBank.h"
 #include"../../Object/Definition.h"
+
+
 
 void GameSceneLoad()
 {
