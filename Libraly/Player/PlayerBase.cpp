@@ -58,22 +58,7 @@ void PlayerBase::Update()
 	ChangeState();
 	Atkjudge();
 
-	// エフェクト条件
-	// HP１の時のエフェクト条件
-	if (m_hp == 1){
-		m_effect_list.at(0)->WakeUp();
-	}
-	else {
-		m_effect_list.at(0)->Sleep();
-	}
-	// 被弾時エフェクト条件
-	if (m_state == (int)P_State::Damage)
-	{
-		m_effect_list.at(4)->WakeUp();
-	}
-	else {
-		m_effect_list.at(4)->Sleep();
-	}
+	
 
 	AllUpdateEffect();
 
@@ -461,6 +446,23 @@ void PlayerBase::AllInitEffect()
 
 void PlayerBase::AllUpdateEffect()
 {
+	// エフェクト条件
+	// HP１の時のエフェクト条件
+	if (m_hp == 1) {
+		m_effect_list.at(0)->WakeUp();
+	}
+	else {
+		m_effect_list.at(0)->Sleep();
+	}
+	// 被弾時エフェクト条件
+	if (m_state == (int)P_State::Damage)
+	{
+		m_effect_list.at(4)->WakeUp();
+	}
+	else {
+		m_effect_list.at(4)->Sleep();
+	}
+
 	m_effect_list.at(0)->Update();
 	m_effect_list.at(1)->Update();
 	m_effect_list.at(2)->Update();
