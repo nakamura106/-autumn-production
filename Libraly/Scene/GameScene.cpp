@@ -11,6 +11,7 @@
 #include"../Bullet/PlayerBullet.h"
 #include"../Engine/FlameTimer.h"
 #include "../DataBank/DataBank.h"
+#include"../SceneLoader/GameSceneLoad/GameSceneLoad.h"
 
 
 // ゲーム本編シーンの初期化
@@ -58,7 +59,7 @@ void InitGameScene()
 
 	UiManager::Instance()->Create();
 
-
+	GameSceneLoad();
 
 	ChangeSceneStep(SceneStep::MainStep);
 }
