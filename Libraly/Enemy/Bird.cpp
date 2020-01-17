@@ -11,7 +11,7 @@ Bird::Bird()
 	m_savetime_shit_cycle = FlameTimer::GetNowFlame();
 	m_is_init_motion_end = false;
 	m_shot_adjust.x = m_draw_param.tex_size_x / 2.f;
-	m_shot_adjust.y = m_draw_param.tex_size_y - 200.f;
+	m_shot_adjust.y = m_draw_param.tex_size_y - 100.f;
 	
 }
 

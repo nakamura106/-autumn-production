@@ -19,8 +19,8 @@ private:
 
 	//ハリ発射位置調整用
 	//note:Adjustは「調整」という意味
-	const float M_NEEDLE_ADJUST_X = 180.f;
-	const float M_NEEDLE_ADJUST_Y = 630.f;
+	const float M_NEEDLE_ADJUST_X = 90.f;
+	const float M_NEEDLE_ADJUST_Y = 310.f;
 
 	const float M_DASHATTACK_SPEED_CHANGE_NUM = 1.02f;
 
