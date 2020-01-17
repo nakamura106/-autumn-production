@@ -43,25 +43,7 @@ HedgeHog::~HedgeHog()
 
 void HedgeHog::Init()
 {
-	/*11/26 íç!!âºé¿ëïÇÃÉRÅ[Éh*/
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Walk_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WalkLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Walk_Right.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WalkRight);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Tukare_Left.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Tukare_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_FatigueRight);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Taiki_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WaitLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Taiki_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_WaitRight);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Sleep_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Sleep_Right.png",		TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_SleepRight);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_DashAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack1Left);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_DashAttack_Right.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack1Right);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Down_Left.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownLeft);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_Down_Right.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_DownRight);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_TogeAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Left);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_TogeAttack_Right.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack2Right);
-	LoadTexture("Res/Tex/Enemy/Mouse/Boss1_FlyNeedle.png",			TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Normal);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_HeadAttack_Left.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Left);
-	LoadTexture("Res/Tex/Enemy/Mouse_Half/Boss1_HeadAttack_Right.png",	TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Attack3Right);
-
+	
 }
 
 

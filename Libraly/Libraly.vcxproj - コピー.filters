@@ -79,24 +79,6 @@
     <Filter Include="MapBase\WoodsMap">
       <UniqueIdentifier>{4eaf0490-a24a-4ed6-97c4-38c42ce1081e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneLoader">
-      <UniqueIdentifier>{2549eeaa-3d5b-48a7-a59a-634e2bb67907}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\TitleSceneLoad">
-      <UniqueIdentifier>{af818f37-10da-4452-9187-4e7ed9bc1c49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\GameSceneLoad">
-      <UniqueIdentifier>{125fbf1f-4ccd-4d43-9afe-9cdca0344b6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\HelpSceneLoad">
-      <UniqueIdentifier>{9594332c-68eb-4bc9-8639-0ec154e0b779}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\SelectSceneLoad">
-      <UniqueIdentifier>{de6c9888-f31d-49e8-99d7-8a9d82070fb5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\GameEndSceneLoad">
-      <UniqueIdentifier>{8d29cd74-4fad-48c7-bd18-7ee947bd9513}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -279,6 +261,7 @@
     <ClCompile Include="Bullet\BananaBullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Map\SeaMap\SeaMap.cpp">
       <Filter>MapBase\SeaMap</Filter>
     </ClCompile>
@@ -287,12 +270,10 @@
     </ClCompile>
     <ClCompile Include="Map\WoodsMap\WoodsMap.cpp">
       <Filter>MapBase\WoodsMap</Filter>
-    </ClCompile>
+=======
     <ClCompile Include="Bullet\MonkeyBullet.cpp">
       <Filter>Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneLoader\GameSceneLoad\GameSceneLoad.cpp">
-      <Filter>SceneLoader\GameSceneLoad</Filter>
+>>>>>>> ゴリラの攻撃・ジャンプ動作の作成
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -482,6 +463,7 @@
     <ClInclude Include="Bullet\BananaBullet.h">
       <Filter>Bullet</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Map\SeaMap\SeaMap.h">
       <Filter>MapBase\SeaMap</Filter>
     </ClInclude>
@@ -490,12 +472,10 @@
     </ClInclude>
     <ClInclude Include="Map\WoodsMap\WoodsMap.h">
       <Filter>MapBase\WoodsMap</Filter>
-    </ClInclude>
+=======
     <ClInclude Include="Bullet\MonkeyBullet.h">
       <Filter>Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneLoader\GameSceneLoad\GameSceneLoad.h">
-      <Filter>SceneLoader\GameSceneLoad</Filter>
+>>>>>>> ゴリラの攻撃・ジャンプ動作の作成
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ void SleepEffect::Init()
 	m_anime_param.change_flame = 15;
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameSleepEffect;
-	LoadTexture("Res/Tex/Effect/sleep_E.png", m_draw_param.category_id, m_draw_param.texture_id);
+	
 }
 
 

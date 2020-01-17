@@ -30,7 +30,7 @@ void SweatEffect::Init()
 	m_anime_param.change_flame = 15;
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameSweatEffect;
-	LoadTexture("Res/Tex/Effect/sweat_E.png", m_draw_param.category_id, m_draw_param.texture_id);
+	
 }
 
 

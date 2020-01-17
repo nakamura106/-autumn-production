@@ -11,11 +11,6 @@
 void SeaMap::Load()
 {
 
-	LoadTexture("Res/Tex/Map/ŠC/Sea2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	
-	LoadTexture("Res/Tex/Map/ŠC/Sea3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	
-	LoadTexture("Res/Tex/Map/ŠC/Sea4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBgTex);		
-
-
 	
 }
 
@@ -28,7 +23,7 @@ void SeaMap::Draw()
 
 void SeaFg::Load()
 {
-	LoadTexture("Res/Tex/Map/ŠC/Sea1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);	
+	
 }
 
 void SeaFg::Draw()

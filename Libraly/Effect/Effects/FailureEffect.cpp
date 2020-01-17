@@ -29,7 +29,7 @@ void FailureEffect::Init()
 	m_anime_param.change_flame = 15;
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameFailureEffect;
-	LoadTexture("Res/Tex/Effect/failure_E.png", m_draw_param.category_id, m_draw_param.texture_id);
+	
 }
 
 

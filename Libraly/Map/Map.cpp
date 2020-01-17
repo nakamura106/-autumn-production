@@ -108,8 +108,7 @@ void Fg::Init()
 
 void Fg::Load()
 {
-	//マップ
-	LoadTexture("Res/Tex/Map/森/Woods1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);		
+	//マップ		
 
 }
 

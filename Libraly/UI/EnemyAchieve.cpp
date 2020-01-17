@@ -11,7 +11,7 @@ EnemyAchieve::~EnemyAchieve()
 
 void EnemyAchieve::Init()
 {
-	LoadTexture("Res/Tex/EnemyUi/EnemyAchieve.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyAchieveUi);
+	
 	m_pos.x = ACHIEVE_POS_X;
 	m_pos.y = ACHIEVE_POS_Y;
 	m_param.category_id = TEXTURE_CATEGORY_GAME;

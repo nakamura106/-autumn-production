@@ -17,7 +17,6 @@ void HitEffect::Init()
 	m_effect_param.IsLoop = false;
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameHitEffect;
-	LoadTexture("Res/Tex/Effect/hit_E.png", m_draw_param.category_id, m_draw_param.texture_id);
 }
 
 void HitEffect::Update()

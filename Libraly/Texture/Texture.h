@@ -157,7 +157,7 @@ GameEnemy_Bullet_Shit,			//!<敵の弾(フン)
 
 
 /* エフェクト用 */
-GameDebuffEfect,		//!< デバフエフェクト
+GameDebuffEffect,		//!< デバフエフェクト
 GameDieEffect,			//!< 死亡エフェクト
 GameFailureEffect,		//!< 演奏失敗エフェクト
 GameHitEffect,			//!< 攻撃ヒットエフェクト

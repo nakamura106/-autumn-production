@@ -11,9 +11,6 @@
 void WoodsMap::Load()
 {
 
-	LoadTexture("Res/Tex/Map/êX/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);	  
-	LoadTexture("Res/Tex/Map/êX/Woods3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::Gamefloor2Tex);	
-	LoadTexture("Res/Tex/Map/êX/Woods4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBgTex);		
 
 }
 
@@ -26,7 +23,7 @@ void WoodsMap::Draw()
 
 void WoodsFg::Load()
 {
-	LoadTexture("Res/Tex/Map/äC/Sea1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);
+	
 }
 
 void WoodsFg::Draw()

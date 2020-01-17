@@ -52,24 +52,7 @@ void TubaPlayer::Init()
 
 void TubaPlayer::Load()
 {
-	LoadTexture("Res/Tex/TubaPlayer/Player_Taiki_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Taiki_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Attack_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Attack_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Damage_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Damage_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Jump_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Jump_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_JumpAttack_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_JumpAttack_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_JumpDamage_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_JumpDamage_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_RightTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Walk_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_LeftTex);
-	LoadTexture("Res/Tex/TubaPlayer/Player_Walk_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_RightTex);
-	LoadTexture("Res/Tex/Effect/tyotyo01_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_1Tex);
-	LoadTexture("Res/Tex/Effect/tyotyo02_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_2Tex);
-	LoadTexture("Res/Tex/Effect/tantyo01_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_3Tex);
-	LoadTexture("Res/Tex/Effect/tantyo02_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBullet_4Tex);
+	
 }
 
 void TubaPlayer::SetRectangle()
