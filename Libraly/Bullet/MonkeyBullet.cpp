@@ -15,8 +15,9 @@ MonkeyBullet::MonkeyBullet(
 	:EnemyBullet(x_, y_, move_speed_, direction_, 0, move_speed_y_, acceleration_y_, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
 {
 
-	m_is_jump = false;
-	m_init_speed_y = move_speed_y_;
+	m_is_jump		= false;
+	m_init_speed_y	= move_speed_y_;
+	m_move_limit	= 2000.f;
 
 }
 
