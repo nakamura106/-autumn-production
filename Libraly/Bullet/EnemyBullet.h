@@ -13,6 +13,7 @@ public:
 		Direction direction_,
 		int draw_angle_ = 0,
 		float move_speed_y_ = 0.f,
+		float acceleration_y_ = 0.f,
 		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
 		int tex_split_w_ = 2,
 		int tex_split_h_ = 1,
@@ -27,6 +28,9 @@ private:
 	const int M_EBULLET_ANIM_SPLIT_ALL	= 1;
 	const int M_EBULLET_ANIM_SPLIT_W	= 2;
 	const int M_EBULLET_ANIM_SPLIT_H	= 1;
+
+protected:
+	float	m_acceleration_y;		//‰Á‘¬“x
 
 };
 

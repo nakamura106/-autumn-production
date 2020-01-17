@@ -261,6 +261,7 @@
     <ClCompile Include="Bullet\BananaBullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Map\SeaMap\SeaMap.cpp">
       <Filter>MapBase\SeaMap</Filter>
     </ClCompile>
@@ -269,6 +270,10 @@
     </ClCompile>
     <ClCompile Include="Map\WoodsMap\WoodsMap.cpp">
       <Filter>MapBase\WoodsMap</Filter>
+=======
+    <ClCompile Include="Bullet\MonkeyBullet.cpp">
+      <Filter>Bullet</Filter>
+>>>>>>> ゴリラの攻撃・ジャンプ動作の作成
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +463,7 @@
     <ClInclude Include="Bullet\BananaBullet.h">
       <Filter>Bullet</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Map\SeaMap\SeaMap.h">
       <Filter>MapBase\SeaMap</Filter>
     </ClInclude>
@@ -466,6 +472,10 @@
     </ClInclude>
     <ClInclude Include="Map\WoodsMap\WoodsMap.h">
       <Filter>MapBase\WoodsMap</Filter>
+=======
+    <ClInclude Include="Bullet\MonkeyBullet.h">
+      <Filter>Bullet</Filter>
+>>>>>>> ゴリラの攻撃・ジャンプ動作の作成
     </ClInclude>
   </ItemGroup>
 </Project>

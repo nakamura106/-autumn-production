@@ -23,9 +23,6 @@ public:
 			void Create() {}
 
 private:
-	/*動作更新*/
-	virtual void MoveUpdate();
-	
 	const float M_MOVE_LIMIT_DEFAULT = 1000.f;
 	
 	/*アニメーション用(仮メンバ)*/
@@ -33,6 +30,9 @@ private:
 	
 
 protected:
+	/*動作更新*/
+	virtual void MoveUpdate();
+
 	float	m_move_count;		//移動量
 	float	m_move_limit;		//移動制限
 	float	m_speed_y;			//y軸移動

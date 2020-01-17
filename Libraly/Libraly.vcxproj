@@ -145,6 +145,7 @@
     <ClCompile Include="Bullet\BananaBullet.cpp" />
     <ClCompile Include="Bullet\BulletBase.cpp" />
     <ClCompile Include="Bullet\EnemyBullet.cpp" />
+    <ClCompile Include="Bullet\MonkeyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Bullet\ShitBullet.cpp" />
     <ClCompile Include="DataBank\DataBank.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Bullet\BananaBullet.h" />
     <ClInclude Include="Bullet\BulletBase.h" />
     <ClInclude Include="Bullet\EnemyBullet.h" />
+    <ClInclude Include="Bullet\MonkeyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
     <ClInclude Include="Bullet\ShitBullet.h" />
     <ClInclude Include="DataBank\DataBank.h" />
