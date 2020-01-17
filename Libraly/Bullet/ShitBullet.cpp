@@ -13,12 +13,11 @@ ShitBullet::ShitBullet(
 	int tex_split_h_,
 	int tex_split_all
 )
-	:EnemyBullet(x_, y_, move_speed_, direction_, 0, move_speed_y_, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
+	:EnemyBullet(x_, y_, move_speed_, direction_, 0, move_speed_y_, acceleration_, use_tex_, tex_split_w_, tex_split_h_, tex_split_all)
 {
 
-	m_is_dropdown		= false;
-	m_savetime_delete	= 0;
-	m_acceleration		= acceleration_;
+	m_is_dropdown = false;
+	m_savetime_delete = 0;
 
 }
 
@@ -62,7 +61,7 @@ void ShitBullet::MoveUpdate()
 		}
 
 		//‰Á‘¬
-		m_speed_y += m_acceleration;
+		m_speed_y += m_acceleration_y;
 
 	}
 

@@ -126,6 +126,11 @@ void ObjectBase::SetRectangle()
 	m_rect_param.height = 0.0f;
 	m_rect_param.width = 0.0f;
 }
+
+bool ObjectBase::CheckLandGround()
+{
+	return (m_pos.y + m_draw_param.tex_size_y) > G_GROUND_POS_Y;
+}
  
 void ObjectBase::CalcDrawPosition()
 {

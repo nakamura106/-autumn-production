@@ -54,6 +54,9 @@ protected:
 	/*当たり判定構造体パラメータ設定関数　後で消す*/
 	virtual void SetRectangle();
 
+	/*地面にいるかどうかの判定*/
+	bool CheckLandGround();
+
 	/*		構造体変数		*/
 	Position		m_pos;			//座標
 	DrawParam		m_draw_param;	//描画用構造体

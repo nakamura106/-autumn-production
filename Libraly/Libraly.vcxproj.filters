@@ -252,6 +252,9 @@
     <ClCompile Include="Bullet\BananaBullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet\MonkeyBullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -438,6 +441,9 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Bullet\BananaBullet.h">
+      <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\MonkeyBullet.h">
       <Filter>Bullet</Filter>
     </ClInclude>
   </ItemGroup>
