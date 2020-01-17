@@ -29,7 +29,7 @@ void DebuffEffect::Init()
 	m_anime_param.split_height = 2;
 	m_anime_param.change_flame = 15;
 
-	m_draw_param.texture_id = GameCategoryTextureList::GameDebuffEfect;
+	m_draw_param.texture_id = GameCategoryTextureList::GameDebuffEffect;
 	
 }
 
