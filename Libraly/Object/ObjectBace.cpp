@@ -25,6 +25,7 @@ ObjectBase::ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed
 	m_draw_angle		= draw_angle_;
 	m_draw_param.tu		= 1.f;
 	m_draw_param.tv		= 1.f;
+	m_is_turn			= false;
 }
 
 ObjectBase::~ObjectBase()
@@ -56,7 +57,8 @@ void ObjectBase::Draw()
 		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
 		(m_draw_param.tu - 1.f) / (float)m_anim_param.split_width,
 		(m_draw_param.tv - 1.f) / (float)m_anim_param.split_height,
-		m_draw_angle
+		m_draw_angle,
+		m_is_turn
 	);
 
 	for (int i = 0; i < m_effect_list.size(); ++i) {

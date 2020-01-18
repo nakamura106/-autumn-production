@@ -11,8 +11,8 @@ public:
 		Direction direction_,
 		float move_speed_y_ = 0.f,
 		float acceleration_y_ = 5.f,
-		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
-		int tex_split_w_ = 2,
+		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Shit,
+		int tex_split_w_ = 4,
 		int tex_split_h_ = 1,
 		int tex_split_all = 1
 	);
@@ -20,7 +20,11 @@ public:
 
 private:
 	void MoveUpdate();
+
 	bool m_is_jump;
 	float m_init_speed_y;
+	float m_init_pos_y;
+
+	void CalcTexAngle();
 
 };

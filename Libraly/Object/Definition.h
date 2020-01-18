@@ -136,6 +136,7 @@ enum class EnemyStateType
 	Attack3,//7:UŒ‚3
 	Dead,	//8:€–S
 	Fly,	//9:”òs
+	Attack4,//10:UŒ‚4
 	EnemyStateType_Max,
 };
 

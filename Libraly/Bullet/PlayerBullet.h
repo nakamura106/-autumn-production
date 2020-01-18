@@ -11,6 +11,7 @@ public:
 	void Load();
 
 	virtual void Draw();
+	void Update();
 
 private:
 	const int	M_PBULLET_ANIM_SPLIT_ALL	= 16;

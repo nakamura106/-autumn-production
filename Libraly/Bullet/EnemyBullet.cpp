@@ -21,6 +21,7 @@ EnemyBullet::EnemyBullet(
 	m_anim_param.split_width = tex_split_w_;
 	m_anim_param.split_height = tex_split_h_;
 	m_acceleration_y = acceleration_y_;
+	
 
 }
 

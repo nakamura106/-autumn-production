@@ -48,7 +48,7 @@ private:
 	const float	M_PLAYER_SIZE_X = 256.f;	//プレイヤーのx方向の画像サイズ(プレイヤーとの位置関係で使用)
 
 	/*初期化用初期値*/
-	const int	M_ANIM_FLAME					= 7;		//画像変更を行うフレーム周期
+	const int	M_ANIM_FLAME					= 7;		//画像変更を行うフレーム周期:7
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
 	const int	M_ANIM_TEX_HEIGHT				= 4;		//縦の分割数
@@ -171,6 +171,7 @@ protected:
 	void		 EnemySleep();		//眠り状態
 	virtual void EnemyFly();		//飛行状態
 	void		 EnemyDead();		//死亡状態
+	virtual void EnemyAttack4(){}	//攻撃状態4
 
 
 	/*			状態初期化			*/
@@ -186,6 +187,7 @@ protected:
 	virtual void InitSleepState();	//眠り状態
 	virtual void InitFlyState();	//飛行状態(鳥で使用)
 	void		 InitDeadState();	//死亡状態
+	void		 InitAttack4State();//攻撃状態４
 
 	/*csv読込関数：引数にAI番号と.csvを除いたファイル名を入れる*/
 	//例：Res/Csv/Mouse/Enemy_AI1.csv→Res/Csv/Mouse/Enemy_AI
