@@ -13,8 +13,6 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
-const float PI = 3.14159265f;
-
 struct CustomVertex
 {
 	float X;			// XÀ•W

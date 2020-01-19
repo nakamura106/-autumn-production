@@ -88,3 +88,10 @@ void PlayerBullet::Draw()
 		(m_draw_param.tv - 1) / m_anim_param.split_height,
 	m_direction);
 }
+
+void PlayerBullet::Update()
+{
+	BulletBase::Update();
+
+	AnimationUpdate();
+}

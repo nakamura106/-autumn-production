@@ -76,8 +76,6 @@ void BulletBase::Update()
 
 	MoveUpdate();
 
-	AnimationUpdate();
-
 	CalcDrawPosition();
 }
 

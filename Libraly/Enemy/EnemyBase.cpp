@@ -101,16 +101,6 @@ void EnemyBase::Draw()
 
 	}
 
-	//デバッグ描画
-	/*
-	DrawFont(
-		m_pos.x + m_draw_param.tex_size_x / 2,
-		m_pos.y + m_draw_param.tex_size_y / 2,
-		std::to_string(m_fatigue_gauge).c_str(),
-		FontSize::Large,
-		FontColor::Red
-	);
-	*/
 	AllDrawEffect();
 	
 }
@@ -123,7 +113,9 @@ void EnemyBase::Init()
 void EnemyBase::Update()
 {
 	//アニメーション(パラパラ画像)値の更新
-	if (m_animation_stop != true)AnimationUpdate();
+	if (m_animation_stop != true) {
+		AnimationUpdate();
+	}
 
 	//Stateの遷移
 	//ChangeState();
@@ -221,6 +213,10 @@ void EnemyBase::UpdateState()
 		EnemyFly();
 		break;
 
+	case EnemyStateType::Attack4:
+		EnemyAttack4();
+		break;
+
 	default:
 		/*
 			!!
@@ -289,6 +285,10 @@ void EnemyBase::UpdateAIState()
 
 	case EnemyStateType::Fly:
 		EnemyFly();
+		break;
+
+	case EnemyStateType::Attack4:
+		EnemyAttack4();
 		break;
 
 	default:
@@ -662,6 +662,9 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 	//状態変更
 	m_state = next_state_;
 
+	//全状態共通の初期化関数
+	InitAllState();
+
 	switch (next_state_)
 	{
 	case EnemyStateType::Wait:
@@ -703,13 +706,15 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 
 	case EnemyStateType::Fly:
 		InitFlyState();
+		break;
+
+	case EnemyStateType::Attack4:
+		InitAttack4State();
+		break;
 
 	default:
 		return;
 	}
-
-	//全状態共通の初期化関数
-	InitAllState();
 
 	//現在の状態を格納
 	m_savetime_state = FlameTimer::GetNowFlame();
@@ -895,6 +900,16 @@ void EnemyBase::InitDeadState()
 	}
 	else {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DownRight;
+	}
+}
+
+void EnemyBase::InitAttack4State()
+{
+	if (m_direction == Direction::LEFT) {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack4Left;
+	}
+	else {
+		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_Attack4Right;
 	}
 }
 
@@ -1219,7 +1234,7 @@ void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, in
 
 		float hypotenuse = pow((speed_x_ * speed_x_) + (speed_y_ * speed_y_), 0.5f);
 
-		draw_angle = static_cast<int>(acosf(((fabsf(speed_x_)) / hypotenuse)));
+		draw_angle = static_cast<int>(acosf(fabsf(speed_x_) / hypotenuse) * 180 / PI);
 
 		if (m_direction == Direction::LEFT) {
 			draw_angle = init_angle_ - draw_angle;
