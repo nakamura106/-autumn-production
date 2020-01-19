@@ -6,12 +6,15 @@
 class ShapeCircle :public ShapeBase
 {
 public:
-	ShapeCircle();
-	~ShapeCircle();
+	ShapeCircle(float x,float y,float radius);
+	~ShapeCircle()override;
 
-	ShapeType GetShapeType() { return m_shape_type; }
+	ShapeType GetShapeType()const override { return m_shape_type; }
+	
+	float GetRadius() { return m_radius; }
 
 private:
+	float m_radius;	// ”¼Œa
 
 };
 

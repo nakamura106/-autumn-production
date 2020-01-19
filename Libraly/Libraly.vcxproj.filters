@@ -103,6 +103,9 @@
     <Filter Include="Collision\ShapeType">
       <UniqueIdentifier>{a675e501-fe53-48fb-9063-b0027c6e8615}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision\CollisionCalc">
+      <UniqueIdentifier>{52185d7a-a3c4-4039-ab6f-387f20179695}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -312,9 +315,6 @@
     <ClCompile Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.cpp">
       <Filter>SceneLoader\TitleSceneLoad</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\CollisionBase.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Collision\ShapeBase.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
@@ -326,6 +326,18 @@
     </ClCompile>
     <ClCompile Include="Collision\ShapeType\ShapeLine.cpp">
       <Filter>Collision\ShapeType</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionCalc\CollisionBase.cpp">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionCalc\CircleAndCircle.cpp">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionCalc\CircleAndRect.cpp">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionCalc\RectAndRect.cpp">
+      <Filter>Collision\CollisionCalc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,9 +554,6 @@
     <ClInclude Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.h">
       <Filter>SceneLoader\TitleSceneLoad</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\CollisionBase.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Collision\ShapeBase.h">
       <Filter>Collision</Filter>
     </ClInclude>
@@ -556,6 +565,18 @@
     </ClInclude>
     <ClInclude Include="Collision\ShapeType\ShapeLine.h">
       <Filter>Collision\ShapeType</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionCalc\CollisionBase.h">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionCalc\CircleAndCircle.h">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionCalc\CircleAndRect.h">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionCalc\RectAndRect.h">
+      <Filter>Collision\CollisionCalc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

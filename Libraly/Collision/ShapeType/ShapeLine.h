@@ -7,7 +7,9 @@ class ShapeLine :public ShapeBase
 {
 public:
 	ShapeLine();
-	~ShapeLine();
+	~ShapeLine()override;
+
+	ShapeType GetShapeType()const override { return m_shape_type; }
 
 
 private:

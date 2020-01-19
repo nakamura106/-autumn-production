@@ -11,8 +11,13 @@ public:
 
 	virtual ShapeType GetShapeType()const = 0;
 
+	float GetCenterX() { return m_CenterX; }
+	float GetCenterY() { return m_CenterY; }
+
 protected:
 	ShapeType m_shape_type;
+
+	float m_CenterX, m_CenterY;
 
 
 };

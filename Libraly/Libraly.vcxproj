@@ -148,7 +148,10 @@
     <ClCompile Include="Bullet\MonkeyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Bullet\ShitBullet.cpp" />
-    <ClCompile Include="Collision\CollisionBase.cpp" />
+    <ClCompile Include="Collision\CollisionCalc\CircleAndCircle.cpp" />
+    <ClCompile Include="Collision\CollisionCalc\CircleAndRect.cpp" />
+    <ClCompile Include="Collision\CollisionCalc\CollisionBase.cpp" />
+    <ClCompile Include="Collision\CollisionCalc\RectAndRect.cpp" />
     <ClCompile Include="Collision\ShapeBase.cpp" />
     <ClCompile Include="Collision\ShapeType\ShapeCircle.cpp" />
     <ClCompile Include="Collision\ShapeType\ShapeLine.cpp" />
@@ -224,7 +227,10 @@
     <ClInclude Include="Bullet\MonkeyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
     <ClInclude Include="Bullet\ShitBullet.h" />
-    <ClInclude Include="Collision\CollisionBase.h" />
+    <ClInclude Include="Collision\CollisionCalc\CircleAndCircle.h" />
+    <ClInclude Include="Collision\CollisionCalc\CircleAndRect.h" />
+    <ClInclude Include="Collision\CollisionCalc\CollisionBase.h" />
+    <ClInclude Include="Collision\CollisionCalc\RectAndRect.h" />
     <ClInclude Include="Collision\ShapeBase.h" />
     <ClInclude Include="Collision\ShapeType\ShapeCircle.h" />
     <ClInclude Include="Collision\ShapeType\ShapeLine.h" />
