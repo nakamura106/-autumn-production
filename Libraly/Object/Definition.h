@@ -148,6 +148,15 @@ enum class EnemyDirection {
 	EnemyDirection_Max
 };
 
+// 当たり判定用の形の種類
+enum class ShapeType {
+	Shape_Circle,	// 円
+	Shape_Rect,		// 矩形
+	Shape_Line,		// 線
+
+	ShapeTypeMax,
+};
+
 
 //AIのパラメータ
 struct EnemyAIParam {

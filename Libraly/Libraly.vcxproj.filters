@@ -97,6 +97,12 @@
     <Filter Include="SceneLoader\GameEndSceneLoad">
       <UniqueIdentifier>{8d29cd74-4fad-48c7-bd18-7ee947bd9513}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{b92cdbf4-f959-4935-8fec-3344595356fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision\ShapeType">
+      <UniqueIdentifier>{a675e501-fe53-48fb-9063-b0027c6e8615}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -305,6 +311,21 @@
     </ClCompile>
     <ClCompile Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.cpp">
       <Filter>SceneLoader\TitleSceneLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionBase.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\ShapeBase.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\ShapeType\ShapeCircle.cpp">
+      <Filter>Collision\ShapeType</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\ShapeType\ShapeRect.cpp">
+      <Filter>Collision\ShapeType</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\ShapeType\ShapeLine.cpp">
+      <Filter>Collision\ShapeType</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +541,21 @@
     </ClInclude>
     <ClInclude Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.h">
       <Filter>SceneLoader\TitleSceneLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionBase.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\ShapeBase.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\ShapeType\ShapeCircle.h">
+      <Filter>Collision\ShapeType</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\ShapeType\ShapeRect.h">
+      <Filter>Collision\ShapeType</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\ShapeType\ShapeLine.h">
+      <Filter>Collision\ShapeType</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
