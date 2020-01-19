@@ -10,16 +10,12 @@ BulletBase::BulletBase(
 	float speed_y_,
 	int draw_angle_
 )
-	:ObjectBase()
+	:ObjectBase(obj_ravel_,direction_,move_speed_,draw_angle_)
 {
 	//オブジェクトからの情報を格納
 	m_pos.x	= x_;
 	m_map_pos = x_;
 	m_pos.y = y_;
-	m_speed = move_speed_;
-	m_direction = direction_;
-
-	m_speed_y = 0.f;
 
 	//使用画像設定
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;

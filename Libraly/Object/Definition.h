@@ -268,6 +268,13 @@ enum class EffectID
 
 struct Position
 {
+	//代入演算子のオーバーロード
+	Position &operator =(const Position &position_) {
+		this->x = position_.x;
+		this->y = position_.y;
+		return *this;
+	}
+
 	Position() {
 		x = 0.0f;
 		y = 0.0f;

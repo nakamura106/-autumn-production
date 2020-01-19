@@ -17,7 +17,9 @@ public:
 		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
 		int tex_split_w_ = 2,
 		int tex_split_h_ = 1,
-		int tex_split_all = 1
+		int tex_split_all_ = 1,
+		int tex_use_num_ = 0,
+		float active_distance_ = 1000.f
 	);
 
 	~EnemyBullet();
@@ -28,9 +30,11 @@ private:
 	const int M_EBULLET_ANIM_SPLIT_ALL	= 1;
 	const int M_EBULLET_ANIM_SPLIT_W	= 2;
 	const int M_EBULLET_ANIM_SPLIT_H	= 1;
+	void CalcTexUseNum();
 
 protected:
 	float	m_acceleration_y;		//‰Á‘¬“x
+	int		m_tex_use_num;	//g—p‚·‚é‰æ‘œ–‡”–Ú
 
 };
 

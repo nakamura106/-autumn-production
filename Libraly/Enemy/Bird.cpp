@@ -82,7 +82,7 @@ void Bird::EnemyAttack2()
 
 		for (int i = 0;i < 3;++i) {
 			//弾発射
-			CreateBullet(m_speed, m_speed + (float)i, true, 45);
+			CreateBullet(static_cast<Direction>(m_direction),m_speed, m_speed + (float)i, true, 45);
 		}
 
 	}
@@ -192,7 +192,7 @@ void Bird::InitAttack3State()
 
 void Bird::CreateShitBullet()
 {
-	Position b_pos = GetShotPos();
+	Position b_pos = GetShotPos(static_cast<Direction>(m_direction));
 
 	bullet_list.push_back(
 		new ShitBullet(
