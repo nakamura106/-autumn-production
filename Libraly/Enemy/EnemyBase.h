@@ -229,7 +229,7 @@ protected:
 	EnemyAIType GetNowAI() { return m_now_ai; }
 
 	//’eì¬
-	Position GetShotPos();
+	Position GetShotPos(Direction direction_);
 	
 	/*
 			’eì¬ŠÖ”
@@ -240,7 +240,19 @@ protected:
 		4 init_angle_	:‰æ‘œ‚ÌŒ³‚Ì‰ñ“]“x”(Œ³‚ª‰½“x‚©)
 
 	*/
-	void CreateBullet(float speed_x_, float speed_y_ = 0.f, bool is_rotate_ = false, int init_angle_ = 0);
+	void CreateBullet(
+		Direction direction_,
+		float speed_x_,
+		float speed_y_ = 0.f,
+		bool is_rotate_ = false,
+		int init_angle_ = 0,
+		GameCategoryTextureList use_tex_ = GameCategoryTextureList::GameEnemy_Bullet_Normal,
+		int tex_all_ = 1,
+		int tex_width_ = 2,
+		int tex_height = 1,
+		int use_tex_num_ = 0,
+		float active_distance_ = 1000.f
+	);
 
 	/*			‘S“G‹¤’Ê‚Ìƒpƒ‰ƒ[ƒ^			*/
 

@@ -83,7 +83,7 @@ void HedgeHog::EnemyAttack2()
 		m_do_bullet = true;
 
 		//’e”­ŽË
-		CreateBullet(m_speed);
+		CreateBullet(static_cast<Direction>(m_direction), m_speed);
 
 	}
 }

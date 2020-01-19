@@ -20,7 +20,7 @@ private:
 	const float M_CHOCHO_1_NUM				= 10.f;
 	const float M_CHOCHO_2_NUM				= 10.f;
 	const float M_TANCHO_1_NUM				= 6.f;
-	const float M_TANCHO_2_NUM				= 10.f;
+	const float M_TANCHO_2_NUM				= 6000.f;
 
 	PlayerBulletType player_bullet_type;	
 
