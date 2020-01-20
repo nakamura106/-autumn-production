@@ -3,6 +3,7 @@
 
 #include "../Object/Definition.h"
 
+
 class ShapeBase
 {
 public:
@@ -18,7 +19,6 @@ protected:
 	ShapeType m_shape_type;
 
 	float m_CenterX, m_CenterY;
-
 
 };
 
