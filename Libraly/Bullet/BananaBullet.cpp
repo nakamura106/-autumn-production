@@ -9,11 +9,12 @@ BananaBullet::BananaBullet(
 	Direction direction_,
 	EnemyBase* parent_,
 	int move_start_anim_num_
-) :ShitBullet(x_, y_, move_speed_, move_speed_y_, acceleration_, direction_, GameCategoryTextureList::GameEnemy_Bullet_Shit, 4, 2, 1)
+) :ShitBullet(x_, y_, move_speed_, move_speed_y_, acceleration_, direction_, GameCategoryTextureList::GameEnemy_Bullet_Shit, 4, 1, 1)
 {
 	m_parent = parent_;
 	m_move_start_anim_num = move_start_anim_num_;
 	m_is_move = false;
+	m_draw_param.tu = 1;
 }
 
 void BananaBullet::MoveUpdate()
@@ -31,6 +32,11 @@ void BananaBullet::MoveUpdate()
 
 			//バナナが回転
 			++m_draw_angle;
+		}
+		else {
+			//バナナの落ちた状態
+			m_draw_angle = 0;
+			m_draw_param.tu = 2;
 		}
 
 	}

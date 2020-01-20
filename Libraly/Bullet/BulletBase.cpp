@@ -8,7 +8,8 @@ BulletBase::BulletBase(
 	Direction direction_,
 	ObjectRavel obj_ravel_,
 	float speed_y_,
-	int draw_angle_
+	int draw_angle_,
+	int tex_size
 )
 	:ObjectBase(obj_ravel_,direction_,move_speed_,draw_angle_)
 {
@@ -20,8 +21,8 @@ BulletBase::BulletBase(
 	//使用画像設定
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id = GameCategoryTextureList::GamePlayerBullet_1Tex;
-	m_draw_param.tex_size_x = M_BULLET_SYZE;
-	m_draw_param.tex_size_y = M_BULLET_SYZE;
+	m_draw_param.tex_size_x = tex_size;
+	m_draw_param.tex_size_y = tex_size;
 
 	//アニメーション用仮メンバ初期化
 	m_anim_param.split_all		= 16;
@@ -30,10 +31,10 @@ BulletBase::BulletBase(
 	m_anim_param.change_flame	= 10;
 
 	//当たり判定用
-	m_rect_param.shift_x = M_BULLET_SYZE / 2.f;
-	m_rect_param.shift_y = M_BULLET_SYZE / 2.f;
-	m_rect_param.width = M_BULLET_SYZE;
-	m_rect_param.height = M_BULLET_SYZE;
+	m_rect_param.shift_x = tex_size / 2.f;
+	m_rect_param.shift_y = tex_size / 2.f;
+	m_rect_param.width = tex_size;
+	m_rect_param.height = tex_size;
 
 	//移動距離判定用
 	m_move_count		= 0.f;

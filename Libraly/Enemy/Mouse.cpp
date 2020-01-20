@@ -19,7 +19,7 @@
 TrpPlayer* trpplayer;
 
 HedgeHog::HedgeHog()
-	:EnemyBase(2.f,	EnemyID::Hedgehog)
+	:EnemyBase(2.f, EnemyID::Hedgehog, 1, 512.f)
 {
 
 	LoadAIData(M_AIDataFileName);
@@ -30,7 +30,7 @@ HedgeHog::HedgeHog()
 	SetRectangle();
 	m_shot_adjust.x = M_NEEDLE_ADJUST_X;
 	m_shot_adjust.y = M_NEEDLE_ADJUST_Y;
-	
+
 }
 
 HedgeHog::~HedgeHog()

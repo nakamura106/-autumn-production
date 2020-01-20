@@ -3,7 +3,7 @@
 #include"../Bullet/MonkeyBullet.h"
 
 Gorilla::Gorilla()
-	:EnemyBase(0.f,EnemyID::Gorilla)
+	:EnemyBase(0.f,EnemyID::Gorilla, 3, 850.f)
 {
 	LoadAIData(M_AIDataFileName);
 	CompleteChangeState();
@@ -22,6 +22,10 @@ Gorilla::Gorilla()
 	m_end_jump = false;
 
 	m_shot_adjust_default = m_shot_adjust;
+
+	m_draw_param.tex_size_x = m_draw_param.tex_size_y = M_GORILLA_TEX_SIZE;
+
+	m_pos.y += M_POS_Y_ADJUST;
 
 }
 
@@ -51,7 +55,7 @@ void Gorilla::EnemyAttack2()
 	//’@‚«‚Â‚¯
 	if (GetAnimationTexNum() >= M_ATTACK2_ANIM_TEX_NUM && m_do_bullet != true) {
 
-		m_shot_adjust.y = m_draw_param.tex_size_y / 2.f * (1.5f);
+		m_shot_adjust.y = m_draw_param.tex_size_y / 2.f + M_INPACT_B_ADJUST_Y;
 
 		if (m_direction == Direction::LEFT) {
 			m_shot_adjust.x = m_draw_param.tex_size_x / 2.f + M_INPACT_LEFT_B_ADJUST;
@@ -60,9 +64,9 @@ void Gorilla::EnemyAttack2()
 			m_shot_adjust.x = m_draw_param.tex_size_x / 2.f + M_INPACT_RIGHT_B_ADJUST;
 		}
 
-		CreateBullet(Direction::LEFT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Shit, 1, 4, 1, 4, M_INPACT_ACTIVE_DISTANCE);
+		CreateBullet(Direction::LEFT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512.f);
 
-		CreateBullet(Direction::RIGHT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Shit, 1, 4, 1, 4, M_INPACT_ACTIVE_DISTANCE);
+		CreateBullet(Direction::RIGHT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512.f);
 
 		m_shot_adjust = m_shot_adjust_default;
 
@@ -110,9 +114,9 @@ void Gorilla::EnemyFly()
 
 		m_jump_speed -= m_jump_acceleration;
 
-		if (m_pos.y >= M_INIT_POS_Y) {
+		if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST) {
 
-			m_pos.y = M_INIT_POS_Y;
+			m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST;
 
 			m_animation_stop = false;
 

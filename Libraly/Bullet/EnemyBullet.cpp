@@ -13,9 +13,11 @@ EnemyBullet::EnemyBullet(
 	int tex_split_h_,
 	int tex_split_all,
 	int tex_use_num_,
-	float active_distance_
+	float active_distance_,
+	bool is_animation_stop_,
+	int tex_size_
 )
-	:BulletBase(x_, y_, move_speed_, direction_, ObjectRavel::Ravel_EnemyBullet, move_speed_y_, draw_angle_)
+	:BulletBase(x_, y_, move_speed_, direction_, ObjectRavel::Ravel_EnemyBullet, move_speed_y_, draw_angle_,tex_size_)
 {
 
 	m_draw_param.texture_id = use_tex_;
@@ -25,6 +27,8 @@ EnemyBullet::EnemyBullet(
 	m_acceleration_y = acceleration_y_;
 	m_tex_use_num = tex_use_num_;
 	m_move_limit = active_distance_;
+
+	m_is_animation_stop = is_animation_stop_;
 
 	CalcTexUseNum();
 
@@ -43,6 +47,10 @@ void EnemyBullet::Init()
 void EnemyBullet::Update()
 {
 	BulletBase::Update();
+
+	if (m_is_animation_stop != true) {
+		AnimationUpdate();
+	}
 }
 
 void EnemyBullet::CalcTexUseNum()

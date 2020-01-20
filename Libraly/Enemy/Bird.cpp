@@ -2,7 +2,7 @@
 #include"../Bullet/ShitBullet.h"
 
 Bird::Bird()
-	:EnemyBase(0.f, EnemyID::Seagull)
+	:EnemyBase(0.f, EnemyID::Seagull, 2, 512.f)
 {
 
 	LoadAIData(M_AIDataFileName);
@@ -15,7 +15,7 @@ Bird::Bird()
 
 	m_speed_y_default = m_speed;
 	--m_anim_param.change_flame;
-	
+
 }
 
 Bird::~Bird()
@@ -95,7 +95,9 @@ void Bird::EnemyAttack2()
 				1,
 				2,
 				1,
-				1);
+				1
+			);
+
 		}
 
 	}
@@ -201,9 +203,9 @@ void Bird::FlyStateFall()
 	}
 
 	//移動処理等
-	if (m_pos.y >= M_INIT_POS_Y) {
+	if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f) {
 
-		m_pos.y = M_INIT_POS_Y;
+		m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f;
 
 		m_animation_stop = false;
 

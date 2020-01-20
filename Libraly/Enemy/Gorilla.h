@@ -9,15 +9,18 @@ public:
 	void Init();
 
 private:
-	const std::string M_AIDataFileName = "Res/Csv/Gorilla/Enemy_AI";
-	const float		  M_JUMP_ACCELERATION_DEFAULT = 0.4f;
-	const int		M_JUMP_STOP_ANIM_FLAME = 4;
-	const float		  M_JUMP_SPEED_DEFAULT = 15.f;
-	const float		M_SHOT_ADJUST_X_INPACT = 220.f;
-	const int		M_ATTACK2_ANIM_TEX_NUM = 13;
-	const float		M_INPACT_RIGHT_B_ADJUST = -70.f;
-	const float		M_INPACT_LEFT_B_ADJUST = -170.f;
-	const float		M_INPACT_ACTIVE_DISTANCE = 600.f;
+	const std::string	M_AIDataFileName			= "Res/Csv/Gorilla/Enemy_AI";
+	const float			M_JUMP_ACCELERATION_DEFAULT	= 0.4f;
+	const int			M_JUMP_STOP_ANIM_FLAME		= 4;
+	const float			M_JUMP_SPEED_DEFAULT		= 15.f;
+	const float			M_SHOT_ADJUST_X_INPACT		= 220.f;
+	const int			M_ATTACK2_ANIM_TEX_NUM		= 13;
+	const float			M_INPACT_RIGHT_B_ADJUST		= 270.f;
+	const float			M_INPACT_LEFT_B_ADJUST		= -300.f;
+	const float			M_INPACT_B_ADJUST_Y			= -100.f;
+	const float			M_INPACT_ACTIVE_DISTANCE	= 600.f;
+	const float			M_GORILLA_TEX_SIZE			= 850.f;
+	const float			M_POS_Y_ADJUST				= -150.f;
 
 	float m_jump_acceleration;	//ジャンプ時のy軸加速度
 	bool  m_do_doraming;		//ドラミング中かどうか
