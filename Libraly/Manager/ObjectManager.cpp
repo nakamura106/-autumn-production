@@ -1,5 +1,6 @@
 #include "ObjectManager.h"
 #include "../Player/TrpPlayer.h"
+#include"../Player/FlutePlayer/FlutePlayer.h"
 #include"../Player/TubaPlayer/TubaPlayer.h"
 #include "../Map/Map.h"
 #include"../Map/WoodsMap/WoodsMap.h"
@@ -111,6 +112,9 @@ void ObjectManager::CreateObject()
 	{
 	case (int)Player::PlayerTypeTrumpet:
 		chara_objects[2] = new TrpPlayer;
+		break;
+	case (int)Player::PlayerTypeFlute:
+		chara_objects[2] = new FlutePlayer;
 		break;
 	case (int)Player::PlayerTypeTuba:
 		chara_objects[2] = new TubaPlayer;

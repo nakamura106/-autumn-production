@@ -88,8 +88,8 @@ enum class P_State
 	Jump_Damage,
 	Damage,
 	Attack,
-	ThinkA,
-	ThinkB,
+	Miss,
+	Landing,
 	Death,
 	Clear,
 

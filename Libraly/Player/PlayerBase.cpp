@@ -29,7 +29,8 @@ PlayerBase::PlayerBase()
 
 
 	m_animtimer = 0;
-
+	m_effecttimer = 16;
+	m_is_miss = false;
 	AllInitEffect();
 
 	// m_effect_list.at(1)->WakeUp();
@@ -115,6 +116,11 @@ void PlayerBase::P_Controll()
 		m_play_note_timer++;
 	}
 
+	if (m_effecttimer <= 16)
+	{
+		m_effecttimer++;
+	}
+	
 
 	/*ボタンを離した後にモーションが
 	継続してしまわないようにする処理*/
@@ -122,7 +128,7 @@ void PlayerBase::P_Controll()
 	{
 		m_is_active = false;
 	}
-
+	
 	// ※までボタン処理
 
 
@@ -167,22 +173,18 @@ void PlayerBase::P_Controll()
 		{
 			m_map_pos -= m_speed;
 		}
-
 		
-			m_direction = LEFT;
+		m_direction = LEFT;
 		
-			
-			
-		
-
 		m_is_active = true;
 	}
 
 	//ジャンプ処理
-	if (GetKey(SPACE_KEY) == true)
+	if (GetKeyDown(SPACE_KEY) == true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
+		InitAllState();
 	}
 
 	//長調短調切り替え処理(押している間のみ)
@@ -194,7 +196,6 @@ void PlayerBase::P_Controll()
 	{
 		m_Key = (int)Key::Major;
 	}
-
 
 	//音符生成
 	if (GetKey(ONE_KEY) == true)
@@ -228,18 +229,18 @@ void PlayerBase::P_Controll()
 	}
 
 	// ※
-
+	
 	//activeがfalseなら待機状態にする処理
 	if (m_is_active == false)
 	{
 		m_state = (int)P_State::Wait;
 	}
-
-	//プレイヤーがジャンプしているか判定する(しているならジャンプ関数を呼び出す)
 	if (m_do_jump == true)
 	{
 		Jump();
 	}
+	//プレイヤーがジャンプしているか判定する(しているならジャンプ関数を呼び出す)
+
 
 	if (m_do_attack == true)
 	{
@@ -252,7 +253,6 @@ void PlayerBase::P_Controll()
 	{
 		m_pos.x += m_speed;
 	}
-
 
 	if (m_pos.x >= 1800.0f)
 	{
@@ -293,7 +293,6 @@ void PlayerBase::Atkjudge()
 		{
 			m_release_timer++;
 		}
-
 		if (notebox[1] == A)
 		{
 			if (!m_do_bullet_firing)
@@ -303,12 +302,12 @@ void PlayerBase::Atkjudge()
 				CreateBullets(PlayerBulletType::Chocho_1);
 				m_do_attack = true;
 				m_is_active = true;
+				InitAllState();
 			}
 			if (m_release_timer >= 140)
 			{
 				m_is_release = true;
 				ReleaseNote();
-
 			}
 		}
 		else
@@ -325,7 +324,6 @@ void PlayerBase::Atkjudge()
 			{
 				m_is_release = true;
 				ReleaseNote();
-
 			}
 		}
 	}
@@ -376,12 +374,16 @@ void PlayerBase::Atkjudge()
 	if (notebox[0] == A && notebox[1] == A && notebox[2] == B || notebox[0] == A && notebox[1] == B && notebox[2] == B ||
 		notebox[0] == B && notebox[1] == B && notebox[2] == A || notebox[0] == B && notebox[1] == A && notebox[2] == A)
 	{
+		
 		if (m_is_release == false)
 		{
+			m_is_miss = true;
 			m_release_timer++;
+
 		}
 		if (m_release_timer >= 140)
 		{
+			m_is_miss = false;
 			m_is_release = true;
 			ReleaseNote();
 		}	
@@ -417,6 +419,14 @@ void PlayerBase::Jump()
 	{
 		m_state = (int)P_State::Jump;
 	}
+	if (m_do_jump == true && m_state == (int)P_State::Attack)
+	{
+		m_state = (int)P_State::Jump_Attack;
+	}
+	if (m_do_jump == true && m_state == (int)P_State::Damage)
+	{
+		m_state = (int)P_State::Jump_Damage;
+	}
 
 
 
@@ -426,6 +436,8 @@ void PlayerBase::Jump()
 	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
 	if (m_pos.y >= P_posYforest)
 	{
+		m_effecttimer = 0;
+		
 		jump_power = P_jump_power;
 		m_do_jump = false;
 		m_is_active = false;
@@ -441,15 +453,15 @@ void PlayerBase::Attack()
 		m_animtimer = 0;
 	}
 
-	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Jump)
+	if (m_state != (int)P_State::Damage&&m_state!=(int)P_State::Attack )
 	{
+	
 		m_state = (int)P_State::Attack;
 	}
+	
+	
 
-	if (GetKey(LEFT_KEY) == true || GetKey(RIGHT_KEY) == true)
-	{
 
-	}
 }
 
 void PlayerBase::AllInitEffect()
@@ -471,6 +483,23 @@ void PlayerBase::AllUpdateEffect()
 	else {
 		m_effect_list.at(0)->Sleep();
 	}
+	if (m_is_miss==true)
+	{
+		m_effect_list.at(2)->WakeUp();
+	}
+	else
+	{
+		m_effect_list.at(2)->Sleep();
+	}
+	if (m_effecttimer <= 15)
+	{
+		m_effect_list.at(3)->WakeUp();
+	}
+	else
+	{
+		
+		m_effect_list.at(3)->Sleep();
+	}
 	// 被弾時エフェクト条件
 	if (m_state == (int)P_State::Damage)
 	{
@@ -479,6 +508,8 @@ void PlayerBase::AllUpdateEffect()
 	else {
 		m_effect_list.at(4)->Sleep();
 	}
+
+
 
 	m_effect_list.at(0)->Update();
 	m_effect_list.at(1)->Update();
@@ -489,31 +520,16 @@ void PlayerBase::AllUpdateEffect()
 
 void PlayerBase::AllDrawEffect()
 {
-	if (DataBank::Instance()->GetPlayerEffect(P_effect::Sweat)==true)
-	{
 		m_effect_list.at(0)->Draw();
-	}
-	if (DataBank::Instance()->GetPlayerEffect(P_effect::Debuff)==true)
-	{
 		m_effect_list.at(1)->Draw();
-	}
-	if (DataBank::Instance()->GetPlayerEffect(P_effect::Failure)==true)
-	{
 		m_effect_list.at(2)->Draw();
-	}
-	if (DataBank::Instance()->GetPlayerEffect(P_effect::Landing)==true)
-	{
 		m_effect_list.at(3)->Draw();
-	}
-	if (DataBank::Instance()->GetPlayerEffect(P_effect::Shot)==true)
-	{
 		m_effect_list.at(4)->Draw();
-	}
-	
 }
 
 void PlayerBase::InitWaitState() 
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Taiki_LeftTex;
@@ -526,6 +542,7 @@ void PlayerBase::InitWaitState()
 
 void PlayerBase::InitMoveState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Walk_LeftTex;
@@ -539,6 +556,7 @@ void PlayerBase::InitMoveState()
 
 void PlayerBase::InitJumpState() 
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Jump_LeftTex;
@@ -551,6 +569,7 @@ void PlayerBase::InitJumpState()
 
 void PlayerBase::InitJumpAttackState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_JumpAttack_LeftTex;
@@ -563,6 +582,7 @@ void PlayerBase::InitJumpAttackState()
 
 void PlayerBase::InitJumpDamageState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_JumpDamage_LeftTex;
@@ -575,6 +595,7 @@ void PlayerBase::InitJumpDamageState()
 
 void PlayerBase::InitDamageState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Damage_LeftTex;
@@ -587,6 +608,7 @@ void PlayerBase::InitDamageState()
 
 void PlayerBase::InitAttackState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Attack_LeftTex;
@@ -599,6 +621,7 @@ void PlayerBase::InitAttackState()
 
 void PlayerBase::InitThinkState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 		
@@ -611,6 +634,7 @@ void PlayerBase::InitThinkState()
 
 void PlayerBase::InitDeathState()
 {
+	
 	if (m_direction == Direction::LEFT)
 	{
 	
@@ -623,6 +647,7 @@ void PlayerBase::InitDeathState()
 
 void PlayerBase::InitClearState()
 {
+
 	if (m_direction == Direction::LEFT)
 	{
 		m_draw_param.texture_id = GamePlayer_Clear_LeftTex;
@@ -635,6 +660,8 @@ void PlayerBase::InitClearState()
 
 void PlayerBase::ChangeState()
 {
+	
+
 	switch (m_state)
 	{
 	case (int)P_State::Wait:
