@@ -40,6 +40,11 @@ void EnemyBullet::Init()
 	
 }
 
+void EnemyBullet::Update()
+{
+	BulletBase::Update();
+}
+
 void EnemyBullet::CalcTexUseNum()
 {
 	if (m_direction == Direction::RIGHT) {

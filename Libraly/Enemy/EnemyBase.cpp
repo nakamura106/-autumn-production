@@ -265,7 +265,7 @@ void EnemyBase::UpdateAIState()
 
 		//“¦‘–ó‘Ô(ƒQ[ƒW‚ªˆê’èˆÈ‰º‚Ìê‡“¦‚°‚éˆ—)
 	case EnemyStateType::Refuge:
-		EnemyRefuge();
+		EnemyMove();
 		break;
 
 		//’ÇÕó‘Ô
@@ -815,6 +815,13 @@ void EnemyBase::InitWalkState()
 
 void EnemyBase::InitRefugeState()
 {
+	if (m_p_pos_relation == Direction::LEFT) {
+		m_direction = Direction::RIGHT;
+	}
+	else {
+		m_direction = Direction::LEFT;
+	}
+
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_WalkLeft;
 	}
@@ -1248,12 +1255,14 @@ void EnemyBase::CreateBullet(
 
 		draw_angle = static_cast<int>(acosf(fabsf(speed_x_) / hypotenuse) * 180 / PI);
 
-		if (direction_ == Direction::LEFT) {
+		draw_angle = init_angle_ - draw_angle;
+
+		/*if (direction_ == Direction::LEFT) {
 			draw_angle = init_angle_ - draw_angle;
 		}
 		else {
 			draw_angle = init_angle_ + draw_angle;
-		}
+		}*/
 
 	}
 
@@ -1264,7 +1273,7 @@ void EnemyBase::CreateBullet(
 			b_pos.y,
 			speed_x_,
 			direction_,
-			init_angle_ - draw_angle,
+			draw_angle,
 			speed_y_,
 			0.f,
 			use_tex_,
