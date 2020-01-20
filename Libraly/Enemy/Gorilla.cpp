@@ -21,6 +21,8 @@ Gorilla::Gorilla()
 	m_jump_speed = 0.f;
 	m_end_jump = false;
 
+	m_shot_adjust_default = m_shot_adjust;
+
 }
 
 Gorilla::~Gorilla()
@@ -47,6 +49,26 @@ void Gorilla::EnemyAttack1()
 void Gorilla::EnemyAttack2()
 {
 	//’@‚«‚Â‚¯
+	if (GetAnimationTexNum() >= M_ATTACK2_ANIM_TEX_NUM && m_do_bullet != true) {
+
+		m_shot_adjust.y = m_draw_param.tex_size_y / 2.f * (1.5f);
+
+		if (m_direction == Direction::LEFT) {
+			m_shot_adjust.x = m_draw_param.tex_size_x / 2.f + M_INPACT_LEFT_B_ADJUST;
+		}
+		else {
+			m_shot_adjust.x = m_draw_param.tex_size_x / 2.f + M_INPACT_RIGHT_B_ADJUST;
+		}
+
+		CreateBullet(Direction::LEFT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Shit, 1, 4, 1, 4, M_INPACT_ACTIVE_DISTANCE);
+
+		CreateBullet(Direction::RIGHT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Shit, 1, 4, 1, 4, M_INPACT_ACTIVE_DISTANCE);
+
+		m_shot_adjust = m_shot_adjust_default;
+
+		m_do_bullet = true;
+
+	}
 }
 
 void Gorilla::EnemyAttack3()
@@ -117,6 +139,7 @@ void Gorilla::InitAllState()
 	EnemyBase::InitAllState();
 
 	m_do_doraming = false;
+
 }
 
 void Gorilla::InitSleepState()
@@ -136,7 +159,7 @@ void Gorilla::InitFlyState()
 
 void Gorilla::CreateBanana()
 {
-	Position b_pos = GetShotPos();
+	Position b_pos = GetShotPos(static_cast<Direction>(m_direction));
 
 	bullet_list.push_back(
 		new BananaBullet(

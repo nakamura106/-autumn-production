@@ -23,6 +23,9 @@ public:
 	void SetPlayerType(int Which_type_of_player) { m_PlayerType = Which_type_of_player; };
 	void SetMapType(int Which_type_of_map) { m_MapType = Which_type_of_map; };
 	void SetIsGameOver(bool is_game_over_) { m_is_game_over = is_game_over_; }
+	void SetPlayerDirection(int direction_) { m_Pdirection = direction_; }
+	void SetPlayerCenter(Position position_) { m_centerpos = position_; }
+	void SetPlayerEffect(P_effect effect_);
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -31,6 +34,9 @@ public:
 	int GetBulletType() { return m_bullet_type; }
 	int GetPlayerType() { return m_PlayerType; }
 	int GetMapType() { return m_MapType; }
+	int GetPlayerHp()const { return m_player_hp; }
+	int GetPlayerdirection() { return m_Pdirection; }
+	int GetPlayerEffect(P_effect p_effect_);
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
@@ -38,8 +44,8 @@ public:
 	float GetFatigueGauge() { return m_fatigue_gauge; }
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
-
-	int GetPlayerHp()const { return m_player_hp; }
+	Position GetPlayerCenter(); 
+	
 
 protected:
 	DataBank();
@@ -53,6 +59,11 @@ private:
 
 	int m_bullet_type;	// PlayerBulletTypeï€ë∂ïœêî
 
+	int m_PlayerType;
+
+	int m_MapType;
+
+
 	float m_map_pos;
 	float m_fg;
 	float m_floor1;
@@ -61,10 +72,10 @@ private:
 
 	bool m_is_game_clear;
 	bool m_is_game_over;
+	bool m_PlayerEffect[(int)P_effect::MaxEffect];
 
-	int m_PlayerType;
-
-	int m_MapType;
+	int m_Pdirection;
+	Position m_centerpos;
 
 private:
 	static DataBank* p_instance;

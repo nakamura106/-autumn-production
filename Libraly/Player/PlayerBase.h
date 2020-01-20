@@ -72,6 +72,7 @@ protected:
 	int		m_play_note_timer;				//音符生成用タイマー
 	int		m_release_timer;				//音符開解放用タイマー
 	int		m_animtimer;
+	int		m_effect;
 
 	int notebox[3];
 

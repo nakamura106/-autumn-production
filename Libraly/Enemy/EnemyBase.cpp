@@ -1205,14 +1205,14 @@ int EnemyBase::GetStateSaveFlame()
 }
 
 
-Position EnemyBase::GetShotPos()
+Position EnemyBase::GetShotPos(Direction direction_)
 {
 	Position b_pos;
 
 	//î≠éÀà íuí≤êÆ
 	b_pos.y = m_pos.y + m_shot_adjust.y;
 
-	if (m_direction == Direction::LEFT) {
+	if (direction_ == Direction::LEFT) {
 		b_pos.x = m_map_pos + m_shot_adjust.x;
 	}
 	else {
@@ -1222,11 +1222,23 @@ Position EnemyBase::GetShotPos()
 	return b_pos;
 }
 
-void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, int init_angle_)
+void EnemyBase::CreateBullet(
+	Direction direction_,
+	float speed_x_, 
+	float speed_y_, 
+	bool is_rotate_, 
+	int init_angle_,
+	GameCategoryTextureList use_tex_,
+	int tex_split_all_,
+	int tex_split_w_,
+	int tex_split_h,
+	int use_tex_num_,
+	float active_distance_
+)
 {
 
 	//íeÇÃî≠éÀà íuÇéÊìæ
-	Position b_pos = GetShotPos();
+	Position b_pos = GetShotPos(static_cast<Direction>(m_direction));
 
 	int draw_angle = 0;
 
@@ -1236,7 +1248,7 @@ void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, in
 
 		draw_angle = static_cast<int>(acosf(fabsf(speed_x_) / hypotenuse) * 180 / PI);
 
-		if (m_direction == Direction::LEFT) {
+		if (direction_ == Direction::LEFT) {
 			draw_angle = init_angle_ - draw_angle;
 		}
 		else {
@@ -1251,9 +1263,16 @@ void EnemyBase::CreateBullet(float speed_x_, float speed_y_, bool is_rotate_, in
 			b_pos.x,
 			b_pos.y,
 			speed_x_,
-			(Direction)m_direction,
+			direction_,
 			init_angle_ - draw_angle,
-			speed_y_
+			speed_y_,
+			0.f,
+			use_tex_,
+			tex_split_w_,
+			tex_split_h,
+			tex_split_all_,
+			use_tex_num_,
+			active_distance_
 		)
 	);
 
