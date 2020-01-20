@@ -67,6 +67,18 @@ enum class MapType
 	MapTypeMax,
 };
 
+enum class P_effect
+{
+	None,
+	Debuff,
+	Failure,
+	Hit,
+	Landing,
+	Shot,
+	Sweat,
+	MaxEffect
+};
+
 enum class P_State
 {
 	Wait,

@@ -25,6 +25,8 @@ PlayerBase::PlayerBase()
 	m_anim_param.split_height = 4;
 	m_anim_param.change_flame = Dispflame;
 
+	m_effect = (int)P_effect::None;
+
 
 	m_animtimer = 0;
 
@@ -65,6 +67,8 @@ void PlayerBase::Update()
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
 	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
+	DataBank::Instance()->SetPlayerDirection(m_direction);
+	DataBank::Instance()->SetPlayerCenter(m_pos);
 
 	
 }
@@ -127,7 +131,7 @@ void PlayerBase::P_Controll()
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
-		if (DataBank::Instance()->GetfgPos() >= 0 || DataBank::Instance()->GetfgPos() <= -3550.0f)
+		if (DataBank::Instance()->GetfgPos() >= 0 || DataBank::Instance()->GetfgPos() <= -3550.0f )
 		{
 			m_pos.x += m_speed;
 		}
@@ -138,7 +142,12 @@ void PlayerBase::P_Controll()
 		{
 			m_map_pos += m_speed;
 		}
-		m_direction = RIGHT;
+
+		
+			m_direction = RIGHT;
+		
+			
+		
 
 		m_is_active = true;
 	}
@@ -158,7 +167,13 @@ void PlayerBase::P_Controll()
 		{
 			m_map_pos -= m_speed;
 		}
-		m_direction = LEFT;
+
+		
+			m_direction = LEFT;
+		
+			
+			
+		
 
 		m_is_active = true;
 	}
@@ -403,6 +418,8 @@ void PlayerBase::Jump()
 		m_state = (int)P_State::Jump;
 	}
 
+
+
 	m_pos.y -= jump_power;
 	jump_power -= Gravity;
 
@@ -472,11 +489,27 @@ void PlayerBase::AllUpdateEffect()
 
 void PlayerBase::AllDrawEffect()
 {
-	m_effect_list.at(0)->Draw();
-	m_effect_list.at(1)->Draw();
-	m_effect_list.at(2)->Draw();
-	m_effect_list.at(3)->Draw();
-	m_effect_list.at(4)->Draw();
+	if (DataBank::Instance()->GetPlayerEffect(P_effect::Sweat)==true)
+	{
+		m_effect_list.at(0)->Draw();
+	}
+	if (DataBank::Instance()->GetPlayerEffect(P_effect::Debuff)==true)
+	{
+		m_effect_list.at(1)->Draw();
+	}
+	if (DataBank::Instance()->GetPlayerEffect(P_effect::Failure)==true)
+	{
+		m_effect_list.at(2)->Draw();
+	}
+	if (DataBank::Instance()->GetPlayerEffect(P_effect::Landing)==true)
+	{
+		m_effect_list.at(3)->Draw();
+	}
+	if (DataBank::Instance()->GetPlayerEffect(P_effect::Shot)==true)
+	{
+		m_effect_list.at(4)->Draw();
+	}
+	
 }
 
 void PlayerBase::InitWaitState() 
