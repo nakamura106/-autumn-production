@@ -29,7 +29,6 @@ public:
 	virtual void Jump();
 	//!< 弾が射程距離を超えたら音符ストックを消す関数
 	void ReleaseNote();
-
 	//状態遷移
 	void ChangeState();
 	
@@ -60,6 +59,7 @@ public:
 
 protected:
 	bool	m_do_jump;						//ジャンプ判定
+	bool	m_is_miss;
 	bool	m_is_active;					//動いているかの判定
 	bool	m_play_note[2];					//音符生成
 	bool	m_do_bullet_firing;				//攻撃判定用
@@ -73,6 +73,7 @@ protected:
 	int		m_release_timer;				//音符開解放用タイマー
 	int		m_animtimer;
 	int		m_effect;
+	int		m_effecttimer;
 
 	int notebox[3];
 

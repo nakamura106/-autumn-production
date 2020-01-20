@@ -48,13 +48,13 @@ Position DataBank::GetPlayerCenter()
 {
 	if (GetPlayerdirection() == (int)Direction::RIGHT)
 	{
-		m_centerpos.x += 116.0f;
-		m_centerpos.y += 116.0f;
+		m_centerpos.x += 181.0f;
+		m_centerpos.y += 128.0f;
 	}
 	if (GetPlayerdirection() == (int)Direction::LEFT)
 	{
-		m_centerpos.x -= 116.0f;
-		m_centerpos.y -= 116.0f;
+		m_centerpos.x -= 181.0f;
+		m_centerpos.y += 128.0f;
 	}
 		return m_centerpos; 
 }

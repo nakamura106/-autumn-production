@@ -22,7 +22,7 @@ void LandingEffect::Init()
 	m_draw_param.tex_size_x = LANDING_SIZE;
 	m_draw_param.tex_size_y = LANDING_SIZE;
 
-	m_anime_param.split_all = 4;
+	m_anime_param.split_all = 3;
 	m_anime_param.split_width = 2;
 	m_anime_param.split_height = 2;
 	m_anime_param.change_flame = 15;
