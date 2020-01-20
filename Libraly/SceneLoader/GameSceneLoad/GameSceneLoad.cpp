@@ -46,6 +46,7 @@ void GameSceneLoad()
 
 		//’e
 		LoadTexture("Res/Tex/Enemy/Gorilla/Boss3_Bullet.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Shit);
+		LoadTexture("Res/Tex/Enemy/Gorilla/gorira_syogekiha_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Inpact);
 		//!<ƒSƒŠƒ‰‚Ì‰æ‘œ“Çž‚±‚±‚Ü‚Å
 		break;
 	case (int)MapType::SeaMap:

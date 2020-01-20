@@ -26,14 +26,14 @@ ShitBullet::ShitBullet(
 void ShitBullet::MoveUpdate()
 {
 
-	if (m_pos.y + M_BULLET_SYZE >= G_GROUND_POS_Y) {
+	if (m_pos.y + m_draw_param.tex_size_y*1.5f >= G_GROUND_POS_Y) {
 
 		if (m_is_dropdown != true) {
 			//現在のフレームをセット
 			m_savetime_delete = FlameTimer::GetNowFlame();
 
 			//ストップ
-			m_pos.y = G_GROUND_POS_Y - M_BULLET_SYZE;
+			m_pos.y = G_GROUND_POS_Y - m_draw_param.tex_size_y*1.5f;
 
 			m_is_dropdown = true;
 

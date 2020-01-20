@@ -30,6 +30,19 @@
 #define B				2		//B
 #define floor2speed		3		//
 
+/*敵のパラメータ*/
+#define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
+#define Refuge_Time	100				//逃げ回る時間
+#define Limit_of_BreakTime 100		//MAXの休憩時間
+#define Cure_of_SleepinessPoint 0.5f	//時間回復する眠気の値
+#define Cure_of_FatiguePoint 1		//時間回復する疲労の値
+#define Distance_of_Maintain 100	//維持する適切な距離
+
+#define Fatigue_Gauge_Max 100		//疲労ゲージ上限
+#define Sleep_Gauge_Max	75			//睡眠ゲージ上限
+
+#define Attack_Interval 100			//攻撃感覚
+
 const int GAMECLEAR_FLAME = 180;	//敵の眠りモーション遷移後、このフレーム数経過でゲームクリア
 const int GAMEOVER_FLAME = 180;		//敵の死亡モーション遷移後、このフレーム数経過でゲームオーバー
 const float G_GROUND_POS_Y = 950.f;//地面の位置
@@ -352,6 +365,16 @@ struct UVANIMATION
 	float m_Rect_Height;	// 矩形の高さ
 	int m_Display_Flame;	// 表示フレーム数
 		
+};
+
+//Wave変更処理の移り変わり
+enum class WaveState {
+	None,			//遷移なし
+	Change_Start,	//遷移開始→敵行動開始
+	EnemyMoved,		//敵行動終了→アイテムを落とす
+	ItemGet,		//アイテム入手→敵モーション
+	EnemyNewMotion,	//敵の新しいモーション開始→終了
+	Change_End,		//遷移終了
 };
 
 

@@ -7,21 +7,10 @@
 #include "../Effect/Effects/SleepEffect.h"
 #include<stdlib.h>
 
-#define Num_of_TakeaBreak  100		//ãxåeÇÇ∆ÇÈÅiîÊòJìxÇÃÅjêîíl
-#define Refuge_Time	100				//ì¶Ç∞âÒÇÈéûä‘
-#define Limit_of_BreakTime 100		//MAXÇÃãxåeéûä‘
-#define Cure_of_SleepinessPoint 0.5f	//éûä‘âÒïúÇ∑ÇÈñ∞ãCÇÃíl
-#define Cure_of_FatiguePoint 1		//éûä‘âÒïúÇ∑ÇÈîÊòJÇÃíl
-#define Distance_of_Maintain 100	//à€éùÇ∑ÇÈìKêÿÇ»ãóó£
-
-#define Fatigue_Gauge_Max 100		//îÊòJÉQÅ[ÉWè„å¿
-#define Sleep_Gauge_Max	75			//êáñ∞ÉQÅ[ÉWè„å¿
-
-#define Attack_Interval 100			//çUåÇä¥äo
 
 //Ç±Ç±Ç‹Ç≈
 
-EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
+EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_size_)
 	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_, 0)
 {
 	m_enemy_id					= enemy_id_;
@@ -30,14 +19,14 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_sleep_gauge				= 0.f;
 	m_is_delete					= false;
 	m_pos.x						= M_INIT_POS_X;
-	m_pos.y						= M_INIT_POS_Y;
+	m_pos.y						= M_INIT_POS_Y - tex_size_ / 2.f;
 	m_map_pos					= M_INIT_POS_X;
 	m_draw_param.tu				= 1.f;
 	m_draw_param.tv				= 1.f;
 	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
-	m_draw_param.tex_size_x		= M_ENEMY_SYZE;
-	m_draw_param.tex_size_y		= M_ENEMY_SYZE;
+	m_draw_param.tex_size_x		= tex_size_;
+	m_draw_param.tex_size_y		= tex_size_;
 	m_anim_param.change_flame	= M_ANIM_FLAME;
 	m_anim_param.split_all		= M_ANIM_TEX_ALL;
 	m_anim_param.split_width	= M_ANIM_TEX_WIDTH;
@@ -59,6 +48,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_)
 	m_shot_adjust.x				= 0.f;
 	m_shot_adjust.y				= 0.f;
 	m_animation_stop			= false;
+	m_now_wave					= 1;
+	m_max_wave					= max_wave_;
+	m_wave_state				= WaveState::None;
 
 	AllInitEffect();
 
@@ -129,7 +121,15 @@ void EnemyBase::Update()
 
 	//åªç›ÇÃèÛë‘Ç…Ç®ÇØÇÈìÆçÏÇÃçXêV
 	//UpdateState();
-	UpdateAIState();
+	if (m_wave_state == WaveState::None) {
+		//èÛë‘ìÆçÏ
+		UpdateAIState();
+		
+	}
+	else if (m_wave_state==WaveState::Change_Start) {
+		//waveëJà⁄íÜÇÃìÆçÏ(âÊñ í[Ç…ëñÇ¡ÇƒÇ¢Ç≠)
+		WaveChangeState();
+	}
 
 	/*à íuí≤êÆÇÃçXêV*/
 	MoveLimitUpdate();
@@ -177,7 +177,7 @@ void EnemyBase::UpdateState()
 		next_state = ChangeStateFromWalk();
 		break;
 
-	//çUåÇ1èÛë‘
+	//çUåÇ1èÛë‘	
 	case EnemyStateType::Attack1:
 		EnemyAttack1();
 		next_state = ChangeStateFromAttack1();
@@ -523,9 +523,22 @@ void EnemyBase::CompleteChangeState()
 	//AIÇ…çáÇÌÇπÇƒå¸Ç´ïœçX
 	ChangeAIDirection();
 
+	//ñ∞ãCÅEîÊòJèÛë‘ëJà⁄
 	if (CheckSleepGageMax()) {
-		//ñ∞ãCÉQÅ[ÉWÇ™ç≈ëÂÇÃèÍçáÅAñ∞ÇËèÛë‘Ç÷ëJà⁄
-		ChangeState(EnemyStateType::Sleep);
+
+		if (m_now_wave >= m_max_wave) {
+			//ñ∞ÇËèÛë‘Ç÷ëJà⁄Å®ÉNÉäÉA
+			ChangeState(EnemyStateType::Sleep);
+		}
+		else {
+			//waveëJà⁄
+			++m_now_wave;
+			
+			DataBank::Instance()->SetWaveState(WaveState::Change_Start);
+
+			m_wave_state = WaveState::Change_Start;
+
+		}
 	}
 	else if (CheckFatigueGageMax()) {
 		//îÊòJÉQÅ[ÉWÇ™ç≈ëÂÇÃèÍçáÅAéÄñSèÛë‘Ç÷ëJà⁄
@@ -930,6 +943,25 @@ void EnemyBase::ChangeDirection()
 	}
 }
 
+void EnemyBase::WaveChangeState()
+{
+	m_direction = Direction::RIGHT;
+
+	EnemyBase::EnemyMove();
+
+	if (m_pos.y >= M_WAVE_CHANGE_MOVE_LIMIT) {
+
+		m_pos.y = M_WAVE_CHANGE_MOVE_LIMIT;
+
+		DataBank::Instance()->SetWaveState(WaveState::EnemyMoved);
+
+		m_wave_state = WaveState::EnemyMoved;
+
+		m_direction = Direction::LEFT;
+	}
+
+}
+
 //Csvì«Ç›çûÇ›ä÷êî
 void EnemyBase::LoadAIData(std::string file_name_)
 {
@@ -1240,7 +1272,9 @@ void EnemyBase::CreateBullet(
 	int tex_split_w_,
 	int tex_split_h,
 	int use_tex_num_,
-	float active_distance_
+	float active_distance_,
+	bool is_animation_stop_,
+	int tex_size_
 )
 {
 
@@ -1281,7 +1315,9 @@ void EnemyBase::CreateBullet(
 			tex_split_h,
 			tex_split_all_,
 			use_tex_num_,
-			active_distance_
+			active_distance_,
+			is_animation_stop_,
+			tex_size_
 		)
 	);
 
@@ -1346,5 +1382,10 @@ void EnemyBase::UpFatigueGage(float up_num_)
 		m_fatigue_gauge = Fatigue_Gauge_Max;
 
 	}
+}
+
+void EnemyBase::ChangeWave()
+{
+
 }
 

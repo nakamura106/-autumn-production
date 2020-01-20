@@ -155,6 +155,7 @@ GameEnemy_Attack4Right,
 
 GameEnemy_Bullet_Normal,		//!<“G‚Ì’e(ƒnƒŠ)
 GameEnemy_Bullet_Shit,			//!<“G‚Ì’e(ƒtƒ“)
+GameEnemy_Bullet_Inpact,		//!<“G‚Ì’e(ÕŒ‚”g)
 
 
 /* ƒGƒtƒFƒNƒg—p */

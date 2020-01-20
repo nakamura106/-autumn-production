@@ -21,7 +21,7 @@
 class EnemyBase :public ObjectBase
 {
 public:
-	EnemyBase(float speed_, EnemyID enemy_id_);
+	EnemyBase(float speed_, EnemyID enemy_id_, int max_wave_, float tex_size_);
 	virtual ~EnemyBase();
 
 	/*Load用関数？：ObjectBaseから引き継いだ*/
@@ -52,7 +52,6 @@ private:
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
 	const int	M_ANIM_TEX_HEIGHT				= 4;		//縦の分割数
-	const float M_ENEMY_SYZE					= 512.f;	//テクスチャのサイズ(本来は縦横がある)
 	const int	M_CURE_SLEEP_TIME_DEFAULT		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
@@ -65,6 +64,7 @@ private:
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.3f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
+	const float M_WAVE_CHANGE_MOVE_LIMIT		= 3200.f;
 	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -145,7 +145,7 @@ private:
 
 protected:
 	const float	M_INIT_POS_X = 700.f;	//初期x座標
-	const float M_INIT_POS_Y = 400.f;	//初期y座標
+	const float M_INIT_POS_Y = 656.f;	//初期y座標
 	const float M_SKY_HEIGHT = 0.f;	//飛行高度
 
 	/*状態遷移・AI変更集約関数：これを呼び出せばOK!(状態遷移する)*/
@@ -209,7 +209,7 @@ protected:
 	/*向き変更：m_Directionを変更する LEFT⇔RIGHT*/
 	void ChangeDirection();
 
-
+	void WaveChangeState();
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
@@ -220,6 +220,9 @@ protected:
 	virtual void UpSleepGage(float up_num_);
 	/*疲労度の増加*/
 	virtual void UpFatigueGage(float up_num_);
+
+	/*Wave変更処理*/
+	void ChangeWave();
 
 
 	/*			ゲッター			*/
@@ -251,7 +254,9 @@ protected:
 		int tex_width_ = 2,
 		int tex_height = 1,
 		int use_tex_num_ = 0,
-		float active_distance_ = 1000.f
+		float active_distance_ = 1000.f,
+		bool is_animation_stop_ = true,
+		int tex_size_ = 128.f
 	);
 
 	/*			全敵共通のパラメータ			*/
@@ -262,6 +267,9 @@ protected:
 	bool			m_animation_stop;	//trueの場合、アニメーションしない
 	bool			m_do_bullet;		//ハリ発射を行ったかどうか
 	Position		m_hand_pos;			//手の位置(バナナ弾で使用)
+	int				m_now_wave;			//現在のwave
+	int				m_max_wave;			//この敵の最大wave
+	WaveState		m_wave_state;		//wave状態
 
 private:
 	// エフェクト関係関数まとめた関数

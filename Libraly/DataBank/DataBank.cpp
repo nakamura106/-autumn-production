@@ -35,6 +35,7 @@ DataBank::DataBank()
 	}
 	
 	m_PlayerType = (int)Player::PlayerTypeTrumpet;
+	m_wave_state = WaveState::None;
 	
 }
 
