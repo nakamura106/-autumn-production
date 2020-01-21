@@ -483,6 +483,7 @@ void PlayerBase::AllUpdateEffect()
 	else {
 		m_effect_list.at(0)->Sleep();
 	}
+	//演奏失敗時
 	if (m_is_miss==true)
 	{
 		m_effect_list.at(2)->WakeUp();
@@ -491,13 +492,13 @@ void PlayerBase::AllUpdateEffect()
 	{
 		m_effect_list.at(2)->Sleep();
 	}
+	//着地時
 	if (m_effecttimer <= 15)
 	{
 		m_effect_list.at(3)->WakeUp();
 	}
 	else
 	{
-		
 		m_effect_list.at(3)->Sleep();
 	}
 	// 被弾時エフェクト条件
@@ -505,7 +506,8 @@ void PlayerBase::AllUpdateEffect()
 	{
 		m_effect_list.at(4)->WakeUp();
 	}
-	else {
+	else 
+	{
 		m_effect_list.at(4)->Sleep();
 	}
 
