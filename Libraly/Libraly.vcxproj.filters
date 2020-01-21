@@ -341,9 +341,12 @@
     </ClCompile>
     <ClCompile Include="Collision\CollisionCalc\AnyCollision.cpp">
       <Filter>Collision\CollisionCalc</Filter>
-  </ClCompile>
+    </ClCompile>
     <ClCompile Include="Player\FlutePlayer\FlutePlayer.cpp">
       <Filter>Player\FlutePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBank\SaveData.cpp">
+      <Filter>DataBank</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -586,9 +589,12 @@
     </ClInclude>
     <ClInclude Include="Collision\CollisionCalc\AnyCollision.h">
       <Filter>Collision\CollisionCalc</Filter>
-</ClInclude>
+    </ClInclude>
     <ClInclude Include="Player\FlutePlayer\FlutePlayer.h">
       <Filter>Player\FlutePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBank\SaveData.h">
+      <Filter>DataBank</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
