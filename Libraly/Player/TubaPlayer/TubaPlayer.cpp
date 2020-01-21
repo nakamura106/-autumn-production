@@ -65,6 +65,7 @@ void TubaPlayer::SetRectangle()
 
 void TubaPlayer::Jump()
 {
+	
 	static float jump_power = P_jump_power;
 
 	m_anim_param.split_all = 20;
@@ -85,7 +86,5 @@ void TubaPlayer::Jump()
 		jump_power = P_jump_power;
 		m_do_jump = false;
 		m_is_active = false;
-		m_anim_param.split_all = 12;
-		m_anim_param.split_height = 4;
 	}
 }

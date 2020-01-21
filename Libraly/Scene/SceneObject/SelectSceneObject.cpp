@@ -164,6 +164,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
+			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
 	}
@@ -177,6 +178,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeFlute);
+			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
 	}
@@ -191,6 +193,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		if (OnMouseDown(Left) == true)
 		{
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTuba);
+			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);
 		}
 	}

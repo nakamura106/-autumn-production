@@ -27,6 +27,7 @@ public:
 	void SetPlayerCenter(Position position_) { m_centerpos = position_; }
 	void SetPlayerEffect(P_effect effect_);
 	void SetWaveState(WaveState wave_state_) { m_wave_state = wave_state_; }
+	void SetState(int state_) { m_state = state_; }
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -38,6 +39,7 @@ public:
 	int GetPlayerHp()const { return m_player_hp; }
 	int GetPlayerdirection() { return m_Pdirection; }
 	int GetPlayerEffect(P_effect p_effect_);
+	int GetState() { return m_state; }
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
@@ -67,6 +69,8 @@ private:
 	int m_PlayerType;
 
 	int m_MapType;
+
+	int m_state;
 
 
 	float m_map_pos;
