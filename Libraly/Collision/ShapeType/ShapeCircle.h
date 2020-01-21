@@ -10,11 +10,6 @@ public:
 	~ShapeCircle()override;
 
 	ShapeType GetShapeType()const override { return m_shape_type; }
-	
-	float GetRadius() { return m_radius; }
-
-private:
-	float m_radius;	// ”¼Œa
 
 };
 

@@ -2,6 +2,7 @@
 
 CircleAndRect::CircleAndRect()
 {
+
 }
 
 CircleAndRect::~CircleAndRect()
@@ -10,5 +11,5 @@ CircleAndRect::~CircleAndRect()
 
 bool CircleAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2)
 {
-	return false;
+
 }

@@ -148,6 +148,7 @@
     <ClCompile Include="Bullet\MonkeyBullet.cpp" />
     <ClCompile Include="Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Bullet\ShitBullet.cpp" />
+    <ClCompile Include="Collision\CollisionCalc\AnyCollision.cpp" />
     <ClCompile Include="Collision\CollisionCalc\CircleAndCircle.cpp" />
     <ClCompile Include="Collision\CollisionCalc\CircleAndRect.cpp" />
     <ClCompile Include="Collision\CollisionCalc\CollisionBase.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Bullet\MonkeyBullet.h" />
     <ClInclude Include="Bullet\PlayerBullet.h" />
     <ClInclude Include="Bullet\ShitBullet.h" />
+    <ClInclude Include="Collision\CollisionCalc\AnyCollision.h" />
     <ClInclude Include="Collision\CollisionCalc\CircleAndCircle.h" />
     <ClInclude Include="Collision\CollisionCalc\CircleAndRect.h" />
     <ClInclude Include="Collision\CollisionCalc\CollisionBase.h" />

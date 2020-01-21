@@ -339,6 +339,9 @@
     <ClCompile Include="Collision\CollisionCalc\RectAndRect.cpp">
       <Filter>Collision\CollisionCalc</Filter>
     </ClCompile>
+    <ClCompile Include="Collision\CollisionCalc\AnyCollision.cpp">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -576,6 +579,9 @@
       <Filter>Collision\CollisionCalc</Filter>
     </ClInclude>
     <ClInclude Include="Collision\CollisionCalc\RectAndRect.h">
+      <Filter>Collision\CollisionCalc</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionCalc\AnyCollision.h">
       <Filter>Collision\CollisionCalc</Filter>
     </ClInclude>
   </ItemGroup>
