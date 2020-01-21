@@ -210,6 +210,7 @@
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
+    <ClCompile Include="Sound\SoundManager.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="UI\EnemyAchieve.cpp" />
     <ClCompile Include="UI\EnemyBaseUi.cpp" />
@@ -292,6 +293,7 @@
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />
+    <ClInclude Include="Sound\SoundManager.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="UI\EnemyAchieve.h" />
     <ClInclude Include="UI\EnemyBaseUi.h" />

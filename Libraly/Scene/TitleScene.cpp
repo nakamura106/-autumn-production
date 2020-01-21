@@ -4,9 +4,11 @@
 #include "../Scene/TitleScene.h"
 #include "../Engine/Anime.h"
 #include <stdio.h>
+#include <string>
 #include "../Scene/Scene.h"
 #include "SceneObject/TitleSceneObject.h"
 #include"../SceneLoader/TitleSceneLoad/TitleSceneLoad.h"
+#include "../Sound/SoundManager.h"
 
 TitleSceneObject title_obj;
 
@@ -47,6 +49,8 @@ void InitTitleScene()
 {
 	title_obj.Init();
 	TitleSceneLoad();
+	SoundManager::Instance()->RegisterTitleSound();
+
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
@@ -54,11 +58,14 @@ void InitTitleScene()
 void MainTitleScene()
 {
 	title_obj.Update();
+	SoundManager::Instance()->UpdatePlaySound();
 }
 
 SceneId FinishTitleScene()
 {
 	ReleaseCategoryTexture(TEXTURE_CATEGORY_TITLE);
+	SoundManager::Instance()->ReleaseTitleSound();
+
 	if (title_obj.m_select_flag == true)
 	{
 		return SceneId::SelectScene;
