@@ -385,5 +385,19 @@ enum class WaveState {
 	Change_End,		//遷移終了
 };
 
+//クリアタイムの種類
+enum class ClearTimeType{
+	Mouse_Trumpet,
+	Mouse_Flute,
+	Mouse_Tuba,
+	Bird_Trumpet,
+	Bird_Flute,
+	Bird_Tuba,
+	Gorilla_Trumpet,
+	Gorilla_Flute,
+	Gorilla_Tuba,
+	ClearTimeType_Max
+};
+
 
 #endif
