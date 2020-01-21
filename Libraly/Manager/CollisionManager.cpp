@@ -44,6 +44,11 @@ void CollisionManager::Init()
 void CollisionManager::Update()
 {
 	AllHitTest();
+
+	//for (int i = 0; i < m_player_obj_list.max_size; i++)
+	//{
+	//	// RunCollisionCalc(m_collision,m_player_obj_list[0]->
+	//}
 }
 
 void CollisionManager::ResetObject()
@@ -53,10 +58,46 @@ void CollisionManager::ResetObject()
 	
 }
 
+bool CollisionManager::RunCollisionCalc(CollisionBase& collision, std::list<ShapeBase*>& shapeGroup1, std::list<ShapeBase*>& shapeGroup2)
+{
+	for (const auto& it1 : shapeGroup1) {
+		for (const auto& it2 : shapeGroup2)
+		{
+			// 当たり判定の処理
+			if (collision.CollisionCalc(*it1, *it2)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+}
+
 
 
 void CollisionManager::AddCollisionObject(ObjectBase* obj)
 {
 	//オブジェクトを中に入れる
 	m_collision_obj_list.push_back(obj);
+}
+
+void CollisionManager::AddPlayerColObject(ObjectBase* p_obj)
+{
+	m_player_obj_list.push_back(p_obj);
+}
+
+void CollisionManager::AddEnemyColObject(ObjectBase* e_obj)
+{
+	m_enemy_obj_list.push_back(e_obj);
+}
+
+void CollisionManager::AddPBulletColObject(ObjectBase* p_b_obj)
+{
+	m_pBullet_obj_list.push_back(p_b_obj);
+}
+
+void CollisionManager::AddEBulletColObject(ObjectBase* e_b_obj)
+{
+	m_eBullet_obj_list.push_back(e_b_obj);
 }
