@@ -5,8 +5,10 @@
 #include "../Effect/EffectBase.h"
 #include "Definition.h"
 #include "../Texture/Texture.h"
+#include "../Collision/ShapeBase.h"
 
 #include <vector>
+#include <list>
 
 class EffectBase;
 
@@ -40,6 +42,8 @@ public:
 
 	/*アニメーション進行ゲッター*/
 	int GetAnimationTexNum();
+
+	std::list<ShapeBase*> GetShapeList() { return m_shape_list; }
 
 private:
 
@@ -78,6 +82,7 @@ protected:
 	bool		m_is_turn;			//画像反転させるかどうか
 
 	std::vector<EffectBase*> m_effect_list;	// エフェクト保存用配列
+	std::list<ShapeBase*> m_shape_list;// 当たり判定用リスト
 };
 
 #endif
