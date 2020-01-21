@@ -145,19 +145,11 @@ void EnemyBase::Update()
 		//弾の制御
 		BulletControl();
 
+		// 当たり判定更新関数
+		CollisionParamUpdate();
 
-	// 当たり判定更新関数
-	CollisionParamUpdate();
-
-	// エフェクトアップデート関数まとめ
-	AllUpdateEffect();
-
-	//データバンクへの値受け渡し
-	DataSetUpdate();
-
-	
-
-	
+		// エフェクトアップデート関数まとめ
+		AllUpdateEffect();
 
 		//マップスクロールの位置計算
 		CalcDrawPosition();
