@@ -1,6 +1,7 @@
 #include "Gorilla.h"
 #include"../Bullet/BananaBullet.h"
 #include"../Bullet/MonkeyBullet.h"
+#include"../DataBank/SaveData.h"
 
 Gorilla::Gorilla()
 	:EnemyBase(0.f,EnemyID::Gorilla, 3, 850.f)
@@ -26,6 +27,9 @@ Gorilla::Gorilla()
 	m_draw_param.tex_size_x = m_draw_param.tex_size_y = M_GORILLA_TEX_SIZE;
 
 	m_pos.y += M_POS_Y_ADJUST;
+
+	SaveData::GetInstance().SetNewClearTime(ClearTimeType::Gorilla_Flute, 100);
+	SaveData::GetInstance().SetCsvFileData();
 
 }
 

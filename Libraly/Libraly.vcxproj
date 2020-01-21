@@ -158,6 +158,7 @@
     <ClCompile Include="Collision\ShapeType\ShapeLine.cpp" />
     <ClCompile Include="Collision\ShapeType\ShapeRect.cpp" />
     <ClCompile Include="DataBank\DataBank.cpp" />
+    <ClCompile Include="DataBank\SaveData.cpp" />
     <ClCompile Include="Effect\EffectBase.cpp" />
     <ClCompile Include="Effect\Effects\DebuffEffect.cpp" />
     <ClCompile Include="Effect\Effects\DieEffect.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="Collision\ShapeType\ShapeLine.h" />
     <ClInclude Include="Collision\ShapeType\ShapeRect.h" />
     <ClInclude Include="DataBank\DataBank.h" />
+    <ClInclude Include="DataBank\SaveData.h" />
     <ClInclude Include="Effect\EffectBase.h" />
     <ClInclude Include="Effect\Effects\DebuffEffect.h" />
     <ClInclude Include="Effect\Effects\DieEffect.h" />
