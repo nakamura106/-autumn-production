@@ -41,13 +41,10 @@ public:
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
-
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
-
 	bool GetIsSleepMax() { return m_sleep_gauge >= Sleep_Gauge_Max; }
 	bool GetIsFatigueGauge() { return m_fatigue_gauge >= Fatigue_Gauge_Max; }
-
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
 
@@ -75,6 +72,7 @@ private:
 	float m_map_pos;
 	float m_fg;
 	float m_floor1;
+	
 	
 	float m_sleep_gauge, m_fatigue_gauge;
 

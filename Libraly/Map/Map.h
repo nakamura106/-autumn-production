@@ -23,6 +23,8 @@ public:
 	//!< 未使用
 	void Create(){}
 
+
+
 	
 
 private:
@@ -58,6 +60,8 @@ public:
 	virtual void Draw()override;
 	//!< 未使用
 	void Create() {}
+
+	
 
 private:
 	void MapScroll(int direction_);
