@@ -23,25 +23,25 @@ bool CircleAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shap
 {
 	if (shape1.GetShapeType() == ShapeType::Shape_Circle)
 	{
-		m_circle_centerX = shape1.GetCenterX;
-		m_circle_centerY = shape1.GetCenterY;
-		m_circle_radius = shape1.GetRadius;
+		m_circle_centerX = shape1.GetCenterX();
+		m_circle_centerY = shape1.GetCenterY();
+		m_circle_radius = shape1.GetRadius();
 
-		m_rect_centerX = shape2.GetCenterX;
-		m_rect_centerY = shape2.GetCenterY;
-		m_rect_halfX = shape2.GetSideX / 2.0f;
-		m_rect_halfY = shape2.GetSideY / 2.0f;
+		m_rect_centerX = shape2.GetCenterX();
+		m_rect_centerY = shape2.GetCenterY();
+		m_rect_halfX = shape2.GetSideX() / 2.0f;
+		m_rect_halfY = shape2.GetSideY() / 2.0f;
 	}
 	else
 	{
-		m_circle_centerX = shape2.GetCenterX;
-		m_circle_centerY = shape2.GetCenterY;
-		m_circle_radius = shape2.GetRadius;
+		m_circle_centerX = shape2.GetCenterX();
+		m_circle_centerY = shape2.GetCenterY();
+		m_circle_radius = shape2.GetRadius();
 
-		m_rect_centerX = shape1.GetCenterX;
-		m_rect_centerY = shape1.GetCenterY;
-		m_rect_halfX = shape1.GetSideX / 2.0f;
-		m_rect_halfY = shape1.GetSideY / 2.0f;
+		m_rect_centerX = shape1.GetCenterX();
+		m_rect_centerY = shape1.GetCenterY();
+		m_rect_halfX = shape1.GetSideX() / 2.0f;
+		m_rect_halfY = shape1.GetSideY() / 2.0f;
 	}
 
 	m_sumX = m_circle_radius + m_rect_halfX;

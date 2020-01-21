@@ -34,11 +34,11 @@ void AnyCollision::RunCollisionCalc(CollisionBase& collision, std::list<ShapeBas
 	{
 		for (auto it2 = shapeGroup2.begin(); it2 != shapeGroup2.end(); ++it2)
 		{
-			// “–‚½‚è”»’è‚ÌŒ‹‰Ê‚Å•ªŠòˆ—
-			if (collision.CollisionCalc(*it1, *it2))
-			{
+			//// “–‚½‚è”»’è‚ÌŒ‹‰Ê‚Å•ªŠòˆ—
+			//if (collision.CollisionCalc(*it1, *it2))
+			//{
 
-			}
+			//}
 		}
 	}
 }
