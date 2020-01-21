@@ -11,8 +11,8 @@ public:
 private:
 	const std::string	M_AIDataFileName			= "Res/Csv/Gorilla/Enemy_AI";
 	const float			M_JUMP_ACCELERATION_DEFAULT	= 0.4f;
-	const int			M_JUMP_STOP_ANIM_FLAME		= 4;
-	const float			M_JUMP_SPEED_DEFAULT		= 15.f;
+	const int			M_JUMP_STOP_ANIM_FLAME		= 7;
+	const float			M_JUMP_SPEED_DEFAULT		= 20.f;
 	const float			M_SHOT_ADJUST_X_INPACT		= 220.f;
 	const int			M_ATTACK2_ANIM_TEX_NUM		= 13;
 	const float			M_INPACT_RIGHT_B_ADJUST		= 270.f;
@@ -21,6 +21,20 @@ private:
 	const float			M_INPACT_ACTIVE_DISTANCE	= 600.f;
 	const float			M_GORILLA_TEX_SIZE			= 850.f;
 	const float			M_POS_Y_ADJUST				= -150.f;
+	const int			M_FRAME_BANANA_START		= 13;
+
+	//バナナ発射時の手の位置
+	const float			M_BANANA_HAND_POS_X[16] = {
+							357.f,208.f,209.f,227.f,
+							233.f,295.f,385.f,459.f,
+							513.f,511.f,465.f,199.f,
+							261.f,387.f,0.f,0.f };
+	const float			M_BANANA_HAND_POS_Y[16] = {
+							801.f,625.f,393.f,409.f,
+							487.f,606.f,687.f,691.f,
+							681.f,669.f,629.f,449.f,
+							291.f,247.f,0.f,0.f };
+
 
 	float m_jump_acceleration;	//ジャンプ時のy軸加速度
 	bool  m_do_doraming;		//ドラミング中かどうか

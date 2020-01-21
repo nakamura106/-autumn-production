@@ -82,6 +82,21 @@ void Gorilla::EnemyAttack3()
 		CreateBanana();
 		m_do_bullet = true;
 	}
+
+	//手の位置調整
+	int anim_num = GetAnimationTexNum();
+	if (anim_num > 0 && anim_num <= m_anim_param.split_all) {
+
+		m_hand_pos.y = M_BANANA_HAND_POS_Y[anim_num - 1];
+
+		if (m_direction == Direction::LEFT) {
+			m_hand_pos.x = M_BANANA_HAND_POS_X[anim_num - 1];
+		}
+		else {
+			m_hand_pos.x = m_draw_param.tex_size_x - M_BANANA_HAND_POS_X[anim_num - 1];
+		}
+	}
+
 }
 
 void Gorilla::EnemyAttack4()
@@ -106,6 +121,8 @@ void Gorilla::EnemyFly()
 		return;
 	}
 
+	int anim_tex_num = GetAnimationTexNum();
+
 	if (m_is_flying == true) {
 		//ジャンプ中
 		EnemyBase::EnemyMove();
@@ -114,25 +131,43 @@ void Gorilla::EnemyFly()
 
 		m_jump_speed -= m_jump_acceleration;
 
+		//1/21雑コード
+		if (m_anim_param.split_all >= 16) {
+			if (anim_tex_num > 10) {
+				m_anim_param.split_all = 13;
+			
+			}
+		}
+		else {
+			if (m_is_animation_end == true) {
+				m_draw_param.tu = m_draw_param.tv = 3.f;
+			}
+		}
+
 		if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST) {
 
 			m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST;
 
-			m_animation_stop = false;
+			//m_animation_stop = false;
 
 			m_is_flying = false;
 
 			m_end_jump = true;
 
+			//1/21雑コード
+			m_draw_param.tu = 1.f;
+			m_draw_param.tv = 4.f;
+			m_anim_param.split_all = 16;
+
 		}
 
 	}
 	else {
-		if (GetAnimationTexNum() >= M_JUMP_STOP_ANIM_FLAME) {
+		if (anim_tex_num >= M_JUMP_STOP_ANIM_FLAME) {
 
 			m_is_flying = true;
 
-			m_animation_stop = true;
+			//m_animation_stop = true;
 		}
 	}
 
@@ -143,6 +178,8 @@ void Gorilla::InitAllState()
 	EnemyBase::InitAllState();
 
 	m_do_doraming = false;
+
+	m_anim_param.change_flame = M_ANIM_FLAME;
 
 }
 
@@ -159,6 +196,8 @@ void Gorilla::InitFlyState()
 
 	m_jump_speed = M_JUMP_SPEED_DEFAULT;
 	m_end_jump = false;
+
+	m_anim_param.change_flame = 5;
 }
 
 void Gorilla::CreateBanana()
@@ -174,7 +213,7 @@ void Gorilla::CreateBanana()
 			0.25f,//加速度
 			(Direction)m_direction,
 			this,
-			12//動き始めるアニメーション番号
+			M_FRAME_BANANA_START//動き始めるアニメーション番号
 		)
 	);
 }
