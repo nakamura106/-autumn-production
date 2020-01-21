@@ -142,3 +142,32 @@ void ObjectBase::CalcDrawPosition()
 	m_pos.x = m_map_pos + p_map_pos;
 
 }
+
+Position ObjectBase::GetPlayerCenter()
+{
+	if (DataBank::Instance()->GetPlayerdirection() == (int)Direction::RIGHT)
+	{
+		m_pos.x += 80.0f;
+		m_pos.y += 128.0f;
+	}
+	if (DataBank::Instance()->GetPlayerdirection() == (int)Direction::LEFT)
+	{
+		m_pos.x += 181.0f;
+		m_pos.y += 128.0f;
+	}
+	return m_pos;
+}
+
+Position ObjectBase::GetCenter(float texturesize_)
+{
+	m_pos.x /= texturesize_;
+	m_pos.y /= texturesize_;
+	return m_pos;
+}
+
+Position ObjectBase::GetCenter(float texturesizeX_, float texturesizeY_)
+{
+	m_pos.x /= texturesizeX_;
+	m_pos.y /= texturesizeY_;
+	return m_pos;
+}

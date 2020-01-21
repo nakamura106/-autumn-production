@@ -69,7 +69,7 @@ void PlayerBase::Update()
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
 	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 	DataBank::Instance()->SetPlayerDirection(m_direction);
-	DataBank::Instance()->SetPlayerCenter(m_pos);
+	
 
 	
 }

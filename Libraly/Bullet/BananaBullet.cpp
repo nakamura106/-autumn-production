@@ -45,7 +45,7 @@ void BananaBullet::MoveUpdate()
 		//Ž©•ª‚ÌÀ•W‚ð‡‚í‚¹‚é
 		Position hand_pos = m_parent->GetHandPos();
 
-		m_map_pos = hand_pos.x;
-		m_pos.y = hand_pos.y;
+		m_map_pos = hand_pos.x - m_draw_param.tex_size_x / 2.f;
+		m_pos.y = hand_pos.y - m_draw_param.tex_size_y / 2.f;
 	}
 }
