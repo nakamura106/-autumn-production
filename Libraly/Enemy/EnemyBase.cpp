@@ -145,7 +145,7 @@ void EnemyBase::Update()
 		//’e‚Ì§Œä
 		BulletControl();
 
-<
+
 	// “–‚½‚è”»’èXVŠÖ”
 	CollisionParamUpdate();
 
