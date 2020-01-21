@@ -32,6 +32,8 @@ public:
 	//ó‘Ô‘JˆÚ
 	void ChangeState();
 	
+	
+
 	virtual void InitWaitState();		//‘Ò‹@ó‘Ô
 	virtual void InitMoveState();		//ˆÚ“®ó‘Ô
 	virtual void InitJumpState();		//“¦‘–ó‘Ô

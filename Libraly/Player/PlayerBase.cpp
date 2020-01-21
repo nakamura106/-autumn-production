@@ -121,6 +121,7 @@ void PlayerBase::P_Controll()
 		m_effecttimer++;
 	}
 	
+	DataBank::Instance()->SetState(m_state);
 
 	/*ボタンを離した後にモーションが
 	継続してしまわないようにする処理*/
@@ -132,11 +133,15 @@ void PlayerBase::P_Controll()
 	// ※までボタン処理
 
 
-
+	if (GetKey(A_KEY) == true)
+	{
+		ChangeSceneStep(SceneStep::EndStep);
+	}
 	//右移動
 	if (GetKey(RIGHT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		DataBank::Instance()->SetState(m_state);
 		if (DataBank::Instance()->GetfgPos() >= 0 || DataBank::Instance()->GetfgPos() <= -3550.0f )
 		{
 			m_pos.x += m_speed;
@@ -162,6 +167,7 @@ void PlayerBase::P_Controll()
 	else if (GetKey(LEFT_KEY) == true)
 	{
 		m_state = (int)P_State::Move;
+		DataBank::Instance()->SetState(m_state);
 		if (DataBank::Instance()->GetfgPos() <= -3550.0f || DataBank::Instance()->GetfgPos() >= 0)
 		{
 			m_pos.x -= m_speed;
@@ -230,10 +236,12 @@ void PlayerBase::P_Controll()
 
 	// ※
 	
+	
 	//activeがfalseなら待機状態にする処理
-	if (m_is_active == false)
-	{
+	if (m_is_active == false&& m_state != (int)P_State::Wait&& m_anim_param.split_all < 20)
+	{	
 		m_state = (int)P_State::Wait;
+		DataBank::Instance()->SetState(m_state);
 	}
 	if (m_do_jump == true)
 	{
@@ -418,14 +426,17 @@ void PlayerBase::Jump()
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)
 	{
 		m_state = (int)P_State::Jump;
+		DataBank::Instance()->SetState(m_state);
 	}
 	if (m_do_jump == true && m_state == (int)P_State::Attack)
 	{
 		m_state = (int)P_State::Jump_Attack;
+		DataBank::Instance()->SetState(m_state);
 	}
 	if (m_do_jump == true && m_state == (int)P_State::Damage)
 	{
 		m_state = (int)P_State::Jump_Damage;
+		DataBank::Instance()->SetState(m_state);
 	}
 
 
@@ -457,11 +468,9 @@ void PlayerBase::Attack()
 	{
 	
 		m_state = (int)P_State::Attack;
+		DataBank::Instance()->SetState(m_state);
 	}
 	
-	
-
-
 }
 
 void PlayerBase::AllInitEffect()
