@@ -3,6 +3,7 @@
 #include"../Object/ObjectBase.h"
 #include<vector>
 
+
 class CollisionManager
 {
 public:
@@ -28,5 +29,5 @@ private:
 
 	std::vector<ObjectBase*> m_collision_obj_list;//当たり判定を行うオブジェクトのリスト
 
-
+	
 };

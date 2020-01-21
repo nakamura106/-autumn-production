@@ -181,6 +181,7 @@ enum class ShapeType {
 	Shape_Line,		// ü
 
 	ShapeTypeMax,
+	ShapeTypeNon = ShapeTypeMax,
 };
 
 

@@ -24,11 +24,11 @@ protected:
 	ShapeType m_shape_type;
 
 	// オブジェクトの中心座標
-	float m_CenterX = 0.f, m_CenterY = 0.f;
+	float m_CenterX, m_CenterY;
 	// 矩形の辺の縦と横幅
-	float m_side_x = 0.f, m_side_y = 0.f;
+	float m_side_x, m_side_y;
 	// 円の半径
-	float m_radius = 0.f;
+	float m_radius;
 
 };
 

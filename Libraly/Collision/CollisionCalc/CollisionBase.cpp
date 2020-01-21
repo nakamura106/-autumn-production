@@ -2,6 +2,7 @@
 
 CollisionBase::CollisionBase()
 {
+
 }
 
 CollisionBase::~CollisionBase()

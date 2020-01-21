@@ -53,6 +53,8 @@ void CollisionManager::ResetObject()
 	
 }
 
+
+
 void CollisionManager::AddCollisionObject(ObjectBase* obj)
 {
 	//オブジェクトを中に入れる

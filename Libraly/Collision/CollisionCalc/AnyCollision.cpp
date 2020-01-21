@@ -27,3 +27,18 @@ bool AnyCollision::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape
 {
 	return m_collision_table[static_cast<int>(shape1.GetShapeType())][static_cast<int>(shape2.GetShapeType())]->CollisionCalc(shape1, shape2);
 }
+
+void AnyCollision::RunCollisionCalc(CollisionBase& collision, std::list<ShapeBase*>& shapeGroup1, std::list<ShapeBase*>& shapeGroup2)
+{
+	for (auto it1 = shapeGroup1.begin(); it1 != shapeGroup1.end(); ++it1)
+	{
+		for (auto it2 = shapeGroup2.begin(); it2 != shapeGroup2.end(); ++it2)
+		{
+			// “–‚½‚è”»’è‚ÌŒ‹‰Ê‚Å•ªŠòˆ—
+			if (collision.CollisionCalc(*it1, *it2))
+			{
+
+			}
+		}
+	}
+}

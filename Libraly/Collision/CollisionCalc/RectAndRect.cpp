@@ -44,9 +44,9 @@ bool RectAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2
 		m_sum_y *= -1.0f;
 	}
 	
-	if (m_sum_x < m_rect1_halfX + m_rect2_halfX)
+	if (m_sum_x <= m_rect1_halfX + m_rect2_halfX)
 	{
-		if (m_sum_y < m_rect1_halfY + m_rect2_halfY)
+		if (m_sum_y <= m_rect1_halfY + m_rect2_halfY)
 		{
 			return true;
 		}

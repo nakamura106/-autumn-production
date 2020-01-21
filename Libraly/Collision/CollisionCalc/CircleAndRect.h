@@ -11,6 +11,15 @@ public:
 
 	bool CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2)override;
 
+
+private:
+	float m_circle_centerX, m_circle_centerY;
+	float m_circle_radius;
+
+	float m_rect_centerX, m_rect_centerY;
+	float m_rect_halfX, m_rect_halfY;
+
+	float m_sumX, m_sumY;
 };
 
 #endif
