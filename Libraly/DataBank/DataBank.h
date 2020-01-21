@@ -27,6 +27,7 @@ public:
 	void SetPlayerEffect(P_effect effect_);
 	void SetWaveState(WaveState wave_state_) { m_wave_state = wave_state_; }
 	void SetState(int state_) { m_state = state_; }
+	void SetWave(WaveType wave_,bool torf_) { m_wave_change[(int)wave_] = torf_; }
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -48,6 +49,7 @@ public:
 	bool GetIsFatigueGauge() { return m_fatigue_gauge >= Fatigue_Gauge_Max; }
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
+	bool GetWavetype(WaveType wave_) { return m_wave_change[(int)wave_]; }
 
 	 
 	WaveState GetWaveState() { return m_wave_state; }
@@ -81,6 +83,7 @@ private:
 
 	bool m_is_game_clear;
 	bool m_is_game_over;
+	bool m_wave_change[(int)WaveType::WaveMax];
 	bool m_PlayerEffect[(int)P_effect::MaxEffect];
 
 	int m_Pdirection;

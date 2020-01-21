@@ -151,27 +151,27 @@ Position ObjectBase::GetPlayerCenter()
 {
 	if (DataBank::Instance()->GetPlayerdirection() == (int)Direction::RIGHT)
 	{
-		m_pos.x += 80.0f;
-		m_pos.y += 128.0f;
+		m_P_Center.x = m_pos.x + 80.0f;
+		m_P_Center.y = m_pos.y + 128.0f;
 	}
 	if (DataBank::Instance()->GetPlayerdirection() == (int)Direction::LEFT)
 	{
-		m_pos.x += 181.0f;
-		m_pos.y += 128.0f;
+		m_P_Center.x = m_pos.x + 181.0f;
+		m_P_Center.x = m_pos.y + 128.0f;
 	}
-	return m_pos;
+	return m_P_Center;
 }
 
 Position ObjectBase::GetCenter(float texturesize_)
 {
-	m_pos.x /= texturesize_;
-	m_pos.y /= texturesize_;
-	return m_pos;
+	m_Tex_Center.x = m_pos.x / texturesize_;
+	m_Tex_Center.y = m_pos.y / texturesize_;
+	return m_Tex_Center;
 }
 
 Position ObjectBase::GetCenter(float texturesizeX_, float texturesizeY_)
 {
-	m_pos.x /= texturesizeX_;
-	m_pos.y /= texturesizeY_;
-	return m_pos;
+	m_Tex_Center.x=m_pos.x / texturesizeX_;
+	m_Tex_Center.y=m_pos.y / texturesizeY_;
+	return m_Tex_Center;
 }

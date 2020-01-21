@@ -184,6 +184,13 @@ enum class ShapeType {
 	ShapeTypeNon = ShapeTypeMax,
 };
 
+enum class WaveType {
+	Wave1,
+	Wave2,
+	Wave3,
+	WaveMax,
+};
+
 
 //AI‚Ìƒpƒ‰ƒ[ƒ^
 struct EnemyAIParam {

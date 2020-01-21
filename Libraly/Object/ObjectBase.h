@@ -75,6 +75,8 @@ protected:
 
 	/*		構造体変数		*/
 	Position		m_pos;			//座標
+	Position		m_P_Center;
+	Position		m_Tex_Center;
 	DrawParam		m_draw_param;	//描画用構造体
 	AnimationParam	m_anim_param;	//アニメーション用構造体
 	HitRectangle	m_rect_param;	//当たり判定用構造体

@@ -45,19 +45,27 @@ void Map::Load()
 
 void Map::Update()
 {
-	if (DataBank::Instance()->GetState() == (int)P_State::Move)
+
+	if (GetKey(LEFT_KEY) == true&&DataBank::Instance()->GetWavetype(WaveType::Wave1)==false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
-		MapScroll();
+		MapScroll(LEFT);
 	}
-	
+	if (GetKey(RIGHT_KEY) == true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	{
+		MapScroll(RIGHT);
+	}
+	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true || DataBank::Instance()->GetWavetype(WaveType::Wave2) == true || DataBank::Instance()->GetWavetype(WaveType::Wave3) == true)
+	{
+		WaveChange(ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().x);
+	}
 		
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
 
-void Map::MapScroll()
+void Map::MapScroll(int direction_)
 {
 	//向きが右向きかつマップの端が-3800以上の時に右にスクロールする
-	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x >= Centerofscreen&& DataBank::Instance()->GetfgPos()>=-3550.0f&&DataBank::Instance()->GetPlayerdirection()==RIGHT )
+	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x >= Centerofscreen&& DataBank::Instance()->GetfgPos()>=-3550.0f&&direction_==RIGHT )
 	{
 		floor1 -= P_speed;
 		obj[0] -= P_speed;
@@ -66,7 +74,7 @@ void Map::MapScroll()
 		floor2 -= floor2speed;
 	}
 	//向きが左向きかつマップの端が0以下の時に左にスクロールする
-	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen&&DataBank::Instance()->GetfgPos()<0.0f&&floor1<0.0f&&floor2<0 && DataBank::Instance()->GetPlayerdirection() == LEFT)
+	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen&&DataBank::Instance()->GetfgPos()<0.0f&&floor1<0.0f&&floor2<0 && direction_ == LEFT)
 	{
 		floor1 += P_speed;
 		obj[0] += P_speed;
@@ -74,6 +82,42 @@ void Map::MapScroll()
 		obj[2] += P_speed;
 		floor2 += floor2speed;
 	}
+}
+
+void Map::WaveChange(float enemyX_)
+{
+	
+	if (enemyX_ >= 960.0f)
+	{
+		floor1 += P_speed*2;
+		obj[0] += P_speed*2;
+		obj[1] += P_speed*2;
+		obj[2] += P_speed*2;
+		floor2 += floor2speed*2;
+	}
+	else
+	{
+		for (int i = 0; i < (int)WaveType::WaveMax; i++)
+		{
+			DataBank::Instance()->SetWave((WaveType)i,false);
+		}
+	}
+	if (enemyX_ <= 960.0f)
+	{
+		floor1 -= P_speed*2;
+		obj[0] -= P_speed*2;
+		obj[1] -= P_speed*2;
+		obj[2] -= P_speed*2;
+		floor2 -= floor2speed*2;
+	}
+	else
+	{
+		for (int i = 0; i < (int)WaveType::WaveMax; i++)
+		{
+			DataBank::Instance()->SetWave((WaveType)i, false);
+		}
+	}
+
 }
 
 void Map::HitJudgement()
@@ -113,22 +157,56 @@ void Fg::Update()
 {
 	DataBank::Instance()->SetfgPos(fg);
 
-	if (DataBank::Instance()->GetState() == (int)P_State::Move)
+	if (GetKey(LEFT_KEY)==true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
-		MapScroll();
+		MapScroll(LEFT);
+	}
+	if (GetKey(RIGHT_KEY) == true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	{
+		MapScroll(RIGHT);
+	}
+	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true || DataBank::Instance()->GetWavetype(WaveType::Wave2) == true || DataBank::Instance()->GetWavetype(WaveType::Wave3) == true)
+	{
+		WaveChange(ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().x);
+	}
+}
+
+void Fg::MapScroll(int direction_)
+{
+	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x >= Centerofscreen && fg >= -3550.0f && direction_ == RIGHT)
+	{
+		fg -= P_speed * 2;
+	}
+	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen && fg < 0.0f && direction_ == LEFT)
+	{
+		fg += P_speed * 2;
 	}
 	
 }
 
-void Fg::MapScroll()
+void  Fg::WaveChange(float enemyX_)
 {
-	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x >= Centerofscreen && fg >= -3550.0f && DataBank::Instance()->GetPlayerdirection() == RIGHT)
+	if (enemyX_ >= 960.0f)
 	{
-		fg -= P_speed * 2;
+		fg += P_speed * 4;
 	}
-	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen && fg < 0.0f && DataBank::Instance()->GetPlayerdirection() == LEFT)
+	else
 	{
-		fg += P_speed * 2;
+		for (int i = 0; i < (int)WaveType::WaveMax; i++)
+		{
+			DataBank::Instance()->SetWave((WaveType)i, false);
+		}
+	}
+	if (enemyX_ <= 960.0f)
+	{
+		fg -= P_speed * 4;
+	}
+	else
+	{
+		for (int i = 0; i < (int)WaveType::WaveMax; i++)
+		{
+			DataBank::Instance()->SetWave((WaveType)i, false);
+		}
 	}
 }
 
