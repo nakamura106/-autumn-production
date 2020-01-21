@@ -48,7 +48,6 @@ private:
 	const float	M_PLAYER_SIZE_X = 256.f;	//プレイヤーのx方向の画像サイズ(プレイヤーとの位置関係で使用)
 
 	/*初期化用初期値*/
-	const int	M_ANIM_FLAME					= 7;		//画像変更を行うフレーム周期:7
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
 	const int	M_ANIM_TEX_HEIGHT				= 4;		//縦の分割数
@@ -146,7 +145,8 @@ private:
 protected:
 	const float	M_INIT_POS_X = 700.f;	//初期x座標
 	const float M_INIT_POS_Y = 656.f;	//初期y座標
-	const float M_SKY_HEIGHT = 0.f;	//飛行高度
+	const float M_SKY_HEIGHT = 0.f;		//飛行高度
+	const int	M_ANIM_FLAME = 7;		//画像変更を行うフレーム周期:7
 
 	/*状態遷移・AI変更集約関数：これを呼び出せばOK!(状態遷移する)*/
 	void CompleteChangeState();
