@@ -113,37 +113,60 @@ void EnemyBase::Update()
 	//ChangeState();
 	ObjectBase::Update();
 
-	//デバッグ用
-	DebugKeyAction();
+	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) != true)
+	{
+		//デバッグ用
+		DebugKeyAction();
 
-	//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
-	AutoChangeGageUpdate();
+		//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
+		AutoChangeGageUpdate();
 
-	//現在の状態における動作の更新
-	//UpdateState();
-	if (m_wave_state == WaveState::None) {
-		//状態動作
-		UpdateAIState();
-		
+		//現在の状態における動作の更新
+		//UpdateState();
+		if (m_wave_state == WaveState::None) {
+			//状態動作
+			UpdateAIState();
+
+		}
+		else if (m_wave_state == WaveState::Change_Start) {
+			//wave遷移中の動作(画面端に走っていく)
+			WaveChangeState();
+		}
+
+		/*位置調整の更新*/
+		MoveLimitUpdate();
+
+		//弾の制御
+		BulletControl();
+
+		//マップスクロールの位置計算
+		CalcDrawPosition();
+
+		//データバンクへの値受け渡し
+		DataSetUpdate();
+
+		AllUpdateEffect();
 	}
-	else if (m_wave_state==WaveState::Change_Start) {
-		//wave遷移中の動作(画面端に走っていく)
-		WaveChangeState();
+	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true)
+	{
+		if (m_pos.x >= 960)
+		{
+			m_pos.x -= P_speed * 2;
+		}
+		else
+		{
+			DataBank::Instance()->SetWave(WaveType::Wave1, false);
+		}
+		if (m_pos.x <= 960)
+		{
+			m_pos.x += P_speed * 2;
+		}
+		else
+		{
+			DataBank::Instance()->SetWave(WaveType::Wave1, false);
+		}
+
 	}
-
-	/*位置調整の更新*/
-	MoveLimitUpdate();
-
-	//弾の制御
-	BulletControl();
-
-	//マップスクロールの位置計算
-	CalcDrawPosition();
-
-	//データバンクへの値受け渡し
-	DataSetUpdate();
-
-	AllUpdateEffect();
 
 }
 

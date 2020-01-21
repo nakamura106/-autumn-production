@@ -13,6 +13,8 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	//ƒvƒŒƒCƒ„[‚Ì’e‚Ìî•ñ‚ğŠi”[
 	SetPlayerBulletInfo();
 
+	m_upward_thrust = 25.0f;
+
 }
 
 PlayerBullet::~PlayerBullet()
@@ -93,5 +95,52 @@ void PlayerBullet::Update()
 {
 	BulletBase::Update();
 
+
+	CalcDrawPosition();
+
+	//MoveUpdate();
+
 	AnimationUpdate();
+}
+
+void PlayerBullet::MoveUpdate()
+{
+	switch (DataBank::Instance()->GetPlayerType())
+	{
+	case (int)Player::PlayerTypeTrumpet:
+		BulletBase::MoveUpdate();
+		break;
+	case (int)Player::PlayerTypeFlute:
+		
+		break;
+	case (int)Player::PlayerTypeTuba:
+		MoveTubaUpdate();
+		break;
+	default:
+		break;
+	}
+}
+
+void PlayerBullet::MoveFluteUpdate()
+{
+
+}
+
+void PlayerBullet::MoveTubaUpdate()
+{
+	m_pos.y -= m_upward_thrust;
+	m_upward_thrust -= 0.6f;
+	if (m_direction == Direction::RIGHT) {
+		m_map_pos += m_speed*1.3f;
+	}
+	else if (m_direction == Direction::LEFT) {
+		m_map_pos -= m_speed*1.3f;
+	}
+	
+	if (m_pos.y >= 900.0f)
+	{
+		m_is_delete = true;
+		m_upward_thrust = 25.0f;
+	}
+
 }
