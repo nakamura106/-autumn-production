@@ -33,7 +33,10 @@ DataBank::DataBank()
 	{
 		m_PlayerEffect[i] = false;
 	}
-	
+	for (int i = 0; i<(int)WaveType::WaveMax; i++)
+	{
+		m_wave_change[i] = false;
+	}
 	m_PlayerType = (int)Player::PlayerTypeTrumpet;
 	m_wave_state = WaveState::None;
 	

@@ -29,8 +29,17 @@ private:
 	/*’e‚Ìí—Ş‚É‚æ‚Á‚Äî•ñ‚ğİ’è*/
 	void SetPlayerBulletInfo();
 
+	void MoveUpdate();
+
+	void MoveFluteUpdate();
+
+	void MoveTubaUpdate();
+
 	/*“–‚½‚è‚Ìˆ—*/
 	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
+
+
+	float m_upward_thrust;
 
 };
 

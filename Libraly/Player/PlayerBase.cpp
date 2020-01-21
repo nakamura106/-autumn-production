@@ -59,12 +59,17 @@ void PlayerBase::Update()
 {
 	ObjectBase::Update();
 	BulletControl();
-	P_Controll();
+	if (DataBank::Instance()->GetWavetype(WaveType::Wave1)!=true || DataBank::Instance()->GetWavetype(WaveType::Wave2)!=true || DataBank::Instance()->GetWavetype(WaveType::Wave3)!=true)
+	{
+		P_Controll();
+	}
 	AnimationUpdate();
 	ChangeState();
 	Atkjudge();
 
+
 	CollisionParamUpdate();
+
 
 	AllUpdateEffect();
 
@@ -73,6 +78,14 @@ void PlayerBase::Update()
 	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 	DataBank::Instance()->SetPlayerDirection(m_direction);
 	
+
+	if (GetKey(E_KEY) == true)
+	{
+		DataBank::Instance()->SetWave(WaveType::Wave1, true);
+	}
+
+	
+
 }
 
 void PlayerBase::BulletControl()
@@ -138,6 +151,8 @@ void PlayerBase::P_Controll()
 	{
 		ChangeSceneStep(SceneStep::EndStep);
 	}
+
+
 	//‰EˆÚ“®
 	if (GetKey(RIGHT_KEY) == true)
 	{
