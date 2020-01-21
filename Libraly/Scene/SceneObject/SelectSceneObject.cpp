@@ -110,6 +110,7 @@ void SelectSceneObject::BossSelectUpdate()
 		{
 			DataBank::Instance()->SetMapType((int)MapType::WoodsMap);
 			is_brass_scene = true;
+
 		}
 	}
 	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f

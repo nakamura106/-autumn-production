@@ -24,7 +24,6 @@ public:
 	void SetMapType(int Which_type_of_map) { m_MapType = Which_type_of_map; };
 	void SetIsGameOver(bool is_game_over_) { m_is_game_over = is_game_over_; }
 	void SetPlayerDirection(int direction_) { m_Pdirection = direction_; }
-	void SetPlayerCenter(Position position_) { m_centerpos = position_; }
 	void SetPlayerEffect(P_effect effect_);
 	void SetWaveState(WaveState wave_state_) { m_wave_state = wave_state_; }
 	void SetState(int state_) { m_state = state_; }
@@ -50,7 +49,7 @@ public:
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
 
-	Position GetPlayerCenter(); 
+	 
 	WaveState GetWaveState() { return m_wave_state; }
 	
 

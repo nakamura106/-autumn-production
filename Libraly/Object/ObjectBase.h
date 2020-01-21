@@ -37,6 +37,15 @@ public:
 	/*当たり判定用構造体ゲッター*/
 	HitRectangle GetRectParam(){ return m_rect_param; }
 
+	//プレイヤー専用中心ゲッター
+	Position GetPlayerCenter();
+
+	//縦横の画像切り抜きサイズが同じ場合
+	Position GetCenter(float splitsize_);
+
+	//縦横の画像切り抜きサイズが違う場合
+	Position GetCenter(float splitsizeX_,float splitsizeY_);
+
 	//12/10　即席当たり判定結果通知関数
 	virtual void HitAction(ObjectRavel ravel_,float hit_use_atk_){}
 
