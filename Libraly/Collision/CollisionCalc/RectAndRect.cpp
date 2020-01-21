@@ -21,5 +21,5 @@ bool RectAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2
 	float rect2_sideY = shape2.GetSideY();
 
 	
-
+	return false;
 }

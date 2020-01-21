@@ -22,7 +22,7 @@ bool CircleAndCircle::CollisionCalc(const ShapeBase& shape1, const ShapeBase& sh
 	float a = circle1_centerX - circle2_centerX;
 	float b = circle1_centerY - circle2_centerY;
 
-	float c = sqrt(a * a + b * b);
+	float c = sqrtf(a * a + b * b);
 
 	if (c <= circle1_radius + circle2_radius)
 	{
