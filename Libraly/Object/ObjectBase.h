@@ -55,6 +55,8 @@ public:
 	// 当たり判定リストのゲッター　collisionmanagerで使用
 	std::list<ShapeBase*> GetShapeList() { return m_shape_list; }
 
+	virtual void CollisionParamUpdate();
+
 private:
 
 protected:

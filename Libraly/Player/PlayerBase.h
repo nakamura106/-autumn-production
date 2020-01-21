@@ -57,6 +57,8 @@ public:
 	void AllUpdateEffect();
 	void AllDrawEffect();
 
+	void CollisionParamUpdate()override;
+
 	
 
 protected:

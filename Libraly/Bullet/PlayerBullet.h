@@ -13,6 +13,8 @@ public:
 	virtual void Draw();
 	void Update();
 
+	void CollisionParamUpdate()override;
+
 private:
 	const int	M_PBULLET_ANIM_SPLIT_ALL	= 16;
 	const int	M_PBULLET_ANIM_SPLIT_W		= 4;

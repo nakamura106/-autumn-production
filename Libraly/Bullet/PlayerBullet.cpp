@@ -1,5 +1,7 @@
 #include "PlayerBullet.h"
 #include "../DataBank/DataBank.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Manager/CollisionManager.h"
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_,ObjectRavel::Ravel_PlayerBullet)
@@ -13,10 +15,15 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	//ƒvƒŒƒCƒ„[‚Ì’e‚Ìî•ñ‚ðŠi”[
 	SetPlayerBulletInfo();
 
+	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, this->GetPos().y, 50.0f));
 }
 
 PlayerBullet::~PlayerBullet()
 {
+	for (const auto& i : m_shape_list)
+	{
+		delete i;
+	}
 }
 
 void PlayerBullet::Load()
@@ -94,4 +101,15 @@ void PlayerBullet::Update()
 	BulletBase::Update();
 
 	AnimationUpdate();
+
+	CollisionParamUpdate();
+}
+
+void PlayerBullet::CollisionParamUpdate()
+{
+	for (const auto& i : m_shape_list)
+	{
+		i->Update(this->GetPos().x, this->GetPos().y);
+	}
+	CollisionManager::GetInstance().AddPBulletColObject(this);
 }

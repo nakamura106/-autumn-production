@@ -277,6 +277,8 @@ private:
 	void AllUpdateEffect();
 	void AllDrawEffect();
 
+	void CollisionParamUpdate()override;
+
 };
 
 
