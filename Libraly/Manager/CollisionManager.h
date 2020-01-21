@@ -40,11 +40,17 @@ private:
 
 	std::vector<ObjectBase*> m_player_obj_list;
 	std::vector<ObjectBase*> m_enemy_obj_list;
+	std::vector<ObjectBase*> m_map_obj_list;
 	std::vector<ObjectBase*> m_pBullet_obj_list;
 	std::vector<ObjectBase*> m_eBullet_obj_list;
 
 	// êVÇµÇ¢ìñÇΩÇËîªíËä÷êî
-	bool RunCollisionCalc(CollisionBase& collision, std::list<ShapeBase*>& shapeGroup1, std::list<ShapeBase*>& shapeGroup2);
+	bool RunCollisionCalc(CollisionBase& collision, const std::list<ShapeBase*>& shapeGroup1, const std::list<ShapeBase*>& shapeGroup2);
+
+	void PlayerAndEnemyCol();
+	void PlayerAndEBulletCol();
+	void PlayerAndMapObjCol();
+	void EnemyAndPBulletCol();
 
 	AnyCollision m_collision;
 	

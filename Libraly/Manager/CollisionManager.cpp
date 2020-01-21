@@ -45,10 +45,11 @@ void CollisionManager::Update()
 {
 	AllHitTest();
 
-	//for (int i = 0; i < m_player_obj_list.max_size; i++)
-	//{
-	//	// RunCollisionCalc(m_collision,m_player_obj_list[0]->
-	//}
+	PlayerAndEnemyCol();
+	PlayerAndEBulletCol();
+	PlayerAndMapObjCol();
+	EnemyAndPBulletCol();
+
 }
 
 void CollisionManager::ResetObject()
@@ -58,7 +59,7 @@ void CollisionManager::ResetObject()
 	
 }
 
-bool CollisionManager::RunCollisionCalc(CollisionBase& collision, std::list<ShapeBase*>& shapeGroup1, std::list<ShapeBase*>& shapeGroup2)
+bool CollisionManager::RunCollisionCalc(CollisionBase& collision, const std::list<ShapeBase*>& shapeGroup1, const std::list<ShapeBase*>& shapeGroup2)
 {
 	for (const auto& it1 : shapeGroup1) {
 		for (const auto& it2 : shapeGroup2)
@@ -70,6 +71,51 @@ bool CollisionManager::RunCollisionCalc(CollisionBase& collision, std::list<Shap
 			else {
 				return false;
 			}
+		}
+	}
+}
+
+void CollisionManager::PlayerAndEnemyCol()
+{
+	for (const auto& i : m_player_obj_list)
+	{
+		for (const auto& j : m_enemy_obj_list)
+		{
+			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+		}
+	}
+
+}
+
+void CollisionManager::PlayerAndEBulletCol()
+{
+	for (const auto& i : m_player_obj_list)
+	{
+		for (const auto& j : m_eBullet_obj_list)
+		{
+			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+		}
+	}
+}
+
+void CollisionManager::PlayerAndMapObjCol()
+{
+	for (const auto& i : m_player_obj_list)
+	{
+		for (const auto& j : m_map_obj_list)
+		{
+			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+		}
+	}
+}
+
+void CollisionManager::EnemyAndPBulletCol()
+{
+	for (const auto& i : m_player_obj_list)
+	{
+		for (const auto& j : m_enemy_obj_list)
+		{
+			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
 		}
 	}
 }

@@ -43,6 +43,7 @@ public:
 	/*アニメーション進行ゲッター*/
 	int GetAnimationTexNum();
 
+	// 当たり判定リストのゲッター　collisionmanagerで使用
 	std::list<ShapeBase*> GetShapeList() { return m_shape_list; }
 
 private:
