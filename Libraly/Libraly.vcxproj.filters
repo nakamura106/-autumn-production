@@ -79,24 +79,6 @@
     <Filter Include="MapBase\WoodsMap">
       <UniqueIdentifier>{4eaf0490-a24a-4ed6-97c4-38c42ce1081e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneLoader">
-      <UniqueIdentifier>{2549eeaa-3d5b-48a7-a59a-634e2bb67907}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\TitleSceneLoad">
-      <UniqueIdentifier>{af818f37-10da-4452-9187-4e7ed9bc1c49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\GameSceneLoad">
-      <UniqueIdentifier>{125fbf1f-4ccd-4d43-9afe-9cdca0344b6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\HelpSceneLoad">
-      <UniqueIdentifier>{9594332c-68eb-4bc9-8639-0ec154e0b779}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\SelectSceneLoad">
-      <UniqueIdentifier>{de6c9888-f31d-49e8-99d7-8a9d82070fb5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneLoader\GameEndSceneLoad">
-      <UniqueIdentifier>{8d29cd74-4fad-48c7-bd18-7ee947bd9513}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{b92cdbf4-f959-4935-8fec-3344595356fd}</UniqueIdentifier>
     </Filter>
@@ -105,6 +87,24 @@
     </Filter>
     <Filter Include="Collision\CollisionCalc">
       <UniqueIdentifier>{52185d7a-a3c4-4039-ab6f-387f20179695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex">
+      <UniqueIdentifier>{2549eeaa-3d5b-48a7-a59a-634e2bb67907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex\TitleSceneLoad">
+      <UniqueIdentifier>{af818f37-10da-4452-9187-4e7ed9bc1c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex\GameSceneLoad">
+      <UniqueIdentifier>{125fbf1f-4ccd-4d43-9afe-9cdca0344b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex\HelpSceneLoad">
+      <UniqueIdentifier>{9594332c-68eb-4bc9-8639-0ec154e0b779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex\SelectSceneLoad">
+      <UniqueIdentifier>{de6c9888-f31d-49e8-99d7-8a9d82070fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadSceneTex\GameEndSceneLoad">
+      <UniqueIdentifier>{8d29cd74-4fad-48c7-bd18-7ee947bd9513}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -301,19 +301,19 @@
       <Filter>Bullet</Filter>
     </ClCompile>
     <ClCompile Include="SceneLoader\GameSceneLoad\GameSceneLoad.cpp">
-      <Filter>SceneLoader\GameSceneLoad</Filter>
+      <Filter>LoadSceneTex\GameSceneLoad</Filter>
     </ClCompile>
     <ClCompile Include="SceneLoader\GameEndSceneLoad\GameEndSceneLoad.cpp">
-      <Filter>SceneLoader\GameEndSceneLoad</Filter>
+      <Filter>LoadSceneTex\GameEndSceneLoad</Filter>
     </ClCompile>
     <ClCompile Include="SceneLoader\HelpSceneLoad\HelpSceneLoad.cpp">
-      <Filter>SceneLoader\HelpSceneLoad</Filter>
+      <Filter>LoadSceneTex\HelpSceneLoad</Filter>
     </ClCompile>
     <ClCompile Include="SceneLoader\SelectSceneLoad\SelectSceneLoad.cpp">
-      <Filter>SceneLoader\SelectSceneLoad</Filter>
+      <Filter>LoadSceneTex\SelectSceneLoad</Filter>
     </ClCompile>
     <ClCompile Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.cpp">
-      <Filter>SceneLoader\TitleSceneLoad</Filter>
+      <Filter>LoadSceneTex\TitleSceneLoad</Filter>
     </ClCompile>
     <ClCompile Include="Collision\ShapeBase.cpp">
       <Filter>Collision</Filter>
@@ -341,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="Collision\CollisionCalc\AnyCollision.cpp">
       <Filter>Collision\CollisionCalc</Filter>
+  </ClCompile>
+    <ClCompile Include="Player\FlutePlayer\FlutePlayer.cpp">
+      <Filter>Player\FlutePlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -543,19 +546,19 @@
       <Filter>Bullet</Filter>
     </ClInclude>
     <ClInclude Include="SceneLoader\GameSceneLoad\GameSceneLoad.h">
-      <Filter>SceneLoader\GameSceneLoad</Filter>
+      <Filter>LoadSceneTex\GameSceneLoad</Filter>
     </ClInclude>
     <ClInclude Include="SceneLoader\GameEndSceneLoad\GameEndSceneLoad.h">
-      <Filter>SceneLoader\GameEndSceneLoad</Filter>
+      <Filter>LoadSceneTex\GameEndSceneLoad</Filter>
     </ClInclude>
     <ClInclude Include="SceneLoader\HelpSceneLoad\HelpSceneLoad.h">
-      <Filter>SceneLoader\HelpSceneLoad</Filter>
+      <Filter>LoadSceneTex\HelpSceneLoad</Filter>
     </ClInclude>
     <ClInclude Include="SceneLoader\SelectSceneLoad\SelectSceneLoad.h">
-      <Filter>SceneLoader\SelectSceneLoad</Filter>
+      <Filter>LoadSceneTex\SelectSceneLoad</Filter>
     </ClInclude>
     <ClInclude Include="SceneLoader\TitleSceneLoad\TitleSceneLoad.h">
-      <Filter>SceneLoader\TitleSceneLoad</Filter>
+      <Filter>LoadSceneTex\TitleSceneLoad</Filter>
     </ClInclude>
     <ClInclude Include="Collision\ShapeBase.h">
       <Filter>Collision</Filter>
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="Collision\CollisionCalc\AnyCollision.h">
       <Filter>Collision\CollisionCalc</Filter>
+</ClInclude>
+    <ClInclude Include="Player\FlutePlayer\FlutePlayer.h">
+      <Filter>Player\FlutePlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

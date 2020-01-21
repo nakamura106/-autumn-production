@@ -26,6 +26,7 @@ public:
 	void SetPlayerDirection(int direction_) { m_Pdirection = direction_; }
 	void SetPlayerCenter(Position position_) { m_centerpos = position_; }
 	void SetPlayerEffect(P_effect effect_);
+	void SetWaveState(WaveState wave_state_) { m_wave_state = wave_state_; }
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -40,11 +41,18 @@ public:
 	float GetfgPos(){ return m_fg; }
 	float Getfloor1Pos() { return m_floor1; }
 	float GetPlayerMapPos() { return m_map_pos; }
+
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
+
+	bool GetIsSleepMax() { return m_sleep_gauge >= Sleep_Gauge_Max; }
+	bool GetIsFatigueGauge() { return m_fatigue_gauge >= Fatigue_Gauge_Max; }
+
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
+
 	Position GetPlayerCenter(); 
+	WaveState GetWaveState() { return m_wave_state; }
 	
 
 protected:
@@ -76,6 +84,7 @@ private:
 
 	int m_Pdirection;
 	Position m_centerpos;
+	WaveState m_wave_state;
 
 private:
 	static DataBank* p_instance;

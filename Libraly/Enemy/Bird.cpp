@@ -2,7 +2,7 @@
 #include"../Bullet/ShitBullet.h"
 
 Bird::Bird()
-	:EnemyBase(0.f, EnemyID::Seagull)
+	:EnemyBase(0.f, EnemyID::Seagull, 2, 512.f)
 {
 
 	LoadAIData(M_AIDataFileName);
@@ -11,8 +11,11 @@ Bird::Bird()
 	m_savetime_shit_cycle = FlameTimer::GetNowFlame();
 	m_is_init_motion_end = false;
 	m_shot_adjust.x = m_draw_param.tex_size_x / 2.f;
-	m_shot_adjust.y = m_draw_param.tex_size_y - 300.f;
-	
+	m_shot_adjust.y = m_draw_param.tex_size_y - 200.f;
+
+	m_speed_y_default = m_speed;
+	--m_anim_param.change_flame;
+
 }
 
 Bird::~Bird()
@@ -82,7 +85,19 @@ void Bird::EnemyAttack2()
 
 		for (int i = 0;i < 3;++i) {
 			//弾発射
-			CreateBullet(static_cast<Direction>(m_direction),m_speed, m_speed + (float)i, true, 45);
+			CreateBullet(
+				static_cast<Direction>(m_direction),
+				m_speed, 
+				m_speed + (float)i, 
+				true, 
+				45,
+				GameEnemy_Bullet_Normal,
+				1,
+				2,
+				1,
+				1
+			);
+
 		}
 
 	}
@@ -111,6 +126,22 @@ void Bird::EnemyFly()
 	}
 }
 
+void Bird::EnemyMove()
+{
+	EnemyBase::EnemyMove();
+
+	FlyDeceleration(1.8f);
+}
+
+void Bird::EnemyWait()
+{
+	EnemyBase::EnemyWait();
+
+	if (m_is_flying == true) {
+		FlyDeceleration(1.8f);
+	}
+}
+
 void Bird::FlyStateRise()
 {
 	//モーション切り替え処理
@@ -130,8 +161,16 @@ void Bird::FlyStateRise()
 
 	}
 
-	//上空に飛んでいく
-	m_pos.y -= m_speed;
+	if (GetAnimationTexNum() >= 2) {
+		//上空に飛んでいく
+		m_pos.y -= m_speed_y_default;
+
+		m_speed_y_default -= M_FLY_DECELERASION;
+
+	}
+	else {
+		m_speed_y_default = m_speed;
+	}
 
 	//上空まで飛んだ
 	if (m_pos.y <= M_SKY_HEIGHT) {
@@ -164,9 +203,9 @@ void Bird::FlyStateFall()
 	}
 
 	//移動処理等
-	if (m_pos.y >= M_INIT_POS_Y) {
+	if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f) {
 
-		m_pos.y = M_INIT_POS_Y;
+		m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f;
 
 		m_animation_stop = false;
 
@@ -209,7 +248,6 @@ void Bird::CreateShitBullet()
 
 void Bird::InitAllState()
 {
-
 	EnemyBase::InitAllState();
 
 	//現在のフレームを取得
@@ -223,3 +261,16 @@ void Bird::InitAllState()
 	m_anim_param.split_width = 4;
 
 }
+
+void Bird::FlyDeceleration(float default_speed_)
+{
+	if (GetAnimationTexNum() >= 2) {
+		m_pos.y -= m_speed_y_default;
+
+		m_speed_y_default -= M_FLY_DECELERASION;
+	}
+	else {
+		m_speed_y_default = default_speed_;
+	}
+}
+

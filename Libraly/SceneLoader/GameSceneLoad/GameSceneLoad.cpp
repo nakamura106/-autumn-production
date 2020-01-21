@@ -46,8 +46,10 @@ void GameSceneLoad()
 
 		//弾
 		LoadTexture("Res/Tex/Enemy/Gorilla/Boss3_Bullet.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Shit);
+		LoadTexture("Res/Tex/Enemy/Gorilla/gorira_syogekiha_E.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Inpact);
 		//!<ゴリラの画像読込ここまで
 		break;
+
 	case (int)MapType::SeaMap:
 		//!<海マップの画像読込
 		LoadTexture("Res/Tex/Map/海/Sea2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);
@@ -91,6 +93,7 @@ void GameSceneLoad()
 		LoadTexture("Res/Tex/Enemy/Bird/Boss2_HaneGreen.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemy_Bullet_Normal);
 		//!<鳥の画像読込ここまで
 		break;
+
 	case (int)MapType::WoodsMap:
 		//!<森マップの画像読込
 		LoadTexture("Res/Tex/Map/森/Woods2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamefloorTex);
@@ -153,7 +156,21 @@ void GameSceneLoad()
 		//!<トランペットプレーヤーここまで
 		break;
 	case (int)Player::PlayerTypeFlute:
-		
+		LoadTexture("Res/Tex/FlutePlayer/Player_Taiki_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Taiki_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Attack_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Attack_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Damage_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Damage_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Jump_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Jump_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_JumpAttack_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_JumpAttack_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpAttack_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_JumpDamage_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_JumpDamage_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_JumpDamage_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Walk_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_Walk_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Walk_RightTex);
+
 		break;
 	case (int)Player::PlayerTypeTuba:
 		//!<チューバプレイヤー画像読込

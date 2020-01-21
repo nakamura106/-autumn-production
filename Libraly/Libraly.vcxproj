@@ -188,6 +188,7 @@
     <ClCompile Include="Map\SeaMap\SeaMap.cpp" />
     <ClCompile Include="Map\WoodsMap\WoodsMap.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
+    <ClCompile Include="Player\FlutePlayer\FlutePlayer.cpp" />
     <ClCompile Include="Player\PlayerBase.cpp" />
     <ClCompile Include="Player\TrpPlayer.cpp" />
     <ClCompile Include="Player\TubaPlayer\TubaPlayer.cpp" />
@@ -269,6 +270,7 @@
     <ClInclude Include="Map\WoodsMap\WoodsMap.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Object\ObjectBase.h" />
+    <ClInclude Include="Player\FlutePlayer\FlutePlayer.h" />
     <ClInclude Include="Player\PlayerBase.h" />
     <ClInclude Include="Player\TrpPlayer.h" />
     <ClInclude Include="Player\TubaPlayer\TubaPlayer.h" />

@@ -55,11 +55,14 @@ void EffectBase::Draw()
 
 void EffectBase::WakeUp()
 {
+	
 	m_IsActive = true;
 }
 
 void EffectBase::Sleep()
 {
+	m_draw_param.tu = 1.0;
+	m_draw_param.tv = 1.0;
 	m_IsActive = false;
 }
 

@@ -14,7 +14,8 @@ public:
 		Direction direction_, 
 		ObjectRavel obj_ravel_, 
 		float speed_y_ = 0.f, 
-		int draw_angle_ = 0
+		int draw_angle_ = 0,
+		int tex_size = 128.f
 	);
 	~BulletBase();
 	virtual void Init();
