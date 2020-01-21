@@ -95,10 +95,7 @@ void PlayerBullet::Update()
 {
 	BulletBase::Update();
 
-
 	CalcDrawPosition();
-
-	//MoveUpdate();
 
 	AnimationUpdate();
 }
@@ -111,7 +108,7 @@ void PlayerBullet::MoveUpdate()
 		BulletBase::MoveUpdate();
 		break;
 	case (int)Player::PlayerTypeFlute:
-		
+		MoveFluteUpdate();
 		break;
 	case (int)Player::PlayerTypeTuba:
 		MoveTubaUpdate();
@@ -123,6 +120,8 @@ void PlayerBullet::MoveUpdate()
 
 void PlayerBullet::MoveFluteUpdate()
 {
+
+
 
 }
 
