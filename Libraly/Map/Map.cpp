@@ -5,6 +5,7 @@
 #include"../DataBank/DataBank.h"
 #include"../Player/TrpPlayer.h"
 #include"../Manager/ObjectManager.h"
+#include"../Object/Definition.h"
 
 
 
@@ -53,7 +54,7 @@ void Map::Update()
 		MapScroll(LEFT);
 	}
 	//HitJudgement();
-	
+
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
 
@@ -95,6 +96,7 @@ void Map::Draw()
 	DrawTexture(obj[2], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject3));
 }
 
+
 void Fg::Init()
 {
 	fg = 0;
@@ -126,8 +128,6 @@ void Fg::Update()
 		MapScroll(LEFT);
 	}
 	
-	
-	
 }
 
 void Fg::MapScroll(int direction)
@@ -146,3 +146,4 @@ void Fg::Draw()
 {
 	DrawTexture(fg, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GameFgTex));
 }
+

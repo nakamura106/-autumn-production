@@ -42,6 +42,7 @@ public:
 	float GetPlayerMapPos() { return m_map_pos; }
 	float GetSleepGauge() { return m_sleep_gauge; }
 	float GetFatigueGauge() { return m_fatigue_gauge; }
+	
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
 	Position GetPlayerCenter(); 
@@ -67,6 +68,7 @@ private:
 	float m_map_pos;
 	float m_fg;
 	float m_floor1;
+	
 	
 	float m_sleep_gauge, m_fatigue_gauge;
 
