@@ -120,6 +120,10 @@ int ObjectBase::GetAnimationTexNum()
 	return (((int)m_draw_param.tv - 1) * m_anim_param.split_width + (int)m_draw_param.tu);
 }
 
+void ObjectBase::CollisionParamUpdate()
+{
+}
+
 
 void ObjectBase::SetRectangle()
 {

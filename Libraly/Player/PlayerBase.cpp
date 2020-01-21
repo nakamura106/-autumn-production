@@ -6,6 +6,10 @@
 #include "../Effect/Effects/FailureEffect.h"
 #include "../Effect/Effects/LandingEffect.h"
 #include "../Effect/Effects/ShotEffect.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Collision/ShapeType/ShapeRect.h"
+#include "../Manager/CollisionManager.h"
+#include "../Manager/ObjectManager.h"
 
 
 PlayerBase::PlayerBase()
@@ -27,15 +31,14 @@ PlayerBase::PlayerBase()
 
 	m_effect = (int)P_effect::None;
 
+	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, this->GetPos().y, 150.0f));
+	
 
 	m_animtimer = 0;
 	m_effecttimer = 16;
 	m_is_miss = false;
 	AllInitEffect();
 
-	// m_effect_list.at(1)->WakeUp();
-	// m_effect_list.at(2)->WakeUp();
-	// m_effect_list.at(3)->WakeUp();	
 }
 
 PlayerBase::~PlayerBase()
@@ -61,7 +64,7 @@ void PlayerBase::Update()
 	ChangeState();
 	Atkjudge();
 
-	
+	CollisionParamUpdate();
 
 	AllUpdateEffect();
 
@@ -69,8 +72,6 @@ void PlayerBase::Update()
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
 	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 	DataBank::Instance()->SetPlayerDirection(m_direction);
-	
-
 	
 }
 
@@ -536,6 +537,15 @@ void PlayerBase::AllDrawEffect()
 		m_effect_list.at(2)->Draw();
 		m_effect_list.at(3)->Draw();
 		m_effect_list.at(4)->Draw();
+}
+
+void PlayerBase::CollisionParamUpdate()
+{
+	for (const auto& i : m_shape_list)
+	{
+		i->Update(this->GetPos().x, this->GetPos().y);
+	}
+	CollisionManager::GetInstance().AddPlayerColObject(this);
 }
 
 void PlayerBase::InitWaitState() 

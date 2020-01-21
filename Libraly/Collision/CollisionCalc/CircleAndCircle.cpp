@@ -27,8 +27,8 @@ bool CircleAndCircle::CollisionCalc(const ShapeBase& shape1, const ShapeBase& sh
 	m_circle1_centerY = shape1.GetCenterY();
 	
 	m_circle2_radius = shape2.GetRadius();
-	m_circle2_centerX = shape1.GetCenterX();
-	m_circle2_centerY = shape1.GetCenterY();
+	m_circle2_centerX = shape2.GetCenterX();
+	m_circle2_centerY = shape2.GetCenterY();
 
 	m_sumX = m_circle1_centerX - m_circle2_centerX;
 	m_sumY = m_circle1_centerY - m_circle2_centerY;

@@ -11,6 +11,7 @@
 #include"../Bullet/PlayerBullet.h"
 #include"../Engine/FlameTimer.h"
 #include "../DataBank/DataBank.h"
+#include "../Manager/CollisionManager.h"
 #include"../SceneLoader/GameSceneLoad/GameSceneLoad.h"
 
 
@@ -71,6 +72,8 @@ void MainGameScene()
 	// UpdateInput();
 	
 	ObjectManager::Instance()->Update();
+
+	CollisionManager::GetInstance().Update();
 
 	UiManager::Instance()->Update();
 

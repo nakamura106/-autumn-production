@@ -5,6 +5,9 @@
 #include"../DataBank/DataBank.h"
 #include "../Effect/Effects/DieEffect.h"
 #include "../Effect/Effects/SleepEffect.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Manager/CollisionManager.h"
+#include "../Manager/ObjectManager.h"
 #include<stdlib.h>
 
 
@@ -55,6 +58,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	AllInitEffect();
 
 	DataBank::Instance()->SetIsGameClear(false);
+
+	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, this->GetPos().y, 200.0f));
+	
 
 }
 
@@ -140,10 +146,18 @@ void EnemyBase::Update()
 	//マップスクロールの位置計算
 	CalcDrawPosition();
 
+	// 当たり判定更新関数
+	CollisionParamUpdate();
+
+	// エフェクトアップデート関数まとめ
+	AllUpdateEffect();
+
 	//データバンクへの値受け渡し
 	DataSetUpdate();
 
-	AllUpdateEffect();
+	
+
+	
 
 }
 
@@ -1353,6 +1367,16 @@ void EnemyBase::AllDrawEffect()
 {
 	m_effect_list.at(0)->Draw();
 	m_effect_list.at(1)->Draw();
+}
+
+void EnemyBase::CollisionParamUpdate()
+{
+	for (const auto& i : m_shape_list)
+	{
+		i->Update(this->GetPos().x, this->GetPos().y);
+	}
+	CollisionManager::GetInstance().AddEnemyColObject(this);
+
 }
 
 

@@ -1,4 +1,5 @@
 #include "ShapeBase.h"
+#include "../Manager/ObjectManager.h"
 
 ShapeBase::ShapeBase()
 {
@@ -14,3 +15,11 @@ ShapeBase::ShapeBase()
 ShapeBase::~ShapeBase()
 {
 }
+
+void ShapeBase::Update(float x, float y)
+{
+	m_CenterX = x;
+	m_CenterY = y;
+}
+
+

@@ -43,12 +43,18 @@ void CollisionManager::Init()
 
 void CollisionManager::Update()
 {
-	AllHitTest();
+	// AllHitTest();
 
 	PlayerAndEnemyCol();
 	PlayerAndEBulletCol();
 	PlayerAndMapObjCol();
 	EnemyAndPBulletCol();
+
+	m_player_obj_list.clear();
+	m_enemy_obj_list.clear();
+	m_map_obj_list.clear();
+	m_pBullet_obj_list.clear();
+	m_eBullet_obj_list.clear();
 
 }
 
@@ -81,7 +87,11 @@ void CollisionManager::PlayerAndEnemyCol()
 	{
 		for (const auto& j : m_enemy_obj_list)
 		{
-			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
+			{
+				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
+				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+			}
 		}
 	}
 
@@ -93,7 +103,11 @@ void CollisionManager::PlayerAndEBulletCol()
 	{
 		for (const auto& j : m_eBullet_obj_list)
 		{
-			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
+			{
+				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
+				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+			}
 		}
 	}
 }
@@ -104,7 +118,11 @@ void CollisionManager::PlayerAndMapObjCol()
 	{
 		for (const auto& j : m_map_obj_list)
 		{
-			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
+			{
+				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
+				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+			}
 		}
 	}
 }
@@ -115,7 +133,11 @@ void CollisionManager::EnemyAndPBulletCol()
 	{
 		for (const auto& j : m_enemy_obj_list)
 		{
-			RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList());
+			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
+			{
+				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
+				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+			}
 		}
 	}
 }

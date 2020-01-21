@@ -10,6 +10,8 @@ public:
 	ShapeBase();
 	virtual ~ShapeBase();
 
+	void Update(float x, float y);
+
 	virtual ShapeType GetShapeType()const = 0;
 
 	float GetCenterX()const { return m_CenterX; }
