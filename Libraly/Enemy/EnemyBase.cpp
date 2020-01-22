@@ -59,7 +59,6 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	AllInitEffect();
 
 	DataBank::Instance()->SetIsGameClear(false);
-
 	m_shape_list.push_back(new ShapeRect(this->GetPos().x, 131.0f, this->GetPos().y, 366.0f, 70.0f, 148.0f));
 	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 249.0f, this->GetPos().y, 363.0f, 195.0f));
 	m_shape_list.push_back(new ShapeRect(this->GetPos().x, 352.0f, this->GetPos().y, 372.0f, 80.0f, 145.0f));
@@ -1396,10 +1395,12 @@ void EnemyBase::AllDrawEffect()
 
 void EnemyBase::CollisionParamUpdate()
 {
+
 	for (const auto& i : m_shape_list)
 	{
-		i->Update(this->GetPos().x, this->GetPos().y);
+		i->Update(this->GetPos().x + m_draw_param.tex_size_x / 2.f, this->GetPos().y + m_draw_param.tex_size_x / 1.5f);
 	}
+
 	CollisionManager::GetInstance().AddEnemyColObject(this);
 
 }

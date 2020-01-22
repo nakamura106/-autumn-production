@@ -18,7 +18,6 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	SetPlayerBulletInfo();
 
 
-
 	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 0.0f, this->GetPos().y, 0.0f, 50.0f));
 
 	m_upward_thrust = 25.0f;
@@ -119,9 +118,10 @@ void PlayerBullet::Update()
 
 	AnimationUpdate();
 
-	CollisionParamUpdate();
-
 	BulletBase::Update();
+
+	if (m_is_delete != true)CollisionParamUpdate();
+
 }
 
 void PlayerBullet::CollisionParamUpdate()
