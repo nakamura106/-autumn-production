@@ -22,10 +22,11 @@ CircleAndCircle::~CircleAndCircle()
 
 bool CircleAndCircle::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2)
 {
+	
 	m_circle1_radius = shape1.GetRadius();
 	m_circle1_centerX = shape1.GetCenterX();
 	m_circle1_centerY = shape1.GetCenterY();
-	
+
 	m_circle2_radius = shape2.GetRadius();
 	m_circle2_centerX = shape2.GetCenterX();
 	m_circle2_centerY = shape2.GetCenterY();

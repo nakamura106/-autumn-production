@@ -10,7 +10,7 @@ public:
 	ShapeBase();
 	virtual ~ShapeBase();
 
-	void Update(float x, float y);
+	void Update(float x, float y, int direction);
 
 	virtual ShapeType GetShapeType()const = 0;
 
@@ -21,6 +21,8 @@ public:
 	float GetSideY()const { return m_side_y; }
 
 	float GetRadius()const { return m_radius; }
+
+	int GetDirection()const { return m_direction; }
 
 protected:
 	ShapeType m_shape_type;
@@ -33,6 +35,10 @@ protected:
 	float m_radius;
 	// GetPosからのオフセット値
 	float m_offset_x, m_offset_y;
+	// オブジェクトの左右情報
+	int m_direction;
+	// 画像サイズ X
+	float m_tex_x;
 
 };
 

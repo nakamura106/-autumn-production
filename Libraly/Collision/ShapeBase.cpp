@@ -18,10 +18,19 @@ ShapeBase::~ShapeBase()
 {
 }
 
-void ShapeBase::Update(float x, float y)
+void ShapeBase::Update(float x, float y, int direction)
 {
-	m_CenterX = x + m_offset_x;
+	m_direction = direction;
+	if (m_direction == Direction::LEFT)
+	{
+		m_CenterX = x + m_offset_x;
+	}
+	else {
+		m_CenterX = x + m_tex_x - m_offset_x;
+	}
 	m_CenterY = y + m_offset_y;
+
+	
 }
 
 
