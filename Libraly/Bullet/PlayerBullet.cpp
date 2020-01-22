@@ -1,7 +1,9 @@
 #include "PlayerBullet.h"
 #include "../DataBank/DataBank.h"
+#include"../Manager/ObjectManager.h"
 #include "../Collision/ShapeType/ShapeCircle.h"
 #include "../Manager/CollisionManager.h"
+#include<math.h>
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_,ObjectRavel::Ravel_PlayerBullet)
@@ -20,6 +22,13 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 
 	m_upward_thrust = 25.0f;
 
+	homingcount = 0;
+
+	m_angle = 0;
+	m_target.x = 0;
+	m_target.y = 0;
+	m_move.x = 0;
+	m_move.y = 0;
 
 }
 
@@ -103,13 +112,15 @@ void PlayerBullet::Draw()
 
 void PlayerBullet::Update()
 {
-	BulletBase::Update();
+	
 
 	CalcDrawPosition();
 
 	AnimationUpdate();
 
 	CollisionParamUpdate();
+
+	BulletBase::Update();
 }
 
 void PlayerBullet::CollisionParamUpdate()
@@ -142,7 +153,25 @@ void PlayerBullet::MoveUpdate()
 void PlayerBullet::MoveFluteUpdate()
 {
 
+	if (homingcount <= 50)
+	{
+		m_target.x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos() - m_map_pos;
+		m_target.y = (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().y + 300.0f) - m_pos.y;
+		m_angle = atan2f(m_target.y, m_target.x);
+		m_move.x = cos(m_angle) * 5;
+		m_move.y = sin(m_angle) * 5;
+	}
+		
+		m_map_pos += m_move.x;
+		m_pos.y += m_move.y;
+	if (homingcount >= 150)
+	{
+		homingcount = 0;
+		m_is_delete = true;
+	}
+	homingcount++;
 
+	
 
 }
 
