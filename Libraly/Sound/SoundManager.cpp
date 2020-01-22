@@ -41,7 +41,7 @@ void SoundManager::RegisterEndSound()
 
 void SoundManager::UpdatePlaySound()
 {
-<<<<<<< HEAD
+
 	m_pAudio->Play(m_bgm, -1000, true);
 	
 	// m_pAudio->Play(m_se2, 0, false);
@@ -50,10 +50,6 @@ void SoundManager::UpdatePlaySound()
 void SoundManager::SoundClickSE()
 {
 	m_pAudio->Play(m_se2, 0, false);
-=======
-	AudioPlayer::GetInstance()->Play(m_bgm, 0, true);
-
->>>>>>> master
 }
 
 void SoundManager::ReleaseTitleSound()
