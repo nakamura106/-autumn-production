@@ -50,6 +50,7 @@ void InitTitleScene()
 	title_obj.Init();
 	TitleSceneLoad();
 	SoundManager::Instance()->RegisterTitleSound();
+	SoundManager::Instance()->UpdatePlaySound();
 
 	ChangeSceneStep(SceneStep::MainStep);
 }
@@ -58,7 +59,7 @@ void InitTitleScene()
 void MainTitleScene()
 {
 	title_obj.Update();
-	SoundManager::Instance()->UpdatePlaySound();
+	
 }
 
 SceneId FinishTitleScene()

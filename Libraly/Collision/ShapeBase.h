@@ -31,6 +31,8 @@ protected:
 	float m_side_x, m_side_y;
 	// 円の半径
 	float m_radius;
+	// GetPosからのオフセット値
+	float m_offset_x, m_offset_y;
 
 };
 

@@ -5,6 +5,7 @@
 #include "../Scene.h"
 #include"../../DataBank/DataBank.h"
 #include"../../Object/Definition.h"
+#include "../../Sound/SoundManager.h"
 
 SelectSceneObject::SelectSceneObject()
 {
@@ -55,7 +56,8 @@ void SelectSceneObject::Init()
 	m_pos[8].x = 850.0f;
 	m_pos[8].y = 200.0f;
 	
-
+	SoundManager::Instance()->RegisterSelectSound();
+	SoundManager::Instance()->UpdatePlaySound();
 
 }
 
@@ -108,6 +110,7 @@ void SelectSceneObject::BossSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::WoodsMap);
 			is_brass_scene = true;
 
@@ -122,6 +125,7 @@ void SelectSceneObject::BossSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::SeaMap);
 			is_brass_scene = true;
 		}
@@ -136,6 +140,7 @@ void SelectSceneObject::BossSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::CityMap);
 			is_brass_scene = true;
 		}
@@ -164,6 +169,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
 			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);
@@ -178,6 +184,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeFlute);
 			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);
@@ -193,6 +200,7 @@ void SelectSceneObject::BrassSelectUpdate()
 		is_hit_mouse = true;
 		if (OnMouseDown(Left) == true)
 		{
+			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTuba);
 			is_brass_scene = false;
 			ChangeSceneStep(SceneStep::EndStep);

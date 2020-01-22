@@ -44,12 +44,21 @@ bool CircleAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shap
 		m_rect_halfY = shape1.GetSideY() / 2.0f;
 	}
 
-	m_sumX = m_circle_radius + m_rect_halfX;
-	m_sumY = m_circle_radius + m_rect_halfY;
-
-	if (m_sumX <= m_circle_centerX + m_rect_centerX)
+	m_sumX = m_circle_centerX - m_rect_centerX;
+	m_sumY = m_circle_centerY - m_rect_centerY;
+	if (m_sumX < 0.f)
 	{
-		if (m_sumY <= m_circle_centerY + m_rect_centerY)
+		m_sumX *= -1.0f;
+	}
+	if (m_sumY < 0.f)
+	{
+		m_sumY *= -1.0f;
+	}
+
+
+	if (m_sumX <= m_circle_radius + m_rect_halfX)
+	{
+		if (m_sumY <= m_circle_radius + m_rect_halfY)
 		{
 			return true;
 		}

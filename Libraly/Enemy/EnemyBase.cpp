@@ -6,6 +6,7 @@
 #include "../Effect/Effects/DieEffect.h"
 #include "../Effect/Effects/SleepEffect.h"
 #include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Collision/ShapeType/ShapeRect.h"
 #include "../Manager/CollisionManager.h"
 #include "../Manager/ObjectManager.h"
 #include<stdlib.h>
@@ -59,7 +60,9 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 
 	DataBank::Instance()->SetIsGameClear(false);
 
-	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, this->GetPos().y, 200.0f));
+	m_shape_list.push_back(new ShapeRect(this->GetPos().x, 131.0f, this->GetPos().y, 366.0f, 70.0f, 148.0f));
+	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 249.0f, this->GetPos().y, 363.0f, 195.0f));
+	m_shape_list.push_back(new ShapeRect(this->GetPos().x, 352.0f, this->GetPos().y, 372.0f, 80.0f, 145.0f));
 	
 
 }

@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "SceneObject/SelectSceneObject.h"
 #include"../SceneLoader/SelectSceneLoad/SelectSceneLoad.h"
+#include "../Sound/SoundManager.h"
 
 SelectSceneObject select_object;
 
@@ -50,6 +51,7 @@ void InitSelectScene()
 
 	SelectSceneLoad();
 
+
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
@@ -59,10 +61,13 @@ void MainSelectScene()
 {
 	select_object.Update();
 
+	
+
 }
 
 SceneId FinishSelectScene()
 {
+	SoundManager::Instance()->ReleaseSelectSound();
 	ReleaseCategoryTexture(TEXTURE_CATEGORY_SELECT);
 	return SceneId::GameScene;
 

@@ -10,6 +10,8 @@ ShapeBase::ShapeBase()
 	m_side_x = 0.f;
 	m_side_y = 0.f;
 	m_radius = 0.f;
+	m_offset_x = 0.f;
+	m_offset_y = 0.f;
 }
 
 ShapeBase::~ShapeBase()
@@ -18,8 +20,8 @@ ShapeBase::~ShapeBase()
 
 void ShapeBase::Update(float x, float y)
 {
-	m_CenterX = x;
-	m_CenterY = y;
+	m_CenterX = x + m_offset_x;
+	m_CenterY = y + m_offset_y;
 }
 
 
