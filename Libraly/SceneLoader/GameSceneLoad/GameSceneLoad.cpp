@@ -220,6 +220,7 @@ void GameSceneLoad()
 	LoadTexture("Res/Tex/EnemyUi/FatigueGauge.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyFatigueGauge);
 	LoadTexture("Res/Tex/EnemyUi/FatigueCircle.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyFatigueCircle);
 	LoadTexture("Res/Tex/EnemyUi/AutoHealGauge.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyAutoHealGauge);
+	LoadTexture("Res/Tex/EnemyUi/LifeGaugeBase.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyGaugeBase);
 
 	LoadTexture("Res/Tex/Chabon Melody/Blue_Center.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBulletUi_BlueCenter);
 	LoadTexture("Res/Tex/Chabon Melody/Blue_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBulletUi_BlueLeft);
@@ -243,8 +244,13 @@ void GameSceneLoad()
 	LoadTexture("Res/Tex/EnemyUi/EnemyAchieve.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyAchieveUi);
 
 	LoadTexture("Res/Tex/EnemyUi/LifeBaseBar.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyUi);
+	LoadTexture("Res/Tex/EnemyUi/LifebaseBar1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyUi1);
+	LoadTexture("Res/Tex/EnemyUi/LifebaseBar2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemyUi2);
 
-	LoadTexture("Res/Tex/Performance Symbol.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerUi);
+	LoadTexture("Res/Tex/EnemyUi/LifeBarCut1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameLifeBarCut1);
+	LoadTexture("Res/Tex/EnemyUi/LifeBarCut2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameLifeBarCut2);
+
+	LoadTexture("Res/Tex/PlayerUi/Performance Symbol.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerUi);
 	//!<UI‰æ‘œ“Çž‚±‚±‚Ü‚Å
 
 

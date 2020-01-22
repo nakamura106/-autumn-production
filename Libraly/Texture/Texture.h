@@ -121,12 +121,17 @@ GamePlayerHp_3Tex,				//!<プレイヤー耐久残り2
 GamePlayerHp_2Tex,				//!<プレイヤー耐久残り1
 GamePlayerHp_1Tex,				//!<プレイヤー耐久残り0
 GameEnemyUi,					//!<エネミーUIの基盤
+GameEnemyUi1,
+GameEnemyUi2,
 GameEnemySleepGauge,			//!<眠気ゲージ
 GameEnemyFatigueGauge,			//!<疲労ゲージ
+GameEnemyGaugeBase,				//!<ライフゲージの一番下
 GameEnemyAutoHealGauge,			//!<自動回復ライン
 GameEnemySleepCircle,			//!<眠気円
 GameEnemyFatigueCircle,			//!<疲労円
 GameEnemyAchieveUi,				//!<敵ドロップアイテム
+GameLifeBarCut1,				
+GameLifeBarCut2,
 
 
 /*Enemy用*/
