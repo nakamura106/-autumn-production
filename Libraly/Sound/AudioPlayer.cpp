@@ -5,7 +5,6 @@
 //  サウンドプレーヤー
 //==========================================
 
-
 bool AudioPlayer::Load(std::string alias, std::string file_name) {
 
 	//まだ読み込んでいないサウンドデータである
@@ -107,7 +106,7 @@ AudioPlayer::~AudioPlayer() {
 			continue;
 		}
 		sound->Release();
-		m_SoundData.erase(data.first);
+		//m_SoundData.erase(data.first);
 	}
 	m_SoundData.clear();
 

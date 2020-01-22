@@ -15,7 +15,7 @@ SoundManager* SoundManager::Instance()
 void SoundManager::RegisterTitleSound()
 {
 	m_bgm_file = "Res/Wav/GetItem.wav";
-	// AudioPlayer::GetInstance()->Load(m_bgm, m_bgm_file);
+	AudioPlayer::GetInstance()->Load(m_bgm, m_bgm_file);
 }
 
 void SoundManager::RegisterSelectSound()
