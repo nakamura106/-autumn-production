@@ -43,6 +43,8 @@ enum SelectCategoryTextureList
 	ClearSymbolTex,
 	CompleteSymbolTex,
 	BossMouseImageTex,
+	BossBirdImageTex,
+	BossGorillaImageTex,
 	SpotlightTex,
 	TimeSymbolTex,
 	NumberCollectedTex,

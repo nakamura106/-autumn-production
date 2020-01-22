@@ -8,6 +8,8 @@ void SelectSceneLoad()
 	LoadTexture("Res/Tex/SelectScene/BossSelect.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::BossSelectBottonTex);
 	LoadTexture("Res/Tex/SelectScene/BrassSelect.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::BrassSelectBottonTex);
 	LoadTexture("Res/Tex/SelectScene/Boss1Image.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::BossMouseImageTex);
+	LoadTexture("Res/Tex/SelectScene/Boss2Image.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::BossBirdImageTex);
+	LoadTexture("Res/Tex/SelectScene/Boss3Image.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::BossGorillaImageTex);
 	LoadTexture("Res/Tex/SelectScene/Clear.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::ClearSymbolTex);
 	LoadTexture("Res/Tex/SelectScene/Complete.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::CompleteSymbolTex);
 	LoadTexture("Res/Tex/SelectScene/Time.png", TEXTURE_CATEGORY_SELECT, SelectCategoryTextureList::TimeSymbolTex);
