@@ -18,7 +18,7 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	SetPlayerBulletInfo();
 
 
-	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 0.0f, this->GetPos().y, 0.0f, 50.0f));
+	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 84.0f, this->GetPos().y, 73.0f, 29.0f));
 
 	m_upward_thrust = 25.0f;
 
