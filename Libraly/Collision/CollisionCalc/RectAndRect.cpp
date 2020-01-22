@@ -51,9 +51,8 @@ bool RectAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shape2
 			return true;
 		}
 	}
-	else
-	{
-		return false;
-	}
-	
+
+
+	return false;
+
 }

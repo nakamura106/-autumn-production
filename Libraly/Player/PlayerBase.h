@@ -8,6 +8,8 @@
 #include"../Bullet/PlayerBullet.h"
 #include<vector>
 
+const float G_PLAYER_SIZE = 256.0f;
+
 class PlayerBase :public ObjectBase
 {
 public:
@@ -60,8 +62,6 @@ public:
 
 	void CollisionParamUpdate()override;
 
-	
-
 protected:
 	bool	m_do_jump;						//ƒWƒƒƒ“ƒv”»’è
 	bool	m_is_miss;
@@ -86,7 +86,5 @@ protected:
 
 	
 private:
-	const float M_PLAYER_SIZE=256.0f;
-
 	const float M_BULLET_SPEED = 7.f;
 };

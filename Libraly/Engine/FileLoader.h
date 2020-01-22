@@ -4,7 +4,7 @@
 #include<string>
 #include<fstream>
 #include<sstream>
-
+#include<random>
 
 /*
 データ保存クラス
@@ -13,6 +13,10 @@
 
 //文字から数値への変換
 int AtoI(std::string str);
+
+namespace RandomTool {
+	int GetRandom();
+}
 
 namespace FileLoadTool {
 	//vector二重配列
@@ -32,7 +36,7 @@ namespace FileLoadTool {
 	template<typename T>
 	void DeleteWVector(w_vector<T*>& vec) {
 		
-		for (int i = 0;i < vec.size();i++) {
+		for (int i = 0;i < static_cast<int>(vec.size());i++) {
 			ReleaseMemory(vec[i]);
 		}
 		w_vector<T*>().swap(vec);

@@ -8,7 +8,6 @@
 #define Num_of_TakeaBreak  100		//休憩をとる（疲労度の）数値
 #define Refuge_Time	100				//逃げ回る時間
 #define Limit_of_BreakTime 100		//MAXの休憩時間
-#define Cure_of_SleepinessPoint 1	//時間回復する眠気の値
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
 //
@@ -23,8 +22,13 @@ TrpPlayer* trpplayer;
 HedgeHog::HedgeHog()
 	:EnemyBase(2.f, EnemyID::Hedgehog, 1, 512.f)
 {
-
+	//Csvファイル読み込み
 	LoadAIData(M_AIDataFileName);
+
+	//使用するAI番号の設定
+	SetAIType();
+
+	//状態設定
 	CompleteChangeState();
 
 	m_is_speed_up = false;
@@ -149,14 +153,57 @@ EnemyAIType HedgeHog::ChangeAIType()
 	//Enemyの位置や向き、プレイヤーとの関係によって
 	//次に使用するAIが変化する
 
-	if (GetNowAI() == EnemyAIType::AI1) {
-		return EnemyAIType::AI2;
-	}
-	else if (GetNowAI() == EnemyAIType::AI2) {
+	//AI1→初期AI
+	//AI2→待機・移動
+	//AI3→自動動作
+	//AI4→追跡・待機
+	//AI5→往復突進
+	//AI6→トゲ発射
+	//AI7→頭突き
+
+	EnemyAIType now_ai = GetNowAI();
+
+	//プレイヤーとエネミーの距離
+	int p_e_distance = fabsf(m_player_center_pos - m_map_pos);
+	
+	//乱数を入手
+	int random = RandomTool::GetRandom();
+
+
+	if (now_ai == EnemyAIType::AI5 ||
+		now_ai == EnemyAIType::AI6 ||
+		now_ai == EnemyAIType::AI7) {
+
+		//3種類の攻撃の後は必ず休む
 		return EnemyAIType::AI3;
+
+	}
+
+	if (m_fatigue_gage_stage == 0&&m_sleep_gage_stage==0) {
+
+		return EnemyAIType::AI2;
+
+	}
+
+	//追跡のみを行う、Player散策AI
+	if (p_e_distance >= 700.f) {
+
+		return EnemyAIType::AI4;
+
 	}
 	else {
-		return EnemyAIType::AI1;
+		//3種類の攻撃をランダムに繰り出す
+		switch (random % 3)
+		{
+		case 0:
+			return EnemyAIType::AI5;
+
+		case 1:
+			return EnemyAIType::AI6;
+
+		case 2:
+			return EnemyAIType::AI7;
+		}
 	}
 
 	return EnemyAIType::AI1;
@@ -168,3 +215,4 @@ void HedgeHog::InitAllState()
 	EnemyBase::InitAllState();
 }
 
+/*/*/

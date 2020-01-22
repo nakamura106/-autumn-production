@@ -16,7 +16,7 @@ public:
 	void SetBulletType(int bullet_type_) { m_bullet_type = bullet_type_; }
 	void SetfgPos(float fg_) { m_fg = fg_; }
 	void Setfloor1Pos(float floor1_) { m_floor1 = floor1_; }
-	void SetPlayerMapPos(int mPos) { m_map_pos = mPos; }
+	void SetPlayerMapPos(float mPos) { m_map_pos = mPos; }
 	void SetSleepGauge(float sleep_hp) { m_sleep_gauge = sleep_hp; }
 	void SetFatigueGauge(float fatigue_hp) { m_fatigue_gauge = fatigue_hp; }
 	void SetIsGameClear(bool is_game_clear_) { m_is_game_clear = is_game_clear_; }
