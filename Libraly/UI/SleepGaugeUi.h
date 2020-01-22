@@ -18,6 +18,9 @@ private:
 	Slider sliders;
 	float m_sleep_gauge;
 
+	const float SLEEPGAUGE_UI_POS_X  = 1050.0f;
+	const float SLEEPGAUGE_UI_POS_Y  = 30.0f;
+
 };
 
 #endif

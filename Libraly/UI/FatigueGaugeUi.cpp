@@ -16,8 +16,8 @@ FatigueGaugeUi::~FatigueGaugeUi()
 void FatigueGaugeUi::Init()
 {
 	
-	m_pos.x = 1050.0f;
-	m_pos.y = 30.0f;
+	m_pos.x = FATIGUE_GAUGE_POS_X;
+	m_pos.y = FATIGUE_GAUGE_POS_Y;
 	m_param.texture_id = GameCategoryTextureList::GameEnemyFatigueGauge;
 	m_fatigue_gauge = DataBank::Instance()->GetFatigueGauge();
 	

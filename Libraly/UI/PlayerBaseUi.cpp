@@ -14,8 +14,8 @@ PlayerBaseUi::~PlayerBaseUi()
 
 void PlayerBaseUi::Init()
 {
-	m_pos.x = 20.0f;
-	m_pos.y = 20.0f;
+	m_pos.x = PLAYERBASE_UI_POS_X;
+	m_pos.y = PLAYERBASE_UI_POS_Y;
 	
 
 	m_param.texture_id = GameCategoryTextureList::GamePlayerUi;

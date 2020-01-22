@@ -12,8 +12,8 @@ PlayerBrassUi::~PlayerBrassUi()
 
 void PlayerBrassUi::Init()
 {
-	m_pos.x = 100.0f;
-	m_pos.y = 70.0f;
+	m_pos.x = BRASSUI_POS_X;
+	m_pos.y = BRASSUI_POS_Y;
 	
 	if (DataBank::Instance()->GetPlayerType() == static_cast<int>(Player::PlayerTypeTrumpet))
 	{

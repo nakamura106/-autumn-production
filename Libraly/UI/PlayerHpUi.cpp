@@ -16,8 +16,8 @@ void PlayerHpUi::Init()
 {
 	
 
-	m_pos.x = 20.0f;
-	m_pos.y = 20.0f;
+	m_pos.x = PLAYERHP_UI_POS_X;
+	m_pos.y = PLAYERHP_UI_POS_Y;
 	
 	m_param.texture_id = GameCategoryTextureList::GamePlayerHp_4Tex;
 	m_hp_state = (int)PlayerHpState::Hp4;

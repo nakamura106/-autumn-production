@@ -19,6 +19,9 @@ private:
 
 	void ReleaseBulletType();
 
+	const float PLAYERBASE_UI_POS_X = 20.0f;
+	const float PLAYERBASE_UI_POS_Y = 20.0f;
+
 };
 
 #endif

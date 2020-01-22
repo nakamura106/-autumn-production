@@ -12,8 +12,8 @@ SleepGaugeUi::~SleepGaugeUi()
 
 void SleepGaugeUi::Init()
 {
-	m_pos.x = 1050.0f;
-	m_pos.y = 30.0f;
+	m_pos.x = SLEEPGAUGE_UI_POS_X;
+	m_pos.y = SLEEPGAUGE_UI_POS_Y;
 
 	m_param.texture_id = GameCategoryTextureList::GameEnemySleepGauge;
 	m_sleep_gauge = DataBank::Instance()->GetSleepGauge();

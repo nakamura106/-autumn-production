@@ -13,7 +13,8 @@ public:
 	void Update()override;
 
 private:
-
+	const float BRASSUI_POS_X = 100.0f;
+	const float BRASSUI_POS_Y = 70.0f;
 
 };
 

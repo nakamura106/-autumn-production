@@ -18,6 +18,9 @@ public:
 private:
 	Slider sliders;
 	float m_fatigue_gauge;
+
+	const float FATIGUE_GAUGE_POS_X = 1050.0f;
+	const float FATIGUE_GAUGE_POS_Y = 30.0f;
 };
 
 #endif

@@ -20,6 +20,9 @@ protected:
 private:
 	int m_hp_state;	// PlayerHP‚Ìó‘Ô‚ğ—ñ‹“Œ^‚Å•Û‘¶‚·‚é
 
+	const float PLAYERHP_UI_POS_X = 20.0f;
+	const float PLAYERHP_UI_POS_Y = 20.0f;
+
 };
 
 #endif
