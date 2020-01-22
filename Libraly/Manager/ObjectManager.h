@@ -33,7 +33,7 @@ protected:
 private:
 
 	static ObjectManager* p_instance;	
-	static const int MAX_CHARA_OBJ = 5;
+	static const int MAX_CHARA_OBJ = 7;
 	ObjectBase* chara_objects[MAX_CHARA_OBJ];
 
 };

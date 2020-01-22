@@ -34,16 +34,17 @@ public:
 	
 	
 
-	virtual void InitWaitState();		//‘Ò‹@ó‘Ô
-	virtual void InitMoveState();		//ˆÚ“®ó‘Ô
-	virtual void InitJumpState();		//“¦‘–ó‘Ô
+	virtual void InitWaitState();		
+	virtual void InitMoveState();		
+	virtual void InitJumpState();		
 	virtual void InitJumpAttackState();	
 	virtual void InitJumpDamageState();	
 	virtual void InitDamageState();		
-	virtual void InitAttackState();		//’ÇÕó‘Ô
-	virtual void InitThinkState();		//–°‚èó‘Ô
-	virtual void InitDeathState();		//€–Só‘Ô
-	virtual void InitClearState();		//ƒNƒŠƒAó‘Ô
+	virtual void InitAttackState();		
+	virtual void InitMoveAttackState();
+	virtual void InitThinkState();		
+	virtual void InitDeathState();		
+	virtual void InitClearState();		
 	virtual void InitAllState();
 
 	void Atkjudge();

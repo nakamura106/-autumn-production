@@ -11,9 +11,9 @@
 #define Cure_of_SleepinessPoint 1	//時間回復する眠気の値
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
-
-#define Fatigue_Gauge_Max 100		//疲労ゲージ上限
-#define Sleep_Gauge_Max	100			//睡眠ゲージ上限
+//
+//#define Fatigue_Gauge_Max 100		//疲労ゲージ上限
+//#define Sleep_Gauge_Max	100			//睡眠ゲージ上限
 
 #define Attack_Interval 100			//攻撃感覚
 #define HedgeHog_Speed 10			//読んで字の如く

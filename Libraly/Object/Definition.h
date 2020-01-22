@@ -101,6 +101,7 @@ enum class P_State
 	Jump_Damage,
 	Damage,
 	Attack,
+	Move_Attack,
 	Miss,
 	Landing,
 	Death,
