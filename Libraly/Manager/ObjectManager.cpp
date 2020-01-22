@@ -11,6 +11,11 @@
 #include"../Enemy/Gorilla.h"
 #include"CollisionManager.h"
 #include"../DataBank/DataBank.h"
+#include"../Object/MapObject/BananaObject.h"
+#include"../Object/MapObject/FountainObject.h"
+#include"../Object/MapObject/GrassObject.h"
+#include"../Object/MapObject/LargeGrassObject.h"
+#include"../Object/MapObject/SmallGrassObject.h"
 
 
 ObjectManager* ObjectManager::p_instance = 0;
@@ -79,31 +84,29 @@ void ObjectManager::CreateObject()
 	switch (DataBank::Instance()->GetMapType())
 	{
 	case (int)MapType::WoodsMap:
-		chara_objects[0] = new WoodsMap();
+		chara_objects[0] = new WoodsMap;
+		chara_objects[1] = new SmallGrassObject;
+		chara_objects[2] = new GrassObject;
+		chara_objects[3] = new LargeGrassObject;
+		chara_objects[4] = new HedgeHog;
+		chara_objects[6] = new WoodsFg;
 		break;
 	case (int)MapType::SeaMap:
-		chara_objects[0] = new SeaMap();
+		chara_objects[0] = new SeaMap;
+		chara_objects[1] = new Bird;
+		chara_objects[3] = new SeaFg;
 		break;
 	case (int)MapType::CityMap:
-		chara_objects[0] = new CityMap();
+		chara_objects[0] = new CityMap;
+		chara_objects[1] = new BananaObject;
+		chara_objects[2] = new FountainObject;
+		chara_objects[3] = new Gorilla;
+		chara_objects[5] = new CityFg;
 		break;
 	default:
-		chara_objects[0] = new WoodsMap();
-		break;
-	}
-	
-	switch (DataBank::Instance()->GetMapType())
-	{
-	case (int)MapType::WoodsMap:
-		chara_objects[1] = new HedgeHog();
-		break;
-	case (int)MapType::SeaMap:
-		chara_objects[1] = new Bird();
-		break;
-	case (int)MapType::CityMap:
-		chara_objects[1] = new Gorilla();
-		break;
-	default:
+		chara_objects[0] = new WoodsMap;
+		chara_objects[2] = new HedgeHog;
+		chara_objects[4] = new WoodsFg;
 		break;
 	}
 	
@@ -111,37 +114,39 @@ void ObjectManager::CreateObject()
 	switch (DataBank::Instance()->GetPlayerType())
 	{
 	case (int)Player::PlayerTypeTrumpet:
-		chara_objects[2] = new TrpPlayer;
+		for (int i = 0; i < MAX_CHARA_OBJ; i++)
+		{
+			if (chara_objects[i] == nullptr)
+			{
+				chara_objects[i] = new TrpPlayer;
+				break;
+			}
+		}
 		break;
 	case (int)Player::PlayerTypeFlute:
-		chara_objects[2] = new FlutePlayer;
+		for (int i = 0; i < MAX_CHARA_OBJ; i++)
+		{
+			if (chara_objects[i] == nullptr)
+			{
+				chara_objects[i] = new FlutePlayer;
+				break;
+			}
+		}
 		break;
 	case (int)Player::PlayerTypeTuba:
-		chara_objects[2] = new TubaPlayer;
+		for (int i = 0; i < MAX_CHARA_OBJ; i++)
+		{
+			if (chara_objects[i] == nullptr)
+			{
+				chara_objects[i] = new TubaPlayer;
+				break;
+			}
+		}
 		break;
 	default:
 		break;
 	}
 		
-	switch (DataBank::Instance()->GetMapType())
-	{
-	case (int)MapType::WoodsMap:
-		chara_objects[3] = new WoodsFg();
-		break;
-	case (int)MapType::SeaMap:
-		chara_objects[3] = new SeaFg();
-		break;
-	case (int)MapType::CityMap:
-		chara_objects[3] = new CityFg();
-		break;
-	default:
-		chara_objects[3] = new WoodsFg();
-		break;
-	}
-	
-
-	
-
 }
 
 void ObjectManager::Update()

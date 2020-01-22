@@ -18,6 +18,10 @@ void GameSceneLoad()
 		LoadTexture("Res/Tex/Map/ŠX/Town4.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameBgTex);
 		LoadTexture("Res/Tex/Map/ŠX/Town1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameFgTex);
 		//!<ŠXƒ}ƒbƒv‚Ì‰æ‘œ“Çž‚±‚±‚Ü‚Å
+		LoadTexture("Res/Tex/Map/ŠX/Object1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject2);
+		LoadTexture("Res/Tex/Map/ŠX/Object2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameObject);
+
+
 
 
 		//!<ƒSƒŠƒ‰‚Ì‰æ‘œ“Çž

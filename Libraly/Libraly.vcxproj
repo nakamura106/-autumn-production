@@ -188,6 +188,12 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\SeaMap\SeaMap.cpp" />
     <ClCompile Include="Map\WoodsMap\WoodsMap.cpp" />
+    <ClCompile Include="Object\MapObject\BananaObject.cpp" />
+    <ClCompile Include="Object\MapObject\FountainObject.cpp" />
+    <ClCompile Include="Object\MapObject\GrassObject.cpp" />
+    <ClCompile Include="Object\MapObject\LargeGrassObject.cpp" />
+    <ClCompile Include="Object\MapObject\MapObjectBase.cpp" />
+    <ClCompile Include="Object\MapObject\SmallGrassObject.cpp" />
     <ClCompile Include="Object\ObjectBace.cpp" />
     <ClCompile Include="Player\FlutePlayer\FlutePlayer.cpp" />
     <ClCompile Include="Player\PlayerBase.cpp" />
@@ -273,6 +279,12 @@
     <ClInclude Include="Map\SeaMap\SeaMap.h" />
     <ClInclude Include="Map\WoodsMap\WoodsMap.h" />
     <ClInclude Include="Object\Definition.h" />
+    <ClInclude Include="Object\MapObject\BananaObject.h" />
+    <ClInclude Include="Object\MapObject\FountainObject.h" />
+    <ClInclude Include="Object\MapObject\GrassObject.h" />
+    <ClInclude Include="Object\MapObject\LargeGrassObject.h" />
+    <ClInclude Include="Object\MapObject\MapObjectBase.h" />
+    <ClInclude Include="Object\MapObject\SmallGrassObject.h" />
     <ClInclude Include="Object\ObjectBase.h" />
     <ClInclude Include="Player\FlutePlayer\FlutePlayer.h" />
     <ClInclude Include="Player\PlayerBase.h" />
