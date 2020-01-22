@@ -185,8 +185,6 @@ void PlayerBullet::MoveFluteUpdate()
 		m_move.x = cosf(m_angle) * 5;
 		m_move.y = sinf(m_angle) * 5;
 	}
-		
->>>>>>> 敵AIの作�E
 		m_map_pos += m_move.x;
 		m_pos.y += m_move.y;
 	if (homingcount >= 150)
