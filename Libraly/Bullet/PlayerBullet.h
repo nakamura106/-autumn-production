@@ -44,9 +44,13 @@ private:
 
 	Position m_move;
 
+	Position m_firepoint;
+
 	float m_angle;
 
 	float m_upward_thrust;
+
+	bool m_is_homing;
 
 };
 

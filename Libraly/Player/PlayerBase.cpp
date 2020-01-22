@@ -156,7 +156,7 @@ void PlayerBase::P_Controll()
 
 
 	//‰EˆÚ“®
-	if (GetKey(RIGHT_KEY) == true)
+	if (GetKey(RIGHT_KEY) == true&&m_state!=(int)P_State::Attack)
 	{
 		m_state = (int)P_State::Move;
 		DataBank::Instance()->SetState(m_state);
@@ -182,7 +182,7 @@ void PlayerBase::P_Controll()
 	}
 
 	//¶ˆÚ“®
-	else if (GetKey(LEFT_KEY) == true)
+	else if (GetKey(LEFT_KEY) == true && m_state != (int)P_State::Attack)
 	{
 		m_state = (int)P_State::Move;
 		DataBank::Instance()->SetState(m_state);
@@ -481,10 +481,16 @@ void PlayerBase::Attack()
 		m_is_active = false;
 		m_animtimer = 0;
 	}
-
-	if (m_state != (int)P_State::Damage&&m_state!=(int)P_State::Attack )
+	if (GetKey(LEFT_KEY) == true || GetKey(RIGHT_KEY) == true)
 	{
-	
+		if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)
+		{
+			m_state = (int)P_State::Move_Attack;
+			DataBank::Instance()->SetState(m_state);
+		}
+	}
+	else if (m_state != (int)P_State::Damage&&m_state!=(int)P_State::Attack )
+	{
 		m_state = (int)P_State::Attack;
 		DataBank::Instance()->SetState(m_state);
 	}
@@ -657,6 +663,19 @@ void PlayerBase::InitAttackState()
 	}
 }
 
+void PlayerBase::InitMoveAttackState()
+{
+
+	if (m_direction == Direction::LEFT)
+	{
+		m_draw_param.texture_id = GamePlayer_WalkAttack_LeftTex;
+	}
+	if (m_direction == Direction::RIGHT)
+	{
+		m_draw_param.texture_id = GamePlayer_WalkAttack_RightTex;
+	}
+}
+
 void PlayerBase::InitThinkState()
 {
 	
@@ -713,6 +732,9 @@ void PlayerBase::ChangeState()
 		break;
 	case (int)P_State::Attack:
 		InitAttackState();
+		break;
+	case (int)P_State::Move_Attack:
+		InitMoveAttackState();
 		break;
 	case (int)P_State::Damage:
 		InitDamageState();

@@ -30,6 +30,8 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	m_target.y = 0;
 	m_move.x = 0;
 	m_move.y = 0;
+	m_firepoint.x = 0;
+	m_firepoint.y = 0;
 
 }
 
@@ -154,27 +156,43 @@ void PlayerBullet::MoveUpdate()
 
 void PlayerBullet::MoveFluteUpdate()
 {
-
-	if (homingcount <= 50)
+	if ((DataBank::Instance()->GetPlayerdirection() == Direction::RIGHT && ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetMapPos() >= ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos()) ||
+		(DataBank::Instance()->GetPlayerdirection() == Direction::LEFT && ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetMapPos() <= ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos())&&
+		m_is_homing==false)
 	{
-		m_target.x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos() - m_map_pos;
-		m_target.y = (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().y + 300.0f) - m_pos.y;
+		if (DataBank::Instance()->GetPlayerdirection() == Direction::RIGHT)
+		{
+			m_map_pos += 7;
+		}
+		if (DataBank::Instance()->GetPlayerdirection() == Direction::LEFT)
+		{
+			m_map_pos -= 7;
+		}
+	}
+	else if (homingcount <= 50)
+	{
+		m_is_homing = true;
+		if (m_firepoint.y == 0)
+		{
+			m_firepoint.x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetMapPos();
+			m_firepoint.y = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().y;
+		}
+		m_target.x = ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos() - m_firepoint.x;
+		m_target.y = (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().y + 300.0f) - m_firepoint.y;
 		m_angle = atan2f(m_target.y, m_target.x);
 		m_move.x = cos(m_angle) * 5;
 		m_move.y = sin(m_angle) * 5;
-	}
-		
+	}	
 		m_map_pos += m_move.x;
 		m_pos.y += m_move.y;
 	if (homingcount >= 150)
 	{
+		m_is_homing = false;
 		homingcount = 0;
 		m_is_delete = true;
 	}
+
 	homingcount++;
-
-	
-
 }
 
 void PlayerBullet::MoveTubaUpdate()

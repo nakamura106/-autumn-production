@@ -147,6 +147,8 @@ void GameSceneLoad()
 		LoadTexture("Res/Tex/TrpPlayer/Player_Taiki_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_LeftTex);
 		LoadTexture("Res/Tex/TrpPlayer/Player_Attack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_LeftTex);
 		LoadTexture("Res/Tex/TrpPlayer/Player_Attack_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_RightTex);
 		LoadTexture("Res/Tex/TrpPlayer/Player_Damage_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_LeftTex);
 		LoadTexture("Res/Tex/TrpPlayer/Player_Damage_Tp_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_RightTex);
 		LoadTexture("Res/Tex/TrpPlayer/Player_Jump_Tp_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_LeftTex);
@@ -165,6 +167,8 @@ void GameSceneLoad()
 		LoadTexture("Res/Tex/FlutePlayer/Player_Taiki_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_LeftTex);
 		LoadTexture("Res/Tex/FlutePlayer/Player_Attack_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_LeftTex);
 		LoadTexture("Res/Tex/FlutePlayer/Player_Attack_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_RightTex);
 		LoadTexture("Res/Tex/FlutePlayer/Player_Damage_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_LeftTex);
 		LoadTexture("Res/Tex/FlutePlayer/Player_Damage_Ft_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_RightTex);
 		LoadTexture("Res/Tex/FlutePlayer/Player_Jump_Ft_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_LeftTex);
@@ -183,6 +187,8 @@ void GameSceneLoad()
 		LoadTexture("Res/Tex/TubaPlayer/Player_Taiki_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Taiki_LeftTex);
 		LoadTexture("Res/Tex/TubaPlayer/Player_Attack_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_LeftTex);
 		LoadTexture("Res/Tex/TubaPlayer/Player_Attack_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Attack_RightTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_LeftTex);
+		LoadTexture("Res/Tex/TrpPlayer/Player_WalkAttack_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_WalkAttack_RightTex);
 		LoadTexture("Res/Tex/TubaPlayer/Player_Damage_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_LeftTex);
 		LoadTexture("Res/Tex/TubaPlayer/Player_Damage_Tb_Right.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Damage_RightTex);
 		LoadTexture("Res/Tex/TubaPlayer/Player_Jump_Tb_Left.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayer_Jump_LeftTex);
