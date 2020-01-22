@@ -38,6 +38,13 @@ private:
 	/*“–‚½‚è‚Ìˆ—*/
 	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
 
+	int homingcount;
+
+	Position m_target;
+
+	Position m_move;
+
+	float m_angle;
 
 	float m_upward_thrust;
 
