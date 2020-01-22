@@ -14,7 +14,7 @@ SoundManager* SoundManager::Instance()
 
 void SoundManager::RegisterTitleSound()
 {
-	m_bgm_file = "Res/Wav/GetItem.wav";
+	m_bgm_file = "Res/Wav/TitleBgm.wav";
 	AudioPlayer::GetInstance()->Load(m_bgm, m_bgm_file);
 }
 
@@ -33,7 +33,7 @@ void SoundManager::RegisterEndSound()
 void SoundManager::UpdatePlaySound()
 {
 	AudioPlayer::GetInstance()->Play(m_bgm, 0, true);
-	AudioPlayer::GetInstance()->SetVolume(m_bgm, 0);
+
 }
 
 void SoundManager::ReleaseTitleSound()

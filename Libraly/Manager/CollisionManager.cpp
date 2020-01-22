@@ -46,9 +46,9 @@ void CollisionManager::Update()
 	// AllHitTest();
 
 	PlayerAndEnemyCol();
-	PlayerAndEBulletCol();
 	PlayerAndMapObjCol();
 	EnemyAndPBulletCol();
+	PlayerAndEBulletCol();
 
 	m_player_obj_list.clear();
 	m_enemy_obj_list.clear();
@@ -129,7 +129,7 @@ void CollisionManager::PlayerAndMapObjCol()
 
 void CollisionManager::EnemyAndPBulletCol()
 {
-	for (const auto& i : m_player_obj_list)
+	for (const auto& i : m_pBullet_obj_list)
 	{
 		for (const auto& j : m_enemy_obj_list)
 		{
