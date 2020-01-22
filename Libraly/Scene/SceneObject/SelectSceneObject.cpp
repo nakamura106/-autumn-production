@@ -17,6 +17,8 @@ SelectSceneObject::SelectSceneObject()
 	}
 	is_hit_mouse = false;
 	is_brass_scene = false;
+
+	m_pos_state = SelectPosState::SomewherePos;
 }
 
 SelectSceneObject::~SelectSceneObject()
@@ -65,6 +67,8 @@ void SelectSceneObject::Update()
 {
 	m_mouse_pos.x = GetMousePos().X;
 	m_mouse_pos.y = GetMousePos().Y;
+
+	UpdateSelectSE();
 
 	if (OnMouseDown(Right) == true)
 	{
@@ -212,4 +216,29 @@ void SelectSceneObject::BrassSelectUpdate()
 		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
 		is_hit_mouse = false;
 	}
+}
+
+void SelectSceneObject::UpdateSelectSE()
+{
+	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
+		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
+		m_pos_state = SelectPosState::LeftPos;
+		SoundManager::Instance()->SoundSelectSE();
+	}
+	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
+		m_pos_state = SelectPosState::CenterPos;
+		SoundManager::Instance()->SoundSelect2SE();
+		
+	}
+	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f) {
+		m_pos_state = SelectPosState::RightPos;
+		SoundManager::Instance()->SoundSelect3SE();
+	}
+	else {
+		m_pos_state = SelectPosState::SomewherePos;
+		SoundManager::Instance()->ResetSelectFlag();
+	}
+
 }

@@ -16,19 +16,23 @@ void SoundManager::RegisterTitleSound()
 {
 	m_bgm_file = "Res/Wav/TitleBgm.wav";
 	m_se1_file = "Res/Wav/SelectSE.wav";
-	m_se2_file = "Res/Wav/ClickSE.wav";
+	m_click_se_file = "Res/Wav/ClickSE.wav";
 	m_pAudio->Load(m_bgm, m_bgm_file);
-	m_pAudio->Load(m_select_se, m_se1_file);
-	m_pAudio->Load(m_click_se, m_se2_file);
+	m_pAudio->Load(m_select1_se, m_se1_file);
+	m_pAudio->Load(m_click_se, m_click_se_file);
 }
 
 void SoundManager::RegisterSelectSound()
 {
 	m_bgm_file = "Res/Wav/SelectBgm.wav";
 	m_se1_file = "Res/Wav/SelectSE.wav";
+	m_se2_file = "Res/Wav/SelectSE.wav";
+	m_se3_file = "Res/Wav/SelectSE.wav";
 
 	m_pAudio->Load(m_bgm, m_bgm_file);
-	m_pAudio->Load(m_select_se, m_se1_file);
+	m_pAudio->Load(m_select1_se, m_se1_file);
+	m_pAudio->Load(m_select2_se, m_se2_file);
+	m_pAudio->Load(m_select3_se, m_se3_file);
 }
 
 void SoundManager::RegisterGameMainSound()
@@ -51,10 +55,29 @@ void SoundManager::SoundSelectBGM()
 
 void SoundManager::SoundSelectSE()
 {
-	if (m_select_flag == false)
+	if (m_select1_flag == false)
 	{
-		m_pAudio->Play(m_select_se, 0, false);
-		m_select_flag = true;
+		m_pAudio->Play(m_select1_se, 0, false);
+		m_select1_flag = true;
+		// m_select2
+	}
+}
+
+void SoundManager::SoundSelect2SE()
+{
+	if (m_select2_flag == false)
+	{
+		m_pAudio->Play(m_select2_se, 0, false);
+		m_select2_flag = true;
+	}
+}
+
+void SoundManager::SoundSelect3SE()
+{
+	if (m_select3_flag == false)
+	{
+		m_pAudio->Play(m_select3_se, 0, false);
+		m_select3_flag = true;
 	}
 }
 
@@ -65,27 +88,36 @@ void SoundManager::SoundClickSE()
 
 void SoundManager::ResetSelectFlag()
 {
-	m_select_flag = false;
+	m_select1_flag = false;
+	m_select2_flag = false;
+	m_select3_flag = false;
 }
 
 void SoundManager::ReleaseTitleSound()
 {
 	m_pAudio->Release(m_bgm);
-	m_pAudio->Release(m_select_se);
+	m_pAudio->Release(m_select1_se);
 	
 }
 
 void SoundManager::ReleaseSelectSound()
 {
 	m_pAudio->Release(m_bgm);
-	m_pAudio->Release(m_select_se);
+	m_pAudio->Release(m_select1_se);
+	m_pAudio->Release(m_select2_se);
+	m_pAudio->Release(m_select3_se);
 }
 
 SoundManager::SoundManager()
 {
-	m_select_flag = false;
+	m_select1_flag = false;
+	m_select2_flag = false;
+	m_select3_flag = false;
+
 	m_bgm = "BGM";
-	m_select_se = "SelectSE";
+	m_select1_se = "SelectSE";
+	m_select2_se = "Select2SE";
+	m_select3_se = "Select3SE";
 }
 
 SoundManager::~SoundManager()

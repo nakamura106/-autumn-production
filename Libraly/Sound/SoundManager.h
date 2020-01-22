@@ -19,6 +19,8 @@ public:
 	void SoundBGM();
 	void SoundSelectBGM();
 	void SoundSelectSE();
+	void SoundSelect2SE();
+	void SoundSelect3SE();
 	void SoundClickSE();
 
 	void ResetSelectFlag();
@@ -34,16 +36,22 @@ protected:
 private:
 	static SoundManager* p_instance;
 
-	bool m_select_flag;	// selectSEをループさせないためのフラグ
+	bool m_select1_flag;	// selectSEをループさせないためのフラグ
+	bool m_select2_flag;
+	bool m_select3_flag;
 
 	
 	std::string m_bgm;
-	std::string m_select_se;
+	std::string m_select1_se;
+	std::string m_select2_se;
+	std::string m_select3_se;
 	std::string m_click_se;
 
 	std::string m_bgm_file;
 	std::string m_se1_file;
 	std::string m_se2_file;
+	std::string m_se3_file;
+	std::string m_click_se_file;
 
 	int i = 0;
 
