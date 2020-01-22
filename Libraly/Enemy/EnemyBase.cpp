@@ -1142,20 +1142,20 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	//ƒvƒŒƒCƒ„[’e‡@
 	case ObjectRavel::Ravel_PlayerBullet:
 		//–°‹C‘‰Á
-		UpSleepGage(hit_use_atk_ / 2.f);
+		UpSleepGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//ƒvƒŒƒCƒ„[’e‡A
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//”æ˜J‰ñ•œ
-		DownFatigueGage(hit_use_atk_ / 2.f);
+		DownFatigueGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//ƒvƒŒƒCƒ„[’e‡B
 	case ObjectRavel::Ravel_PlayerBullet3:
-		UpFatigueGage(hit_use_atk_ / 2.f);
+		UpFatigueGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
@@ -1212,7 +1212,7 @@ bool EnemyBase::CheckFatigueGageMax()
 GageState EnemyBase::CheckGaugeState()
 {
 	//”æ˜Jó‘Ô
-	if (m_fatigue_gage_stage > m_sleep_gage_stage) {
+	if (m_fatigue_gage_stage > m_sleep_gage_stage && m_fatigue_gage_stage >= 3) {//’iŠK3‚ÍƒQ[ƒW”¼•ªˆÈã
 		return GageState::Fatigue_State;
 	}
 	

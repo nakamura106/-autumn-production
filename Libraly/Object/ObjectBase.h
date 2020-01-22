@@ -30,6 +30,17 @@ public:
 	bool GetIsDelete() { return m_is_delete; }
 	/*当たり判定時に使用する値を返す*/
 	float GetHitUseAtk() { return m_hit_use_atk; }
+
+	/*当たり判定時に使用する値を返す：NewVer 1/23*/
+	/*
+		当たったオブジェクトを渡すことでそのオブジェクトに応じた値を返す
+		(オーバーライドして各オブジェクトが設定)
+	
+	*/
+	virtual float GetHitUseAtk(ObjectRavel hit_obj_) {
+		return m_hit_use_atk;
+	}
+
 	/*マップ上の座標(ワールド座標)を返す*/
 	float GetMapPos() { return m_map_pos; };
 	/*Objectラベルゲッター*/

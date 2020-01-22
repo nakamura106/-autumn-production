@@ -24,10 +24,15 @@ void CollisionManager::AllHitTest()
 
 			//当たり判定
 			if (IsHitTest(m_collision_obj_list[i], m_collision_obj_list[j])) {
+
+				ObjectRavel j_obj = m_collision_obj_list[j]->GetRavel();
+				ObjectRavel i_obj = m_collision_obj_list[i]->GetRavel();
+
 				//当たった！！
 				//オブジェクトに通知
-				m_collision_obj_list[i]->HitAction(m_collision_obj_list[j]->GetRavel(), m_collision_obj_list[j]->GetHitUseAtk());
-				m_collision_obj_list[j]->HitAction(m_collision_obj_list[i]->GetRavel(), m_collision_obj_list[i]->GetHitUseAtk());
+				//第一引数で当たったオブジェクトを渡し、第二引数でそのオブジェクトが自分に与える効果の値を渡す
+				m_collision_obj_list[i]->HitAction(j_obj, m_collision_obj_list[j]->GetHitUseAtk(i_obj));
+				m_collision_obj_list[j]->HitAction(i_obj, m_collision_obj_list[i]->GetHitUseAtk(j_obj));
 			}
 
 		}
@@ -90,8 +95,11 @@ void CollisionManager::PlayerAndEnemyCol()
 		{
 			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
 			{
-  	 			i->HitAction(j->GetRavel(), j->GetHitUseAtk());
-				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+				ObjectRavel j_obj = j->GetRavel();
+				ObjectRavel i_obj = i->GetRavel();
+
+  	 			i->HitAction(j_obj, j->GetHitUseAtk(i_obj));
+				j->HitAction(i_obj, i->GetHitUseAtk(j_obj));
 			}
 		}
 	}
@@ -106,8 +114,11 @@ void CollisionManager::PlayerAndEBulletCol()
 		{
 			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
 			{
-				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
-				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+				ObjectRavel j_obj = j->GetRavel();
+				ObjectRavel i_obj = i->GetRavel();
+
+				i->HitAction(j_obj, j->GetHitUseAtk(i_obj));
+				j->HitAction(i_obj, i->GetHitUseAtk(j_obj));
 			}
 		}
 	}
@@ -121,8 +132,11 @@ void CollisionManager::PlayerAndMapObjCol()
 		{
 			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
 			{
-				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
-				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+				ObjectRavel j_obj = j->GetRavel();
+				ObjectRavel i_obj = i->GetRavel();
+
+				i->HitAction(j_obj, j->GetHitUseAtk(i_obj));
+				j->HitAction(i_obj, i->GetHitUseAtk(j_obj));
 			}
 		}
 	}
@@ -136,8 +150,11 @@ void CollisionManager::EnemyAndPBulletCol()
 		{
 			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
 			{
-				i->HitAction(j->GetRavel(), j->GetHitUseAtk());
-				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
+				ObjectRavel j_obj = j->GetRavel();
+				ObjectRavel i_obj = i->GetRavel();
+
+				i->HitAction(j_obj, j->GetHitUseAtk(i_obj));
+				j->HitAction(i_obj, i->GetHitUseAtk(j_obj));
 			}
 		}
 	}
