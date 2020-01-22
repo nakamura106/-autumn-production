@@ -74,11 +74,14 @@ bool CollisionManager::RunCollisionCalc(CollisionBase& collision, const std::lis
 			if (collision.CollisionCalc(*it1, *it2)) {
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
+			
 		}
 	}
+
+	return false;
+
 }
 
 void CollisionManager::PlayerAndEnemyCol()

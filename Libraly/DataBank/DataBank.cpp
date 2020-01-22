@@ -102,4 +102,7 @@ int DataBank::GetPlayerEffect(P_effect p_effect_)
 	default:
 		break;
 	}
+
+	return 0;
+
 }

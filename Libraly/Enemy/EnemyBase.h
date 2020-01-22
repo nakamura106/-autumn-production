@@ -4,6 +4,7 @@
 #include "../Object/ObjectBase.h"
 #include"../Engine/FlameTimer.h"
 #include"../Bullet/EnemyBullet.h"
+#include"../Engine/FileLoader.h"
 #include<vector>
 #include<string>
 
@@ -44,9 +45,6 @@ private:
 	using EnemyAIList = std::vector < EnemyAIParam* >;
 	using EnemyBulletList = std::vector<EnemyBullet*>;
 
-	/*仮実装用定数*/
-	const float	M_PLAYER_SIZE_X = 256.f;	//プレイヤーのx方向の画像サイズ(プレイヤーとの位置関係で使用)
-
 	/*初期化用初期値*/
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
@@ -73,6 +71,9 @@ private:
 
 	/*データバンクへの値渡し*/
 	void DataSetUpdate();
+
+	/*データバンクからの値の取得*/
+	void DataGetUpdate();
 
 	/*当たり時の処理*/
 	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
@@ -137,8 +138,6 @@ private:
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
 	int				m_savetime_end;				//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
-	int				m_fatigue_gage_stage;		//疲労ゲージの段階を示す
-	int				m_sleep_gage_stage;			//眠気ゲージの段階を示す
 	
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 
@@ -259,17 +258,22 @@ protected:
 		int tex_size_ = 128.f
 	);
 
+	void SetAIType();
+
 	/*			全敵共通のパラメータ			*/
 
-	bool			m_is_flying;		//飛んでいるかどうか
-	EnemyBulletList bullet_list;		//弾のリスト
-	Position		m_shot_adjust;		//弾発射時の位置調整用(座標からどれくらいずれているか)
-	bool			m_animation_stop;	//trueの場合、アニメーションしない
-	bool			m_do_bullet;		//ハリ発射を行ったかどうか
-	Position		m_hand_pos;			//手の位置(バナナ弾で使用)
-	int				m_now_wave;			//現在のwave
-	int				m_max_wave;			//この敵の最大wave
-	WaveState		m_wave_state;		//wave状態
+	bool			m_is_flying;			//飛んでいるかどうか
+	EnemyBulletList bullet_list;			//弾のリスト
+	Position		m_shot_adjust;			//弾発射時の位置調整用(座標からどれくらいずれているか)
+	bool			m_animation_stop;		//trueの場合、アニメーションしない
+	bool			m_do_bullet;			//ハリ発射を行ったかどうか
+	Position		m_hand_pos;				//手の位置(バナナ弾で使用)
+	int				m_now_wave;				//現在のwave
+	int				m_max_wave;				//この敵の最大wave
+	WaveState		m_wave_state;			//wave状態
+	int				m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
+	int				m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
+	float			m_player_center_pos;		//プレイヤーのx座標
 
 private:
 	// エフェクト関係関数まとめた関数

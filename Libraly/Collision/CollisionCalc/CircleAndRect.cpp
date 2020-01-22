@@ -63,9 +63,7 @@ bool CircleAndRect::CollisionCalc(const ShapeBase& shape1, const ShapeBase& shap
 			return true;
 		}
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 
 }

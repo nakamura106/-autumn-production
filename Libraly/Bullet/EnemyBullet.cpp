@@ -15,7 +15,7 @@ EnemyBullet::EnemyBullet(
 	int tex_use_num_,
 	float active_distance_,
 	bool is_animation_stop_,
-	int tex_size_
+	float tex_size_
 )
 	:BulletBase(x_, y_, move_speed_, direction_, ObjectRavel::Ravel_EnemyBullet, move_speed_y_, draw_angle_,tex_size_)
 {
@@ -66,11 +66,11 @@ void EnemyBullet::CalcTexUseNum()
 		m_draw_param.tu = m_draw_param.tv = 0.f;
 
 		if (tmp == 0) {
-			m_draw_param.tu = m_anim_param.split_width;
+			m_draw_param.tu = static_cast<float>(m_anim_param.split_width);
 			--m_draw_param.tv;
 		}
 		else {
-			m_draw_param.tu = tmp;
+			m_draw_param.tu = static_cast<float>(tmp);
 		}
 
 		m_draw_param.tv += static_cast<int>(m_tex_use_num / m_anim_param.split_width);
