@@ -14,7 +14,6 @@ public:
 	void Draw()override;
 	
 private:
-	int m_gauge_base_texid;
 
 };
 

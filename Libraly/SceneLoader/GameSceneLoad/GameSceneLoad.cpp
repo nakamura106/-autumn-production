@@ -238,6 +238,10 @@ void GameSceneLoad()
 	LoadTexture("Res/Tex/Life/HP2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerHp_3Tex);
 	LoadTexture("Res/Tex/Life/HP3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerHp_4Tex);
 
+	LoadTexture("Res/Tex/PlayerUi/Brass1.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBrassUi1);
+	LoadTexture("Res/Tex/PlayerUi/Brass2.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBrassUi2);
+	LoadTexture("Res/Tex/PlayerUi/Brass3.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GamePlayerBrassUi3);
+
 	LoadTexture("Res/Tex/EnemyUi/SleepGauge.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemySleepGauge);
 	LoadTexture("Res/Tex/EnemyUi/SleepCircle.png", TEXTURE_CATEGORY_GAME, GameCategoryTextureList::GameEnemySleepCircle);
 

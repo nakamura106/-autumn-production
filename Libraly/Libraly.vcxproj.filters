@@ -347,9 +347,12 @@
     </ClCompile>
     <ClCompile Include="Sound\SoundManager.cpp">
       <Filter>Sound</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="DataBank\SaveData.cpp">
       <Filter>DataBank</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\PlayerBrassUi.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -598,9 +601,12 @@
     </ClInclude>
     <ClInclude Include="Sound\SoundManager.h">
       <Filter>Sound</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="DataBank\SaveData.h">
       <Filter>DataBank</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\PlayerBrassUi.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

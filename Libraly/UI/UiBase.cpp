@@ -2,6 +2,7 @@
 
 UiBase::UiBase()
 {
+	m_param.category_id = TEXTURE_CATEGORY_GAME;
 }
 
 UiBase::~UiBase()

@@ -17,7 +17,7 @@ void PlayerBulletUi::Init()
 
 	m_pos.x = 20.0f;
 	m_pos.y = 20.0f;
-	m_param.category_id = TEXTURE_CATEGORY_GAME;
+
 	m_param.texture_id = GameCategoryTextureList::GameBulletUi_BlueLeft;
 	m_draw_texid1 = GameCategoryTextureList::GameBulletUi_BlueLeft;
 	m_draw_texid2 = GameCategoryTextureList::GameBulletUi_BlueCenter;

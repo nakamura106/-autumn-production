@@ -14,7 +14,6 @@ void EnemyAchieve::Init()
 	
 	m_pos.x = ACHIEVE_POS_X;
 	m_pos.y = ACHIEVE_POS_Y;
-	m_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_param.texture_id = GameCategoryTextureList::GameEnemyAchieveUi;
 	m_animation_state = 1;
 }

@@ -120,6 +120,9 @@ GamePlayerHp_4Tex,				//!<プレイヤー耐久残り3
 GamePlayerHp_3Tex,				//!<プレイヤー耐久残り2
 GamePlayerHp_2Tex,				//!<プレイヤー耐久残り1
 GamePlayerHp_1Tex,				//!<プレイヤー耐久残り0
+GamePlayerBrassUi1,				//!トランペットUI
+GamePlayerBrassUi2,				//!<フルートUI
+GamePlayerBrassUi3,				//!<チューバUI
 GameEnemyUi,					//!<エネミーUIの基盤
 GameEnemyUi1,
 GameEnemyUi2,

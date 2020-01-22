@@ -217,6 +217,7 @@
     <ClCompile Include="UI\EnemyBaseUi.cpp" />
     <ClCompile Include="UI\FatigueGaugeUi.cpp" />
     <ClCompile Include="UI\PlayerBaseUi.cpp" />
+    <ClCompile Include="UI\PlayerBrassUi.cpp" />
     <ClCompile Include="UI\PlayerBulletUi.cpp" />
     <ClCompile Include="UI\PlayerHpUi.cpp" />
     <ClCompile Include="UI\SleepGaugeUi.cpp" />
@@ -301,6 +302,7 @@
     <ClInclude Include="UI\EnemyBaseUi.h" />
     <ClInclude Include="UI\FatigueGaugeUi.h" />
     <ClInclude Include="UI\PlayerBaseUi.h" />
+    <ClInclude Include="UI\PlayerBrassUi.h" />
     <ClInclude Include="UI\PlayerBulletUi.h" />
     <ClInclude Include="UI\PlayerHpUi.h" />
     <ClInclude Include="UI\SleepGaugeUi.h" />
