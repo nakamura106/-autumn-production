@@ -21,6 +21,9 @@ enum TitleCategoryTextureList
 	TitleContinue2Tex,		//!< ‘±‚«ƒ{ƒ^ƒ“Off
 	TitleHelp1Tex,			//!< ƒwƒ‹ƒvƒ{ƒ^ƒ“On
 	TitleHelp2Tex,			//!< ƒwƒ‹ƒvƒ{ƒ^ƒ“Off
+	Help1Tex,				//!< ƒwƒ‹ƒv‰æ–Ê‚ÅŽg‚¤‘fÞ
+	Help2Tex,
+	Help3Tex,
 	TitleTextureMax			//!< ƒŠƒXƒgÅ‘å”
 };
 
@@ -28,9 +31,6 @@ enum TitleCategoryTextureList
 enum HelpCategoryTextureList
 {
 	HelpBgTex,
-	Help1Tex,		//!< ƒwƒ‹ƒv1–‡–Ú
-	Help2Tex,		//!< ƒwƒ‹ƒv2–‡–Ú
-	Help3Tex,		//!< ƒwƒ‹ƒv3–‡–Ú
 	HelpTextureMax
 };
 

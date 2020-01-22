@@ -24,12 +24,12 @@ void HelpSceneObject::Init()
 	
 
 	m_param[0].texture_id = HelpCategoryTextureList::HelpBgTex;
-	m_param[1].texture_id = HelpCategoryTextureList::Help1Tex;
+
 }
 
 void HelpSceneObject::Update()
 {
-	if (OnMouseDown(Left) == true)
+	/*if (OnMouseDown(Left) == true)
 	{
 		if (m_param[1].texture_id == HelpCategoryTextureList::Help1Tex)
 		{
@@ -43,7 +43,7 @@ void HelpSceneObject::Update()
 		{
 			ChangeSceneStep(SceneStep::EndStep);
 		}
-	}
+	}*/
 }
 
 void HelpSceneObject::Draw()

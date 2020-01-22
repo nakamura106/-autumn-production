@@ -57,7 +57,7 @@ void SelectSceneObject::Init()
 	m_pos[8].y = 200.0f;
 	
 	SoundManager::Instance()->RegisterSelectSound();
-	SoundManager::Instance()->UpdatePlaySound();
+	SoundManager::Instance()->SoundSelectBGM();
 
 }
 

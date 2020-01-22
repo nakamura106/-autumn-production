@@ -4,6 +4,16 @@
 #include "SceneBase.h"
 #include "../../Object/Definition.h"
 
+enum class TitleSceneState
+{
+	Home,
+	Start,
+	Continue,
+	Help,
+
+	TitleSceneStateMax,
+};
+
 
 class TitleSceneObject :public SceneBase
 {
@@ -15,12 +25,21 @@ public:
 	void Update()override;
 	void Draw()override;
 
-	bool m_help_flag, m_select_flag;
+	// タイトル内のシーン遷移ごとのアップデート関数
+	void UpdateHomeScene();
+	void UpdateStartScene();
+	void UpdateContinueScene();
+	void UpdateHelpScene();
+
+	void UpdateSelectSE();
+
 
 private:
 	Position m_mouse_pos;
-	Position m_draw_pos[5];
-	DrawParam m_param[5];
+	Position m_draw_pos[8];
+	DrawParam m_param[8];
+
+	TitleSceneState m_scene_state;
 
 };
 

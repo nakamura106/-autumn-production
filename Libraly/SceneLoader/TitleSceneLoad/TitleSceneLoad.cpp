@@ -12,4 +12,8 @@ void TitleSceneLoad()
 	LoadTexture("Res/Tex/TitleScene/Logo.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleLogoTex);
 	LoadTexture("Res/Tex/TitleScene/GameStart1.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleStart1Tex);
 	LoadTexture("Res/Tex/TitleScene/GameStart2.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleStart2Tex);
+
+	LoadTexture("Res/Tex/HelpScene/Help1.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::Help1Tex);
+	LoadTexture("Res/Tex/HelpScene/Help2.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::Help2Tex);
+	LoadTexture("Res/Tex/HelpScene/Help3.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::Help3Tex);
 }

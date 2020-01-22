@@ -10,21 +10,21 @@ public:
 	static SoundManager* Instance();
 
 	// 各シーンごとの音素材登録
-	void RegisterTitleSound();
+	void RegisterTitleSound();		// タイトル
+	void RegisterSelectSound();		// セレクト
+	void RegisterGameMainSound();	// ゲームメイン
+	void RegisterEndSound();		// ゲームエンド
 
-	void RegisterSelectSound();
-
-	void RegisterGameMainSound();
-
-	void RegisterEndSound();
-
-	// 各シーンのSoundUpdate;
-	void UpdatePlaySound();
-
+	// 鳴らす関数
+	void SoundBGM();
+	void SoundSelectBGM();
+	void SoundSelectSE();
 	void SoundClickSE();
 
-	void ReleaseTitleSound();
+	void ResetSelectFlag();
 
+	// 解放関数
+	void ReleaseTitleSound();
 	void ReleaseSelectSound();
 
 protected:
@@ -34,9 +34,13 @@ protected:
 private:
 	static SoundManager* p_instance;
 
+	bool m_select_flag;	// selectSEをループさせないためのフラグ
+
+	
 	std::string m_bgm;
-	std::string m_se1;
-	std::string m_se2;
+	std::string m_select_se;
+	std::string m_click_se;
+
 	std::string m_bgm_file;
 	std::string m_se1_file;
 	std::string m_se2_file;
