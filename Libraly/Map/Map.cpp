@@ -13,16 +13,14 @@
 
 Map::Map()
 {
-
 	m_obj_ravel = ObjectRavel::Ravel_Map;
 	floor1 = 0;
 	floor2 = 0;
-	obj[0] = 400.0f;
-	obj[1] = 1200.0f;
-	obj[2] = 2000.f;
+	
 	m_speed = P_speed;
 	m_pos.x = 0;
 	m_pos.y = 0;
+	
 }
 
 Map::~Map()
@@ -68,18 +66,14 @@ void Map::MapScroll(int direction_)
 	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x >= Centerofscreen&& DataBank::Instance()->GetfgPos()>=-3550.0f&&direction_==RIGHT )
 	{
 		floor1 -= P_speed;
-		obj[0] -= P_speed;
-		obj[1] -= P_speed;
-		obj[2] -= P_speed;
+		
 		floor2 -= floor2speed;
 	}
 	//向きが左向きかつマップの端が0以下の時に左にスクロールする
 	if (ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetPos().x <= Centerofscreen&&DataBank::Instance()->GetfgPos()<0.0f&&floor1<0.0f&&floor2<0 && direction_ == LEFT)
 	{
 		floor1 += P_speed;
-		obj[0] += P_speed;
-		obj[1] += P_speed;
-		obj[2] += P_speed;
+	
 		floor2 += floor2speed;
 	}
 }
@@ -90,9 +84,7 @@ void Map::WaveChange(float enemyX_)
 	if (enemyX_ >= 960.0f)
 	{
 		floor1 += P_speed*2;
-		obj[0] += P_speed*2;
-		obj[1] += P_speed*2;
-		obj[2] += P_speed*2;
+		
 		floor2 += floor2speed*2;
 	}
 	else
@@ -105,9 +97,7 @@ void Map::WaveChange(float enemyX_)
 	if (enemyX_ <= 960.0f)
 	{
 		floor1 -= P_speed*2;
-		obj[0] -= P_speed*2;
-		obj[1] -= P_speed*2;
-		obj[2] -= P_speed*2;
+		
 		floor2 -= floor2speed*2;
 	}
 	else
@@ -130,9 +120,7 @@ void Map::Draw()
 	DrawTexture(0.0f, 0.0f, GetTexture(TEXTURE_CATEGORY_GAME, GameBgTex));
 	DrawTexture(floor2, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, Gamefloor2Tex));
 	DrawTexture(floor1, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
-	DrawTexture(obj[0], P_posYforest, GetTexture(TEXTURE_CATEGORY_GAME, GameObject));
-	DrawTexture(obj[1], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject2));
-	DrawTexture(obj[2], P_posYforest - 100, GetTexture(TEXTURE_CATEGORY_GAME, GameObject3));
+
 }
 
 

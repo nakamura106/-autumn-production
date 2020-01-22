@@ -106,6 +106,9 @@
     <Filter Include="LoadSceneTex\GameEndSceneLoad">
       <UniqueIdentifier>{8d29cd74-4fad-48c7-bd18-7ee947bd9513}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\MapObject">
+      <UniqueIdentifier>{cf3a458c-0ea1-46fe-bf1d-18fdfa1f7b7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -353,6 +356,24 @@
     </ClCompile>
     <ClCompile Include="UI\PlayerBrassUi.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\BananaObject.cpp">
+      <Filter>Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\FountainObject.cpp">
+      <Filter>Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\LargeGrassObject.cpp">
+      <Filter>Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\GrassObject.cpp">
+      <Filter>Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\SmallGrassObject.cpp">
+      <Filter>Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapObject\MapObjectBase.cpp">
+      <Filter>Object\MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -607,6 +628,24 @@
     </ClInclude>
     <ClInclude Include="UI\PlayerBrassUi.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\BananaObject.h">
+      <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\FountainObject.h">
+      <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\GrassObject.h">
+      <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\LargeGrassObject.h">
+      <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\SmallGrassObject.h">
+      <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapObject\MapObjectBase.h">
+      <Filter>Object\MapObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
