@@ -31,9 +31,9 @@ PlayerBase::PlayerBase()
 
 	m_effect = (int)P_effect::None;
 
-	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 58.0f, this->GetPos().y, 56.0f, 36.0f, 256.0f));
-	m_shape_list.push_back(new ShapeRect(this->GetPos().x, 64.0f, this->GetPos().y, 144.0f, 59.0f, 93.0f, 256.0f));
-	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 63.0f, this->GetPos().y, 217.0f, 23.0f, 256.0f));
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 61.0f, m_pos.y, 57.0f, 39.0f, 256.0f));
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 61.0f, m_pos.y, 144.0f, 61.0f, 94.0f, 256.0f));
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 65.0f, m_pos.y, 222.0f, 26.0f, 256.0f));
 	
 
 	m_animtimer = 0;

@@ -28,6 +28,8 @@ public:
 	void Init();
 	void Update();
 
+	void CollisionParamUpdate()override;
+
 private:
 	const int M_EBULLET_ANIM_SPLIT_ALL	= 1;
 	const int M_EBULLET_ANIM_SPLIT_W	= 2;

@@ -12,6 +12,7 @@ ShapeBase::ShapeBase()
 	m_radius = 0.f;
 	m_offset_x = 0.f;
 	m_offset_y = 0.f;
+	m_tex_x = 0.f;
 }
 
 ShapeBase::~ShapeBase()
@@ -21,11 +22,12 @@ ShapeBase::~ShapeBase()
 void ShapeBase::Update(float x, float y, int direction)
 {
 	m_direction = direction;
-	if (m_direction == Direction::LEFT)
+
+	if (m_direction == Direction::RIGHT)
 	{
 		m_CenterX = x + m_offset_x;
 	}
-	else {
+	else if(m_direction == Direction::LEFT){
 		m_CenterX = x + m_tex_x - m_offset_x;
 	}
 	m_CenterY = y + m_offset_y;

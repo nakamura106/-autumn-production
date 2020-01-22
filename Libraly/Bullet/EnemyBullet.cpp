@@ -1,4 +1,6 @@
 #include "EnemyBullet.h"
+#include "../Collision/ShapeType/ShapeRect.h"
+#include "../Manager/CollisionManager.h"
 
 EnemyBullet::EnemyBullet(
 	float x_,
@@ -32,11 +34,16 @@ EnemyBullet::EnemyBullet(
 
 	CalcTexUseNum();
 
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 24.0f, m_pos.y, 104.0f, 106.0f, 24.0f, 128.0f));
+
 }
 
 EnemyBullet::~EnemyBullet()
 {
-
+	for (const auto& i : m_shape_list)
+	{
+		delete i;
+	}
 }
 
 void EnemyBullet::Init()
@@ -51,6 +58,17 @@ void EnemyBullet::Update()
 	if (m_is_animation_stop != true) {
 		AnimationUpdate();
 	}
+
+	if (m_is_delete != true)CollisionParamUpdate();
+}
+
+void EnemyBullet::CollisionParamUpdate()
+{
+	for (const auto& i : m_shape_list)
+	{
+		i->Update(m_pos.x, m_pos.y, m_direction);
+	}
+	CollisionManager::GetInstance().AddEBulletColObject(this);
 }
 
 void EnemyBullet::CalcTexUseNum()

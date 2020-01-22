@@ -1,5 +1,7 @@
 #include "Mouse.h"
 #include "../Player/TrpPlayer.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Collision/ShapeType/ShapeRect.h"
 
 //’è”’l‚Í‰¼Œˆ‚ß
 
@@ -30,6 +32,8 @@ HedgeHog::HedgeHog()
 	SetRectangle();
 	m_shot_adjust.x = M_NEEDLE_ADJUST_X;
 	m_shot_adjust.y = M_NEEDLE_ADJUST_Y;
+
+	
 
 }
 

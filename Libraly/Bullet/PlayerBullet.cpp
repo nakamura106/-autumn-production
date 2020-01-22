@@ -18,7 +18,7 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	SetPlayerBulletInfo();
 
 
-	m_shape_list.push_back(new ShapeCircle(this->GetPos().x, 0.0f, this->GetPos().y, 0.0f, 50.0f,128.0f));
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 82.0f, m_pos.y, 70.0f, 25.0f,128.0f));
 
 	m_upward_thrust = 25.0f;
 
@@ -128,7 +128,7 @@ void PlayerBullet::CollisionParamUpdate()
 {
 	for (const auto& i : m_shape_list)
 	{
-		i->Update(this->GetPos().x, this->GetPos().y, m_direction);
+		i->Update(m_pos.x, m_pos.y, m_direction);
 	}
 	CollisionManager::GetInstance().AddPBulletColObject(this);
 }

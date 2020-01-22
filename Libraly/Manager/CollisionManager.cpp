@@ -89,7 +89,7 @@ void CollisionManager::PlayerAndEnemyCol()
 		{
 			if (RunCollisionCalc(m_collision, i->GetShapeList(), j->GetShapeList()))
 			{
-	 			i->HitAction(j->GetRavel(), j->GetHitUseAtk());
+  	 			i->HitAction(j->GetRavel(), j->GetHitUseAtk());
 				j->HitAction(i->GetRavel(), i->GetHitUseAtk());
 			}
 		}

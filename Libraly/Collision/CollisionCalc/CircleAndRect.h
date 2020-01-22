@@ -17,7 +17,7 @@ private:
 	float m_circle_radius;
 
 	float m_rect_centerX, m_rect_centerY;
-	float m_rect_halfX, m_rect_halfY;
+	float m_rect_width, m_rect_height;
 
 	float m_sumX, m_sumY;
 };
