@@ -36,13 +36,15 @@ PlayerBase::PlayerBase()
 	m_shape_list.push_back(new ShapeRect(m_pos.x, 61.0f, m_pos.y, 144.0f, 61.0f, 94.0f, 256.0f));
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 65.0f, m_pos.y, 222.0f, 26.0f, 256.0f));
 	
-
+	
 	m_animtimer = 0;
 	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
 	m_gravity = 17.0f;
 	m_is_miss = false;
 	m_is_hit_mapobj = false;
+	m_is_obj_stop = false;
+	m_do_damage = false;
 	AllInitEffect();
 
 }
@@ -204,19 +206,58 @@ void PlayerBase::P_Controll()
 		m_is_active = true;
 	}
 
-	//ジャンプ処理
+	//プレイヤーに重力をかける処理
 
-	if (IsButtonDown(AButton) == true || GetKeyDown(SPACE_KEY) == true)
+	m_pos.y += m_gravity;
+	m_gravity += Gravity;
+
+	if (m_pos.y >= P_posYforest && m_is_obj_stop != true) {
+		m_pos.y = P_posYforest;
+		m_gravity = 0.f;
+	}
+
+	//ジャンプ処理
+	if ((IsButtonPush(AButton) == true || GetKeyDown(SPACE_KEY) == true) && m_do_jump != true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
 		m_gravity = -P_jump_power;
+		m_pos.y -= 1.f;
 		InitAllState();
+		if (m_is_obj_stop == true) {
+			m_is_obj_stop = false;
+		}
 	}
-	if (m_is_hit_mapobj==true&&m_do_jump!=true)
-	{
-		m_pos.y = m_floorpos;
+
+	if (m_is_hit_mapobj == true) {
+
+		if (m_gravity > 0.f) {
+			//stop処理
+			m_is_obj_stop = true;
+		}
+
+		if (m_is_obj_stop == true) {
+			m_pos.y = m_floorpos - m_draw_param.tex_size_y;
+
+			m_gravity = 0.f;
+		}
+		/*if (m_pos.y + m_draw_param.tex_size_y >= m_floorpos && m_gravity > 0.f) {
+
+			m_pos.y = m_floorpos - m_draw_param.tex_size_y;
+			m_do_jump = false;
+			m_is_active = false;
+			m_gravity = 0.f;
+		}
+
+		if (m_do_jump != true) {
+			m_gravity = 0.f;
+		}*/
 	}
+	else {
+		m_is_obj_stop = false;
+	}
+
+	
 	
 	//長調短調切り替え処理(押している間のみ)
 
@@ -294,17 +335,7 @@ void PlayerBase::P_Controll()
 		m_pos.x -= m_speed;
 	}
 
-	//プレイヤーに重力をかける処理
 	
-	if (m_is_hit_mapobj==false)
-	{
-		m_pos.y += m_gravity;
-		m_gravity += Gravity;
-	}
-
-	if (m_pos.y > P_posYforest) {
-		m_pos.y = P_posYforest;
-	}
 	
 
 	m_is_hit_mapobj = false;
@@ -477,11 +508,10 @@ void PlayerBase::Jump()
 
 
 	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
-	if (m_pos.y >=m_floorpos)
+	if (m_pos.y >= P_posYforest || m_is_obj_stop == true)
 	{
 		m_effecttimer = 0;
-		
-		
+
 		m_do_jump = false;
 		m_is_active = false;
 	}
@@ -583,6 +613,13 @@ void PlayerBase::CollisionParamUpdate()
 		i->Update(m_pos.x, m_pos.y, m_direction);
 	}
 	CollisionManager::GetInstance().AddPlayerColObject(this);
+}
+
+void PlayerBase::ClearNoteBox()
+{
+	for (int i = 0;i < G_NOTE_BOX_NUM;++i) {
+		notebox[i] = 0;
+	}
 }
 
 void PlayerBase::InitWaitState() 
@@ -774,15 +811,30 @@ void PlayerBase::ChangeState()
 
 void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
-	if (ravel_ == ObjectRavel::Ravel_MapObj && 
-		m_pos.y + 128.0f <= hit_use_atk_) {
+	if (ravel_ == ObjectRavel::Ravel_MapObj ) {
 
-		m_floorpos = hit_use_atk_;
-
-		m_pos.y = m_floorpos - m_draw_param.tex_size_y/2.f;
+		m_floorpos = hit_use_atk_ + 34.f;
 
 		m_is_hit_mapobj = true;
 
+	}
+	else if (ravel_ == ObjectRavel::Ravel_Boss || ravel_ == ObjectRavel::Ravel_EnemyBullet) {
+		if (hit_use_atk_ > 0.f && m_do_damage == false) {
+
+			//ダメージ
+			--m_hp;
+
+			//ダメージ受けたフラグON
+			m_do_damage = true;
+		}
+	}
+	else if (ravel_ == ObjectRavel::Ravel_BananaBullet) {
+		//速度低下・音符ストック消去
+		ClearNoteBox();
+	}
+	else if (ravel_ == ObjectRavel::Ravel_ShitBullet) {
+		//演奏・ジャンプ禁止・音符ストック消去
+		ClearNoteBox();
 	}
 
 }

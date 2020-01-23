@@ -71,6 +71,14 @@ void EnemyBullet::CollisionParamUpdate()
 	CollisionManager::GetInstance().AddEBulletColObject(this);
 }
 
+void EnemyBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
+{
+	if (ravel_ == ObjectRavel::Ravel_Player) {
+		//è¡ñ≈
+		m_is_delete = true;
+	}
+}
+
 void EnemyBullet::CalcTexUseNum()
 {
 	if (m_direction == Direction::RIGHT) {

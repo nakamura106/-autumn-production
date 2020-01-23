@@ -4,6 +4,7 @@
 #include "../../Collision/ShapeType/ShapeRect.h"
 
 FountainObject::FountainObject()
+	:MapObjectBase(34.f, 30.f)
 {
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 1900.0f;
