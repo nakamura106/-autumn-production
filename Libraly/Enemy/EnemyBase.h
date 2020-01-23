@@ -39,6 +39,16 @@ public:
 	/*テクスチャの手の位置を返す*/
 	Position GetHandPos();
 
+	//ゲージのLevel
+	enum class EnemyGageStage :int {
+		Zero,
+		Quarter,
+		Half_Down,
+		Half_Up,
+		Almost,
+		Max
+	};
+
 private:
 
 	using EnemyAIList = std::vector < EnemyAIParam* >;
@@ -53,11 +63,11 @@ private:
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
 	const float M_MOVE_LIMIT_X					= 3500.f;	
 	const float M_FATIGUE						= 46.f;
-	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 2.f;
-	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 1.2f;		//眠気自動減少速度値
-	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.7f;
-	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.3f;
-	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 1.f;		//疲労度自動増加速度値
+	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 7.f;
+	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 5.f;		//眠気自動減少速度値
+	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 3.5f;
+	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 1.f;
+	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.5f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
 	const float M_WAVE_CHANGE_MOVE_LIMIT		= 3200.f;
@@ -271,10 +281,11 @@ protected:
 	int				m_now_wave;				//現在のwave
 	int				m_max_wave;				//この敵の最大wave
 	WaveState		m_wave_state;			//wave状態
-	int				m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
-	int				m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
+	EnemyGageStage	m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
+	EnemyGageStage	m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
 	float			m_player_center_pos;		//プレイヤーのx座標
 	float			m_tex_space_front;		//正面の空白部分を示す
+	bool			m_do_deadly_ai;			//必殺技をしたかどうかフラグ
 
 private:
 	// エフェクト関係関数まとめた関数

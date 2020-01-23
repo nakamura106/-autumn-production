@@ -24,6 +24,8 @@ private:
 	const int			M_FRAME_BANANA_START		= 13;
 	const float			M_TEX_FRONT_SPACE = 250.f;
 
+	const EnemyAIType	M_DEADLY_AI = EnemyAIType::AI10;	//必殺技のAIタイプ
+
 	//バナナ発射時の手の位置
 	const float			M_BANANA_HAND_POS_X[16] = {
 							357.f,208.f,209.f,227.f,

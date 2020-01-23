@@ -19,10 +19,10 @@ private:
 	const int	M_PBULLET_ANIM_SPLIT_ALL	= 16;
 	const int	M_PBULLET_ANIM_SPLIT_W		= 4;
 	const int	M_PBULLET_ANIM_SPLIT_H		= 4;
-	const float M_CHOCHO_1_NUM				= 10.f;
+	const float M_CHOCHO_1_NUM				= 20.f;
 	const float M_CHOCHO_2_NUM				= 10.f;
-	const float M_TANCHO_1_NUM				= 6.f;
-	const float M_TANCHO_2_NUM				= 6000.f;
+	const float M_TANCHO_1_NUM				= 20.f;
+	const float M_TANCHO_2_NUM				= 600.f;
 
 	PlayerBulletType player_bullet_type;	
 
