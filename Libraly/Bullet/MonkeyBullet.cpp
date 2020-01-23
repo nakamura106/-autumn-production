@@ -1,4 +1,5 @@
 #include"MonkeyBullet.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
 
 MonkeyBullet::MonkeyBullet(
 	float x_,
@@ -24,6 +25,8 @@ MonkeyBullet::MonkeyBullet(
 	if (m_direction == Direction::RIGHT) {
 		m_is_turn = true;
 	}
+
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 58.0f, m_pos.y, 83.0f, 34.0f, 128.0f));
 
 }
 

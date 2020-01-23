@@ -1,6 +1,7 @@
 #include"BananaObject.h"
 #include"../../Engine/Graphics.h"
 #include"../../Object/Definition.h"
+#include "../../Collision/ShapeType/ShapeRect.h"
 
 BananaObject::BananaObject()
 {
@@ -8,6 +9,7 @@ BananaObject::BananaObject()
 	m_pos.x = 500.0f;
 	m_pos.y = P_posYforest;
 	
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 227.0f, m_pos.y, 51.0f, 225.0f, 22.0f, 512.0f));
 }
 
 void BananaObject::Draw()
