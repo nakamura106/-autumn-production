@@ -79,6 +79,7 @@ protected:
 	int		m_animtimer;
 	int		m_effect;
 	int		m_effecttimer;
+	int		m_invincibletimer;
 	float   m_floorpos;
 	float	m_gravity;
 	bool	m_is_obj_stop;

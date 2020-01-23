@@ -40,11 +40,13 @@ PlayerBase::PlayerBase()
 	m_animtimer = 0;
 	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
+	m_invincibletimer = 0;
 	m_gravity = 17.0f;
 	m_is_miss = false;
 	m_is_hit_mapobj = false;
 	m_is_obj_stop = false;
 	AllInitEffect();
+	m_is_invincible == false;
 
 }
 
@@ -138,6 +140,15 @@ void PlayerBase::P_Controll()
 	{
 		m_effecttimer++;
 	}
+
+	if (m_invincibletimer >= 0)
+	{
+		m_invincibletimer--;
+	}
+	if (m_invincibletimer == 0)
+	{
+		m_is_invincible = false;
+	}
 	
 	DataBank::Instance()->SetState(m_state);
 
@@ -156,6 +167,7 @@ void PlayerBase::P_Controll()
 		ChangeSceneStep(SceneStep::EndStep);
 	}
 
+	
 
 	//‰EˆÚ“®
 	if ((IsButtonPush(RightButton)||GetKey(RIGHT_KEY) == true)&&m_state!=(int)P_State::Attack)
@@ -173,13 +185,7 @@ void PlayerBase::P_Controll()
 		{
 			m_map_pos += m_speed;
 		}
-
-		
-			m_direction = RIGHT;
-		
-			
-		
-
+		m_direction = RIGHT;
 		m_is_active = true;
 	}
 
@@ -805,7 +811,20 @@ void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 		m_floorpos = hit_use_atk_ + 34.f;
 
 		m_is_hit_mapobj = true;
+	}
 
+	if (ravel_ == ObjectRavel::Ravel_EnemyBullet || ravel_ == ObjectRavel::Ravel_Boss)
+	{
+		if (m_invincibletimer <= 0 && m_hp>=0)
+		{
+			m_hp--;
+		}
+		if (m_is_invincible==false)
+		{
+			m_invincibletimer = 90;
+			m_is_invincible == true;
+		}
+		m_invincibletimer--;
 	}
 
 }
