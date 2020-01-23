@@ -183,7 +183,7 @@ void EnemyBase::Update()
 
 	}
 
-
+	DataBank::Instance()->SetIsDebuff(m_is_debuff);
 }
 
 Position EnemyBase::GetHandPos()
@@ -611,6 +611,7 @@ void EnemyBase::AutoChangeGageUpdate()
 
 	//ƒQ[ƒWŽ©“®•Ï“®’âŽ~
 	if (m_stop_auto_sleep_time > 0) {
+		m_is_debuff = true;
 		--m_stop_auto_sleep_time;
 	}
 	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) < M_AUTO_CHANGE_GAGE_FLAME) {
@@ -666,6 +667,7 @@ void EnemyBase::AutoChangeGageUpdate()
 	UpFatigueGage(fatigue_up);
 
 	if (m_stop_auto_sleep_time <= 0) {
+		m_is_debuff = false;
 		DownSleepGage(sleep_down);
 	}
 	

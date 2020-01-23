@@ -375,6 +375,9 @@
     <ClCompile Include="Object\MapObject\MapObjectBase.cpp">
       <Filter>Object\MapObject</Filter>
     </ClCompile>
+    <ClCompile Include="UI\LifeCutUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Anime.h">
@@ -646,6 +649,9 @@
     </ClInclude>
     <ClInclude Include="Object\MapObject\MapObjectBase.h">
       <Filter>Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\LifeCutUi.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

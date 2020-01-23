@@ -51,7 +51,7 @@ void FatigueGaugeUi::Draw()
 {
 	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyGaugeBase));
 
-	DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyAutoHealGauge));
+	
 
 	DrawSliderUVMappingVersion(sliders);
 

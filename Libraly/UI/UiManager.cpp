@@ -7,6 +7,7 @@
 #include "FatigueGaugeUi.h"
 #include "EnemyAchieve.h"
 #include "PlayerBrassUi.h"
+#include "LifeCutUi.h"
 
 UiManager* UiManager::p_instance = 0;
 
@@ -70,6 +71,7 @@ void UiManager::Create()
 	ui_objects[5] = new EnemyBaseUi();
 	ui_objects[6] = new EnemyAchieve();
 	ui_objects[7] = new PlayerBrassUi();
+	ui_objects[8] = new LifeCutUi();
 }
 
 void UiManager::Update()

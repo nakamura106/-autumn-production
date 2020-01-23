@@ -38,6 +38,14 @@ void SleepGaugeUi::Update()
 {
 	m_sleep_gauge = DataBank::Instance()->GetSleepGauge();
 
+	if (DataBank::Instance()->GetIsDebuff())
+	{
+		m_param.texture_id = GameCategoryTextureList::GameEnemyAutoHealGauge;
+	}
+	else
+	{
+		m_param.texture_id = GameCategoryTextureList::GameEnemySleepGauge;
+	}
 
 	UpdateSliderCurrentValue(sliders);
 	UpdateSliderNextValue(m_sleep_gauge, sliders);

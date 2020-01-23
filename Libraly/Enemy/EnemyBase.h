@@ -287,6 +287,8 @@ protected:
 	float			m_tex_space_front;		//正面の空白部分を示す
 	bool			m_do_deadly_ai;			//必殺技をしたかどうかフラグ
 
+	bool m_is_debuff;
+
 private:
 	// エフェクト関係関数まとめた関数
 	void AllInitEffect();
