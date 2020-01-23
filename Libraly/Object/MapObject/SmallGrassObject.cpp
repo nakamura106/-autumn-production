@@ -4,6 +4,7 @@
 #include "../../Collision/ShapeType/ShapeRect.h"
 
 SmallGrassObject::SmallGrassObject()
+	:MapObjectBase(92.f, 31.f)
 {
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 400.0f;

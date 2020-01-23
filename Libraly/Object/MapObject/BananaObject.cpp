@@ -4,6 +4,7 @@
 #include "../../Collision/ShapeType/ShapeRect.h"
 
 BananaObject::BananaObject()
+	:MapObjectBase(51.f,22.f)
 {
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 500.0f;
