@@ -37,7 +37,9 @@ void SoundManager::RegisterSelectSound()
 
 void SoundManager::RegisterGameMainSound()
 {
-	
+	m_bgm_file = "Res/Wav/forestBGM1.wav";
+
+	m_pAudio->Load(m_bgm, m_bgm_file);
 }
 
 void SoundManager::RegisterEndSound()
@@ -47,7 +49,7 @@ void SoundManager::RegisterEndSound()
 
 void SoundManager::SoundBGM()
 {
-	m_pAudio->Play(m_bgm, -1500, true);
+	m_pAudio->Play(m_bgm, -500, true);
 }
 
 void SoundManager::SoundSelectBGM()
