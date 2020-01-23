@@ -67,6 +67,18 @@ ObjectManager::~ObjectManager()
 	}
 }
 
+void ObjectManager::AllDaleteObject()
+{
+	for (int i = 0; i < MAX_CHARA_OBJ; i++)
+	{
+		if (chara_objects[i] != nullptr)
+		{
+			delete chara_objects[i];
+			chara_objects[i] = nullptr;
+		}
+	}
+}
+
 // ポインタ配列の中身にすべてNULLを入れておく
 void ObjectManager::Init()
 {
