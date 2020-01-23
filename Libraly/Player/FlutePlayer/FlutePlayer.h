@@ -9,7 +9,7 @@ public:
 	~FlutePlayer() {};
 
 	void Init()override;
-	void Load()override {};
+	
 	void SetRectangle()override;
 
 };

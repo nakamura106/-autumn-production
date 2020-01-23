@@ -15,7 +15,7 @@ public:
 	
 	 void SetRectangle()override;
 
-	 void Load()override;
+	
 private:
 	
 

@@ -43,17 +43,13 @@ void TubaPlayer::Init()
 	{
 		notebox[i] = 0;
 	}
-	Load();
 
 	SetRectangle();
 
 	
 }
 
-void TubaPlayer::Load()
-{
-	
-}
+
 
 void TubaPlayer::SetRectangle()
 {
