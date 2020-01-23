@@ -15,6 +15,7 @@ public:
 	void CreateObject();
 	void Update();
 	void Draw();
+	void AllDaleteObject();
 
 	ObjectBase* GetPlayerObject()
 	{
