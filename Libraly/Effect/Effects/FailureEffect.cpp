@@ -1,4 +1,5 @@
 #include "FailureEffect.h"
+#include "../../DataBank/DataBank.h"
 
 #define FAILURE_SIZE 64.0f
 #define FAILURE_OFFX -60.0f
@@ -29,6 +30,26 @@ void FailureEffect::Init()
 	m_anime_param.change_flame = 15;
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameFailureEffect;
+	
+}
+
+void FailureEffect::Update()
+{
+	AnimationUpdate();
+	if (m_IsActive == true)
+	{
+		if (DataBank::Instance()->GetPlayerdirection() == Direction::RIGHT)
+		{
+			m_effect_param.m_X = m_parent->GetPos().x + m_effect_param.m_offsetX;
+			m_effect_param.m_Y = m_parent->GetPos().y + m_effect_param.m_offsetY;
+		}
+		else {
+			m_effect_param.m_X = m_parent->GetPos().x + m_effect_param.m_offsetX + lrAdjustment;
+			m_effect_param.m_Y = m_parent->GetPos().y + m_effect_param.m_offsetY;
+		}
+		
+	}
+
 	
 }
 

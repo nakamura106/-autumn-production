@@ -52,3 +52,5 @@ void BananaBullet::MoveUpdate()
 		m_pos.y = hand_pos.y - m_draw_param.tex_size_y / 2.f;
 	}
 }
+
+

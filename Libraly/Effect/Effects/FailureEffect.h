@@ -11,6 +11,8 @@ public:
 
 	void Init()override;
 
+	void Update()override;
+
 	EffectID GetEffectID()override;
 
 private:

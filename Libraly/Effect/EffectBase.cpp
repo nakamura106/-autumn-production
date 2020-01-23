@@ -6,6 +6,7 @@ EffectBase::EffectBase(ObjectBase* parent_)
 
 	m_animation_timer = 0;
 	m_is_animation_end = false;
+
 	
 	Init();
 }

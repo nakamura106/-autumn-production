@@ -1,4 +1,5 @@
 #include "SweatEffect.h"
+#include "../../DataBank/DataBank.h"
 
 #define SWEAT_SIZE 64.0f
 #define SWEAT_OFFX -80.0f
@@ -31,6 +32,19 @@ void SweatEffect::Init()
 
 	m_draw_param.texture_id = GameCategoryTextureList::GameSweatEffect;
 	
+}
+
+void SweatEffect::Update()
+{
+	if (DataBank::Instance()->GetPlayerdirection() == Direction::RIGHT)
+	{
+		m_effect_param.m_X = m_parent->GetPos().x + m_effect_param.m_offsetX;
+		m_effect_param.m_Y = m_parent->GetPos().y + m_effect_param.m_offsetY;
+	}
+	else {
+		m_effect_param.m_X = m_parent->GetPos().x + m_effect_param.m_offsetX + lrAdjustment;
+		m_effect_param.m_Y = m_parent->GetPos().y + m_effect_param.m_offsetY;
+	}
 }
 
 

@@ -32,6 +32,8 @@ public:
 	void SetState(int state_) { m_state = state_; }
 	void SetWave(WaveType wave_,bool torf_) { m_wave_change[(int)wave_] = torf_; }
 	void SetIsDebuff(bool is_debuff) { m_is_debuff = is_debuff; }
+	void SetIsHitBanana(bool is_hit_banana) { m_is_hit_banana = is_hit_banana; }
+	void SetIsHitShit(bool is_hit_shit) { m_is_hit_shit = is_hit_shit; }
 	
 
 	int GetPlayerHp() { return m_player_hp; }
@@ -56,6 +58,8 @@ public:
 	bool GetIsGameOver() { return m_is_game_over; }
 	bool GetWavetype(WaveType wave_) { return m_wave_change[(int)wave_]; }
 	bool GetIsDebuff() { return m_is_debuff; }
+	bool GetIsHitBanana() { return m_is_hit_banana; }
+	bool GetIsHitShit() { return m_is_hit_shit; }
 
 	 
 	WaveState GetWaveState() { return m_wave_state; }
@@ -90,6 +94,8 @@ private:
 	float m_sleep_gauge, m_fatigue_gauge;
 
 	bool m_is_debuff;
+	bool m_is_hit_banana;
+	bool m_is_hit_shit;
 	bool m_is_game_clear;
 	bool m_is_game_over;
 	bool m_wave_change[(int)WaveType::WaveMax];
