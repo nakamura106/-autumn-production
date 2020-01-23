@@ -1,6 +1,8 @@
 #include "Gorilla.h"
 #include"../Bullet/BananaBullet.h"
 #include"../Bullet/MonkeyBullet.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Collision/ShapeType/ShapeRect.h"
 #include"../DataBank/SaveData.h"
 
 Gorilla::Gorilla()
@@ -27,6 +29,11 @@ Gorilla::Gorilla()
 	m_draw_param.tex_size_x = m_draw_param.tex_size_y = M_GORILLA_TEX_SIZE;
 
 	m_pos.y += M_POS_Y_ADJUST;
+
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 347.0f, m_pos.y, 379.0f, 69.0f, 850.0f));//“ª
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 441.0f, m_pos.y, 668.0f, 138.0f, 307.0f, 850.0f));//˜r
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 333.0f, m_pos.y, 503.0f, 69.0f, 850.0f));//“·‘Ì
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 280.0f, m_pos.y, 696.0f, 104.0f, 235.0f, 850.0f));// ‘«
 
 	SaveData::GetInstance().SetNewClearTime(ClearTimeType::Gorilla_Flute, 100);
 	SaveData::GetInstance().SetCsvFileData();

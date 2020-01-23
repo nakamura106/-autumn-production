@@ -1,5 +1,7 @@
 ﻿#include"Bird.h"
 #include"../Bullet/ShitBullet.h"
+#include "../Collision/ShapeType/ShapeCircle.h"
+#include "../Collision/ShapeType/ShapeRect.h"
 
 Bird::Bird()
 	:EnemyBase(0.f, EnemyID::Seagull, 2, 512.f)
@@ -16,6 +18,9 @@ Bird::Bird()
 	m_speed_y_default = m_speed;
 	--m_anim_param.change_flame;
 
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 137.0f, m_pos.y, 322.0f, 151.0f, 32.0f, 512.0f));//頭
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 285.0f, m_pos.y, 338.0f, 142.0f, 84.0f, 512.0f));//胴体
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 365.0f, m_pos.y, 299.0f, 47.0f, 512.0f));//羽
 }
 
 Bird::~Bird()

@@ -59,10 +59,6 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	AllInitEffect();
 
 	DataBank::Instance()->SetIsGameClear(false);
-	
-	m_shape_list.push_back(new ShapeCircle(m_pos.x, 347.0f, m_pos.y, 379.0f, 69.0f, 512.0f));//“ªH
-	m_shape_list.push_back(new ShapeCircle(m_pos.x, 201.0f, m_pos.y, 395.0f, 85.0f, 512.0f));//‚¨KˆÊ’u
-	m_shape_list.push_back(new ShapeRect(m_pos.x, 100.0f, m_pos.y, 23.0f, 200.0f, 46.0f, 512.0f));	//ã‚É“–‚½‚è”»’è‚ ‚è
 
 }
 
