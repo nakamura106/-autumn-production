@@ -50,7 +50,8 @@ void Map::Update()
 		MapScroll(RIGHT);
 	}
 
-		
+	
+
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
 
@@ -73,10 +74,7 @@ void Map::MapScroll(int direction_)
 }
 
 
-void Map::HitJudgement()
-{
-	
-}
+
 
 void Map::Draw()
 {
@@ -132,31 +130,7 @@ void Fg::MapScroll(int direction_)
 	
 }
 
-void  Fg::WaveChange(float enemyX_)
-{
-	if (enemyX_ >= 960.0f)
-	{
-		fg += P_speed * 4;
-	}
-	else
-	{
-		for (int i = 0; i < (int)WaveType::WaveMax; i++)
-		{
-			DataBank::Instance()->SetWave((WaveType)i, false);
-		}
-	}
-	if (enemyX_ <= 960.0f)
-	{
-		fg -= P_speed * 4;
-	}
-	else
-	{
-		for (int i = 0; i < (int)WaveType::WaveMax; i++)
-		{
-			DataBank::Instance()->SetWave((WaveType)i, false);
-		}
-	}
-}
+
 
 void Fg::Draw()
 {
