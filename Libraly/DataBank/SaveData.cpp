@@ -71,7 +71,7 @@ bool SaveData::GetCsvFileData()
 
 	//csvファイルが2段ある必要がある
 	if (file.size() >= 2) {
-		if (file[1].size() >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
+		if (static_cast<int>(file[1].size()) >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
 
 			//データ存在するか
 			m_is_data_exist = static_cast<bool>(*file[1][1]);
@@ -107,7 +107,7 @@ bool SaveData::SetCsvFileData()
 
 	if (data.size() >= 2) {
 
-		if (data[1].size() >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
+		if (static_cast<int>(data[1].size()) >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
 			
 			//データ存在するか
 			*data[1][1] = static_cast<int>(m_is_data_exist);

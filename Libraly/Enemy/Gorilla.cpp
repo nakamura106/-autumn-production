@@ -68,9 +68,9 @@ void Gorilla::EnemyAttack2()
 			m_shot_adjust.x = m_draw_param.tex_size_x / 2.f + M_INPACT_RIGHT_B_ADJUST;
 		}
 
-		CreateBullet(Direction::LEFT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512.f);
+		CreateBullet(Direction::LEFT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512);
 
-		CreateBullet(Direction::RIGHT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512.f);
+		CreateBullet(Direction::RIGHT, m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Inpact, 2, 2, 3, 0, M_INPACT_ACTIVE_DISTANCE, false, 512);
 
 		m_shot_adjust = m_shot_adjust_default;
 
@@ -247,4 +247,5 @@ void Gorilla::CreateMonkey()
 			0.15f//‰Á‘¬“x
 		)
 	);
+
 }

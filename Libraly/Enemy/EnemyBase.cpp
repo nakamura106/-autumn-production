@@ -1,6 +1,5 @@
 #include "EnemyBase.h"
 #include "../Player/TrpPlayer.h"
-#include"../Engine/FileLoader.h"
 #include"../Engine/Input.h"
 #include"../DataBank/DataBank.h"
 #include "../Effect/Effects/DieEffect.h"
@@ -55,14 +54,15 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_now_wave					= 1;
 	m_max_wave					= max_wave_;
 	m_wave_state				= WaveState::None;
+	m_player_center_pos			= 0.f;
 
 	AllInitEffect();
 
 	DataBank::Instance()->SetIsGameClear(false);
 	
-	m_shape_list.push_back(new ShapeCircle(m_pos.x, 347.0f, m_pos.y, 379.0f, 69.0f, 512.0f));
-	m_shape_list.push_back(new ShapeCircle(m_pos.x, 201.0f, m_pos.y, 395.0f, 85.0f, 512.0f));
-	m_shape_list.push_back(new ShapeRect(m_pos.x, 100.0f, m_pos.y, 23.0f, 200.0f, 46.0f, 512.0f));
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 347.0f, m_pos.y, 379.0f, 69.0f, 512.0f));//頭？
+	m_shape_list.push_back(new ShapeCircle(m_pos.x, 201.0f, m_pos.y, 395.0f, 85.0f, 512.0f));//お尻位置
+	m_shape_list.push_back(new ShapeRect(m_pos.x, 100.0f, m_pos.y, 23.0f, 200.0f, 46.0f, 512.0f));	//上に当たり判定あり
 
 }
 
@@ -125,6 +125,9 @@ void EnemyBase::Update()
 	{
 		//デバッグ用
 		DebugKeyAction();
+
+		//データバンクからのデータの取得
+		DataGetUpdate();
 
 		//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
 		AutoChangeGageUpdate();
@@ -411,11 +414,14 @@ bool EnemyBase::AITransitionStraight()
 
 bool EnemyBase::AITransitionPassPlayer()
 {
+
+	float p_pos_x = DataBank::Instance()->GetPlayerMapPos();
+
 	//プレイヤーのx座標をゲット
 	if (m_p_pos_relation == Direction::LEFT) {
 
 		if (m_map_pos + m_draw_param.tex_size_x / 2.f <
-			DataBank::Instance()->GetPlayerMapPos())
+			p_pos_x + G_PLAYER_SIZE / 2.f)
 		{
 			return true;
 		}
@@ -423,7 +429,7 @@ bool EnemyBase::AITransitionPassPlayer()
 	else {
 
 		if ((m_map_pos + m_draw_param.tex_size_x / 2.f) >
-			DataBank::Instance()->GetPlayerMapPos())
+			p_pos_x + G_PLAYER_SIZE / 2.f)
 		{
 			return true;
 		}
@@ -442,7 +448,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
 		if (m_p_pos_relation == Direction::LEFT) {
-			if (p_pos_x + M_PLAYER_SIZE_X >= m_map_pos) {
+			if (p_pos_x + G_PLAYER_SIZE >= m_map_pos) {
 				return true;
 			}
 		}
@@ -1115,6 +1121,15 @@ void EnemyBase::DataSetUpdate()
 
 }
 
+void EnemyBase::DataGetUpdate()
+{
+
+	DataBank* d_bank = DataBank::Instance();
+
+	m_player_center_pos = d_bank->GetPlayerMapPos() + G_PLAYER_SIZE / 2.f;
+
+}
+
 void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
 	//当たり判定
@@ -1127,20 +1142,20 @@ void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 	//プレイヤー弾①
 	case ObjectRavel::Ravel_PlayerBullet:
 		//眠気増加
-		UpSleepGage(hit_use_atk_ / 2.f);
+		UpSleepGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//プレイヤー弾②
 	case ObjectRavel::Ravel_PlayerBullet2:
 		//疲労回復
-		DownFatigueGage(hit_use_atk_ / 2.f);
+		DownFatigueGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
 	//プレイヤー弾③
 	case ObjectRavel::Ravel_PlayerBullet3:
-		UpFatigueGage(hit_use_atk_ / 2.f);
+		UpFatigueGage(hit_use_atk_);
 		m_stop_auto_sleep_time = M_STOP_AUTO_SLEEP_TIME_HITBULLET;
 		break;
 
@@ -1197,7 +1212,7 @@ bool EnemyBase::CheckFatigueGageMax()
 GageState EnemyBase::CheckGaugeState()
 {
 	//疲労状態
-	if (m_fatigue_gage_stage > m_sleep_gage_stage) {
+	if (m_fatigue_gage_stage > m_sleep_gage_stage && m_fatigue_gage_stage >= 3) {//段階3はゲージ半分以上
 		return GageState::Fatigue_State;
 	}
 	
@@ -1359,6 +1374,11 @@ void EnemyBase::CreateBullet(
 		)
 	);
 
+}
+
+void EnemyBase::SetAIType()
+{
+	m_now_ai = ChangeAIType();
 }
 
 void EnemyBase::AllInitEffect()

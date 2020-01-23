@@ -21,7 +21,7 @@ public:
 		int tex_use_num_ = 0,
 		float active_distance_ = 1000.f,
 		bool is_animation_stop_ = true,
-		int tex_size_ = 128.f
+		float tex_size_ = 128.f
 	);
 
 	~EnemyBullet();

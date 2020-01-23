@@ -21,8 +21,8 @@ PlayerBase::PlayerBase()
 	m_draw_param.tv = 1.0f;
 	m_draw_param.category_id = TEXTURE_CATEGORY_GAME;
 	m_draw_param.texture_id = GameCategoryTextureList::GamePlayer_Taiki_RightTex;
-	m_draw_param.tex_size_x = M_PLAYER_SIZE;
-	m_draw_param.tex_size_y = M_PLAYER_SIZE;
+	m_draw_param.tex_size_x = G_PLAYER_SIZE;
+	m_draw_param.tex_size_y = G_PLAYER_SIZE;
 
 	//アニメーション用仮メンバ初期化
 	m_anim_param.split_all = 12;

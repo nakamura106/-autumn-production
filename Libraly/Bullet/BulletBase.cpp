@@ -9,7 +9,7 @@ BulletBase::BulletBase(
 	ObjectRavel obj_ravel_,
 	float speed_y_,
 	int draw_angle_,
-	int tex_size
+	float tex_size
 )
 	:ObjectBase(obj_ravel_,direction_,move_speed_,draw_angle_)
 {

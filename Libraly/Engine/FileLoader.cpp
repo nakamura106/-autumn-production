@@ -9,6 +9,19 @@ int AtoI(std::string str) {
 	return atoi(str.c_str());
 }
 
+int RandomTool::GetRandom() {
+	std::random_device rd;
+
+	std::mt19937 mt(rd());
+
+	int rand = mt();
+
+	//一応、負の場合は正に変換
+	if (rand < 0)rand = -rand;
+
+	return rand;
+}
+
 //int型の数字をchar型に変換
 char FileLoadTool::ItoC(int num) {
 
