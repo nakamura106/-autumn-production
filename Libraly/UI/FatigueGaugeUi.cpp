@@ -26,7 +26,7 @@ void FatigueGaugeUi::Init()
 		m_pos.x,							// X座標
 		m_pos.y,							// Y座標
 		0.0f,							// 最小値
-		100.0f,							// 最大値
+		148.0f,							// 最大値
 		m_fatigue_gauge,				// 現状の値
 		m_fatigue_gauge,				// 次の値
 		0.0f,							// 速度 
@@ -55,7 +55,7 @@ void FatigueGaugeUi::Draw()
 
 	DrawSliderUVMappingVersion(sliders);
 
-	if (m_fatigue_gauge >= 100.0f)
+	if (m_fatigue_gauge >= 148.0f)
 	{
 		DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemyFatigueCircle));
 	}

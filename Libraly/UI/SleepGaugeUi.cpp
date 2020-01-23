@@ -23,7 +23,7 @@ void SleepGaugeUi::Init()
 		m_pos.x,							// X座標
 		m_pos.y,							// Y座標
 		0.0f,							// 最小値
-		100.0f,							// 最大値
+		148.0f,							// 最大値
 		m_sleep_gauge,				// 現状の値
 		m_sleep_gauge,				// 次の値
 		0.0f,							// 速度 
@@ -47,7 +47,7 @@ void SleepGaugeUi::Draw()
 {
 	DrawSliderUVMappingVersion(sliders);
 
-	if (m_sleep_gauge >= 75.0f)
+	if (m_sleep_gauge >= Sleep_Gauge_Max)
 	{
 		DrawTexture(m_pos.x, m_pos.y, GetTexture(m_param.category_id, GameCategoryTextureList::GameEnemySleepCircle));
 	}

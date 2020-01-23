@@ -41,7 +41,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_now_ai_num				= -1;
 	m_stop_state_transition		= false;
 	m_hit_use_atk				= 0.f;
-	m_auto_sleep_time			= M_CURE_SLEEP_TIME_DEFAULT;
+	m_auto_sleep_time			= M_AUTO_CHANGE_GAGE_FLAME;
 	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time		= 0;
 	m_savetime_end				= 0;
@@ -605,7 +605,7 @@ void EnemyBase::AutoChangeGageUpdate()
 		--m_stop_auto_sleep_time;
 		return;
 	}
-	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) < M_CURE_SLEEP_TIME_DEFAULT) {
+	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) < M_AUTO_CHANGE_GAGE_FLAME) {
 		return;
 	}
 	else {
@@ -642,6 +642,7 @@ void EnemyBase::AutoChangeGageUpdate()
 	case 4:
 		//–°‹CŒ¸­F’âŽ~A”æ˜J‘‰ÁF’á‘¬
 		fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
+		UpFatigueGage(fatigue_up);
 		break;
 
 	//Max(Å‘å)
@@ -956,6 +957,8 @@ void EnemyBase::InitFlyState()
 
 void EnemyBase::InitDeadState()
 {
+	m_savetime_end = FlameTimer::GetNowFlame();
+
 	if (m_direction == Direction::LEFT) {
 		m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_DownLeft;
 	}
@@ -1266,6 +1269,13 @@ void EnemyBase::EnemyDead()
 		DataBank::Instance()->SetIsGameOver(true);
 
 	}
+
+	if (m_is_animation_end == true) {
+		m_animation_stop = true;
+		m_draw_param.tu = 4.f;
+		m_draw_param.tv = 3.f;
+	}
+
 }
 
 void EnemyBase::DownSleepGage(float down_num_)
