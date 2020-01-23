@@ -33,13 +33,10 @@ void Map::Init()
 	
 
 	
-	Load();
-}
-
-void Map::Load()
-{
 	
 }
+
+
 
 void Map::Update()
 {

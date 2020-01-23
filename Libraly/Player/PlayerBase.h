@@ -19,8 +19,7 @@ public:
 	virtual void Init() = 0;
 	virtual void CreateBullets(PlayerBulletType bullettype);
 	void Create();
-	//!< 画像読込用関数(ゲームシーンにべた書き予定)
-	virtual void Load() = 0;
+	
 	//!< アップデート関数(処理更新用)
 	virtual void Update();
 	//!< 描画関数(オブジェクトベースでまとめてやる予定)

@@ -19,7 +19,7 @@ public:
 	~ObjectBase();
 
 	virtual void Init() = 0;
-	virtual void Load() = 0;
+	
 	virtual void Update();
 	virtual void Draw();
 

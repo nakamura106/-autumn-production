@@ -14,7 +14,7 @@ public:
 
 	void Jump();
 
-	void Load()override;
+	
 private:
 
 };

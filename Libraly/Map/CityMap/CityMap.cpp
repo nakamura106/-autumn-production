@@ -8,11 +8,7 @@
 #include"../../Manager/ObjectManager.h"
 
 
-void CityMap::Load()
-{
 
-	
-}
 
 void CityMap::Draw()
 {
@@ -21,10 +17,7 @@ void CityMap::Draw()
 	DrawTexture(floor1, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 }
 
-void CityFg::Load()
-{
-	
-}
+
 
 void CityFg::Draw()
 {

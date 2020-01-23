@@ -37,7 +37,7 @@ void FlutePlayer::Init()
 	{
 		notebox[i] = 0;
 	}
-	Load();
+	
 
 	SetRectangle();
 }

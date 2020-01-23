@@ -9,7 +9,7 @@ public:
 	BananaObject();
 	~BananaObject() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Draw();
 	

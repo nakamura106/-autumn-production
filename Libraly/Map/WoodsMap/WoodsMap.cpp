@@ -8,11 +8,7 @@
 #include"../../Manager/ObjectManager.h"
 
 
-void WoodsMap::Load()
-{
 
-
-}
 
 void WoodsMap::Draw()
 {
@@ -22,10 +18,6 @@ void WoodsMap::Draw()
 
 }
 
-void WoodsFg::Load()
-{
-	
-}
 
 void WoodsFg::Draw()
 {
