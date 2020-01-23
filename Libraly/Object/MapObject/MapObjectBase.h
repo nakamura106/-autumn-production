@@ -7,7 +7,7 @@ public:
 	MapObjectBase();
 	~MapObjectBase() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Update();
 

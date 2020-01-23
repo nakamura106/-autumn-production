@@ -25,8 +25,7 @@ public:
 	EnemyBase(float speed_, EnemyID enemy_id_, int max_wave_, float tex_size_);
 	virtual ~EnemyBase();
 
-	/*Load用関数？：ObjectBaseから引き継いだ*/
-	void Load() {}
+	
 	/*描画関数*/
 	void Draw();
 	/*初期化*/
@@ -49,7 +48,7 @@ private:
 	const int	M_ANIM_TEX_ALL					= 12;		//画像のアニメーション枚数
 	const int	M_ANIM_TEX_WIDTH				= 4;		//横の分割数
 	const int	M_ANIM_TEX_HEIGHT				= 4;		//縦の分割数
-	const int	M_CURE_SLEEP_TIME_DEFAULT		= 60;		//ゲージ自動回復のフレーム周期
+	const int	M_AUTO_CHANGE_GAGE_FLAME		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
 	const float M_MOVE_LIMIT_X					= 3500.f;	
@@ -58,10 +57,11 @@ private:
 	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 1.2f;		//眠気自動減少速度値
 	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 0.7f;
 	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 0.3f;
-	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.3f;		//疲労度自動増加速度値
+	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 1.f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
 	const float M_WAVE_CHANGE_MOVE_LIMIT		= 3200.f;
+	const float	M_TEX_FRONT_SPACE				= 50.f;
 	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -255,7 +255,7 @@ protected:
 		int use_tex_num_ = 0,
 		float active_distance_ = 1000.f,
 		bool is_animation_stop_ = true,
-		int tex_size_ = 128.f
+		float tex_size_ = 128.f
 	);
 
 	void SetAIType();
@@ -274,6 +274,7 @@ protected:
 	int				m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
 	int				m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
 	float			m_player_center_pos;		//プレイヤーのx座標
+	float			m_tex_space_front;		//正面の空白部分を示す
 
 private:
 	// エフェクト関係関数まとめた関数

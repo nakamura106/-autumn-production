@@ -15,7 +15,7 @@ public:
 	//!< 初期化関数(座標など)
 	void Init()override;
 	//!< 画像読込関数関数
-	virtual void Load()override;
+	
 	//!< 更新関数(毎フレーム更新が必要なもの等)
 	void Update()override;
 	//!< 描画用関数(背景やオブジェクトを描画する)

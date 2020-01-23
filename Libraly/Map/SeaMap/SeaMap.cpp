@@ -8,11 +8,7 @@
 #include"../../Manager/ObjectManager.h"
 
 
-void SeaMap::Load()
-{
 
-	
-}
 
 void SeaMap::Draw()
 {
@@ -21,10 +17,7 @@ void SeaMap::Draw()
 	DrawTexture(floor1, m_pos.y, GetTexture(TEXTURE_CATEGORY_GAME, GamefloorTex));
 }
 
-void SeaFg::Load()
-{
-	
-}
+
 
 void SeaFg::Draw()
 {
