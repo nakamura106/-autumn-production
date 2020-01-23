@@ -162,16 +162,10 @@ void PlayerBullet::MoveFluteUpdate()
 		(DataBank::Instance()->GetPlayerdirection() == Direction::LEFT && ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Player)->GetMapPos() <= ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetMapPos())&&
 		m_is_homing==false)
 	{
-		if (DataBank::Instance()->GetPlayerdirection() == Direction::RIGHT)
-		{
-			m_map_pos += 7;
-		}
-		if (DataBank::Instance()->GetPlayerdirection() == Direction::LEFT)
-		{
-			m_map_pos -= 7;
-		}
+		m_is_nothoming = true;
 	}
-	else if (homingcount <= 50)
+
+	if (homingcount <= 50&&m_is_nothoming==false)
 	{
 		m_is_homing = true;
 		if (m_firepoint.y == 0)
@@ -186,11 +180,22 @@ void PlayerBullet::MoveFluteUpdate()
 		m_move.x = cosf(m_angle) * 5;
 		m_move.y = sinf(m_angle) * 5;
 	}
+
+	if (m_direction == Direction::RIGHT&&m_is_nothoming == true)
+	{
+		m_map_pos += 7;
+	}
+	if (m_direction == Direction::LEFT&& m_is_nothoming == true)
+	{
+		m_map_pos -= 7;
+	}
 		m_map_pos += m_move.x;
+		m_pos.x += m_move.x;
 		m_pos.y += m_move.y;
 	if (homingcount >= 150)
 	{
 		m_is_homing = false;
+		m_is_nothoming = false;
 		homingcount = 0;
 		m_is_delete = true;
 	}

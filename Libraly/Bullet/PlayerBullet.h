@@ -50,7 +50,9 @@ private:
 
 	float m_upward_thrust;
 
-	bool m_is_homing;
+	bool m_is_homing=false;
+
+	bool m_is_nothoming=false;
 
 };
 

@@ -83,7 +83,11 @@ void TubaPlayer::Jump()
 	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
 	if (m_pos.y >= P_posYforest)
 	{
+		m_anim_param.split_all = 12;
+		m_anim_param.split_height = 4;
+		m_effecttimer = 0;
 		jump_power = P_jump_power;
+		InitAllState();
 		m_do_jump = false;
 		m_is_active = false;
 	}

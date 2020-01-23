@@ -257,17 +257,22 @@ void PlayerBase::P_Controll()
 	
 	
 	//activeがfalseなら待機状態にする処理
-	if (m_is_active == false&& m_state != (int)P_State::Wait&& m_anim_param.split_all < 20)
+	if (m_is_active == false&& m_state != (int)P_State::Wait)
 	{	
 		m_state = (int)P_State::Wait;
 		DataBank::Instance()->SetState(m_state);
 	}
+
 	if (m_do_jump == true)
 	{
 		Jump();
 	}
 	//プレイヤーがジャンプしているか判定する(しているならジャンプ関数を呼び出す)
-
+	if (m_is_animation_end == true)
+	{
+		m_anim_param.split_all = 12;
+		m_anim_param.split_height = 4;
+	}
 
 	if (m_do_attack == true)
 	{
