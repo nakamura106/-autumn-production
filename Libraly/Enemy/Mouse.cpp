@@ -169,8 +169,14 @@ EnemyAIType HedgeHog::ChangeAIType()
 	//AI5→往復突進
 	//AI6→トゲ発射
 	//AI7→頭突き
+	//AI10→必殺技
 
-	return EnemyAIType::AI7;
+	if (m_fatigue_gage_stage >= EnemyGageStage::Half_Up && m_do_deadly_ai == false) {
+
+		m_do_deadly_ai = true;
+
+		return EnemyAIType::AI10;
+	}
 
 	EnemyAIType now_ai = GetNowAI();
 
@@ -185,13 +191,13 @@ EnemyAIType HedgeHog::ChangeAIType()
 		now_ai == EnemyAIType::AI6 ||
 		now_ai == EnemyAIType::AI7) {
 
-		//3種類の攻撃の後は必ず休む
+		//3種類の攻撃の後は突進→頭突きの流れ
 		return EnemyAIType::AI3;
 
 	}
 
 	//ゲージステージ(段階)0はゲージ量0を意味する
-	if (m_fatigue_gage_stage == 0 && m_sleep_gage_stage == 0) {
+	if (m_fatigue_gage_stage == EnemyGageStage::Zero && m_sleep_gage_stage == EnemyGageStage::Zero) {
 
 		return EnemyAIType::AI2;
 

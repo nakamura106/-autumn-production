@@ -32,6 +32,29 @@ enum MouseButton
 	Center,		//!< 真ん中
 };
 
+/** @brief キーボタンの種類 */
+enum ButtonKind
+{
+	AButton,
+	BButton,
+	XButton,
+	YButton,
+	UpButton,
+	DownButton,
+	LeftButton,
+	RightButton,
+	ButtonKindMax,
+};
+
+enum ButtonState
+{
+	ButtonStateNone,
+	ButtonStateDown,
+	ButtonStatePush,
+	ButtonStateUp,
+	ButtonStateMax,
+};
+
 /**
 * @brief Input機能初期化関数@n
 * デバイスの入力取得に必要な初期化を行う
@@ -86,6 +109,11 @@ void UpDateKey();
 bool GetKey(DWORD key_code);
 bool GetKeyDown(DWORD key_code);
 bool GetKeyUp(DWORD key_code);
+
+bool IsButtonPush(ButtonKind button);
+bool IsButtonUp(ButtonKind button);
+bool IsButtonDown(ButtonKind button);
+
 #endif
 
 

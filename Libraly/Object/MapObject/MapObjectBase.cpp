@@ -16,11 +16,11 @@ MapObjectBase::MapObjectBase()
 
 void MapObjectBase::Update()
 {
-	if (GetKey(LEFT_KEY) == true )
+	if ((IsButtonPush(LeftButton) ||GetKey(LEFT_KEY) == true) )
 	{
 		MoveUpdate(LEFT);
 	}
-	if (GetKey(RIGHT_KEY) == true )
+	if ((IsButtonPush(RightButton) || GetKey(RIGHT_KEY) == true) )
 	{
 		MoveUpdate(RIGHT);
 	}

@@ -1,6 +1,9 @@
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #include <Windows.h>
+#include <stdio.h>
+#include <math.h>
+#include <D3dx9math.h>
 #include "../Engine/Vec.h"
 #include "../Engine/Windows.h"
 #include "../Engine/Input.h"
@@ -17,6 +20,8 @@ struct INPUTSTATE
 
 static LPDIRECTINPUT8 g_InputInterface;		//!< DIRECTINPUT8のポインタ
 static LPDIRECTINPUTDEVICE8 g_MouseDevice;		//!< DIRECTINPUTDEVICE8のポインタ
+static LPDIRECTINPUTDEVICE8 g_GamePadDevice;
+static ButtonState g_ButtonStates[ButtonKind::ButtonKindMax];
 static DIMOUSESTATE g_PrevMouseState;			//!< マウスの１フレーム前の入力情報
 static DIMOUSESTATE g_CurrentMouseState;		//!< マウスの現在の入力情報
 static Vec2 g_MousePos;
@@ -28,8 +33,21 @@ bool CreateInputInterface();
 // マウスデバイスの作成
 bool CreateMouseDevice();
 
+// ゲームパッドデバイスの作成
+bool CreateGamePadDevice();
+
+// ゲームパッドの更新
+void UpdateGamePad();
+
 // マウスの更新
 void UpdateMouse();
+
+//ゲームパッドデバイスの作成-デバイス列挙の結果を受け取る構造体
+struct DeviceEnumParameter
+{
+	LPDIRECTINPUTDEVICE8* GamePadDevice;
+	int FindCount;
+};
 
 #define MOUSE_ON_VALUE (0x80)		// オン状態の値
 
@@ -37,6 +55,136 @@ static LPDIRECTINPUTDEVICE8 g_pKeyDevice;
 
 // キー情報
 static INPUTSTATE g_InputState;
+
+BOOL SetUpCooperativeLevel(LPDIRECTINPUTDEVICE8 device)
+{
+	//協調モードの設定
+	if (FAILED(device->SetCooperativeLevel(
+		FindWindow(WINDOW_CLASS_NAME, nullptr),
+		DISCL_NONEXCLUSIVE | DISCL_FOREGROUND)
+	))
+	{
+		return false;
+	}
+	return true;
+}
+
+BOOL StartGamePadControl()
+{
+	if (g_GamePadDevice == nullptr)
+	{
+		return false;
+	}
+
+	if (FAILED(g_GamePadDevice->Acquire()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/*
+	軸モード
+		絶対値モード => 基準点からの位置
+		相対値モード => 前回位置を基準とした位置
+
+	DIPROPシリーズ
+		DIPROPHEADER + プロパティ用のメンバ
+	DIPROPWORD => DWORD型1つで済むプロパティを変更できる汎用構造体
+*/
+BOOL SetUpGamePadProperty(LPDIRECTINPUTDEVICE8 device)
+{
+	// 軸モードを絶対値モードとして設定
+	DIPROPDWORD diprop;
+	ZeroMemory(&diprop, sizeof(diprop));
+	// ここからDIPROPのヘッダーにステータス設定
+	diprop.diph.dwSize = sizeof(diprop);
+	diprop.diph.dwHeaderSize = sizeof(diprop.diph);
+	diprop.diph.dwHow = DIPH_DEVICE;
+	diprop.diph.dwObj = 0;
+	diprop.dwData = DIPROPAXISMODE_ABS;
+	if (FAILED(device->SetProperty(DIPROP_AXISMODE, &diprop.diph)))
+	{
+		return false;
+	}
+
+	// X軸の値の範囲設定
+	DIPROPRANGE diprg;
+	ZeroMemory(&diprg, sizeof(diprg));
+	diprg.diph.dwSize = sizeof(diprg);
+	diprg.diph.dwHeaderSize = sizeof(diprg.diph);
+	diprg.diph.dwHow = DIPH_BYOFFSET;
+	diprg.diph.dwObj = DIJOFS_X;
+	diprg.lMin = -1000;
+	diprg.lMax = 1000;
+	if (FAILED(device->SetProperty(DIPROP_RANGE, &diprg.diph)))
+	{
+		return false;
+	}
+
+	// Y軸の値の範囲設定
+	diprg.diph.dwObj = DIJOFS_Y;
+	if (FAILED(device->SetProperty(DIPROP_RANGE, &diprg.diph)))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// 戻り値　デバイス列挙を継続するか？
+// true : Yes(Continue)  false : No(Stop)
+// DEVICEINSTANCE : 列挙されたデバイス(デバイス識別子、製品の識別子、デバイスのタイプ、登録名、製品名)
+//					最低限必要なのはデバイス識別子のみ => CreateDevice
+// LPVOID : EnumDevicesで渡した値
+BOOL CALLBACK DeviceFindCallBack(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
+{
+	DeviceEnumParameter* parameter = (DeviceEnumParameter*)pvRef;
+	LPDIRECTINPUTDEVICE8 device = nullptr;
+
+	if (parameter->FindCount >= 1)
+	{
+		return DIENUM_STOP;
+	}
+
+	HRESULT hr = g_InputInterface->CreateDevice(
+		lpddi->guidInstance,
+		parameter->GamePadDevice,
+		NULL);
+
+	if (FAILED(hr))
+	{
+		return DIENUM_STOP;
+	}
+
+	device = *parameter->GamePadDevice;
+	hr = device->SetDataFormat(&c_dfDIJoystick);
+
+	if (FAILED(hr))
+	{
+		return DIENUM_STOP;
+	}
+
+	if (SetUpGamePadProperty(device) == false)
+	{
+		return DIENUM_STOP;
+	}
+
+	if (SetUpCooperativeLevel(device) == false)
+	{
+		return DIENUM_STOP;
+	}
+
+	//if (FAILED(device->Poll()))
+	//{
+	//	return DIENUM_STOP;
+	//}
+
+	parameter->FindCount++;
+
+	return DIENUM_CONTINUE;
+}
 
 
 bool InitInput()
@@ -57,6 +205,17 @@ bool InitInput()
 		return false;
 	}
 
+	if (CreateGamePadDevice() == false)
+	{
+		EndInput();
+		return false;
+	}
+
+	for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
+	{
+		g_ButtonStates[i] = ButtonState::ButtonStateNone;
+	}
+
 	ZeroMemory(&g_CurrentMouseState, sizeof(DIMOUSESTATE));
 	ZeroMemory(&g_PrevMouseState, sizeof(DIMOUSESTATE));
 
@@ -69,6 +228,12 @@ void EndInput()
 	{
 		g_MouseDevice->Release();
 		g_MouseDevice = nullptr;
+	}
+
+	if (g_GamePadDevice != nullptr)
+	{
+		g_GamePadDevice->Release();
+		g_GamePadDevice = nullptr;
 	}
 
 	if (g_InputInterface != nullptr)
@@ -89,6 +254,7 @@ void UpdateInput()
 {
 	UpdateMouse();
 	UpDateKey();
+	UpdateGamePad();
 
 	g_PrevMouseState = g_CurrentMouseState;
 	// マウスの状態を取得します
@@ -159,6 +325,43 @@ bool CreateInputInterface()
 	if (FAILED(ret))
 	{
 		return false;	// 作成に失敗
+	}
+
+	return true;
+}
+
+bool CreateGamePadDevice()
+{
+	DeviceEnumParameter parameter;
+
+	parameter.FindCount = 0;
+	parameter.GamePadDevice = &g_GamePadDevice;
+
+	// 指定したデバイスを列挙する（今回であればゲームパッド）
+	if (FAILED(g_InputInterface->EnumDevices(
+		DI8DEVTYPE_GAMEPAD,
+		DeviceFindCallBack,		// 第2引数：コールバック関数
+		&parameter,				// 第3引数：コールバック関数に渡すことができるデータ
+		DIEDFL_ATTACHEDONLY		// 第4引数：現状でささっているデバイスのみを使用する設定
+	)))
+	{
+		return false;
+	}
+
+	/*if (parameter.FindCount == 0)
+	{
+		return false;
+	}*/
+
+	int count = 0;
+	while (StartGamePadControl() == false)
+	{
+		Sleep(1000);
+		count++;
+		if (count >= 5)
+		{
+			break;
+		}
 	}
 
 	return true;
@@ -338,6 +541,114 @@ void UpDateKey()
 	}
 }
 
+void UpdateGamePad()
+{
+
+	if (g_GamePadDevice == nullptr)
+	{
+		return;
+	}
+
+	DIJOYSTATE pad_data;
+	HRESULT hr = g_GamePadDevice->GetDeviceState(sizeof(DIJOYSTATE), &pad_data);
+	if (FAILED(hr))
+	{
+		if (FAILED(g_GamePadDevice->Acquire()))
+		{
+			for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
+			{
+				g_ButtonStates[i] = ButtonState::ButtonStateNone;
+			}
+		}
+	}
+
+	bool is_push[ButtonKind::ButtonKindMax] = { false };
+
+	if (pad_data.lX < -200)
+	{
+		is_push[ButtonKind::LeftButton] = true;
+	}
+	else if (pad_data.lX > 200)
+	{
+		is_push[ButtonKind::RightButton] = true;
+	}
+
+	if (pad_data.lY < 200)
+	{
+		is_push[ButtonKind::UpButton] = true;
+	}
+	else if (pad_data.lY > 200)
+	{
+		is_push[ButtonKind::DownButton] = true;
+	}
+
+	// 十字キー
+	if (pad_data.rgdwPOV[0] != 0xFFFFFFFF)
+	{
+		float rad = D3DXToRadian((pad_data.rgdwPOV[0] / 100.0f));
+		// 本来はxがcos、yがsinだけど、rgdwPOVは0が上から始まるので、
+		// cosとsinを逆にした方が都合がいい
+		float x = sinf(rad);
+		float y = cosf(rad);
+
+		if (x < -0.01f)
+		{
+			is_push[ButtonKind::LeftButton] = true;
+		}
+		else if (x > 0.01f)
+		{
+			is_push[ButtonKind::RightButton] = true;
+		}
+
+		if (y > 0.01f)
+		{
+			is_push[ButtonKind::UpButton] = true;
+		}
+		else if (y < -0.01f)
+		{
+			is_push[ButtonKind::DownButton] = true;
+		}
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (pad_data.rgbButtons[i] == 0x80)
+		{
+			is_push[i] = true;
+		}
+		else {
+			is_push[i] = false;
+		}
+	}
+	
+
+	for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
+	{
+		if (is_push[i] == true)
+		{
+			if (g_ButtonStates[i] == ButtonState::ButtonStateNone)
+			{
+				g_ButtonStates[i] = ButtonState::ButtonStateDown;
+			}
+			else
+			{
+				g_ButtonStates[i] = ButtonState::ButtonStatePush;
+			}
+		}
+		else
+		{
+			if (g_ButtonStates[i] == ButtonState::ButtonStatePush)
+			{
+				g_ButtonStates[i] = ButtonState::ButtonStateUp;
+			}
+			else
+			{
+				g_ButtonStates[i] = ButtonState::ButtonStateNone;
+			}
+		}
+	}
+}
+
 bool GetKey(DWORD key_code)
 {
 	return g_InputState.now& key_code;
@@ -351,4 +662,34 @@ bool GetKeyDown(DWORD key_code)
 bool GetKeyUp(DWORD key_code)
 {
 	return g_InputState.ntrg& key_code;
+}
+
+bool IsButtonPush(ButtonKind button)
+{
+	if (g_ButtonStates[button] == ButtonState::ButtonStatePush)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool IsButtonUp(ButtonKind button)
+{
+	if (g_ButtonStates[button] == ButtonState::ButtonStateUp)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool IsButtonDown(ButtonKind button)
+{
+	if (g_ButtonStates[button] == ButtonState::ButtonStateDown)
+	{
+		return true;
+	}
+
+	return false;
 }

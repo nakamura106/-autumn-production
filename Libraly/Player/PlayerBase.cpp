@@ -158,7 +158,7 @@ void PlayerBase::P_Controll()
 
 
 	//‰EˆÚ“®
-	if (GetKey(RIGHT_KEY) == true&&m_state!=(int)P_State::Attack)
+	if ((IsButtonPush(RightButton)||GetKey(RIGHT_KEY) == true)&&m_state!=(int)P_State::Attack)
 	{
 		m_state = (int)P_State::Move;
 		DataBank::Instance()->SetState(m_state);
@@ -184,7 +184,7 @@ void PlayerBase::P_Controll()
 	}
 
 	//¶ˆÚ“®
-	else if (GetKey(LEFT_KEY) == true && m_state != (int)P_State::Attack)
+	else if ((IsButtonPush(LeftButton)  || GetKey(LEFT_KEY) == true) && m_state != (int)P_State::Attack)
 	{
 		m_state = (int)P_State::Move;
 		DataBank::Instance()->SetState(m_state);
@@ -206,7 +206,8 @@ void PlayerBase::P_Controll()
 	}
 
 	//ƒWƒƒƒ“ƒvˆ—
-	if (GetKeyDown(SPACE_KEY) == true&& m_do_jump != true)
+
+	if (IsButtonPush(AButton) == true || GetKeyDown(SPACE_KEY) == true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
@@ -231,7 +232,7 @@ void PlayerBase::P_Controll()
 	}
 
 	//‰¹•„¶¬
-	if (GetKey(ONE_KEY) == true)
+	if (IsButtonPush(BButton) || GetKey(ONE_KEY) == true)
 	{
 		if (m_play_note_timer >= 70 && m_Key == (int)Key::Major)
 		{

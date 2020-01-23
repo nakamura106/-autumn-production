@@ -41,11 +41,11 @@ void Map::Init()
 void Map::Update()
 {
 
-	if (GetKey(LEFT_KEY) == true&&DataBank::Instance()->GetWavetype(WaveType::Wave1)==false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	if ((IsButtonPush(LeftButton)||GetKey(LEFT_KEY) == true)&&DataBank::Instance()->GetWavetype(WaveType::Wave1)==false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
 		MapScroll(LEFT);
 	}
-	if (GetKey(RIGHT_KEY) == true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	if ((IsButtonPush(RightButton) || GetKey(RIGHT_KEY) == true) && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
 		MapScroll(RIGHT);
 	}
@@ -106,11 +106,11 @@ void Fg::Update()
 {
 	DataBank::Instance()->SetfgPos(fg);
 
-	if (GetKey(LEFT_KEY)==true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	if ((IsButtonPush(LeftButton) || GetKey(RIGHT_KEY) == true) && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
 		MapScroll(LEFT);
 	}
-	if (GetKey(RIGHT_KEY) == true && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	if ((IsButtonPush(RightButton) || GetKey(RIGHT_KEY) == true) && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
 		MapScroll(RIGHT);
 	}
