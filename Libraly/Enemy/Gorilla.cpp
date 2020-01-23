@@ -35,6 +35,8 @@ Gorilla::Gorilla()
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 333.0f, m_pos.y, 503.0f, 69.0f, 850.0f));//“·‘Ì
 	m_shape_list.push_back(new ShapeRect(m_pos.x, 280.0f, m_pos.y, 696.0f, 104.0f, 235.0f, 850.0f));// ‘«
 
+	m_tex_space_front = M_TEX_FRONT_SPACE;
+
 	SaveData::GetInstance().SetNewClearTime(ClearTimeType::Gorilla_Flute, 100);
 	SaveData::GetInstance().SetCsvFileData();
 

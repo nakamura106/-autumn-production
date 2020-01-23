@@ -55,6 +55,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_max_wave					= max_wave_;
 	m_wave_state				= WaveState::None;
 	m_player_center_pos			= 0.f;
+	m_tex_space_front			= M_TEX_FRONT_SPACE;
 
 	AllInitEffect();
 
@@ -444,7 +445,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	if (m_direction == Direction::LEFT) {
 		//E=L,P=L
 		if (m_p_pos_relation == Direction::LEFT) {
-			if (p_pos_x + G_PLAYER_SIZE >= m_map_pos) {
+			if ((p_pos_x + G_PLAYER_SIZE) >= (m_map_pos + m_tex_space_front + 120.f)) {
 				return true;
 			}
 		}
@@ -452,7 +453,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	else {
 		//E=R,P=L
 		if (m_p_pos_relation == Direction::RIGHT) {
-			if (p_pos_x <= (m_map_pos + m_draw_param.tex_size_x)) {
+			if (p_pos_x <= (m_map_pos + m_draw_param.tex_size_x - m_tex_space_front)) {
 				return true;
 			}
 		}
@@ -1323,7 +1324,7 @@ void EnemyBase::CreateBullet(
 	int use_tex_num_,
 	float active_distance_,
 	bool is_animation_stop_,
-	int tex_size_
+	float tex_size_
 )
 {
 

@@ -10,10 +10,6 @@
 #define Limit_of_BreakTime 100		//MAXの休憩時間
 #define Cure_of_FatiguePoint 1		//時間回復する疲労の値
 #define Distance_of_Maintain 100	//維持する適切な距離
-//
-//#define Fatigue_Gauge_Max 100		//疲労ゲージ上限
-//#define Sleep_Gauge_Max	100			//睡眠ゲージ上限
-
 #define Attack_Interval 100			//攻撃感覚
 #define HedgeHog_Speed 10			//読んで字の如く
 
@@ -93,7 +89,18 @@ void HedgeHog::EnemyAttack2()
 		m_do_bullet = true;
 
 		//弾発射
-		CreateBullet(static_cast<Direction>(m_direction), m_speed);
+		CreateBullet(
+			static_cast<Direction>(m_direction), 
+			m_speed,
+			0.f,
+			false,
+			0,
+			GameCategoryTextureList::GameEnemy_Bullet_Normal,
+			1,
+			2,
+			1,
+			1
+		);
 
 	}
 }
@@ -102,7 +109,7 @@ void HedgeHog::EnemyAttack3()
 {
 	int num = GetAnimationTexNum();
 
-	if (num == M_ATTACK3_ANIM_TEX_NUM) {
+	if (num >= M_ATTACK3_ANIM_TEX_NUM && num <= M_ATTACK3_ANIM_TEX_NUM + 1) {
 		EnemyMove();
 	}
 }
@@ -163,10 +170,12 @@ EnemyAIType HedgeHog::ChangeAIType()
 	//AI6→トゲ発射
 	//AI7→頭突き
 
+	return EnemyAIType::AI7;
+
 	EnemyAIType now_ai = GetNowAI();
 
 	//プレイヤーとエネミーの距離
-	int p_e_distance = fabsf(m_player_center_pos - m_map_pos);
+	float p_e_distance = fabsf(m_player_center_pos - m_map_pos);
 	
 	//乱数を入手
 	int random = RandomTool::GetRandom();
@@ -181,7 +190,8 @@ EnemyAIType HedgeHog::ChangeAIType()
 
 	}
 
-	if (m_fatigue_gage_stage == 0&&m_sleep_gage_stage==0) {
+	//ゲージステージ(段階)0はゲージ量0を意味する
+	if (m_fatigue_gage_stage == 0 && m_sleep_gage_stage == 0) {
 
 		return EnemyAIType::AI2;
 
