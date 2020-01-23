@@ -8,6 +8,10 @@ Bird::Bird()
 {
 
 	LoadAIData(M_AIDataFileName);
+
+	//使用するAI番号の設定
+	SetAIType();
+
 	CompleteChangeState();
 
 	m_savetime_shit_cycle = FlameTimer::GetNowFlame();
@@ -44,7 +48,74 @@ void Bird::SetRectangle()
 EnemyAIType Bird::ChangeAIType()
 {
 	//AI1→初期AI
-	//AI2→
+	//AI2→飛んで徘徊後、降りてくる
+
+	//AI3→飛んでそのまま飛行
+	//AI4→降りてきて休息
+
+	//AI5→飛んでいる前提でハネ発射
+	//AI6→飛んでいる前提でフン発射
+
+	//AI7以降はWave2?
+
+	//AI10は必殺技枠(昇り・降り込み)
+
+	EnemyAIType now_ai = GetNowAI();
+
+	//必殺技
+	if (m_fatigue_gage_stage >= EnemyGageStage::Half_Up &&
+		now_ai != EnemyAIType::AI3 && 
+		now_ai != EnemyAIType::AI5 && 
+		now_ai != EnemyAIType::AI6 && 
+		m_do_deadly_ai == false)
+	{
+		m_do_deadly_ai = true;
+
+		return EnemyAIType::AI10;
+	}
+
+	//プレイヤーとエネミーの距離
+	float p_e_distance = fabsf(m_player_center_pos - m_map_pos);
+
+	//乱数を入手
+	int random = RandomTool::GetRandom();
+
+	if (now_ai == EnemyAIType::AI5 ||
+		now_ai == EnemyAIType::AI6) {
+
+		//空中攻撃後は降りてきて休息
+		return EnemyAIType::AI4;
+
+	}
+
+	//ゲージステージ(段階)0はゲージ量0を意味する
+	if (m_fatigue_gage_stage == EnemyGageStage::Zero && m_sleep_gage_stage == EnemyGageStage::Zero && now_ai != EnemyAIType::AI3) {
+
+		return EnemyAIType::AI2;
+
+	}
+
+	//追跡のみを行う、Player散策AI
+	if (now_ai==EnemyAIType::AI3) {
+
+		//2種類の攻撃をランダムに繰り出す
+		switch (random % 2)
+		{
+		case 0:
+			return EnemyAIType::AI5;
+
+		case 1:
+			return EnemyAIType::AI6;
+
+		}
+
+	}
+	else {
+
+		//飛んで飛行状態に
+		return EnemyAIType::AI3;
+	}
+
 	return EnemyAIType::AI1;
 }
 
@@ -90,13 +161,19 @@ void Bird::EnemyAttack2()
 
 		m_do_bullet = true;
 
-		for (int i = 0;i < 3;++i) {
+		int feather_num = M_SHOT_FEATHER_NUM;
+
+		if (GetNowAI() == M_DEADLY_AI) {
+			feather_num = M_DEADLY_FEATHER_NUM;
+		}
+
+		for (int i = 0;i < feather_num;++i) {
 			//弾発射
 			CreateBullet(
 				static_cast<Direction>(m_direction),
-				m_speed, 
-				m_speed + (float)i, 
-				true, 
+				m_speed - (static_cast<float>(i) - (static_cast<float>(feather_num + 1) / 2.f)),
+				m_speed + (static_cast<float>(i) - (static_cast<float>(feather_num + 1) / 2.f)),
+				true,
 				45,
 				GameEnemy_Bullet_Normal,
 				1,
@@ -113,6 +190,9 @@ void Bird::EnemyAttack2()
 
 void Bird::EnemyAttack3()
 {
+
+	EnemyMove();
+
 	if (FlameTimer::GetNowFlame(m_savetime_shit_cycle) >= M_SHIT_CYCLE) {
 		//発射
 		CreateShitBullet();

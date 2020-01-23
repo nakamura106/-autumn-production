@@ -45,8 +45,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_savetime_auto_slpgauge	= FlameTimer::GetNowFlame();
 	m_stop_auto_sleep_time		= 0;
 	m_savetime_end				= 0;
-	m_fatigue_gage_stage		= 0;
-	m_sleep_gage_stage			= 0;
+	m_fatigue_gage_stage		= EnemyGageStage::Zero;
+	m_sleep_gage_stage			= EnemyGageStage::Zero;
 	m_is_flying					= false;
 	m_shot_adjust.x				= 0.f;
 	m_shot_adjust.y				= 0.f;
@@ -56,6 +56,7 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_wave_state				= WaveState::None;
 	m_player_center_pos			= 0.f;
 	m_tex_space_front			= M_TEX_FRONT_SPACE;
+	m_do_deadly_ai				= false;
 
 	AllInitEffect();
 
@@ -594,16 +595,23 @@ void EnemyBase::CompleteChangeState()
 void EnemyBase::AutoChangeGageUpdate()
 {
 	//ƒQ[ƒW‚Ìis“x‚ğŠi”[
-	m_fatigue_gage_stage	= GageStageCalc(m_fatigue_gauge, Fatigue_Gauge_Max, M_FATIGUE_GAGE_STAGE_NUM);
-	m_sleep_gage_stage		= GageStageCalc(m_sleep_gauge, Sleep_Gauge_Max, M_SLEEP_GAGE_STAGE_NUM);
+	int fatigue_stage = GageStageCalc(m_fatigue_gauge, Fatigue_Gauge_Max, M_FATIGUE_GAGE_STAGE_NUM);
+	int sleep_stage = GageStageCalc(m_sleep_gauge, Sleep_Gauge_Max, M_SLEEP_GAGE_STAGE_NUM);
 
+	if (fatigue_stage >= 0 && fatigue_stage <= static_cast<int>(EnemyGageStage::Max)) {
+		m_fatigue_gage_stage = static_cast<EnemyGageStage>(fatigue_stage);
+	}
+	if (fatigue_stage >= 0 && sleep_stage <= static_cast<int>(EnemyGageStage::Max)) {
+		m_sleep_gage_stage = static_cast<EnemyGageStage>(sleep_stage);
+	}
+
+	
 	float fatigue_up	= 0.f;
 	float sleep_down	= 0.f;
 
 	//ƒQ[ƒW©“®•Ï“®’â~
 	if (m_stop_auto_sleep_time > 0) {
 		--m_stop_auto_sleep_time;
-		return;
 	}
 	if (FlameTimer::GetNowFlame(m_savetime_auto_slpgauge) < M_AUTO_CHANGE_GAGE_FLAME) {
 		return;
@@ -616,37 +624,37 @@ void EnemyBase::AutoChangeGageUpdate()
 	switch (m_fatigue_gage_stage)
 	{
 	//0(Å¬)
-	case 0:
+	case EnemyGageStage::Zero:
 		sleep_down = M_AUTO_SLEEP_UP_MAX_SPEED;
 		break;
 
 	//1’iŠK–Ú@`1/4
-	case 1:
+	case EnemyGageStage::Quarter:
 		//–°‹CŒ¸­F‚‘¬
 		sleep_down = M_AUTO_SLEEP_UP_HIGH_SPEED;
 		break;
 
 	//2’iŠK–Ú@`1/2
-	case 2:
+	case EnemyGageStage::Half_Down:
 		//–°‹CŒ¸­F’†‘¬
 		sleep_down = M_AUTO_SLEEP_UP_MEDIUM_SPEED;
 		break;
 
 	//3’iŠK–Ú@`3/4
-	case 3:
+	case EnemyGageStage::Half_Up:
 		//–°‹CŒ¸­F’á‘¬
 		sleep_down = M_AUTO_SLEEP_UP_LOW_SPEED;
+		fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
 		break;
 
 	//4’iŠK–Ú@`Å‘å
-	case 4:
+	case EnemyGageStage::Almost:
 		//–°‹CŒ¸­F’â~A”æ˜J‘‰ÁF’á‘¬
 		fatigue_up = M_AUTO_FATIGUE_DOWN_LOW_SPEED;
-		UpFatigueGage(fatigue_up);
 		break;
 
 	//Max(Å‘å)
-	case 5:
+	case EnemyGageStage::Max:
 		//“G€–S
 		break;
 
@@ -655,9 +663,12 @@ void EnemyBase::AutoChangeGageUpdate()
 	}
 
 	//ƒQ[ƒW•Ï“®
-	m_fatigue_gauge += fatigue_up;
+	UpFatigueGage(fatigue_up);
 
-	m_sleep_gauge -= sleep_down;
+	if (m_stop_auto_sleep_time <= 0) {
+		DownSleepGage(sleep_down);
+	}
+	
 
 	//ƒQ[ƒW‚ÌƒRƒ“ƒgƒ[ƒ‹
 	GaugeLimitControl();
@@ -776,7 +787,7 @@ void EnemyBase::ChangeState(EnemyStateType next_state_)
 	m_state_save_pos_x = m_map_pos;
 
 	//ƒvƒŒƒCƒ„[‚ª‚Ç‚¿‚ç‚Ì•ûŒü‚É‚¢‚é‚Ì‚©‚ğŠi”[
-	if (m_map_pos < DataBank::Instance()->GetPlayerMapPos()) {
+	if (m_map_pos + m_draw_param.tex_size_x / 2.f < DataBank::Instance()->GetPlayerMapPos() + G_PLAYER_SIZE / 2.f) {
 		m_p_pos_relation = Direction::RIGHT;
 	}
 	else {
@@ -833,7 +844,7 @@ void EnemyBase::InitWaitState()
 			//”òs
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitLeft;
 		}
-		else if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+		else if (m_fatigue_gage_stage >= EnemyGageStage::Half_Up) {
 			//”æ˜Jó‘Ô
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueLeft;
 		}
@@ -846,7 +857,7 @@ void EnemyBase::InitWaitState()
 			//”òs
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_SkyWaitRight;
 		}
-		else if (m_fatigue_gage_stage > M_FATIGUE_GAGE_STAGE_NUM / 2) {
+		else if (m_fatigue_gage_stage >= EnemyGageStage::Half_Up) {
 			//”æ˜Jó‘Ô
 			m_draw_param.texture_id = GameCategoryTextureList::GameEnemy_FatigueRight;
 		}
@@ -1012,7 +1023,7 @@ void EnemyBase::LoadAIData(std::string file_name_)
 	//‚P`‚P‚O‚ÌŠî–{”z—ñ
 	for (int i = 0;i < static_cast<int>(EnemyAIType::EnemyAIType_Max);++i) {
 
-		std::string f_name = file_name_ + FileLoadTool::ItoC(i + 1) + ".csv";
+		std::string f_name = file_name_ + std::to_string(i + 1) + ".csv";
 
 		FileLoadTool::w_vector<int*> file = FileLoad::GetFileDataInt(f_name);
 
@@ -1212,7 +1223,7 @@ bool EnemyBase::CheckFatigueGageMax()
 GageState EnemyBase::CheckGaugeState()
 {
 	//”æ˜Jó‘Ô
-	if (m_fatigue_gage_stage > m_sleep_gage_stage && m_fatigue_gage_stage >= 3) {//’iŠK3‚ÍƒQ[ƒW”¼•ªˆÈã
+	if (m_fatigue_gage_stage > m_sleep_gage_stage && m_fatigue_gage_stage >= EnemyGageStage::Half_Up) {//’iŠK3‚ÍƒQ[ƒW”¼•ªˆÈã
 		return GageState::Fatigue_State;
 	}
 	

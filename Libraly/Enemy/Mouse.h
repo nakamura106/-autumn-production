@@ -29,6 +29,8 @@ private:
 	const int	M_ATTACK2_ANIM_TEX_NUM = 7;
 	const int	M_ATTACK3_ANIM_TEX_NUM = 5;
 
+	const EnemyAIType	M_DEADLY_AI = EnemyAIType::AI10;	//•KŽE‹Z‚ÌAIƒ^ƒCƒv
+
 	
 	const std::string M_AIDataFileName = "Res/Csv/Mouse/Enemy_AI";
 	bool m_is_speed_up;		//‰Á‘¬‚·‚é‚©	
