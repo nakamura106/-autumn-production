@@ -31,7 +31,7 @@ public:
 	void SetWaveState(WaveState wave_state_) { m_wave_state = wave_state_; }
 	void SetState(int state_) { m_state = state_; }
 	void SetWave(WaveType wave_,bool torf_) { m_wave_change[(int)wave_] = torf_; }
-	void SetObjectHit(bool is_hit_object_) { m_is_hit_object = is_hit_object_; }
+	
 
 	int GetPlayerHp() { return m_player_hp; }
 	int GetNote1() { return note1; }
@@ -54,7 +54,7 @@ public:
 	bool GetIsGameClear() { return m_is_game_clear; }
 	bool GetIsGameOver() { return m_is_game_over; }
 	bool GetWavetype(WaveType wave_) { return m_wave_change[(int)wave_]; }
-	bool GetMapObjectHit() { return m_is_hit_object; }
+	
 
 	 
 	WaveState GetWaveState() { return m_wave_state; }
@@ -90,7 +90,6 @@ private:
 
 	bool m_is_game_clear;
 	bool m_is_game_over;
-	bool m_is_hit_object;
 	bool m_wave_change[(int)WaveType::WaveMax];
 	bool m_PlayerEffect[(int)P_effect::MaxEffect];
 

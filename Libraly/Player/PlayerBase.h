@@ -69,6 +69,7 @@ protected:
 	bool	m_do_bullet_firing;				//攻撃判定用
 	bool	m_is_release;					//音符開放判定用
 	bool	m_do_attack;					//
+	bool    m_is_hit_mapobj;
 	int		m_hp;							//体力
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
@@ -79,6 +80,7 @@ protected:
 	int		m_effect;
 	int		m_effecttimer;
 	float   m_floorpos;
+	float	m_gravity;
 
 	int notebox[3];
 

@@ -40,7 +40,9 @@ PlayerBase::PlayerBase()
 	m_animtimer = 0;
 	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
+	m_gravity = 17.0f;
 	m_is_miss = false;
+	m_is_hit_mapobj = false;
 	AllInitEffect();
 
 }
@@ -210,16 +212,14 @@ void PlayerBase::P_Controll()
 	{
 		m_do_jump = true;
 		m_is_active = true;
+		m_gravity = -P_jump_power;
 		InitAllState();
 	}
-	if (DataBank::Instance()->GetMapObjectHit()==true&&m_do_jump!=true)
+	if (m_is_hit_mapobj==true&&m_do_jump!=true)
 	{
 		m_pos.y = m_floorpos;
 	}
-	else
-	{
-		m_floorpos = P_posYforest;
-	}
+	
 	//長調短調切り替え処理(押している間のみ)
 	if (GetKey(SHIFT_KEY) == true)
 	{
@@ -300,10 +300,19 @@ void PlayerBase::P_Controll()
 	}
 
 	//プレイヤーに重力をかける処理
-	if (m_pos.y <= P_posX)
+	
+	if (m_is_hit_mapobj==false)
 	{
-		m_pos.y += Gravity;
+		m_pos.y += m_gravity;
+		m_gravity += Gravity;
 	}
+
+	if (m_pos.y > P_posYforest) {
+		m_pos.y = P_posYforest;
+	}
+	
+
+	m_is_hit_mapobj = false;
 }
 
 void PlayerBase::CreateBullets(PlayerBulletType bullettype)
@@ -472,16 +481,12 @@ void PlayerBase::Jump()
 	}
 
 
-
-	m_pos.y -= jump_power;
-	jump_power -= Gravity;
-
 	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
 	if (m_pos.y >=m_floorpos)
 	{
 		m_effecttimer = 0;
 		
-		jump_power = P_jump_power;
+		
 		m_do_jump = false;
 		m_is_active = false;
 	}
@@ -774,15 +779,17 @@ void PlayerBase::ChangeState()
 
 void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
-	if (ravel_ == ObjectRavel::Ravel_MapObj&&m_pos.y+128.0f<=ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_MapObj)->GetPos().y) {
-		m_floorpos = m_pos.y;
-		DataBank::Instance()->SetObjectHit(true);
+	if (ravel_ == ObjectRavel::Ravel_MapObj && 
+		m_pos.y + 128.0f <= hit_use_atk_) {
+
+		m_floorpos = hit_use_atk_;
+
+		m_pos.y = m_floorpos - m_draw_param.tex_size_y/2.f;
+
+		m_is_hit_mapobj = true;
+
 	}
-	else
-	{
-		m_floorpos = P_posYforest;
-		DataBank::Instance()->SetObjectHit(false);
-	}
+
 }
 
 void PlayerBase::InitAllState()
