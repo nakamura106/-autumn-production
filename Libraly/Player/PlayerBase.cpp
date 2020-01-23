@@ -85,10 +85,7 @@ void PlayerBase::Update()
 	DataBank::Instance()->SetPlayerDirection(m_direction);
 	
 
-	if (GetKey(E_KEY) == true)
-	{
-		DataBank::Instance()->SetWave(WaveType::Wave1, true);
-	}
+	
 
 	
 
@@ -209,7 +206,7 @@ void PlayerBase::P_Controll()
 
 	//ƒWƒƒƒ“ƒvˆ—
 
-	if (IsButtonPush(AButton) == true || GetKeyDown(SPACE_KEY) == true)
+	if (IsButtonDown(AButton) == true || GetKeyDown(SPACE_KEY) == true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
@@ -222,19 +219,12 @@ void PlayerBase::P_Controll()
 	}
 	
 	//’·’²’Z’²Ø‚è‘Ö‚¦ˆ—(‰Ÿ‚µ‚Ä‚¢‚éŠÔ‚Ì‚Ý)
-	if (GetKey(SHIFT_KEY) == true)
-	{
-		m_Key = (int)Key::Minor;
-	}
-	else
-	{
-		m_Key = (int)Key::Major;
-	}
+
 
 	//‰¹•„¶¬
-	if (IsButtonPush(BButton) || GetKey(ONE_KEY) == true)
+	if (IsButtonDown(BButton) || GetKeyDown(ONE_KEY) == true)
 	{
-		if (m_play_note_timer >= 70 && m_Key == (int)Key::Major)
+		if (m_play_note_timer >= 70)
 		{
 			m_play_note[0] = true;
 			m_play_note_timer = 0;
@@ -247,7 +237,11 @@ void PlayerBase::P_Controll()
 				}
 			}
 		}
-		if (m_play_note_timer >= 70 && m_Key == (int)Key::Minor)
+		
+	}
+	if (IsButtonDown(YButton)==true||GetKeyDown(TWO_KEY)==true)
+	{
+		if (m_play_note_timer >= 70)
 		{
 			m_play_note[1] = true;
 			m_play_note_timer = 0;
@@ -501,7 +495,7 @@ void PlayerBase::Attack()
 		m_is_active = false;
 		m_animtimer = 0;
 	}
-	if (GetKey(LEFT_KEY) == true || GetKey(RIGHT_KEY) == true)
+	if (GetKey(LEFT_KEY) == true || GetKey(RIGHT_KEY) == true||IsButtonPush(LeftButton)||IsButtonPush(RightButton))
 	{
 		if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)
 		{

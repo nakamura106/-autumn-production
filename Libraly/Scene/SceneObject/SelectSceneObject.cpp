@@ -17,7 +17,7 @@ SelectSceneObject::SelectSceneObject()
 	}
 	is_hit_mouse = false;
 	is_brass_scene = false;
-
+	m_select = 1;
 	m_pos_state = SelectPosState::SomewherePos;
 }
 
@@ -70,9 +70,12 @@ void SelectSceneObject::Update()
 
 	UpdateSelectSE();
 
-	if (OnMouseDown(Right) == true)
+	
+
+	if (OnMouseDown(Right) == true||IsButtonDown(AButton))
 	{
 		is_brass_scene = false;
+		m_select = 1;
 	}
 
 
@@ -104,8 +107,32 @@ void SelectSceneObject::BossSelectUpdate()
 	m_param[4].texture_id = SelectCategoryTextureList::NumberCollectedTex;
 	m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
 
+	if (IsButtonDown(RightButton) && m_select < 3)
+	{
+		m_select++;
+	}
+	if (IsButtonDown(LeftButton) && m_select > 1)
+	{
+		m_select--;
+	}
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
-		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
+		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f)
+	{
+		m_select = 1;
+	}
+	if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f)
+	{
+		m_select = 2;
+	}
+	if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+	{
+		m_select = 3;
+	}
+
+	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
+		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f||m_select==1) {
 		m_param[2].texture_id = SelectCategoryTextureList::BossMouseImageTex;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame1;
@@ -113,7 +140,7 @@ void SelectSceneObject::BossSelectUpdate()
 
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::WoodsMap);
@@ -122,14 +149,14 @@ void SelectSceneObject::BossSelectUpdate()
 		}
 	}
 	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
-		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f||m_select==2) {
 		m_param[2].texture_id = SelectCategoryTextureList::BossBirdImageTex;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame1;
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
 		m_pos[8].x = m_pos[6].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::SeaMap);
@@ -137,7 +164,7 @@ void SelectSceneObject::BossSelectUpdate()
 		}
 	}
 	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
-		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f||m_select==3)
 	{
 		m_param[2].texture_id = SelectCategoryTextureList::BossGorillaImageTex;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
@@ -145,7 +172,7 @@ void SelectSceneObject::BossSelectUpdate()
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame1;
 		m_pos[8].x = m_pos[7].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetMapType((int)MapType::CityMap);
@@ -168,14 +195,38 @@ void SelectSceneObject::BrassSelectUpdate()
 	m_param[6].texture_id = SelectCategoryTextureList::FluteFrame3;
 	m_param[7].texture_id = SelectCategoryTextureList::TubaFrame3;
 
+	if (IsButtonDown(RightButton) && m_select < 3)
+	{
+		m_select++;
+	}
+	if (IsButtonDown(LeftButton) && m_select > 1)
+	{
+		m_select--;
+	}
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
-		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
+		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f)
+	{
+		m_select = 1;
+	}
+	if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f)
+	{
+		m_select = 2;
+	}
+	if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+	{
+		m_select = 3;
+	}
+
+	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
+		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f||m_select==1) {
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame1;
 		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame2;
 		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
 		m_pos[8].x = m_pos[5].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTrumpet);
@@ -184,13 +235,13 @@ void SelectSceneObject::BrassSelectUpdate()
 		}
 	}
 	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
-		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
+		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f||m_select==2) {
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame1;
 		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame2;
 		m_pos[8].x = m_pos[6].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeFlute);
@@ -199,14 +250,14 @@ void SelectSceneObject::BrassSelectUpdate()
 		}
 	}
 	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
-		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
+		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f||m_select==3)
 	{
 		m_param[5].texture_id = SelectCategoryTextureList::TrpFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::FluteFrame2;
 		m_param[7].texture_id = SelectCategoryTextureList::TubaFrame1;
 		m_pos[8].x = m_pos[7].x;
 		is_hit_mouse = true;
-		if (OnMouseDown(Left) == true)
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 		{
 			SoundManager::Instance()->SoundClickSE();
 			DataBank::Instance()->SetPlayerType((int)Player::PlayerTypeTuba);
@@ -238,6 +289,18 @@ void SelectSceneObject::UpdateSelectSE()
 	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
 		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f) {
 		m_pos_state = SelectPosState::RightPos;
+		SoundManager::Instance()->SoundSelect3SE();
+	}
+	else if ((IsButtonDown(LeftButton) || IsButtonDown(RightButton))&&m_select==1)
+	{
+		SoundManager::Instance()->SoundSelectSE();
+	}
+	else if ((IsButtonDown(LeftButton) || IsButtonDown(RightButton)) && m_select == 2)
+	{
+		SoundManager::Instance()->SoundSelect2SE();
+	}
+	else if ((IsButtonDown(LeftButton) || IsButtonDown(RightButton)) && m_select == 3)
+	{
 		SoundManager::Instance()->SoundSelect3SE();
 	}
 	else {

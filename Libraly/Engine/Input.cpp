@@ -564,20 +564,20 @@ void UpdateGamePad()
 
 	bool is_push[ButtonKind::ButtonKindMax] = { false };
 
-	if (pad_data.lX < -200)
+	if (pad_data.lX < -500)
 	{
 		is_push[ButtonKind::LeftButton] = true;
 	}
-	else if (pad_data.lX > 200)
+	else if (pad_data.lX > 500)
 	{
 		is_push[ButtonKind::RightButton] = true;
 	}
 
-	if (pad_data.lY < 200)
+	if (pad_data.lY < -500)
 	{
 		is_push[ButtonKind::UpButton] = true;
 	}
-	else if (pad_data.lY > 200)
+	else if (pad_data.lY > 500)
 	{
 		is_push[ButtonKind::DownButton] = true;
 	}

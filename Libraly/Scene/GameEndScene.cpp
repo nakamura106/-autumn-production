@@ -53,7 +53,7 @@ void MainGameEndScene()
 
 	end_object.Update();
 
-	if (OnMouseDown(Left) == true) {
+	if (OnMouseDown(Left) == true||IsButtonDown(BButton)) {
 		ChangeSceneStep(SceneStep::EndStep);
 	}
 }
