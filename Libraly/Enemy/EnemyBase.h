@@ -62,6 +62,7 @@ private:
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
 	const float M_WAVE_CHANGE_MOVE_LIMIT		= 3200.f;
+	const float	M_TEX_FRONT_SPACE				= 50.f;
 	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
 	void BulletControl();		
@@ -255,7 +256,7 @@ protected:
 		int use_tex_num_ = 0,
 		float active_distance_ = 1000.f,
 		bool is_animation_stop_ = true,
-		int tex_size_ = 128.f
+		float tex_size_ = 128.f
 	);
 
 	void SetAIType();
@@ -274,6 +275,7 @@ protected:
 	int				m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
 	int				m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
 	float			m_player_center_pos;		//プレイヤーのx座標
+	float			m_tex_space_front;		//正面の空白部分を示す
 
 private:
 	// エフェクト関係関数まとめた関数

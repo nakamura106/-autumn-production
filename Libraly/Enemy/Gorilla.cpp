@@ -28,6 +28,8 @@ Gorilla::Gorilla()
 
 	m_pos.y += M_POS_Y_ADJUST;
 
+	m_tex_space_front = M_TEX_FRONT_SPACE;
+
 	SaveData::GetInstance().SetNewClearTime(ClearTimeType::Gorilla_Flute, 100);
 	SaveData::GetInstance().SetCsvFileData();
 

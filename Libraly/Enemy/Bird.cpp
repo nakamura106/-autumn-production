@@ -38,6 +38,8 @@ void Bird::SetRectangle()
 
 EnemyAIType Bird::ChangeAIType()
 {
+	//AI1→初期AI
+	//AI2→
 	return EnemyAIType::AI1;
 }
 

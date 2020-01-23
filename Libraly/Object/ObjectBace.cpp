@@ -37,7 +37,7 @@ void ObjectBase::Update()
 	//CollisionManagerにオブジェクトを入れる
 	CollisionManager::GetInstance().AddCollisionObject(this);
 
-	for (int i = 0; i < m_effect_list.size(); ++i) {
+	for (int i = 0; i < static_cast<int>(m_effect_list.size()); ++i) {
 		if (m_effect_list[i]->GetIsActive() == true)
 		{
 			m_effect_list[i]->Update();
@@ -61,7 +61,7 @@ void ObjectBase::Draw()
 		m_is_turn
 	);
 
-	for (int i = 0; i < m_effect_list.size(); ++i) {
+	for (int i = 0; i < static_cast<int>(m_effect_list.size()); ++i) {
 		if (m_effect_list[i]->GetIsActive() == true)
 		{
 			m_effect_list[i]->Draw();
