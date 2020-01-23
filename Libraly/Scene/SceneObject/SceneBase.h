@@ -11,8 +11,10 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
+protected:
+	int m_select;
 private:
-
+	
 };
 
 #endif

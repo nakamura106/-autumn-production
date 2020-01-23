@@ -10,7 +10,7 @@ TitleSceneObject::TitleSceneObject()
 {
 	m_mouse_pos.x = 0.0f;
 	m_mouse_pos.y = 0.0f;
-
+	m_select=1;
 	m_scene_state = TitleSceneState::Home;
 }
 
@@ -96,11 +96,37 @@ void TitleSceneObject::Draw()
 void TitleSceneObject::UpdateHomeScene()
 {
 	UpdateSelectSE();
+	
+
+	if (IsButtonDown(DownButton) && m_select < 3)
+	{
+		m_select++;
+	}
+	if (IsButtonDown(UpButton) && m_select > 1)
+	{
+		m_select--;
+	}
 
 	if (m_draw_pos[2].x < m_mouse_pos.x && m_mouse_pos.x < m_draw_pos[2].x + 289.0f
-		&& m_draw_pos[2].y < m_mouse_pos.y && m_mouse_pos.y < m_draw_pos[2].y + 60.0f) {
+		&& m_draw_pos[2].y < m_mouse_pos.y && m_mouse_pos.y < m_draw_pos[2].y + 60.0f)
+	{
+		m_select = 1;
+	}
+	if (m_draw_pos[3].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[3].x + 221.0f
+		&& m_draw_pos[3].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[3].y + 51.0f)
+	{
+		m_select = 2;
+	}
+	if (m_draw_pos[4].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[4].x + 142.0f
+		&& m_draw_pos[4].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[4].y + 50.0f)
+	{
+		m_select = 3;
+	}
+
+	if (m_draw_pos[2].x < m_mouse_pos.x && m_mouse_pos.x < m_draw_pos[2].x + 289.0f
+		&& m_draw_pos[2].y < m_mouse_pos.y && m_mouse_pos.y < m_draw_pos[2].y + 60.0f|| m_select == 1) {
 		m_param[2].texture_id = TitleCategoryTextureList::TitleStart1Tex;
-		if (OnMouseDown(Left) == true) {
+		if (OnMouseDown(Left) == true|| IsButtonDown(BButton)) {
 			SoundManager::Instance()->SoundClickSE();
 			m_scene_state = TitleSceneState::Start;
 		}
@@ -110,9 +136,9 @@ void TitleSceneObject::UpdateHomeScene()
 	}
 
 	if (m_draw_pos[3].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[3].x + 221.0f
-		&& m_draw_pos[3].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[3].y + 51.0f) {
+		&& m_draw_pos[3].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[3].y + 51.0f|| m_select == 2) {
 		m_param[3].texture_id = TitleCategoryTextureList::TitleContinue1Tex;
-		if (OnMouseDown(Left) == true) {
+		if (OnMouseDown(Left) == true|| IsButtonDown(BButton)) {
 			SoundManager::Instance()->SoundClickSE();
 			m_scene_state = TitleSceneState::Continue;
 		}
@@ -122,9 +148,9 @@ void TitleSceneObject::UpdateHomeScene()
 	}
 
 	if (m_draw_pos[4].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[4].x + 142.0f
-		&& m_draw_pos[4].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[4].y + 50.0f) {
+		&& m_draw_pos[4].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[4].y + 50.0f|| m_select == 3) {
 		m_param[4].texture_id = TitleCategoryTextureList::TitleHelp1Tex;
-		if (OnMouseDown(Left) == true) {
+		if (OnMouseDown(Left) == true||IsButtonDown(BButton)) {
 			SoundManager::Instance()->SoundClickSE();
 			m_scene_state = TitleSceneState::Help;
 		}
@@ -149,7 +175,7 @@ void TitleSceneObject::UpdateContinueScene()
 
 void TitleSceneObject::UpdateHelpScene()
 {
-	if (OnMouseDown(Left) == true)
+	if (OnMouseDown(Left) == true||IsButtonDown(BButton))
 	{
 		if (m_param[5].texture_id == TitleCategoryTextureList::Help1Tex)
 		{
@@ -169,7 +195,7 @@ void TitleSceneObject::UpdateHelpScene()
 		}
 	}
 
-	if (OnMouseDown(Right) == true)
+	if (OnMouseDown(Right) == true||IsButtonDown(AButton))
 	{
 		if (m_param[5].texture_id == TitleCategoryTextureList::Help1Tex)
 		{
@@ -201,6 +227,10 @@ void TitleSceneObject::UpdateSelectSE()
 	}
 	else if (m_draw_pos[4].x <= m_mouse_pos.x && m_mouse_pos.x <= m_draw_pos[4].x + 142.0f
 		&& m_draw_pos[4].y <= m_mouse_pos.y && m_mouse_pos.y <= m_draw_pos[4].y + 50.0f) {
+		SoundManager::Instance()->SoundSelectSE();
+	}
+	else if (IsButtonDown(UpButton) || IsButtonDown(DownButton))
+	{
 		SoundManager::Instance()->SoundSelectSE();
 	}
 	else {
