@@ -106,7 +106,7 @@ void Fg::Update()
 {
 	DataBank::Instance()->SetfgPos(fg);
 
-	if ((IsButtonPush(LeftButton) || GetKey(RIGHT_KEY) == true) && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
+	if ((IsButtonPush(LeftButton) || GetKey(LEFT_KEY) == true) && DataBank::Instance()->GetWavetype(WaveType::Wave1) == false && DataBank::Instance()->GetWavetype(WaveType::Wave2) == false && DataBank::Instance()->GetWavetype(WaveType::Wave3) == false)
 	{
 		MapScroll(LEFT);
 	}
