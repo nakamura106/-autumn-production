@@ -33,6 +33,8 @@ public:
 	/*更新*/
 	virtual void Update();
 
+	virtual float GetHitUseAtk(ObjectRavel hit_obj_);
+
 	/*			ゲッター群			*/
 	/*状態取得*/
 	EnemyStateType	GetEnemyState() { return m_state; }

@@ -19,6 +19,7 @@ ShitBullet::ShitBullet(
 
 	m_is_dropdown = false;
 	m_savetime_delete = 0;
+	m_obj_ravel = ObjectRavel::Ravel_ShitBullet;
 
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 54.0f, m_pos.y, 83.0f, 26.0f, 128.0f));
 

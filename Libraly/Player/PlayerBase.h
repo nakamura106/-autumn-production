@@ -9,6 +9,7 @@
 #include<vector>
 
 const float G_PLAYER_SIZE = 256.0f;
+const int G_NOTE_BOX_NUM = 3;
 
 class PlayerBase :public ObjectBase
 {
@@ -81,13 +82,15 @@ protected:
 	int		m_effecttimer;
 	float   m_floorpos;
 	float	m_gravity;
-	bool	m_is_obj_stop;
+	bool	m_is_obj_stop;					//マップオブジェクトに乗るためのflag
+	bool	m_do_damage;					//ダメージを受けた時true
 
-	int notebox[3];
+	int notebox[G_NOTE_BOX_NUM];
 
 	std::vector<PlayerBullet*> bullet_list;
 
 	
 private:
 	const float M_BULLET_SPEED = 7.f;
+	void ClearNoteBox();
 };
