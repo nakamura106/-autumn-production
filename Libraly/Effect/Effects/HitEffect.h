@@ -10,8 +10,9 @@ public:
 	~HitEffect();
 
 	void Init()override;
-	void Update()override;
 
+	void Update()override;
+	
 	EffectID GetEffectID()override;
 	
 private:

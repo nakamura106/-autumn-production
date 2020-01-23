@@ -54,6 +54,8 @@ private:
 
 	bool m_is_nothoming=false;
 
+	bool m_is_not_draw;
+
 };
 
 #endif

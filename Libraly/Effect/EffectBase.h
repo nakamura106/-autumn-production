@@ -52,6 +52,9 @@ public:
 	void AnimationUpdate();
 	int GetAnimationTexNum();
 
+	bool GetIsAnimeEnd() { return m_is_animation_end; }
+
+
 protected:
 	bool m_IsActive = false;
 	EffectParam m_effect_param;
