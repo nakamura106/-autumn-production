@@ -122,6 +122,7 @@ int ObjectBase::GetAnimationTexNum()
 
 void ObjectBase::CollisionParamUpdate()
 {
+	
 }
 
 

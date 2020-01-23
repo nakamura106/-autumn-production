@@ -137,11 +137,13 @@ void TitleSceneObject::UpdateHomeScene()
 
 void TitleSceneObject::UpdateStartScene()
 {
+	m_scene_state = TitleSceneState::Home;
 	ChangeSceneStep(SceneStep::EndStep);
 }
 
 void TitleSceneObject::UpdateContinueScene()
 {
+	m_scene_state = TitleSceneState::Home;
 	ChangeSceneStep(SceneStep::EndStep);
 }
 

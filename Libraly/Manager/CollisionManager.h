@@ -25,6 +25,7 @@ public:
 	void AddEnemyColObject(ObjectBase* e_obj);
 	void AddPBulletColObject(ObjectBase* p_b_obj);
 	void AddEBulletColObject(ObjectBase* e_b_obj);
+	void AddMapColObject(ObjectBase* map_obj);
 
 private:
 	CollisionManager();

@@ -13,6 +13,8 @@ public:
 
 	void MoveUpdate(Direction direction_);
 
+	void CollisionParamUpdate()override;
+
 private:
 	
 };

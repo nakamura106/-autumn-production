@@ -3,6 +3,7 @@
 #include"../../Engine/Input.h"
 #include"../../Object/Definition.h"
 #include"../../DataBank/DataBank.h"
+#include "../../Manager/CollisionManager.h"
 
 
 MapObjectBase::MapObjectBase()
@@ -10,6 +11,7 @@ MapObjectBase::MapObjectBase()
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 0;
 	m_pos.y = 0;
+	m_direction = Direction::RIGHT;
 }
 
 void MapObjectBase::Update()
@@ -22,6 +24,8 @@ void MapObjectBase::Update()
 	{
 		MoveUpdate(RIGHT);
 	}
+
+	CollisionParamUpdate();
 }
 
 void MapObjectBase::MoveUpdate(Direction direction_)
@@ -36,4 +40,14 @@ void MapObjectBase::MoveUpdate(Direction direction_)
 	{
 		m_pos.x += P_speed;
 	}
+}
+
+void MapObjectBase::CollisionParamUpdate()
+{
+	for (const auto& i : m_shape_list)
+	{
+		i->Update(m_pos.x, m_pos.y, m_direction);
+	}
+
+	CollisionManager::GetInstance().AddMapColObject(this);
 }

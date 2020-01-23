@@ -187,3 +187,8 @@ void CollisionManager::AddEBulletColObject(ObjectBase* e_b_obj)
 {
 	m_eBullet_obj_list.push_back(e_b_obj);
 }
+
+void CollisionManager::AddMapColObject(ObjectBase* map_obj)
+{
+	m_map_obj_list.push_back(map_obj);
+}
