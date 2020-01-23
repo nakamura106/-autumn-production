@@ -10,7 +10,7 @@ public:
 	LargeGrassObject();
 	~LargeGrassObject() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Draw();
 

@@ -9,7 +9,7 @@ public:
 	GrassObject();
 	~GrassObject() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Draw();
 

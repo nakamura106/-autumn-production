@@ -9,7 +9,7 @@ public:
 	FountainObject();
 	~FountainObject() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Draw();
 

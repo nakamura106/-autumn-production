@@ -25,8 +25,7 @@ public:
 	EnemyBase(float speed_, EnemyID enemy_id_, int max_wave_, float tex_size_);
 	virtual ~EnemyBase();
 
-	/*Load—pŠÖ”HFObjectBase‚©‚çˆø‚«Œp‚¢‚¾*/
-	void Load() {}
+	
 	/*•`‰æŠÖ”*/
 	void Draw();
 	/*‰Šú‰»*/

@@ -9,7 +9,7 @@ public:
 	SmallGrassObject();
 	~SmallGrassObject() {};
 	void Init() {};
-	void Load() {};
+	
 
 	void Draw();
 

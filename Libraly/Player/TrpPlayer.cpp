@@ -52,17 +52,12 @@ void TrpPlayer::Init()
 	{
 		notebox[i] = 0;
 	}
-	Load();
 
 	SetRectangle();
 
 }
 
-void TrpPlayer::Load()
-{
-	
 
-}
 
 void TrpPlayer::SetRectangle()
 {
