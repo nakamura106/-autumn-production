@@ -22,12 +22,14 @@ public:
 	void SoundSelect2SE();
 	void SoundSelect3SE();
 	void SoundClickSE();
+	void SoundBulletSE();
 
 	void ResetSelectFlag();
 
 	// ‰ğ•úŠÖ”
 	void ReleaseTitleSound();
 	void ReleaseSelectSound();
+	void ReleaseBattleSound();
 
 protected:
 	SoundManager();
@@ -47,6 +49,7 @@ private:
 	std::string m_select2_se;
 	std::string m_select3_se;
 	std::string m_click_se;
+	std::string m_bullet_se;
 
 	// flie“Ç‚İ‚İ—p•Ï”
 	std::string m_bgm_file;
@@ -54,6 +57,7 @@ private:
 	std::string m_se2_file;
 	std::string m_se3_file;
 	std::string m_click_se_file;
+	std::string m_bullet_se_file;
 
 	AudioPlayer* m_pAudio = AudioPlayer::GetInstance(GetWindowHandle());
 };

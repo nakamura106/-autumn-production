@@ -4,6 +4,7 @@
 #include "../Collision/ShapeType/ShapeCircle.h"
 #include "../Manager/CollisionManager.h"
 #include<math.h>
+#include "../Sound/SoundManager.h"
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_,ObjectRavel::Ravel_PlayerBullet)

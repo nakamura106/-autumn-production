@@ -10,6 +10,7 @@
 #include "../Collision/ShapeType/ShapeRect.h"
 #include "../Manager/CollisionManager.h"
 #include "../Manager/ObjectManager.h"
+#include "../Sound/SoundManager.h"
 
 
 PlayerBase::PlayerBase()

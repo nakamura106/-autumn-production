@@ -37,6 +37,7 @@ void SoundManager::RegisterSelectSound()
 
 void SoundManager::RegisterGameMainSound()
 {
+	
 }
 
 void SoundManager::RegisterEndSound()
@@ -93,6 +94,11 @@ void SoundManager::SoundClickSE()
 	m_pAudio->Play(m_click_se, 0, false);
 }
 
+void SoundManager::SoundBulletSE()
+{
+	m_pAudio->Play(m_bullet_se, 0, false);
+}
+
 void SoundManager::ResetSelectFlag()
 {
 	m_select1_flag = false;
@@ -115,6 +121,12 @@ void SoundManager::ReleaseSelectSound()
 	m_pAudio->Release(m_select3_se);
 }
 
+void SoundManager::ReleaseBattleSound()
+{
+	m_pAudio->Release(m_bgm);
+	m_pAudio->Release(m_bullet_se);
+}
+
 SoundManager::SoundManager()
 {
 	m_select1_flag = false;
@@ -126,6 +138,7 @@ SoundManager::SoundManager()
 	m_select2_se = "Select2SE";
 	m_select3_se = "Select3SE";
 	m_click_se = "ClickSE";
+	m_bullet_se = "BulletSE";
 }
 
 SoundManager::~SoundManager()

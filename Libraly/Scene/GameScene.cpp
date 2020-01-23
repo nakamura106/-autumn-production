@@ -13,6 +13,7 @@
 #include "../DataBank/DataBank.h"
 #include "../Manager/CollisionManager.h"
 #include"../SceneLoader/GameSceneLoad/GameSceneLoad.h"
+#include "../Sound/SoundManager.h"
 
 
 // ゲーム本編シーンの初期化
@@ -62,6 +63,9 @@ void InitGameScene()
 
 	GameSceneLoad();
 
+	SoundManager::Instance()->RegisterGameMainSound();
+	SoundManager::Instance()->SoundBGM();
+
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
@@ -86,6 +90,7 @@ void MainGameScene()
 
 SceneId FinishGameScene()
 {
+	SoundManager::Instance()->ReleaseBattleSound();
 	ReleaseCategoryTexture(TEXTURE_CATEGORY_GAME);
 
 

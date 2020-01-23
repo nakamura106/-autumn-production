@@ -106,6 +106,7 @@ void SelectSceneObject::BossSelectUpdate()
 
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
 		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f) {
+		m_param[2].texture_id = SelectCategoryTextureList::BossMouseImageTex;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame1;
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
@@ -122,6 +123,7 @@ void SelectSceneObject::BossSelectUpdate()
 	}
 	else if (m_pos[6].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[6].x + 349.0f
 		&& m_pos[6].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[6].y + 349.0f) {
+		m_param[2].texture_id = SelectCategoryTextureList::BossBirdImageTex;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame1;
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
@@ -137,6 +139,7 @@ void SelectSceneObject::BossSelectUpdate()
 	else if (m_pos[7].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[7].x + 349.0f
 		&& m_pos[7].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[7].y + 349.0f)
 	{
+		m_param[2].texture_id = SelectCategoryTextureList::BossGorillaImageTex;
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame1;
@@ -150,6 +153,7 @@ void SelectSceneObject::BossSelectUpdate()
 		}
 	}
 	else {
+		
 		m_param[5].texture_id = SelectCategoryTextureList::BossMouseFrame2;
 		m_param[6].texture_id = SelectCategoryTextureList::BossBirdFrame2;
 		m_param[7].texture_id = SelectCategoryTextureList::BossGorillaFrame2;
