@@ -33,7 +33,7 @@ public:
 	//ó‘Ô‘JˆÚ
 	void ChangeState();
 	
-	
+	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
 
 	virtual void InitWaitState();		
 	virtual void InitMoveState();		
@@ -78,6 +78,7 @@ protected:
 	int		m_animtimer;
 	int		m_effect;
 	int		m_effecttimer;
+	float   m_floorpos;
 
 	int notebox[3];
 

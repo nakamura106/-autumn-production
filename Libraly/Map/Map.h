@@ -68,7 +68,6 @@ public:
 
 private:
 	void MapScroll(int direction_);
-	void WaveChange(float enemyX_);
 protected:
 	float fg;
 };

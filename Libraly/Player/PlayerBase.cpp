@@ -38,6 +38,7 @@ PlayerBase::PlayerBase()
 	
 
 	m_animtimer = 0;
+	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
 	m_is_miss = false;
 	AllInitEffect();
@@ -205,13 +206,20 @@ void PlayerBase::P_Controll()
 	}
 
 	//ジャンプ処理
-	if (GetKeyDown(SPACE_KEY) == true)
+	if (GetKeyDown(SPACE_KEY) == true&& m_do_jump != true)
 	{
 		m_do_jump = true;
 		m_is_active = true;
 		InitAllState();
 	}
-
+	if (DataBank::Instance()->GetMapObjectHit()==true&&m_do_jump!=true)
+	{
+		m_pos.y = m_floorpos;
+	}
+	else
+	{
+		m_floorpos = P_posYforest;
+	}
 	//長調短調切り替え処理(押している間のみ)
 	if (GetKey(SHIFT_KEY) == true)
 	{
@@ -469,7 +477,7 @@ void PlayerBase::Jump()
 	jump_power -= Gravity;
 
 	//プレイヤーが地面(ジャンプ開始前のY座標)についたらジャンプ状態を解除する
-	if (m_pos.y >= P_posYforest)
+	if (m_pos.y >=m_floorpos)
 	{
 		m_effecttimer = 0;
 		
@@ -762,6 +770,19 @@ void PlayerBase::ChangeState()
 	}
 
 	
+}
+
+void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
+{
+	if (ravel_ == ObjectRavel::Ravel_MapObj&&m_pos.y+128.0f<=ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_MapObj)->GetPos().y) {
+		m_floorpos = m_pos.y;
+		DataBank::Instance()->SetObjectHit(true);
+	}
+	else
+	{
+		m_floorpos = P_posYforest;
+		DataBank::Instance()->SetObjectHit(false);
+	}
 }
 
 void PlayerBase::InitAllState()
