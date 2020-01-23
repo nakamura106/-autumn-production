@@ -6,12 +6,14 @@
 #include "../../Manager/CollisionManager.h"
 
 
-MapObjectBase::MapObjectBase()
+MapObjectBase::MapObjectBase(float hit_offset_y_,float hit_side_y_)
 {
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 0;
 	m_pos.y = 0;
 	m_direction = Direction::RIGHT;
+	m_hit_offset_y = hit_offset_y_;
+	m_hit_side_y = hit_side_y_;
 }
 
 void MapObjectBase::Update()

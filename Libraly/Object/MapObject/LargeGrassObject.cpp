@@ -6,6 +6,7 @@
 
 
 LargeGrassObject::LargeGrassObject()
+	:MapObjectBase(211.f, 24.f)
 {
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 1900.0f;

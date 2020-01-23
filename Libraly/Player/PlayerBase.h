@@ -81,6 +81,7 @@ protected:
 	int		m_effecttimer;
 	float   m_floorpos;
 	float	m_gravity;
+	bool	m_is_obj_stop;
 
 	int notebox[3];
 
