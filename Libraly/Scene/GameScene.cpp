@@ -59,6 +59,8 @@ void InitGameScene()
 
 	ObjectManager::Instance()->Init();
 
+	UiManager::Instance()->Init();
+
 	UiManager::Instance()->Create();
 
 	GameSceneLoad();
@@ -92,6 +94,9 @@ SceneId FinishGameScene()
 {
 	SoundManager::Instance()->ReleaseBattleSound();
 	ReleaseCategoryTexture(TEXTURE_CATEGORY_GAME);
+	ObjectManager::Instance()->AllDaleteObject();
+	DataBank::Instance()->ResetData();
+	UiManager::Instance()->AllDaleteUI();
 
 
 	return SceneId::GameEndScene;

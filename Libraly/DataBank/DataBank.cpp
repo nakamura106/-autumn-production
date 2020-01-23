@@ -46,9 +46,14 @@ DataBank::DataBank()
 
 DataBank::~DataBank()
 {
+
 }
 
-
+void DataBank::ResetData()
+{
+	m_fatigue_gauge = 0;
+	m_sleep_gauge = 0;
+}
 
 void DataBank::SetPlayerEffect(P_effect effect_)
 {

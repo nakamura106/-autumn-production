@@ -49,10 +49,7 @@ void Map::Update()
 	{
 		MapScroll(RIGHT);
 	}
-	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true || DataBank::Instance()->GetWavetype(WaveType::Wave2) == true || DataBank::Instance()->GetWavetype(WaveType::Wave3) == true)
-	{
-		WaveChange(ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().x);
-	}
+
 		
 	DataBank::Instance()->Setfloor1Pos(floor1);
 }
@@ -75,37 +72,6 @@ void Map::MapScroll(int direction_)
 	}
 }
 
-void Map::WaveChange(float enemyX_)
-{
-	
-	if (enemyX_ >= 960.0f)
-	{
-		floor1 += P_speed*2;
-		
-		floor2 += floor2speed*2;
-	}
-	else
-	{
-		for (int i = 0; i < (int)WaveType::WaveMax; i++)
-		{
-			DataBank::Instance()->SetWave((WaveType)i,false);
-		}
-	}
-	if (enemyX_ <= 960.0f)
-	{
-		floor1 -= P_speed*2;
-		
-		floor2 -= floor2speed*2;
-	}
-	else
-	{
-		for (int i = 0; i < (int)WaveType::WaveMax; i++)
-		{
-			DataBank::Instance()->SetWave((WaveType)i, false);
-		}
-	}
-
-}
 
 void Map::HitJudgement()
 {
@@ -150,10 +116,7 @@ void Fg::Update()
 	{
 		MapScroll(RIGHT);
 	}
-	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true || DataBank::Instance()->GetWavetype(WaveType::Wave2) == true || DataBank::Instance()->GetWavetype(WaveType::Wave3) == true)
-	{
-		WaveChange(ObjectManager::Instance()->GetCharaObject(ObjectRavel::Ravel_Boss)->GetPos().x);
-	}
+	
 }
 
 void Fg::MapScroll(int direction_)

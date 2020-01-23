@@ -7,6 +7,9 @@ class DataBank
 public:
 	static DataBank* Instance();
 
+	//Ÿ‚ÌƒQ[ƒ€‚Å‰Šú‰»‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢’l
+	void ResetData();
+
 	void SetPlayerHp(int hp) { m_player_hp = hp; }
 	void SetNote(int note1_, int note2_, int note3_) {
 		note1 = note1_;
@@ -53,6 +56,8 @@ public:
 
 	 
 	WaveState GetWaveState() { return m_wave_state; }
+
+	
 	
 
 protected:

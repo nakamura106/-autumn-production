@@ -37,6 +37,18 @@ UiManager::~UiManager()
 	}
 }
 
+void UiManager::AllDaleteUI()
+{
+	for (int i = 0; i < MAX_UI_OBJ; i++)
+	{
+		if (ui_objects[i] != nullptr)
+		{
+			delete ui_objects[i];
+			ui_objects[i] = nullptr;
+		}
+	}
+}
+
 void UiManager::Init()
 {
 	for (int i = 0; i < MAX_UI_OBJ; i++)

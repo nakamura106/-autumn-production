@@ -32,7 +32,7 @@ private:
 	//!< マップスクロール関数(プレイヤーの動きに合わせてスクロール速度が違う)
 	void MapScroll(int direction_);
 
-	void WaveChange(float enemyX_);
+	
 
 	//!< 当たり判定関数(プレイヤーがオブジェクトに当たっているか判定する関数)
 	void HitJudgement();
