@@ -36,7 +36,7 @@ PlayerBase::PlayerBase()
 	m_shape_list.push_back(new ShapeRect(m_pos.x, 61.0f, m_pos.y, 144.0f, 61.0f, 94.0f, 256.0f));
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 65.0f, m_pos.y, 222.0f, 26.0f, 256.0f));
 	
-
+	
 	m_animtimer = 0;
 	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
@@ -45,6 +45,7 @@ PlayerBase::PlayerBase()
 	m_is_miss = false;
 	m_is_hit_mapobj = false;
 	m_is_obj_stop = false;
+	m_do_damage = false;
 	AllInitEffect();
 	m_is_invincible == false;
 
@@ -229,6 +230,9 @@ void PlayerBase::P_Controll()
 		m_gravity = -P_jump_power;
 		m_pos.y -= 1.f;
 		InitAllState();
+		if (m_is_obj_stop == true) {
+			m_is_obj_stop = false;
+		}
 	}
 
 	if (m_is_hit_mapobj == true) {
@@ -617,6 +621,13 @@ void PlayerBase::CollisionParamUpdate()
 	CollisionManager::GetInstance().AddPlayerColObject(this);
 }
 
+void PlayerBase::ClearNoteBox()
+{
+	for (int i = 0;i < G_NOTE_BOX_NUM;++i) {
+		notebox[i] = 0;
+	}
+}
+
 void PlayerBase::InitWaitState() 
 {
 	
@@ -825,6 +836,24 @@ void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 			m_is_invincible == true;
 		}
 		m_invincibletimer--;
+	}
+	else if (ravel_ == ObjectRavel::Ravel_Boss || ravel_ == ObjectRavel::Ravel_EnemyBullet) {
+		if (hit_use_atk_ > 0.f && m_do_damage == false) {
+
+			//ダメージ
+			--m_hp;
+
+			//ダメージ受けたフラグON
+			m_do_damage = true;
+		}
+	}
+	else if (ravel_ == ObjectRavel::Ravel_BananaBullet) {
+		//速度低下・音符ストック消去
+		ClearNoteBox();
+	}
+	else if (ravel_ == ObjectRavel::Ravel_ShitBullet) {
+		//演奏・ジャンプ禁止・音符ストック消去
+		ClearNoteBox();
 	}
 
 }

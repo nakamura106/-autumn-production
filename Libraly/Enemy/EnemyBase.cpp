@@ -186,6 +186,26 @@ void EnemyBase::Update()
 	DataBank::Instance()->SetIsDebuff(m_is_debuff);
 }
 
+float EnemyBase::GetHitUseAtk(ObjectRavel hit_obj_)
+{
+	//1.fを返すとプレイヤーにダメージ
+	if (hit_obj_ == ObjectRavel::Ravel_Player) {
+
+		if (m_state == EnemyStateType::Attack1 ||
+			m_state == EnemyStateType::Attack2 ||
+			m_state == EnemyStateType::Attack3 ||
+			m_state == EnemyStateType::Attack4 ||
+			m_state == EnemyStateType::Fly) {
+			return 1.f;
+		}
+		else {
+			return 0.f;
+		}
+	}
+
+	return 0.0f;
+}
+
 Position EnemyBase::GetHandPos()
 {
 	Position pos;

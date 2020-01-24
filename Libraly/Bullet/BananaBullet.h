@@ -22,5 +22,6 @@ private:
 	EnemyBase* m_parent = nullptr;
 	int m_move_start_anim_num;
 	bool m_is_move;//“®‚¢‚½Œã‚Í‚±‚ê‚ªtrue
+	bool m_is_hit_player;
 
 };

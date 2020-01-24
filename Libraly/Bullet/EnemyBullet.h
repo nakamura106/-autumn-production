@@ -30,6 +30,8 @@ public:
 
 	void CollisionParamUpdate()override;
 
+	void HitAction(ObjectRavel ravel_, float hit_use_atk_);
+
 private:
 	const int M_EBULLET_ANIM_SPLIT_ALL	= 1;
 	const int M_EBULLET_ANIM_SPLIT_W	= 2;

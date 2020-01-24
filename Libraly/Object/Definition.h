@@ -59,6 +59,8 @@ enum class ObjectRavel
 	Ravel_PlayerBullet3,
 	Ravel_PlayerBullet4,
 	Ravel_EnemyBullet,	//エネミーの弾
+	Ravel_BananaBullet,
+	Ravel_ShitBullet,
 	ObjectRavel_Max
 };
 

@@ -4,7 +4,9 @@
 #include "../Collision/ShapeType/ShapeCircle.h"
 #include "../Manager/CollisionManager.h"
 #include<math.h>
+#include <list>
 #include "../Sound/SoundManager.h"
+#include "../Effect/Effects/HitEffect.h"
 
 PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction direction_, PlayerBulletType p_bullet_type_)
 	:BulletBase(x_, y_, move_speed_, direction_,ObjectRavel::Ravel_PlayerBullet)
@@ -34,6 +36,9 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	m_move.y = 0;
 	m_firepoint.x = 0;
 	m_firepoint.y = 0;
+	m_is_not_draw = false;
+
+	m_effect_list.push_back(new HitEffect(this));
 
 }
 
@@ -43,6 +48,7 @@ PlayerBullet::~PlayerBullet()
 	{
 		delete i;
 	}
+	
 }
 
 void PlayerBullet::Load()
@@ -98,21 +104,37 @@ void PlayerBullet::SetPlayerBulletInfo()
 void PlayerBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
 	if (ravel_ == ObjectRavel::Ravel_Boss) {
-		m_is_delete = true;
+		
+		m_effect_list.at(0)->WakeUp();
+		
+		for (const auto& i : m_shape_list)
+		{
+			delete i;
+			
+		}
+		std::list<ShapeBase*>().swap(m_shape_list);
+
+		m_is_not_draw = true;
+		// m_is_delete = true;
 	}
 }
 
 void PlayerBullet::Draw()
 {
-	DrawInversion(
-		m_pos.x,					//x座標
-		m_pos.y,					//y座標
-		m_draw_param.tex_size_x,	//テクスチャの横サイズ
-		m_draw_param.tex_size_y,	//テクスチャの縦サイズ		
-		GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
-		(m_draw_param.tu - 1) / m_anim_param.split_width,
-		(m_draw_param.tv - 1) / m_anim_param.split_height,
-	m_direction);
+	if (m_is_not_draw == false)
+	{
+		DrawInversion(
+			m_pos.x,					//x座標
+			m_pos.y,					//y座標
+			m_draw_param.tex_size_x,	//テクスチャの横サイズ
+			m_draw_param.tex_size_y,	//テクスチャの縦サイズ		
+			GetTexture(m_draw_param.category_id, m_draw_param.texture_id),
+			(m_draw_param.tu - 1) / m_anim_param.split_width,
+			(m_draw_param.tv - 1) / m_anim_param.split_height,
+			m_direction);
+	}
+
+	m_effect_list.at(0)->Draw();
 }
 
 void PlayerBullet::Update()
@@ -123,9 +145,17 @@ void PlayerBullet::Update()
 
 	AnimationUpdate();
 
+	
 	BulletBase::Update();
 
 	if (m_is_delete != true)CollisionParamUpdate();
+
+	m_effect_list.at(0)->Update();
+
+	if (m_effect_list[0]->GetIsAnimeEnd() == true)
+	{
+		m_is_delete = true;
+	}
 
 }
 

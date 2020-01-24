@@ -40,6 +40,9 @@ void BananaBullet::MoveUpdate()
 			//バナナの落ちた状態
 			m_draw_angle = 0;
 			m_draw_param.tu = 2;
+
+			//バナナバレットに変更
+			m_obj_ravel = ObjectRavel::Ravel_BananaBullet;
 		}
 
 	}
@@ -52,3 +55,5 @@ void BananaBullet::MoveUpdate()
 		m_pos.y = hand_pos.y - m_draw_param.tex_size_y / 2.f;
 	}
 }
+
+

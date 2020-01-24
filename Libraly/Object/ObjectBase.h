@@ -57,6 +57,8 @@ public:
 	//縦横の画像切り抜きサイズが違う場合
 	Position GetCenter(float splitsizeX_,float splitsizeY_);
 
+	int GetDirection() { return m_direction; }
+
 	//12/10　即席当たり判定結果通知関数
 	virtual void HitAction(ObjectRavel ravel_,float hit_use_atk_){}
 
