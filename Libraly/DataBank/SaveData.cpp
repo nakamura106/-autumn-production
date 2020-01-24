@@ -7,13 +7,8 @@ SaveData::SaveData()
 	//csvファイル読み込みが失敗した場合、0初期化
 	if (GetCsvFileData() != true) {
 
-		m_is_data_exist = false;
+		ResetAllData();
 
-		m_clear_item_num = 0;
-
-		for (int i = 0;i < static_cast<int>(ClearTimeType::ClearTimeType_Max);++i) {
-			m_clear_time[i] = 0;
-		}
 	}
 }
 
@@ -62,6 +57,30 @@ bool SaveData::SetNewClearTime(ClearTimeType clear_time_type_, int clear_time_nu
 	return false;
 }
 
+bool SaveData::SetBossNum(int boss_num)
+{
+	if (boss_num > m_release_enemy_num && boss_num <= 3) {
+
+		m_release_enemy_num = boss_num;
+
+		return true;
+	}
+	return false;
+}
+
+void SaveData::ResetAllData()
+{
+	m_is_data_exist = false;
+
+	m_clear_item_num = 0;
+
+	m_release_enemy_num = 0;
+
+	for (int i = 0;i < static_cast<int>(ClearTimeType::ClearTimeType_Max);++i) {
+		m_clear_time[i] = 0;
+	}
+}
+
 bool SaveData::GetCsvFileData()
 {
 	//情報入手
@@ -71,18 +90,21 @@ bool SaveData::GetCsvFileData()
 
 	//csvファイルが2段ある必要がある
 	if (file.size() >= 2) {
-		if (static_cast<int>(file[1].size()) >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
+		if (static_cast<int>(file[1].size()) >= clear_time_max + 4) {//+4はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
 
 			//データ存在するか
 			m_is_data_exist = static_cast<bool>(*file[1][1]);
 
+			//敵解放数
+			m_release_enemy_num = *file[1][2];
+
 			//称号獲得数
-			m_clear_item_num = *file[1][2];
+			m_clear_item_num = *file[1][3];
 
 			//スコアタイム
 			for (int i = 0;i < clear_time_max;++i) {
 
-				m_clear_time[i] = *file[1][i + 3];
+				m_clear_time[i] = *file[1][i + 4];
 
 			}
 
@@ -107,18 +129,21 @@ bool SaveData::SetCsvFileData()
 
 	if (data.size() >= 2) {
 
-		if (static_cast<int>(data[1].size()) >= clear_time_max + 3) {//+3はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
+		if (static_cast<int>(data[1].size()) >= clear_time_max + 4) {//+4はcsvの使用していない部分とデータが存在するか判定と称号獲得数の分
 			
 			//データ存在するか
 			*data[1][1] = static_cast<int>(m_is_data_exist);
 
+			//敵解放数
+			*data[1][2] = m_release_enemy_num;
+
 			//称号獲得数
-			*data[1][2] = m_clear_item_num;
+			*data[1][3] = m_clear_item_num;
 
 			//スコアタイム
 			for (int i = 0;i < clear_time_max;++i) {
 
-				*data[1][i + 3] = m_clear_time[i];
+				*data[1][i + 4] = m_clear_time[i];
 
 			}
 

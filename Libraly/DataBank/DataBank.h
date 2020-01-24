@@ -34,6 +34,7 @@ public:
 	void SetIsDebuff(bool is_debuff) { m_is_debuff = is_debuff; }
 	void SetIsHitBanana(bool is_hit_banana) { m_is_hit_banana = is_hit_banana; }
 	void SetIsHitShit(bool is_hit_shit) { m_is_hit_shit = is_hit_shit; }
+	void SetDoEnemyDeadlyAi(bool do_e_deadly_ai_) { m_do_enemy_deadly_ai = do_e_deadly_ai_; }
 	
 
 	int GetPlayerHp() { return m_player_hp; }
@@ -60,7 +61,7 @@ public:
 	bool GetIsDebuff() { return m_is_debuff; }
 	bool GetIsHitBanana() { return m_is_hit_banana; }
 	bool GetIsHitShit() { return m_is_hit_shit; }
-
+	bool GetDoEnemyDeadlyAi() { return m_do_enemy_deadly_ai; }
 	 
 	WaveState GetWaveState() { return m_wave_state; }
 
@@ -104,6 +105,8 @@ private:
 	int m_Pdirection;
 	Position m_centerpos;
 	WaveState m_wave_state;
+
+	bool m_do_enemy_deadly_ai;//“G‚Ì•KŽE‹Z‚ª“®‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
 private:
 	static DataBank* p_instance;

@@ -19,12 +19,19 @@ public:
 	bool GetIsDataExist() { return m_is_data_exist; }
 	int GetClearItemNum() { return m_clear_item_num; }
 	int GetClearTime(ClearTimeType clear_time_type_);
+	int GetReleaseBossNum() { return m_release_enemy_num; }
 
 	/*称号獲得数更新関数*/
 	bool SetClearItemNum(int clear_item_num_);
 
 	/*ハイスコア更新設定関数*/
 	bool SetNewClearTime(ClearTimeType clear_time_type_, int clear_time_num_);
+
+	/*ボス数更新関数*/
+	bool SetBossNum(int boss_num);
+
+	/*要素を全てリセット*/
+	void ResetAllData();
 
 	/*csvファイルからデータを入手*/
 	bool GetCsvFileData();
@@ -34,6 +41,7 @@ public:
 
 private:
 	bool m_is_data_exist;	//データが存在するか
+	int m_release_enemy_num;	//敵の解放数
 	int m_clear_item_num;	//称号獲得数
 	int m_clear_time[static_cast<int>(ClearTimeType::ClearTimeType_Max)];//クリアタイム
 

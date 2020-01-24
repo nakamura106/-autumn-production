@@ -24,8 +24,6 @@ private:
 	const int			M_FRAME_BANANA_START		= 13;
 	const float			M_TEX_FRONT_SPACE = 250.f;
 
-	const EnemyAIType	M_DEADLY_AI = EnemyAIType::AI10;	//必殺技のAIタイプ
-
 	//バナナ発射時の手の位置
 	const float			M_BANANA_HAND_POS_X[16] = {
 							357.f,208.f,209.f,227.f,
@@ -40,7 +38,6 @@ private:
 
 
 	float m_jump_acceleration;	//ジャンプ時のy軸加速度
-	bool  m_do_doraming;		//ドラミング中かどうか
 	float m_jump_speed;			//ジャンプ中のy軸移動量
 	bool  m_end_jump;			//ジャンプが終わったかどうか1/18雑コード
 	Position m_shot_adjust_default;	//弾の発射位置調整y方向の標準値
@@ -53,6 +50,7 @@ private:
 	void EnemyAttack3();	//バナナ投げ
 	void EnemyAttack4();	//サル召喚
 	void EnemyFly();		//ジャンプ動作
+	void EnemyDead();
 
 	void InitAllState();	//全状態共通
 	void InitSleepState();

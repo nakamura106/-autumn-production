@@ -40,6 +40,8 @@ DataBank::DataBank()
 	m_PlayerType = (int)Player::PlayerTypeTrumpet;
 	m_wave_state = WaveState::None;
 	
+	m_do_enemy_deadly_ai = false;
+
 }
 
 
