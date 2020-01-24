@@ -9,6 +9,7 @@ Gorilla::Gorilla()
 	:EnemyBase(0.f,EnemyID::Gorilla, 3, 850.f)
 {
 	LoadAIData(M_AIDataFileName);
+	SetAIType();
 	CompleteChangeState();
 
 	//ƒSƒŠƒ‰‚¾‚¯—áŠOB–°‚èó‘Ô‚Ì‚ÝˆÙ‚È‚é
@@ -20,7 +21,6 @@ Gorilla::Gorilla()
 	m_hand_pos.y = m_draw_param.tex_size_y / 2.f;
 
 	m_jump_acceleration = M_JUMP_ACCELERATION_DEFAULT;
-	m_do_doraming = false;
 	m_jump_speed = 0.f;
 	m_end_jump = false;
 
@@ -53,6 +53,98 @@ void Gorilla::Init()
 
 EnemyAIType Gorilla::ChangeAIType()
 {
+
+	//AI1¨‰ŠúAI
+	//AI2¨œpœj
+	//AI3¨’ÇÕ‚Ì‚Ý
+	//AI4¨’@‚«‚Â‚¯
+	//AI5¨ƒoƒiƒi“Š‚°
+	//AI6¨ƒTƒ‹¢Š«
+	//AI7¨Wave2`
+	//AI8¨Wave2`
+	//AI9¨Wave2`
+	//AI10¨•KŽE‹Z
+
+	//Œ³‚Ì‰ŠúAI
+	return EnemyAIType::AI1;
+
+	//•KŽE‹Z
+	if (m_do_deadly_ai == false && m_now_wave == m_max_wave) {
+
+		m_do_deadly_ai = true;
+
+		return EnemyAIType::DeadlyAi;
+	}
+
+	EnemyAIType now_ai = GetNowAI();
+
+	//ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì‹——£
+	float p_e_distance = fabsf(m_player_center_pos - m_map_pos);
+
+	if (now_ai == EnemyAIType::AI4 ||
+		now_ai == EnemyAIType::AI5 ||
+		now_ai == EnemyAIType::AI6) {
+
+		//3Ží—Þ‚ÌUŒ‚‚ÌŒã‚ÍŒˆ‚Ü‚Á‚½UŒ‚
+		return EnemyAIType::AI3;
+
+	}
+
+	//ƒQ[ƒWƒXƒe[ƒW(’iŠK)0‚ÍƒQ[ƒW—Ê0‚ðˆÓ–¡‚·‚é
+	if (m_fatigue_gage_stage == EnemyGageStage::Zero && m_sleep_gage_stage == EnemyGageStage::Zero && m_now_wave == 1) {
+
+		return EnemyAIType::AI2;
+
+	}
+
+	//—”‚ð“üŽè
+	int random = RandomTool::GetRandom();
+
+	//’ÇÕ‚Ì‚Ý‚ðs‚¤APlayerŽUôAI
+	if (p_e_distance >= 700.f) {
+
+		return EnemyAIType::AI3;
+
+	}
+	else {
+		//4Ží—Þ‚ÌUŒ‚‚ðƒ‰ƒ“ƒ_ƒ€‚ÉŒJ‚èo‚·
+		switch (random % 4)
+		{
+		case 0:
+			return EnemyAIType::AI4;
+
+		case 1:
+			return EnemyAIType::AI5;
+
+		case 2:
+			return EnemyAIType::AI6;
+
+		case 3:
+			if (m_now_wave == 1) {
+				return EnemyAIType::AI2;
+			}
+			break;
+		}
+	}
+
+	random = RandomTool::GetRandom();
+
+	//wave2ˆÈ~ŒÀ’èAI
+	switch (random % 3)
+	{
+	case 0:
+		return EnemyAIType::AI7;
+
+	case 1:
+		return EnemyAIType::AI8;
+
+	case 2:
+		return EnemyAIType::AI9;
+
+	default:
+		break;
+	}
+
 	return EnemyAIType::AI1;
 }
 
@@ -65,6 +157,10 @@ void Gorilla::EnemyAttack1()
 
 void Gorilla::EnemyAttack2()
 {
+
+	//wave2ˆÈ~‚Ì‚ÝAÕŒ‚”g
+	if (m_now_wave == 1)return;
+
 	//’@‚«‚Â‚¯
 	if (GetAnimationTexNum() >= M_ATTACK2_ANIM_TEX_NUM && m_do_bullet != true) {
 
@@ -184,6 +280,16 @@ void Gorilla::EnemyFly()
 		}
 	}
 
+}
+
+void Gorilla::EnemyDead()
+{
+	EnemyBase::EnemyDead();
+
+	if (m_is_animation_end == true) {
+		m_draw_param.tu = 4.f;
+		m_draw_param.tv = 4.f;
+	}
 }
 
 void Gorilla::InitAllState()

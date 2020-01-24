@@ -138,7 +138,7 @@ enum class EnemyAIType {
 	AI7,
 	AI8,
 	AI9,
-	AI10,
+	DeadlyAi,
 	EnemyAIType_Max
 };
 
