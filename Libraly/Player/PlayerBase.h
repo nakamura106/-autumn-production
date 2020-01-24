@@ -72,6 +72,7 @@ protected:
 	bool	m_do_attack;					//
 	bool    m_is_hit_mapobj;
 	int		m_hp;							//体力
+
 	int		m_List;							//テクスチャーリスト保存用
 	int		m_Key;							//長調か短調か
 	int     m_i;							//アニメーション切り替え用
@@ -80,6 +81,7 @@ protected:
 	int		m_animtimer;
 	int		m_effect;
 	int		m_effecttimer;
+	int		m_dmgeffecttimer;
 	int		m_invincibletimer;
 	float   m_floorpos;
 	float	m_gravity;
@@ -90,6 +92,7 @@ protected:
 
 	std::vector<PlayerBullet*> bullet_list;
 
+	void ClearAnimation() {};
 	
 private:
 	const float M_BULLET_SPEED = 7.f;

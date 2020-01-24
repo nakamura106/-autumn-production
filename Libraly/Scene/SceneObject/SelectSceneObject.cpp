@@ -86,7 +86,6 @@ void SelectSceneObject::Update()
 		BrassSelectUpdate();
 	}
 	
-
 }
 
 void SelectSceneObject::Draw()
@@ -115,6 +114,7 @@ void SelectSceneObject::BossSelectUpdate()
 	{
 		m_select--;
 	}
+	
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
 		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f)
 	{
@@ -203,6 +203,7 @@ void SelectSceneObject::BrassSelectUpdate()
 	{
 		m_select--;
 	}
+	
 	if (m_pos[5].x < m_mouse_pos.x && m_mouse_pos.x < m_pos[5].x + 349.0f
 		&& m_pos[5].y < m_mouse_pos.y && m_mouse_pos.y < m_pos[5].y + 349.0f)
 	{
