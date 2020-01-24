@@ -40,6 +40,7 @@ PlayerBase::PlayerBase()
 	m_animtimer = 0;
 	m_floorpos = P_posYforest;
 	m_effecttimer = 16;
+	m_dmgeffecttimer = 61;
 	m_invincibletimer = 0;
 	m_gravity = 17.0f;
 	m_is_miss = false;
@@ -48,7 +49,7 @@ PlayerBase::PlayerBase()
 	m_do_damage = false;
 	AllInitEffect();
 	m_is_invincible == false;
-
+	
 }
 
 PlayerBase::~PlayerBase()
@@ -67,31 +68,34 @@ void PlayerBase::Create()
 
 void PlayerBase::Update()
 {
-	ObjectBase::Update();
-	BulletControl();
-	if (DataBank::Instance()->GetWavetype(WaveType::Wave1)!=true || DataBank::Instance()->GetWavetype(WaveType::Wave2)!=true || DataBank::Instance()->GetWavetype(WaveType::Wave3)!=true)
-	{
-		P_Controll();
-	}
-	AnimationUpdate();
-	ChangeState();
-	Atkjudge();
-
-
-	CollisionParamUpdate();
-
-
-	AllUpdateEffect();
-
 	DataBank::Instance()->SetPlayerHp(m_hp);
 	DataBank::Instance()->SetPlayerMapPos(m_map_pos);
 	DataBank::Instance()->SetNote(notebox[0], notebox[1], notebox[2]);
 	DataBank::Instance()->SetPlayerDirection(m_direction);
-	
-
-	
-
-	
+	ObjectBase::Update();
+	BulletControl();
+	if (m_hp > 0)
+	{
+		P_Controll();
+		Atkjudge();
+		CollisionParamUpdate();
+		AllUpdateEffect();
+		ChangeState();
+	}
+	else if(m_hp==0||DataBank::Instance()->GetIsGameOver()==true)
+	{
+		m_state = (int)P_State::Wait;
+		ChangeState();
+		ChangeSceneStep(SceneStep::EndStep);
+	}
+	if (DataBank::Instance()->GetIsGameClear()==true)
+	{
+		m_anim_param.split_all = 20;
+		m_anim_param.split_height = 4;
+		m_state = (int)P_State::Clear;
+		ChangeState();
+	}
+	AnimationUpdate();
 
 }
 
@@ -125,8 +129,10 @@ void PlayerBase::Draw()
 		}
 
 	}
-
-	AllDrawEffect();
+	if (m_hp > 0)
+	{
+		AllDrawEffect();
+	}
 
 }
 
@@ -140,6 +146,10 @@ void PlayerBase::P_Controll()
 	if (m_effecttimer <= 16)
 	{
 		m_effecttimer++;
+	}
+	if (m_dmgeffecttimer <= 61)
+	{
+		m_dmgeffecttimer++;
 	}
 
 	if (m_invincibletimer >= 0)
@@ -513,6 +523,12 @@ void PlayerBase::Jump()
 {
 	static float jump_power = P_jump_power;
 
+	if (DataBank::Instance()->GetPlayerType() == (int)Player::PlayerTypeTuba)
+	{
+		m_anim_param.split_all = 20;
+		m_anim_param.split_height = 5;
+	}
+
 	//プレイヤーがDamage状態、Attack状態でなければジャンプ状態にする
 	if (m_state != (int)P_State::Damage && m_state != (int)P_State::Attack)
 	{
@@ -535,7 +551,8 @@ void PlayerBase::Jump()
 	if (m_pos.y >= P_posYforest || m_is_obj_stop == true)
 	{
 		m_effecttimer = 0;
-
+		m_anim_param.split_all = 12;
+		m_anim_param.split_height = 4;
 		m_do_jump = false;
 		m_is_active = false;
 	}
@@ -603,8 +620,9 @@ void PlayerBase::AllUpdateEffect()
 		m_effect_list.at(3)->Sleep();
 	}
 	// 被弾時エフェクト条件
-	if (m_state == (int)P_State::Damage)
+	if (m_dmgeffecttimer<=60)
 	{
+		
 		m_effect_list.at(4)->WakeUp();
 	}
 	else 
@@ -847,6 +865,8 @@ void PlayerBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 		if (m_invincibletimer <= 0 && m_hp>=0)
 		{
 			m_hp--;
+			DataBank::Instance()->SetPlayerHp(m_hp);
+			m_dmgeffecttimer = 0;
 		}
 		if (m_is_invincible==false)
 		{

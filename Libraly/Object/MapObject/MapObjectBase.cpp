@@ -18,15 +18,17 @@ MapObjectBase::MapObjectBase(float hit_offset_y_,float hit_side_y_)
 
 void MapObjectBase::Update()
 {
-	if ((IsButtonPush(LeftButton) ||GetKey(LEFT_KEY) == true) )
+	if (DataBank::Instance()->GetPlayerHp() > 0)
 	{
-		MoveUpdate(LEFT);
+		if ((IsButtonPush(LeftButton) || GetKey(LEFT_KEY) == true))
+		{
+			MoveUpdate(LEFT);
+		}
+		if ((IsButtonPush(RightButton) || GetKey(RIGHT_KEY) == true))
+		{
+			MoveUpdate(RIGHT);
+		}
 	}
-	if ((IsButtonPush(RightButton) || GetKey(RIGHT_KEY) == true) )
-	{
-		MoveUpdate(RIGHT);
-	}
-
 	CollisionParamUpdate();
 }
 

@@ -12,7 +12,7 @@ public:
 
 	void SetRectangle();
 
-	void Jump();
+	
 
 	
 private:

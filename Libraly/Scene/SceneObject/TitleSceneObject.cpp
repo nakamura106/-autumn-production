@@ -10,7 +10,7 @@ TitleSceneObject::TitleSceneObject()
 {
 	m_mouse_pos.x = 0.0f;
 	m_mouse_pos.y = 0.0f;
-	m_select=1;
+	
 	m_scene_state = TitleSceneState::Home;
 }
 
@@ -21,7 +21,7 @@ TitleSceneObject::~TitleSceneObject()
 void TitleSceneObject::Init()
 {
 
-
+	m_select = 0;
 	for (int i = 0; i < 5; i++)
 	{
 		m_draw_pos[i].x = 0.0f;
@@ -106,7 +106,10 @@ void TitleSceneObject::UpdateHomeScene()
 	{
 		m_select--;
 	}
-
+	if (m_select == 0&&(IsButtonDown(DownButton)||IsButtonDown(UpButton)))
+	{
+		m_select=1;
+	}
 	if (m_draw_pos[2].x < m_mouse_pos.x && m_mouse_pos.x < m_draw_pos[2].x + 289.0f
 		&& m_draw_pos[2].y < m_mouse_pos.y && m_mouse_pos.y < m_draw_pos[2].y + 60.0f)
 	{

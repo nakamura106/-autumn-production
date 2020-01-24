@@ -16,7 +16,7 @@ DataBank::DataBank()
 {
 	m_fatigue_gauge = 0;
 	m_map_pos = 0;
-	m_player_hp = 0;
+	m_player_hp = 5;
 	m_sleep_gauge = 0;
 	m_fg = 0;
 	note1 = 0;
