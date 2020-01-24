@@ -175,7 +175,7 @@ EnemyAIType HedgeHog::ChangeAIType()
 
 		m_do_deadly_ai = true;
 
-		return EnemyAIType::AI10;
+		return EnemyAIType::DeadlyAi;
 	}
 
 	EnemyAIType now_ai = GetNowAI();

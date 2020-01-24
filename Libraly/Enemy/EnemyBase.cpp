@@ -57,6 +57,8 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 	m_player_center_pos			= 0.f;
 	m_tex_space_front			= M_TEX_FRONT_SPACE;
 	m_do_deadly_ai				= false;
+	m_do_doraming				= false;
+	m_savetime_wavechange = 0;
 
 	AllInitEffect();
 
@@ -130,6 +132,18 @@ void EnemyBase::Update()
 		//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
 		AutoChangeGageUpdate();
 
+		//弾の制御
+		BulletControl();
+
+		//マップスクロールの位置計算
+		CalcDrawPosition();
+
+		//データバンクへの値受け渡し
+		DataSetUpdate();
+
+		// エフェクトアップデート関数まとめ
+		AllUpdateEffect();
+
 		//現在の状態における動作の更新
 		//UpdateState();
 		if (m_wave_state == WaveState::None) {
@@ -139,28 +153,24 @@ void EnemyBase::Update()
 		}
 		else if (m_wave_state == WaveState::Change_Start) {
 			//wave遷移中の動作(画面端に走っていく)
-			WaveChangeState();
+			WaveChangeState1();
+		}
+		else if (m_wave_state == WaveState::EnemyMoved) {
+			WaveChangeState2();
+		}
+		else if (m_wave_state == WaveState::ItemGet) {
+			//ゲーム開始
+			if (FlameTimer::GetNowFlame(m_savetime_wavechange) > 120) {
+				m_wave_state = WaveState::None;
+			}
 		}
 
 		/*位置調整の更新*/
 		MoveLimitUpdate();
 
-		//弾の制御
-		BulletControl();
-
 		// 当たり判定更新関数
 		CollisionParamUpdate();
 
-		// エフェクトアップデート関数まとめ
-		AllUpdateEffect();
-
-		//マップスクロールの位置計算
-		CalcDrawPosition();
-
-		//データバンクへの値受け渡し
-		DataSetUpdate();
-
-		AllUpdateEffect();
 	}
 	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true)
 	{
@@ -1020,23 +1030,55 @@ void EnemyBase::ChangeDirection()
 	}
 }
 
-void EnemyBase::WaveChangeState()
+void EnemyBase::WaveChangeState1()
 {
-	m_direction = Direction::RIGHT;
+	if (m_state != EnemyStateType::Walk) {
+		m_direction = Direction::RIGHT;
+		m_state = EnemyStateType::Walk;
+		InitWalkState();
+	}
 
 	EnemyBase::EnemyMove();
 
-	if (m_pos.y >= M_WAVE_CHANGE_MOVE_LIMIT) {
+	if (m_map_pos >= M_WAVE_CHANGE_MOVE_LIMIT) {
 
-		m_pos.y = M_WAVE_CHANGE_MOVE_LIMIT;
+		m_map_pos = M_WAVE_CHANGE_MOVE_LIMIT;
 
 		DataBank::Instance()->SetWaveState(WaveState::EnemyMoved);
 
 		m_wave_state = WaveState::EnemyMoved;
 
 		m_direction = Direction::LEFT;
+
+		m_state = EnemyStateType::Wait;
+		InitWaitState();
 	}
 
+}
+
+void EnemyBase::WaveChangeState2()
+{
+	if (m_state != EnemyStateType::Walk) {
+		m_sleep_gauge = 0.f;
+		m_fatigue_gauge = 0.f;
+		m_state = EnemyStateType::Walk;
+		InitWalkState();
+	}
+
+	EnemyBase::EnemyMove();
+
+	if (DataBank::Instance()->GetPlayerMapPos() + 1000.f > m_map_pos) {
+		//終了
+
+		DataBank::Instance()->SetWaveState(WaveState::ItemGet);
+
+		m_wave_state = WaveState::ItemGet;
+
+		m_savetime_wavechange = FlameTimer::GetNowFlame();
+
+		m_state = EnemyStateType::Wait;
+		InitWaitState();
+	}
 }
 
 //Csv読み込み関数
@@ -1152,6 +1194,13 @@ void EnemyBase::DataSetUpdate()
 	d_bank->SetSleepGauge(m_sleep_gauge);
 	d_bank->SetFatigueGauge(m_fatigue_gauge);
 
+	if (m_now_ai == EnemyAIType::DeadlyAi) {
+		d_bank->SetDoEnemyDeadlyAi(true);
+	}
+	else {
+		d_bank->SetDoEnemyDeadlyAi(false);
+	}
+
 }
 
 void EnemyBase::DataGetUpdate()
@@ -1165,6 +1214,12 @@ void EnemyBase::DataGetUpdate()
 
 void EnemyBase::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
+
+	if (m_do_doraming == true) {
+		//ドラミング中の場合、無効化
+		return;
+	}
+
 	//当たり判定
 	switch (ravel_)
 	{

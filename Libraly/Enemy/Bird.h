@@ -14,7 +14,6 @@ private:
 	const int			M_FLYFALL_STOP_ANIMATION = 16;
 	const int			M_ATTACK2_ANIM_TEX_NUM = 10;
 	const float			M_FLY_DECELERASION = 0.05f;
-	const EnemyAIType	M_DEADLY_AI = EnemyAIType::AI10;
 	const int			M_SHOT_FEATHER_NUM = 3;
 	const int			M_DEADLY_FEATHER_NUM = 9;
 

@@ -71,7 +71,7 @@ EnemyAIType Bird::ChangeAIType()
 	{
 		m_do_deadly_ai = true;
 
-		return EnemyAIType::AI10;
+		return EnemyAIType::DeadlyAi;
 	}
 
 	//プレイヤーとエネミーの距離
@@ -163,7 +163,7 @@ void Bird::EnemyAttack2()
 
 		int feather_num = M_SHOT_FEATHER_NUM;
 
-		if (GetNowAI() == M_DEADLY_AI) {
+		if (GetNowAI() == EnemyAIType::DeadlyAi) {
 			feather_num = M_DEADLY_FEATHER_NUM;
 		}
 

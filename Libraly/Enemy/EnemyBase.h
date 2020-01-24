@@ -72,7 +72,7 @@ private:
 	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.5f;		//疲労度自動増加速度値
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
-	const float M_WAVE_CHANGE_MOVE_LIMIT		= 3200.f;
+	const float M_WAVE_CHANGE_MOVE_LIMIT		= 2500.f;
 	const float	M_TEX_FRONT_SPACE				= 50.f;
 	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
@@ -150,6 +150,7 @@ private:
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
 	int				m_savetime_end;				//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
+	int				m_savetime_wavechange;
 	
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 
@@ -181,7 +182,7 @@ protected:
 	virtual void EnemyRest() {}		//休憩状態？
 	void		 EnemySleep();		//眠り状態
 	virtual void EnemyFly();		//飛行状態
-	void		 EnemyDead();		//死亡状態
+	virtual void EnemyDead();		//死亡状態
 	virtual void EnemyAttack4(){}	//攻撃状態4
 
 
@@ -220,7 +221,10 @@ protected:
 	/*向き変更：m_Directionを変更する LEFT⇔RIGHT*/
 	void ChangeDirection();
 
-	void WaveChangeState();
+	//逃げる
+	void WaveChangeState1();
+	//戻ってくる
+	void WaveChangeState2();
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
@@ -288,6 +292,7 @@ protected:
 	float			m_player_center_pos;		//プレイヤーのx座標
 	float			m_tex_space_front;		//正面の空白部分を示す
 	bool			m_do_deadly_ai;			//必殺技をしたかどうかフラグ
+	bool			m_do_doraming;			//ドラミング中かどうか
 
 	bool m_is_debuff;
 
