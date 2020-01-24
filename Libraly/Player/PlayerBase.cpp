@@ -280,6 +280,15 @@ void PlayerBase::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = A;
+					if (i == 0) {
+						SoundManager::Instance()->SoundBullet1SE();
+					}
+					else if (i == 1) {
+						SoundManager::Instance()->SoundBullet2SE();
+					}
+					else {
+						SoundManager::Instance()->SoundBullet3SE();
+					}
 					break;
 				}
 			}
@@ -297,6 +306,15 @@ void PlayerBase::P_Controll()
 				if (notebox[i] == 0)
 				{
 					notebox[i] = B;
+					if (i == 0) {
+						SoundManager::Instance()->SoundBullet1SE();
+					}
+					else if (i == 1) {
+						SoundManager::Instance()->SoundBullet2SE();
+					}
+					else {
+						SoundManager::Instance()->SoundBullet3SE();
+					}
 					break;
 				}
 			}

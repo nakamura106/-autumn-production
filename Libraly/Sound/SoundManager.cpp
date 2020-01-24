@@ -38,8 +38,15 @@ void SoundManager::RegisterSelectSound()
 void SoundManager::RegisterGameMainSound()
 {
 	m_bgm_file = "Res/Wav/forestBGM1.wav";
+	m_bullet1_se_file = "Res/Wav/Trp1.wav";
+	m_bullet2_se_file = "Res/Wav/Trp2.wav";
+	m_bullet3_se_file = "Res/Wav/Trp3.wav";
 
 	m_pAudio->Load(m_bgm, m_bgm_file);
+	m_pAudio->Load(m_bullet1_se, m_bullet1_se_file);
+	m_pAudio->Load(m_bullet2_se, m_bullet2_se_file);
+	m_pAudio->Load(m_bullet3_se, m_bullet3_se_file);
+
 }
 
 void SoundManager::RegisterEndSound()
@@ -96,9 +103,19 @@ void SoundManager::SoundClickSE()
 	m_pAudio->Play(m_click_se, 0, false);
 }
 
-void SoundManager::SoundBulletSE()
+void SoundManager::SoundBullet1SE()
 {
-	m_pAudio->Play(m_bullet_se, 0, false);
+	m_pAudio->Play(m_bullet1_se, 0, false);
+}
+
+void SoundManager::SoundBullet2SE()
+{
+	m_pAudio->Play(m_bullet1_se, 0, false);
+}
+
+void SoundManager::SoundBullet3SE()
+{
+	m_pAudio->Play(m_bullet1_se, 0, false);
 }
 
 void SoundManager::ResetSelectFlag()
@@ -126,7 +143,9 @@ void SoundManager::ReleaseSelectSound()
 void SoundManager::ReleaseBattleSound()
 {
 	m_pAudio->Release(m_bgm);
-	m_pAudio->Release(m_bullet_se);
+	m_pAudio->Release(m_bullet1_se);
+	m_pAudio->Release(m_bullet2_se);
+	m_pAudio->Release(m_bullet3_se);
 }
 
 SoundManager::SoundManager()
@@ -140,7 +159,7 @@ SoundManager::SoundManager()
 	m_select2_se = "Select2SE";
 	m_select3_se = "Select3SE";
 	m_click_se = "ClickSE";
-	m_bullet_se = "BulletSE";
+	m_bullet1_se = "BulletSE";
 }
 
 SoundManager::~SoundManager()
