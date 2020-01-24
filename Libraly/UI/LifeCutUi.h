@@ -14,7 +14,7 @@ public:
 
 private:
 
-	const float LIFE_CUT_POSX = 1535.0f;
+	const float LIFE_CUT_POSX = 1375.0f;
 	const float LIFE_CUT_POSY = 75.0f;
 
 };
