@@ -6,15 +6,11 @@
 #include"../DataBank/SaveData.h"
 
 Gorilla::Gorilla()
-	:EnemyBase(0.f,EnemyID::Gorilla, 3, 850.f)
+	:EnemyBase(0.f, EnemyID::Gorilla, 3, 850.f, 4, 4, 16)
 {
 	LoadAIData(M_AIDataFileName);
 	SetAIType();
 	CompleteChangeState();
-
-	//ƒSƒŠƒ‰‚¾‚¯—áŠOB–°‚èó‘Ô‚Ì‚ÝˆÙ‚È‚é
-	m_anim_param.split_all = 16;
-	m_anim_param.split_width = m_anim_param.split_height = 4;
 
 	//Žè‚ÌˆÊ’uÝ’è
 	m_hand_pos.x = m_draw_param.tex_size_x / 2.f - 100.f;
@@ -253,9 +249,9 @@ void Gorilla::EnemyFly()
 			}
 		}
 
-		if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST) {
+		if (m_pos.y >= ENEMY_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST) {
 
-			m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST;
+			m_pos.y = ENEMY_INIT_POS_Y - m_draw_param.tex_size_y / 2.f + M_POS_Y_ADJUST;
 
 			//m_animation_stop = false;
 
@@ -323,7 +319,7 @@ void Gorilla::CreateBanana()
 {
 	Position b_pos = GetShotPos(static_cast<Direction>(m_direction));
 
-	bullet_list.push_back(
+	m_bullet_list.push_back(
 		new BananaBullet(
 			b_pos.x,
 			b_pos.y,
@@ -352,7 +348,7 @@ void Gorilla::CreateMonkey()
 		move_direction = Direction::LEFT;
 	}
 
-	bullet_list.push_back(
+	m_bullet_list.push_back(
 		new MonkeyBullet(
 			pos_x,
 			m_pos.y + m_draw_param.tex_size_y / 2.f,

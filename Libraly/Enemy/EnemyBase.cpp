@@ -13,27 +13,32 @@
 
 //Ç±Ç±Ç‹Ç≈
 
-EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_size_)
-	:ObjectBase(ObjectRavel::Ravel_Boss, Direction::LEFT, speed_, 0)
+EnemyBase::EnemyBase(
+	float speed_, 
+	EnemyID enemy_id_,
+	int max_wave_, 
+	float tex_size_,
+	int tex_split_w_,
+	int tex_split_h_,
+	int tex_split_all_
+)
+	:ObjectBase(ENEMY_INIT_POS_X, ENEMY_INIT_POS_Y - tex_size_ / 2.f, tex_size_, tex_size_, 1, 1, 1, ObjectRavel::Ravel_Boss, Direction::LEFT, speed_, 0, false)
 {
 	m_enemy_id					= enemy_id_;
 	m_state						= EnemyStateType::Walk;
 	m_fatigue_gauge				= 0.f;
 	m_sleep_gauge				= 0.f;
 	m_is_delete					= false;
-	m_pos.x						= M_INIT_POS_X;
-	m_pos.y						= M_INIT_POS_Y - tex_size_ / 2.f;
-	m_map_pos					= M_INIT_POS_X;
-	m_draw_param.tu				= 1.f;
-	m_draw_param.tv				= 1.f;
-	m_draw_param.category_id	= TEXTURE_CATEGORY_GAME;
+	m_pos.x						= ENEMY_INIT_POS_X;
+	m_pos.y						= ENEMY_INIT_POS_Y - tex_size_ / 2.f;
+	m_map_pos					= ENEMY_INIT_POS_X;
 	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
 	m_draw_param.tex_size_x		= tex_size_;
 	m_draw_param.tex_size_y		= tex_size_;
 	m_anim_param.change_flame	= M_ANIM_FLAME;
-	m_anim_param.split_all		= M_ANIM_TEX_ALL;
-	m_anim_param.split_width	= M_ANIM_TEX_WIDTH;
-	m_anim_param.split_height	= M_ANIM_TEX_HEIGHT;
+	m_anim_param.split_all		= tex_split_w_;
+	m_anim_param.split_width	= tex_split_h_;
+	m_anim_param.split_height	= tex_split_all_;
 	m_savetime_state			= 0;
 	m_state_save_pos_x			= 0;
 	m_p_pos_relation			= Direction::LEFT;
@@ -69,11 +74,11 @@ EnemyBase::EnemyBase(float speed_, EnemyID enemy_id_,int max_wave_, float tex_si
 EnemyBase::~EnemyBase()
 {
 	//bulletâï˙
-	for (auto& i : bullet_list) {
+	for (auto& i : m_bullet_list) {
 		delete i;
 		i = nullptr;
 	}
-	std::vector<EnemyBullet*>().swap(bullet_list);
+	std::vector<EnemyBullet*>().swap(m_bullet_list);
 
 	//AIÉäÉXÉgÇÃdelete
 	for (int i = 0;i < (int)EnemyAIType::EnemyAIType_Max;++i) {
@@ -93,7 +98,7 @@ void EnemyBase::Draw()
 	ObjectBase::Draw();
 
 	//íeÇÃï`âÊ
-	for (const auto& i : bullet_list) {
+	for (const auto& i : m_bullet_list) {
 
 		if (i != nullptr) {
 			i->Draw();
@@ -194,6 +199,7 @@ void EnemyBase::Update()
 	}
 
 	DataBank::Instance()->SetIsDebuff(m_is_debuff);
+
 }
 
 float EnemyBase::GetHitUseAtk(ObjectRavel hit_obj_)
@@ -1153,17 +1159,17 @@ void EnemyBase::EnemyMove()
 
 void EnemyBase::BulletControl()
 {
-	for (int i = 0;i < static_cast<int>(bullet_list.size());++i) {
+	for (int i = 0;i < static_cast<int>(m_bullet_list.size());++i) {
 		//íeÇÃçXêV
-		bullet_list[i]->Update();
+		m_bullet_list[i]->Update();
 
 		//íeÇÃis_deleteÇ™trueÇÃèÍçáÅAíeè¡ñ≈
-		if (bullet_list[i]->GetIsDelete()) {
+		if (m_bullet_list[i]->GetIsDelete()) {
 			//ÉÅÉÇÉäâï˙
-			delete bullet_list[i];
+			delete m_bullet_list[i];
 
 			//íeÇè¡ñ≈
-			bullet_list.erase(bullet_list.begin() + i);
+			m_bullet_list.erase(m_bullet_list.begin() + i);
 
 		}
 	}
@@ -1449,7 +1455,7 @@ void EnemyBase::CreateBullet(
 	}
 
 	//í èÌíeê∂ê¨
-	bullet_list.push_back(
+	m_bullet_list.push_back(
 		new EnemyBullet(
 			b_pos.x,
 			b_pos.y,
