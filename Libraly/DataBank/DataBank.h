@@ -35,6 +35,8 @@ public:
 	void SetIsHitBanana(bool is_hit_banana) { m_is_hit_banana = is_hit_banana; }
 	void SetIsHitShit(bool is_hit_shit) { m_is_hit_shit = is_hit_shit; }
 	void SetDoEnemyDeadlyAi(bool do_e_deadly_ai_) { m_do_enemy_deadly_ai = do_e_deadly_ai_; }
+	void SetBulletDeathPos(Position pos) { m_bullet_death_pos.x = pos.x; m_bullet_death_pos.y = pos.y; }
+	void SetBulletDeathPosClear() { m_bullet_death_pos.x = 0.f; m_bullet_death_pos.y = 0.f; }
 	
 
 	int GetPlayerHp() { return m_player_hp; }
@@ -62,6 +64,7 @@ public:
 	bool GetIsHitBanana() { return m_is_hit_banana; }
 	bool GetIsHitShit() { return m_is_hit_shit; }
 	bool GetDoEnemyDeadlyAi() { return m_do_enemy_deadly_ai; }
+	Position GetBulletDeathPos() { return m_bullet_death_pos; }
 	 
 	WaveState GetWaveState() { return m_wave_state; }
 
@@ -107,6 +110,8 @@ private:
 	WaveState m_wave_state;
 
 	bool m_do_enemy_deadly_ai;//“G‚Ì•KŽE‹Z‚ª“®‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©
+
+	Position m_bullet_death_pos;
 
 private:
 	static DataBank* p_instance;

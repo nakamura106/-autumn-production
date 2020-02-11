@@ -38,6 +38,7 @@ PlayerBullet::PlayerBullet(float x_, float y_, float move_speed_, Direction dire
 	m_firepoint.y = 0;
 	m_is_not_draw = false;
 
+	
 	m_effect_list.push_back(new HitEffect(this));
 
 }
@@ -105,6 +106,10 @@ void PlayerBullet::HitAction(ObjectRavel ravel_, float hit_use_atk_)
 {
 	if (ravel_ == ObjectRavel::Ravel_Boss) {
 		
+		DataBank::Instance()->SetBulletDeathPos(m_pos);
+
+		
+
 		m_effect_list.at(0)->WakeUp();
 		
 		for (const auto& i : m_shape_list)
