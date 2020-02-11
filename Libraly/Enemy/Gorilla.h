@@ -22,7 +22,7 @@ private:
 	const float			M_GORILLA_TEX_SIZE			= 850.f;
 	const float			M_POS_Y_ADJUST				= -150.f;
 	const int			M_FRAME_BANANA_START		= 13;
-	const float			M_TEX_FRONT_SPACE = 250.f;
+	const float			M_TEX_FRONT_SPACE			= 250.f;
 
 	//バナナ発射時の手の位置
 	const float			M_BANANA_HAND_POS_X[16] = {

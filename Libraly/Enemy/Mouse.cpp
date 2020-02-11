@@ -13,8 +13,6 @@
 #define Attack_Interval 100			//çUåÇä¥äo
 #define HedgeHog_Speed 10			//ì«ÇÒÇ≈éöÇÃî@Ç≠
 
-TrpPlayer* trpplayer;
-
 HedgeHog::HedgeHog()
 	:EnemyBase(2.f, EnemyID::Hedgehog, 1, 512.f)
 {
@@ -32,7 +30,6 @@ HedgeHog::HedgeHog()
 	SetRectangle();
 	m_shot_adjust.x = M_NEEDLE_ADJUST_X;
 	m_shot_adjust.y = M_NEEDLE_ADJUST_Y;
-
 	
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 347.0f, m_pos.y, 379.0f, 69.0f, 512.0f));//ì™
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 201.0f, m_pos.y, 395.0f, 85.0f, 512.0f));//Ç®êKà íu
@@ -89,18 +86,7 @@ void HedgeHog::EnemyAttack2()
 		m_do_bullet = true;
 
 		//íeî≠éÀ
-		CreateBullet(
-			static_cast<Direction>(m_direction), 
-			m_speed,
-			0.f,
-			false,
-			0,
-			GameCategoryTextureList::GameEnemy_Bullet_Normal,
-			1,
-			2,
-			1,
-			1
-		);
+		CreateBullet(static_cast<Direction>(m_direction), m_speed, 0.f, false, 0, GameCategoryTextureList::GameEnemy_Bullet_Normal, 1, 2, 1, 1);
 
 	}
 }

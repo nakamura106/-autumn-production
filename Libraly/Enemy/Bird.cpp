@@ -290,9 +290,9 @@ void Bird::FlyStateFall()
 	}
 
 	//移動処理等
-	if (m_pos.y >= M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f) {
+	if (m_pos.y >= ENEMY_INIT_POS_Y - m_draw_param.tex_size_y / 2.f) {
 
-		m_pos.y = M_INIT_POS_Y - m_draw_param.tex_size_y / 2.f;
+		m_pos.y = ENEMY_INIT_POS_Y - m_draw_param.tex_size_y / 2.f;
 
 		m_animation_stop = false;
 
@@ -320,7 +320,7 @@ void Bird::CreateShitBullet()
 {
 	Position b_pos = GetShotPos(static_cast<Direction>(m_direction));
 
-	bullet_list.push_back(
+	m_bullet_list.push_back(
 		new ShitBullet(
 			b_pos.x,
 			b_pos.y,

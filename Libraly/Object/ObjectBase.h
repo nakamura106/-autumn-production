@@ -16,6 +16,20 @@ class ObjectBase {
 public:
 	ObjectBase();
 	ObjectBase(ObjectRavel obj_ravel_, Direction direction_, float speed_, int draw_angle_);
+	ObjectBase(
+		float pos_x_,
+		float pos_y_,
+		float size_x_,
+		float size_y_,
+		int tex_split_w_,
+		int tex_split_h_,
+		int tex_split_all,
+		ObjectRavel obj_ravel_, 
+		Direction direction_, 
+		float speed_, 
+		int draw_angle_, 
+		bool is_turn_
+	);
 	~ObjectBase();
 
 	virtual void Init() = 0;
@@ -69,7 +83,7 @@ public:
 	std::list<ShapeBase*> GetShapeList() { return m_shape_list; }
 
 	// CollisionópUpdateÇ‹Ç∆Çﬂä÷êî
-	virtual void CollisionParamUpdate();
+	virtual void CollisionParamUpdate(){}
 
 private:
 
