@@ -36,7 +36,7 @@ bool MakeWindow(int width, int height, const char* title)
 		0,								// 補助メモリ
 		GetModuleHandle(nullptr),		// このプログラムのインスタンスハンドル
 		LoadIcon(NULL, IDI_APPLICATION),// アイコン画像
-		LoadCursor(NULL, IDC_ARROW),	// カーソル画像
+		LoadCursor(NULL, IDC_HAND),	// カーソル画像
 		NULL,							// 背景ブラシ(背景色)
 		NULL,							// メニュー名
 		WINDOW_CLASS_NAME,				// クラス名									
