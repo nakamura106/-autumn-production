@@ -260,7 +260,7 @@ void Gorilla::EnemyFly()
 			m_end_jump = true;
 
 			//1/21GƒR[ƒh
-			m_draw_param.tu = 1.f;
+			m_draw_param.tu = 4.f;
 			m_draw_param.tv = 4.f;
 			m_anim_param.split_all = 16;
 
