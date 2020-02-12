@@ -105,17 +105,17 @@ void SoundManager::SoundClickSE()
 
 void SoundManager::SoundBullet1SE()
 {
-	m_pAudio->Play(m_bullet1_se, 0, false);
+	m_pAudio->Play(m_bullet1_se, -1000, false);
 }
 
 void SoundManager::SoundBullet2SE()
 {
-	m_pAudio->Play(m_bullet1_se, 0, false);
+	m_pAudio->Play(m_bullet1_se, -1000, false);
 }
 
 void SoundManager::SoundBullet3SE()
 {
-	m_pAudio->Play(m_bullet1_se, 0, false);
+	m_pAudio->Play(m_bullet1_se, -1000, false);
 }
 
 void SoundManager::ResetSelectFlag()

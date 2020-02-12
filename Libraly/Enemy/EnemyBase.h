@@ -22,24 +22,37 @@
 class EnemyBase :public ObjectBase
 {
 public:
-	EnemyBase(float speed_, EnemyID enemy_id_, int max_wave_, float tex_size_);
-	virtual ~EnemyBase();
+	EnemyBase(
+		float speed_, 
+		EnemyID enemy_id_, 
+		int max_wave_, 
+		float tex_size_,
+		int tex_split_w_ = 4,
+		int tex_split_h_ = 4,
+		int tex_split_all_ = 12
+	);
 
+	virtual ~EnemyBase();
 	
 	/*描画関数*/
 	void Draw();
+
 	/*初期化*/
 	virtual void Init();
+
 	/*更新*/
 	virtual void Update();
 
-	virtual float GetHitUseAtk(ObjectRavel hit_obj_);
-
 	/*			ゲッター群			*/
+
 	/*状態取得*/
 	EnemyStateType	GetEnemyState() { return m_state; }
+
 	/*テクスチャの手の位置を返す*/
 	Position GetHandPos();
+
+	/*当たり判定時の値を返す*/
+	virtual float GetHitUseAtk(ObjectRavel hit_obj_);
 
 	//ゲージのLevel
 	enum class EnemyGageStage :int {
@@ -63,20 +76,19 @@ private:
 	const int	M_AUTO_CHANGE_GAGE_FLAME		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
-	const float M_MOVE_LIMIT_X					= 3500.f;	
-	const float M_FATIGUE						= 46.f;
-	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 7.f;
-	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 5.f;		//眠気自動減少速度値
-	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 3.5f;
-	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 1.f;
-	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.5f;		//疲労度自動増加速度値
+	const float M_MOVE_LIMIT_X					= 3500.f;	//移動できるx軸の最大値
+	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 7.f;		//眠気自動減少速度値(疲労度MAX)
+	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 5.f;		//眠気自動減少速度値(疲労度1/4以上)
+	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 3.5f;		//眠気自動減少速度値(疲労度半分以上)
+	const float M_AUTO_SLEEP_UP_LOW_SPEED		= 1.f;		//眠気自動減少速度値(疲労度3/4以上)
+	const float M_AUTO_FATIGUE_DOWN_LOW_SPEED	= 0.5f;		//疲労自動増加速度値(疲労度4/3以上)
 	const int	M_FATIGUE_GAGE_STAGE_NUM		= 4;		//疲労度ゲージの段階数
 	const int	M_SLEEP_GAGE_STAGE_NUM			= 4;		//眠気ゲージの段階数
-	const float M_WAVE_CHANGE_MOVE_LIMIT		= 2500.f;
-	const float	M_TEX_FRONT_SPACE				= 50.f;
+	const float M_WAVE_CHANGE_MOVE_LIMIT		= 2500.f;	//wave遷移する際の移動量
+	const float	M_TEX_FRONT_SPACE				= 50.f;		//テクスチャサイズの前方向空白
 	
 	/*生成している弾の管理をする関数：Updateで呼び出している*/
-	void BulletControl();		
+	void BulletControl();
 
 	/*デバッグ用関数：キー入力によってEnemyが変化*/
 	void DebugKeyAction();
@@ -104,7 +116,6 @@ private:
 
 	/*ゲージ量の最大最低管理*/
 	void GaugeLimitControl();
-
 
 	/*			新状態遷移			*/
 
@@ -154,9 +165,14 @@ private:
 	
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト
 
+	// エフェクト関係関数まとめた関数
+	void AllInitEffect();
+	void AllUpdateEffect();
+	void AllDrawEffect();
+
+	void CollisionParamUpdate()override;
+
 protected:
-	const float	M_INIT_POS_X = 700.f;	//初期x座標
-	const float M_INIT_POS_Y = 656.f;	//初期y座標
 	const float M_SKY_HEIGHT = 0.f;		//飛行高度
 	const int	M_ANIM_FLAME = 7;		//画像変更を行うフレーム周期:7
 
@@ -173,7 +189,6 @@ protected:
 	/*			状態更新			*///旧、新状態遷移どちらでも使用
 
 	virtual void EnemyWait() {}		//待機状態
-	//virtual void EnemyChase() {}	//追跡状態
 	virtual void EnemyMove();		//移動状態
 	virtual void EnemyRefuge() {}	//逃走状態
 	virtual void EnemyAttack1() {}	//攻撃状態１
@@ -221,10 +236,15 @@ protected:
 	/*向き変更：m_Directionを変更する LEFT⇔RIGHT*/
 	void ChangeDirection();
 
+
+	/*		Wave遷移の際の処理		*/	
+
 	//逃げる
 	void WaveChangeState1();
 	//戻ってくる
 	void WaveChangeState2();
+
+
 	/*			ゲージ処理			*/
 
 	/*眠気度の自動回復*/
@@ -279,7 +299,7 @@ protected:
 	/*			全敵共通のパラメータ			*/
 
 	bool			m_is_flying;			//飛んでいるかどうか
-	EnemyBulletList bullet_list;			//弾のリスト
+	EnemyBulletList m_bullet_list;			//弾のリスト
 	Position		m_shot_adjust;			//弾発射時の位置調整用(座標からどれくらいずれているか)
 	bool			m_animation_stop;		//trueの場合、アニメーションしない
 	bool			m_do_bullet;			//ハリ発射を行ったかどうか
@@ -289,20 +309,12 @@ protected:
 	WaveState		m_wave_state;			//wave状態
 	EnemyGageStage	m_fatigue_gage_stage;	//疲労ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 死亡)
 	EnemyGageStage	m_sleep_gage_stage;		//眠気ゲージの段階を示す 0(ゲージ量0)～5(ゲージ量MAX 眠り)
-	float			m_player_center_pos;		//プレイヤーのx座標
+	float			m_player_center_pos;	//プレイヤーのx座標
 	float			m_tex_space_front;		//正面の空白部分を示す
 	bool			m_do_deadly_ai;			//必殺技をしたかどうかフラグ
 	bool			m_do_doraming;			//ドラミング中かどうか
 
-	bool m_is_debuff;
-
-private:
-	// エフェクト関係関数まとめた関数
-	void AllInitEffect();
-	void AllUpdateEffect();
-	void AllDrawEffect();
-
-	void CollisionParamUpdate()override;
+	bool m_is_debuff;						//眠気度自動回復ストップ
 
 };
 

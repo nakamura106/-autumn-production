@@ -20,7 +20,7 @@ void LifeCutUi::Init()
 
 void LifeCutUi::Update()
 {
-	if (DataBank::Instance()->GetFatigueGauge() >= 75.0f)
+	if (DataBank::Instance()->GetFatigueGauge() >= 50.0f)
 	{
 		m_param.texture_id = GameCategoryTextureList::GameLifeBarCut2;
 	}

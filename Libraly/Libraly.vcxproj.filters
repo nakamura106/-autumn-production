@@ -109,6 +109,9 @@
     <Filter Include="Object\MapObject">
       <UniqueIdentifier>{cf3a458c-0ea1-46fe-bf1d-18fdfa1f7b7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ScoreTime">
+      <UniqueIdentifier>{b2eb07fe-ea0d-4af2-84c6-80cf7d002db4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -377,6 +380,9 @@
     </ClCompile>
     <ClCompile Include="UI\LifeCutUi.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreTime\ScoreTime.cpp">
+      <Filter>ScoreTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -652,6 +658,9 @@
     </ClInclude>
     <ClInclude Include="UI\LifeCutUi.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreTime\ScoreTime.h">
+      <Filter>ScoreTime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

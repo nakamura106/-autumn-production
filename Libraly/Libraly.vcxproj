@@ -215,6 +215,7 @@
     <ClCompile Include="Scene\SceneObject\TitleSceneObject.cpp" />
     <ClCompile Include="Scene\SelectScene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="ScoreTime\ScoreTime.cpp" />
     <ClCompile Include="Sound\AudioPlayer.cpp" />
     <ClCompile Include="Sound\DirectSound.cpp" />
     <ClCompile Include="Sound\SoundManager.cpp" />
@@ -307,6 +308,7 @@
     <ClInclude Include="Scene\SceneObject\TitleSceneObject.h" />
     <ClInclude Include="Scene\SelectScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="ScoreTime\ScoreTime.h" />
     <ClInclude Include="Sound\AudioPlayer.h" />
     <ClInclude Include="Sound\DirectSound.h" />
     <ClInclude Include="Sound\SoundManager.h" />

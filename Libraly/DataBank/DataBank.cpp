@@ -29,6 +29,9 @@ DataBank::DataBank()
 	m_Pdirection=(int)Direction::RIGHT;
 	m_centerpos.x = 0;
 	m_centerpos.y = 0;
+	m_bullet_death_pos.x = 0.f;
+	m_bullet_death_pos.y = 0.f;
+
 	for (int i = 0; i < (int)P_effect::MaxEffect; i++)
 	{
 		m_PlayerEffect[i] = false;
