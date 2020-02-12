@@ -29,16 +29,13 @@ EnemyBase::EnemyBase(
 	m_fatigue_gauge				= 0.f;
 	m_sleep_gauge				= 0.f;
 	m_is_delete					= false;
-	m_pos.x						= ENEMY_INIT_POS_X;
-	m_pos.y						= ENEMY_INIT_POS_Y - tex_size_ / 2.f;
-	m_map_pos					= ENEMY_INIT_POS_X;
 	m_draw_param.texture_id		= GameCategoryTextureList::GameEnemy_WalkLeft;
 	m_draw_param.tex_size_x		= tex_size_;
 	m_draw_param.tex_size_y		= tex_size_;
 	m_anim_param.change_flame	= M_ANIM_FLAME;
-	m_anim_param.split_all		= tex_split_w_;
-	m_anim_param.split_width	= tex_split_h_;
-	m_anim_param.split_height	= tex_split_all_;
+	m_anim_param.split_width	= tex_split_w_;
+	m_anim_param.split_height	= tex_split_h_;
+	m_anim_param.split_all		= tex_split_all_;
 	m_savetime_state			= 0;
 	m_state_save_pos_x			= 0;
 	m_p_pos_relation			= Direction::LEFT;
@@ -126,77 +123,55 @@ void EnemyBase::Update()
 	//ChangeState();
 	ObjectBase::Update();
 
-	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) != true)
-	{
-		//デバッグ用
-		DebugKeyAction();
+	//デバッグ用
+	DebugKeyAction();
 
-		//データバンクからのデータの取得
-		DataGetUpdate();
+	//データバンクからのデータの取得
+	DataGetUpdate();
 
-		//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
-		AutoChangeGageUpdate();
+	//ゲージの段階を保存、疲労ゲージ量によって自動ゲージ変動
+	AutoChangeGageUpdate();
 
-		//弾の制御
-		BulletControl();
+	//弾の制御
+	BulletControl();
 
-		//マップスクロールの位置計算
-		CalcDrawPosition();
+	//マップスクロールの位置計算
+	CalcDrawPosition();
 
-		//データバンクへの値受け渡し
-		DataSetUpdate();
+	//データバンクへの値受け渡し
+	DataSetUpdate();
 
-		// エフェクトアップデート関数まとめ
-		AllUpdateEffect();
+	// エフェクトアップデート関数まとめ
+	AllUpdateEffect();
 
-		//現在の状態における動作の更新
-		//UpdateState();
-		if (m_wave_state == WaveState::None) {
-			//状態動作
-			UpdateAIState();
-
-		}
-		else if (m_wave_state == WaveState::Change_Start) {
-			//wave遷移中の動作(画面端に走っていく)
-			WaveChangeState1();
-		}
-		else if (m_wave_state == WaveState::EnemyMoved) {
-			WaveChangeState2();
-		}
-		else if (m_wave_state == WaveState::ItemGet) {
-			//ゲーム開始
-			if (FlameTimer::GetNowFlame(m_savetime_wavechange) > 120) {
-				m_wave_state = WaveState::None;
-			}
-		}
-
-		/*位置調整の更新*/
-		MoveLimitUpdate();
-
-		// 当たり判定更新関数
-		CollisionParamUpdate();
+	//現在の状態における動作の更新
+	//UpdateState();
+	if (m_wave_state == WaveState::None) {
+		//状態動作
+		UpdateAIState();
 
 	}
-	if (DataBank::Instance()->GetWavetype(WaveType::Wave1) == true)
-	{
-		if (m_pos.x >= 960)
-		{
-			m_pos.x -= P_speed * 2;
-		}
-		else
-		{
-			DataBank::Instance()->SetWave(WaveType::Wave1, false);
-		}
-		if (m_pos.x <= 960)
-		{
-			m_pos.x += P_speed * 2;
-		}
-		else
-		{
-			DataBank::Instance()->SetWave(WaveType::Wave1, false);
-		}
-
+	else if (m_wave_state == WaveState::Change_Start) {
+		//wave遷移中の動作(画面端に走っていく)
+		WaveChangeState1();
 	}
+	else if (m_wave_state == WaveState::EnemyMoved) {
+		WaveChangeState2();
+	}
+	else if (m_wave_state == WaveState::ItemGet) {
+		//ゲーム開始
+		if (FlameTimer::GetNowFlame(m_savetime_wavechange) > 120) {
+			m_wave_state = WaveState::None;
+		}
+	}
+
+	/*位置調整の更新*/
+	MoveLimitUpdate();
+
+	// 当たり判定更新関数
+	CollisionParamUpdate();
+
+	
 
 	DataBank::Instance()->SetIsDebuff(m_is_debuff);
 
