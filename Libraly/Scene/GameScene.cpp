@@ -68,6 +68,8 @@ void InitGameScene()
 	SoundManager::Instance()->RegisterGameMainSound();
 	SoundManager::Instance()->SoundBGM();
 
+	DataBank::Instance()->SetGameStartFlame(FlameTimer::GetNowFlame());
+
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
@@ -85,6 +87,7 @@ void MainGameScene()
 
 	if (DataBank::Instance()->GetIsGameClear() == true)
 	{
+		DataBank::Instance()->SetGameEndFlame(FlameTimer::GetNowFlame(DataBank::Instance()->GetGameStartFlame()));
 		ChangeSceneStep(SceneStep::EndStep);
 	}
 
@@ -92,6 +95,7 @@ void MainGameScene()
 
 SceneId FinishGameScene()
 {
+
 	SoundManager::Instance()->ReleaseBattleSound();
 	ReleaseCategoryTexture(TEXTURE_CATEGORY_GAME);
 	ObjectManager::Instance()->AllDaleteObject();

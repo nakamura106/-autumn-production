@@ -31,6 +31,8 @@ DataBank::DataBank()
 	m_centerpos.y = 0;
 	m_bullet_death_pos.x = 0.f;
 	m_bullet_death_pos.y = 0.f;
+	m_game_start_flame = 0;
+	m_game_end_flame = 0;
 
 	for (int i = 0; i < (int)P_effect::MaxEffect; i++)
 	{
