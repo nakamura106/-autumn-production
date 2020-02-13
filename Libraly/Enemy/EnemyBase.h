@@ -76,7 +76,7 @@ private:
 	const int	M_AUTO_CHANGE_GAGE_FLAME		= 60;		//ゲージ自動回復のフレーム周期
 	const int	M_STOP_AUTO_SLEEP_TIME_DEFAULT	= 600;		//ゲージ自動回復を止めるフレーム時間
 	const int	M_STOP_AUTO_SLEEP_TIME_HITBULLET = 120;		//プレイヤー弾当たり判定時のゲージ自動回復を止めるフレーム時間
-	const float M_MOVE_LIMIT_X					= 3500.f;	//移動できるx軸の最大値
+	const float M_MOVE_LIMIT_X					= 4000.f;	//移動できるx軸の最大値
 	const float M_AUTO_SLEEP_UP_MAX_SPEED		= 7.f;		//眠気自動減少速度値(疲労度MAX)
 	const float M_AUTO_SLEEP_UP_HIGH_SPEED		= 5.f;		//眠気自動減少速度値(疲労度1/4以上)
 	const float M_AUTO_SLEEP_UP_MEDIUM_SPEED	= 3.5f;		//眠気自動減少速度値(疲労度半分以上)
@@ -161,6 +161,7 @@ private:
 	int				m_savetime_auto_slpgauge;	//フレーム数格納：眠気度自動回復時に使用
 	int				m_savetime_end;				//フレーム数格納：眠ってからゲームクリアまでで使用
 	int				m_savetime_state;			//フレーム数格納：状態を継続する時間計算で使用
+	int				m_transition_num;			//状態遷移時に使用する値のコピー
 	int				m_savetime_wavechange;
 	
 	EnemyAIList		m_ai_list[static_cast<int>(EnemyAIType::EnemyAIType_Max)];	//AIのパターンが格納されたリスト

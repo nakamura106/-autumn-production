@@ -11,6 +11,7 @@ LargeGrassObject::LargeGrassObject()
 	m_obj_ravel = ObjectRavel::Ravel_MapObj;
 	m_pos.x = 1900.0f;
 	m_pos.y = P_posYforest-100;
+	m_is_p_hit_large_obj = false;
 
 	m_shape_list.push_back(new ShapeRect(m_pos.x, 189.0f, m_pos.y, 211.0f, 294.0f, 24.0f, 1024.0f));
 	m_shape_list.push_back(new ShapeRect(m_pos.x, 454.0f, m_pos.y, 47.0f, 315.0f, 33.0f, 1024.0f));

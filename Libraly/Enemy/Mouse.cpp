@@ -151,13 +151,23 @@ EnemyAIType HedgeHog::ChangeAIType()
 
 	//AI1→初期AI
 	//AI2→待機・移動
-	//AI3→自動動作
-	//AI4→追跡・待機
-	//AI5→往復突進
+	//AI3→待機
+	//AI4→追跡
+	//AI5→突進
 	//AI6→トゲ発射
 	//AI7→頭突き
+
 	//AI10→必殺技
 
+
+	//ゲージステージ(段階)0はゲージ量0を意味する
+	if (m_fatigue_gage_stage == EnemyGageStage::Zero && m_sleep_gage_stage == EnemyGageStage::Zero) {
+
+		return EnemyAIType::AI2;
+
+	}
+
+	//必殺技
 	if (m_fatigue_gage_stage >= EnemyGageStage::Half_Up && m_do_deadly_ai == false) {
 
 		m_do_deadly_ai = true;
@@ -176,24 +186,23 @@ EnemyAIType HedgeHog::ChangeAIType()
 
 	if (now_ai == EnemyAIType::AI5 ||
 		now_ai == EnemyAIType::AI6 ||
-		now_ai == EnemyAIType::AI7) {
+		now_ai == EnemyAIType::AI7
+		) {
 
-		//3種類の攻撃の後は突進→頭突きの流れ
+		//3種類の攻撃の後は待機
 		return EnemyAIType::AI3;
 
 	}
 
-	//ゲージステージ(段階)0はゲージ量0を意味する
-	if (m_fatigue_gage_stage == EnemyGageStage::Zero && m_sleep_gage_stage == EnemyGageStage::Zero) {
-
-		return EnemyAIType::AI2;
-
-	}
-
 	//追跡のみを行う、Player散策AI
-	if (p_e_distance >= 700.f) {
+	if (p_e_distance >= 1920.f) {
 
 		return EnemyAIType::AI4;
+
+	}
+	else if (p_e_distance <= 100.f) {
+
+		return EnemyAIType::AI5;
 
 	}
 	else {

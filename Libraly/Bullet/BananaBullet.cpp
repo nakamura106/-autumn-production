@@ -16,6 +16,7 @@ BananaBullet::BananaBullet(
 	m_move_start_anim_num = move_start_anim_num_;
 	m_is_move = false;
 	m_draw_param.tu = 1;
+	MoveUpdate();
 
 	m_shape_list.push_back(new ShapeCircle(m_pos.x, 58.0f, m_pos.y, 83.0f, 34.0f, 128.0f));
 }
@@ -42,7 +43,7 @@ void BananaBullet::MoveUpdate()
 			m_draw_param.tu = 2;
 
 			//バナナバレットに変更
-			m_obj_ravel = ObjectRavel::Ravel_BananaBullet;
+			//m_obj_ravel = ObjectRavel::Ravel_BananaBullet;
 		}
 
 	}

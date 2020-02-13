@@ -4,7 +4,7 @@
 #include "../Collision/ShapeType/ShapeRect.h"
 
 Bird::Bird()
-	:EnemyBase(0.f, EnemyID::Seagull, 2, 512.f)
+	:EnemyBase(0.f, EnemyID::Seagull, 1, 512.f)
 {
 
 	LoadAIData(M_AIDataFileName);
