@@ -37,6 +37,8 @@ public:
 	void SetDoEnemyDeadlyAi(bool do_e_deadly_ai_) { m_do_enemy_deadly_ai = do_e_deadly_ai_; }
 	void SetBulletDeathPos(Position pos) { m_bullet_death_pos.x = pos.x; m_bullet_death_pos.y = pos.y; }
 	void SetBulletDeathPosClear() { m_bullet_death_pos.x = 0.f; m_bullet_death_pos.y = 0.f; }
+	void SetGameStartFlame(int flame) { m_game_start_flame = flame; }
+	void SetGameEndFlame(int flame) { m_game_end_flame = flame; }
 	
 
 	int GetPlayerHp() { return m_player_hp; }
@@ -64,6 +66,8 @@ public:
 	bool GetIsHitBanana() { return m_is_hit_banana; }
 	bool GetIsHitShit() { return m_is_hit_shit; }
 	bool GetDoEnemyDeadlyAi() { return m_do_enemy_deadly_ai; }
+	int GetGameStartFlame() { return m_game_start_flame; }
+	int GetGameEndFlame() { return m_game_end_flame; }
 	Position GetBulletDeathPos() { return m_bullet_death_pos; }
 	 
 	WaveState GetWaveState() { return m_wave_state; }
@@ -111,7 +115,9 @@ private:
 
 	bool m_do_enemy_deadly_ai;//敵の必殺技が動いているかどうか
 
-	Position m_bullet_death_pos;
+	Position m_bullet_death_pos; // プレイヤーの玉が死んだときの座標
+
+	int m_game_start_flame, m_game_end_flame;
 
 private:
 	static DataBank* p_instance;
