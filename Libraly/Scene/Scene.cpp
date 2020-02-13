@@ -6,6 +6,7 @@
 #include "../Scene/GameEndScene.h"
 #include "HelpScene.h"
 #include "SelectScene.h"
+#include"../Texture/Texture.h"
 
 
 static SceneId g_CurrentSceneId = SceneId::TitleScene;		// “®ì’†ƒV[ƒ“ID
@@ -67,6 +68,7 @@ void DrawScene()
 	{
 		return;
 	}
+
 	if (g_CurrentSceneStep == SceneStep::MainStep)
 	{
 		switch (g_CurrentSceneId)

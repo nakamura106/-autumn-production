@@ -472,7 +472,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 	}
 
 	//状態遷移条件値は移動距離でも判定するために存在(値0の場合は判定無し)
-	if (m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num != 0) {
+	if (m_transition_num != 0) {
 
 		return AITransitionDistance();
 
@@ -484,7 +484,7 @@ bool EnemyBase::AITransitionFrontPlayer()
 bool EnemyBase::AITransitionDistance()
 {
 	if (fabsf(m_state_save_pos_x - m_map_pos) >=
-		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
+		m_transition_num
 		&& m_is_animation_end)
 	{
 		return true;
@@ -496,7 +496,7 @@ bool EnemyBase::AITransitionDistance()
 bool EnemyBase::AITransitionFlameTime()
 {
 	if (FlameTimer::GetNowFlame(m_savetime_state) >= 
-		m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num
+		m_transition_num
 		&& m_is_animation_end)
 	{
 		return true;
@@ -846,10 +846,15 @@ void EnemyBase::InitAllState()
 	m_animation_stop = false;
 	m_do_bullet = false;
 
+	//シーン遷移時に使用する値をコピー
+	m_transition_num = m_ai_list[static_cast<int>(m_now_ai)][m_now_ai_num]->e_transition_num;
+
 }
 
 void EnemyBase::InitWaitState()
 {
+	//待ち状態の場合、状態遷移をするまでの有効時間がspeedの値分、短縮
+	m_transition_num -= m_speed;
 
 	if (m_direction == Direction::LEFT) {
 		//使用する画像の変更(以下同じ)

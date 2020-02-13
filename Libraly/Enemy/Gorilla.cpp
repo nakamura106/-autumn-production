@@ -6,7 +6,7 @@
 #include"../DataBank/SaveData.h"
 
 Gorilla::Gorilla()
-	:EnemyBase(0.f, EnemyID::Gorilla, 3, 850.f, 4, 4, 16)
+	:EnemyBase(0.f, EnemyID::Gorilla, 1, 850.f, 4, 4, 16)
 {
 	LoadAIData(M_AIDataFileName);
 	SetAIType();
@@ -62,10 +62,10 @@ EnemyAIType Gorilla::ChangeAIType()
 	//AI10¨•KŽE‹Z
 
 	//Œ³‚Ì‰ŠúAI
-	return EnemyAIType::AI1;
+	//return EnemyAIType::AI1;
 
 	//•KŽE‹Z
-	if (m_do_deadly_ai == false && m_now_wave == m_max_wave) {
+	if (m_do_deadly_ai == false && m_fatigue_gage_stage == EnemyGageStage::Half_Up) {
 
 		m_do_deadly_ai = true;
 
@@ -154,8 +154,13 @@ void Gorilla::EnemyAttack1()
 void Gorilla::EnemyAttack2()
 {
 
-	//wave2ˆÈ~‚Ì‚ÝAÕŒ‚”g
-	if (m_now_wave == 1)return;
+	//~wave2ˆÈ~‚Ì‚ÝAÕŒ‚”g
+	//2ŒŽ14“ú@ì•i“W’†‚ÍƒQ[ƒW—Ê‚É‰ž‚¶‚Ä•Ï‰»
+	if (m_fatigue_gage_stage == EnemyGageStage::Zero ||
+		m_fatigue_gage_stage == EnemyGageStage::Quarter ||
+		m_fatigue_gage_stage == EnemyGageStage::Half_Down) {
+		return;
+	}
 
 	//’@‚«‚Â‚¯
 	if (GetAnimationTexNum() >= M_ATTACK2_ANIM_TEX_NUM && m_do_bullet != true) {

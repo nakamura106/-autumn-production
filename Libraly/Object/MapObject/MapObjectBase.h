@@ -23,7 +23,7 @@ public:
 		return m_hit_use_atk;
 	}
 
-	float GetHitObjectPosY() {
+	virtual float GetHitObjectPosY() {
 		return m_pos.y + m_hit_offset_y - (m_hit_side_y / 2.f);
 	}
 

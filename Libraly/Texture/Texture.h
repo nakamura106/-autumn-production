@@ -167,6 +167,7 @@ GameEnemy_Bullet_Normal,		//!<敵の弾(ハリ)
 GameEnemy_Bullet_Shit,			//!<敵の弾(フン)
 GameEnemy_Bullet_Inpact,		//!<敵の弾(衝撃波)
 
+Game_NowLoading,
 
 /* エフェクト用 */
 GameDebuffEffect,		//!< デバフエフェクト

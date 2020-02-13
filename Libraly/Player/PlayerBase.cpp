@@ -252,7 +252,7 @@ void PlayerBase::P_Controll()
 			m_is_obj_stop = true;
 		}
 
-		if (m_is_obj_stop == true) {
+		if (m_is_obj_stop == true && m_pos.y <= m_floorpos - m_draw_param.tex_size_y) {
 			m_pos.y = m_floorpos - m_draw_param.tex_size_y;
 
 			m_gravity = 0.f;

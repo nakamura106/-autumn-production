@@ -45,6 +45,7 @@ SceneId UpdateGameScene()
 
 void DrawGameScene()
 {
+	
 	ObjectManager::Instance()->Draw();
 
 	UiManager::Instance()->Draw();
@@ -55,6 +56,7 @@ void DrawGameScene()
 
 void InitGameScene()
 {
+
 	ObjectManager::Instance()->CreateObject();
 
 	ObjectManager::Instance()->Init();
@@ -69,6 +71,7 @@ void InitGameScene()
 	SoundManager::Instance()->SoundBGM();
 
 	ChangeSceneStep(SceneStep::MainStep);
+
 }
 
 

@@ -62,6 +62,19 @@ public:
 
 	void CollisionParamUpdate()override;
 
+	//2月14日　田中の雑コード
+	virtual float GetHitUseAtk(ObjectRavel hit_obj_) {
+
+		if (hit_obj_ == ObjectRavel::Ravel_MapObj) {
+			if (m_map_pos + G_PLAYER_SIZE > 2354.f) {
+				return 1.f;
+			}
+			return 0.f;
+		}
+
+		return m_hit_use_atk;
+	}
+
 protected:
 	bool	m_do_jump;						//ジャンプ判定
 	bool	m_is_miss;
